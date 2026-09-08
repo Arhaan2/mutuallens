@@ -685,16 +685,18 @@ export default function App() {
         {!report && (
           <>
             {feedback('entry')}
-            <button
-              className="text-button"
-              onClick={sampleEntry}
-              disabled={!!busy}
-            >
-              Explore synthetic sample
-            </button>
-            <button className="text-button" onClick={() => clearReport(true)}>
-              Start over
-            </button>
+            <div className="inline-actions">
+              <button
+                className="text-button"
+                onClick={sampleEntry}
+                disabled={!!busy}
+              >
+                Explore synthetic sample
+              </button>
+              <button className="text-button" onClick={() => clearReport(true)}>
+                Start over
+              </button>
+            </div>
           </>
         )}
         {report && (

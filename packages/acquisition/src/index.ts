@@ -1,11 +1,11 @@
-/** Server-only boundary. No source adapter is approved; no upstream calls are possible. */
+/** Default unconfigured preview capability; configured routes use the server adapter. */
 export const capabilities = Object.freeze({
   release: 'preview' as const,
   automatic: Object.freeze({
     enabled: false as const,
     status: 'blocked' as const,
     reason:
-      'Automatic checks are not available: complete-list access at the live target scale and a recurring zero-cash allowance have not been verified.',
+      'Automatic checking is awaiting provider account setup and authorized live validation. File comparison is available now.',
   }),
   ads: false as const,
 });
