@@ -1,3 +1,4 @@
+import { openImportDetails, openSnapshotOptions } from '../browser/product-ui';
 import { test, expect, type Page, type Download } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { zipSync, strToU8 } from 'fflate';
@@ -19,8 +20,7 @@ const pair = (followers: string[], followed: string[]) => [
   jsonFile('following.json', following(followed)),
 ];
 async function openImport(page: Page) {
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import>summary').click();
+  await openImportDetails(page);
 }
 async function importPair(
   page: Page,
@@ -32,7 +32,6 @@ async function importPair(
   await page.locator('#import-account').fill('synthetic_hosted');
   await page.locator('#import-files').setInputFiles(pair(followers, followed));
   await page.locator('#collected-at').fill(date);
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(page.locator('#results-title')).toContainText(
@@ -209,10 +208,11 @@ test('hosted: homepage sample entry, metadata, exact synthetic counts and parsed
   );
 });
 
-test('hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives', async ({
+test('hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives', async ({
   page,
 }) => {
   await page.goto(`${CHECKER}/#import`);
+  await openImportDetails(page);
   await page.locator('#import-account').fill('synthetic_hosted');
   const zip = zipSync({
     'connections/followers_1.json': strToU8(
@@ -230,7 +230,6 @@ test('hosted: ZIP split parts deduplicate, export exact records, and partial imp
     mimeType: 'application/zip',
     buffer: Buffer.from(zip),
   });
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_hosted',
@@ -259,27 +258,27 @@ test('hosted: ZIP split parts deduplicate, export exact records, and partial imp
     .locator('#import-files')
     .setInputFiles([
       jsonFile('followers_1.json', ['synthetic_mutual'].map(row)),
-      jsonFile('followers_2.json', ['synthetic_fan'].map(row)),
+      jsonFile('followers_3.json', ['synthetic_fan'].map(row)),
       jsonFile(
         'following.json',
         following(['synthetic_mutual', 'synthetic_followed']),
       ),
     ]);
-  await expect(page.getByLabel('I confirm these files')).not.toBeChecked();
+  await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
-  await page
-    .getByRole('button', {
-      name: 'Not following you back Withheld',
-      exact: true,
-    })
-    .click();
-  await expect(
-    page.getByRole('heading', { name: 'Missing doesn’t mean not following.' }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole('button', { name: 'Export filtered CSV' }),
-  ).toBeDisabled();
+  await expect(page.locator('.category.active')).toHaveAccessibleName(
+    'Not found in supplied followers 1',
+  );
+  await expect(page.locator('.account-list')).toContainText(
+    '@synthetic_followed',
+  );
+  await expect(page.locator('.upload-limitation')).toBeVisible();
+  const qualifiedCsv = await textDownload(
+    await download(page, 'Export filtered CSV'),
+  );
+  expect(qualifiedCsv).toContain('Not found in supplied followers');
+  expect(qualifiedCsv).toMatch(/missing|part/i);
 });
 
 test('hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed', async ({
@@ -291,6 +290,7 @@ test('hosted: explicit snapshots persist, all65 differences browse, export is co
   expect(
     await page.evaluate(async () => (await indexedDB.databases()).length),
   ).toBe(0);
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.locator('.snapshot-row')).toHaveCount(1);
   const added = Array.from(
@@ -303,6 +303,7 @@ test('hosted: explicit snapshots persist, all65 differences browse, export is co
     ['synthetic_mutual'],
     '2025-02-01T12:00',
   );
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.locator('.snapshot-row')).toHaveCount(2);
   await page.reload();
@@ -345,4 +346,114 @@ test('hosted: explicit snapshots persist, all65 differences browse, export is co
     .getByRole('button', { name: 'Confirm delete all snapshots' })
     .click();
   await expect(page.locator('.snapshot-row')).toHaveCount(0);
+});
+
+test('hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML', async ({
+  page,
+}) => {
+  const name = (number: number) =>
+    `hosted_fixture_${String(number).padStart(5, '0')}`;
+  const followers = Array.from({ length: 6000 }, (_, index) => name(index + 1));
+  const followingNames = Array.from({ length: 6000 }, (_, index) =>
+    name(index + 1501),
+  );
+  await page.goto(`${CHECKER}/#import`);
+  await expect(page.locator('#import input[required]')).toHaveCount(0);
+  await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
+  await expect(page.locator('#import-account')).toHaveValue('');
+  await expect(page.locator('#collected-at')).toHaveValue('');
+  await page
+    .locator('#import-files')
+    .setInputFiles(pair(followers, followingNames));
+  await page.getByRole('button', { name: /Compare local files/ }).click();
+  const assertCounts = async () => {
+    await expect(page.locator('#results-title')).toHaveText(
+      'Your uploaded files',
+    );
+    await expect(page.locator('.category.active')).toHaveAccessibleName(
+      'Not following you back 1,500',
+    );
+    await expect(
+      page.getByRole('button', { name: 'Mutuals 4,500', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'All followers 6,000', exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'All following 6,000', exact: true }),
+    ).toBeVisible();
+    await expect(page.locator('.account-list > li')).toHaveCount(50);
+    await expect(page.locator('.result-scope')).toContainText(
+      'Based on your uploaded files',
+    );
+  };
+  await assertCounts();
+  const profile = page.locator('.account-list a').first();
+  await expect(profile).toHaveAttribute(
+    'href',
+    `https://www.instagram.com/${name(6001)}/`,
+  );
+  await expect(profile).toHaveAttribute('target', '_blank');
+  await expect(profile).toHaveAttribute('rel', 'noopener noreferrer');
+  await page
+    .getByRole('navigation', { name: 'Result pages', exact: true })
+    .getByRole('button', { name: 'Last', exact: true })
+    .click();
+  await expect(page.locator('.account-list')).toContainText(`@${name(7500)}`);
+  await page.getByRole('searchbox').fill(`@${name(7500).toUpperCase()}`);
+  await expect(page.locator('.account-list > li')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Clear search', exact: true }).click();
+  const csv = parseCsv(
+    await textDownload(await download(page, 'Export filtered CSV')),
+  );
+  expect(csv).toHaveLength(1501);
+  expect(csv.slice(1).map((record) => record[0])).toEqual(
+    followingNames.slice(4500),
+  );
+  expect(
+    csv
+      .slice(1)
+      .every((record) => record[5]?.includes('Based on your uploaded files')),
+  ).toBe(true);
+  const nativeText = await textDownload(await download(page, 'Export JSON'));
+  const native = JSON.parse(nativeText);
+  expect(native.comparisonBasis).toBe('supplied_files');
+  expect(native.account.username).toBe('');
+  expect(native.followers.metadata.terminal).toBe(false);
+  expect(native.exportScope).toContain('Based on your uploaded files');
+  expect(native.followers.records).toHaveLength(6000);
+  expect(native.following.records).toHaveLength(6000);
+  const relationshipHtml = (names: string[], direction: string) =>
+    `<!doctype html><html><head><title>${direction}</title></head><body><h1>${direction}</h1>${names.map((username) => `<div class="_a6-g"><div class="_a6-p"><a href="https://www.instagram.com/${username}/">${username}</a></div></div>`).join('')}</body></html>`;
+  const html = (filename: string, names: string[], direction: string) => ({
+    name: filename,
+    mimeType: 'text/html',
+    buffer: Buffer.from(relationshipHtml(names, direction)),
+  });
+  for (const inputs of [
+    [
+      {
+        name: 'mutuallens-dataset.json',
+        mimeType: 'application/json',
+        buffer: Buffer.from(nativeText),
+      },
+    ],
+    [
+      html('followers_1.html', followers, 'Followers'),
+      html('following.html', followingNames, 'Following'),
+    ],
+  ]) {
+    await page.getByRole('button', { name: 'Start over', exact: true }).click();
+    await expect(page.locator('#import-account')).toHaveValue('');
+    await expect(page.locator('#collected-at')).toHaveValue('');
+    await page.locator('#import-files').setInputFiles(inputs);
+    await page.getByRole('button', { name: /Compare local files/ }).click();
+    await assertCounts();
+    const equivalent = parseCsv(
+      await textDownload(await download(page, 'Export filtered CSV')),
+    );
+    expect(equivalent.slice(1).map((record) => record[0])).toEqual(
+      followingNames.slice(4500),
+    );
+  }
 });

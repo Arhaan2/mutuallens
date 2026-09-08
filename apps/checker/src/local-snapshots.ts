@@ -99,7 +99,12 @@ export function validSnapshot(value: unknown): value is Snapshot {
       typeof d.account.username !== 'string'
     )
       return false;
-    normalizeUsername(d.account.username);
+    if (d.account.username !== '') normalizeUsername(d.account.username);
+    if (
+      d.comparisonBasis !== undefined &&
+      !['supplied_files', 'source_evidence'].includes(String(d.comparisonBasis))
+    )
+      return false;
     validId(d.account.id);
     for (const direction of ['followers', 'following']) {
       const list = d[direction];

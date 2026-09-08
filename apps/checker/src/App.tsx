@@ -10,6 +10,8 @@ import type {
   AccountRecord,
   Comparison,
   Dataset,
+  Direction,
+  ImportAssignment,
   Snapshot,
   SnapshotComparison,
 } from '@mutuallens/core';
@@ -19,6 +21,7 @@ import {
   saveSnapshot,
 } from './local-snapshots';
 import { DifferenceList } from './DifferenceList';
+import { AutomaticCheck } from './AutomaticCheck';
 
 type Report = { dataset: Dataset; comparison: Comparison; elapsedMs: number };
 type Category =
@@ -29,7 +32,11 @@ type Category =
   | 'following';
 type Capability = {
   release: 'preview';
-  automatic: { enabled: false; status: 'blocked'; reason: string };
+  automatic: {
+    enabled: boolean;
+    status: 'blocked' | 'available';
+    reason: string;
+  };
   ads: false;
 };
 type Scope = 'entry' | 'import' | 'results' | 'history';
@@ -66,7 +73,7 @@ export default function App() {
   const storageGeneration = useRef(0);
   const fileInput = useRef<HTMLInputElement>(null);
   const errorBox = useRef<HTMLDivElement>(null);
-  const [username, setUsername] = useState('');
+  const [automaticResetKey, setAutomaticResetKey] = useState(0);
   const [error, setError] = useState('');
   const [notice, setNoticeText] = useState('');
   const [quietNotice, setQuietNotice] = useState(false);
@@ -85,7 +92,8 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [files, setFiles] = useState<File[]>([]);
   const [account, setAccount] = useState('');
-  const [complete, setComplete] = useState(false);
+  const [assignments, setAssignments] = useState<ImportAssignment[]>([]);
+  const [directions, setDirections] = useState<Record<string, Direction>>({});
   const [collectedAt, setCollectedAt] = useState('');
   const [snapshots, setSnapshots] = useState<Snapshot[]>([]);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -141,8 +149,10 @@ export default function App() {
         if (
           !candidate ||
           candidate.release !== 'preview' ||
-          candidate.automatic?.enabled !== false ||
-          candidate.automatic.status !== 'blocked' ||
+          typeof candidate.automatic?.enabled !== 'boolean' ||
+          (candidate.automatic.enabled
+            ? candidate.automatic.status !== 'available'
+            : candidate.automatic.status !== 'blocked') ||
           typeof candidate.automatic.reason !== 'string' ||
           candidate.ads !== false
         )
@@ -174,6 +184,7 @@ export default function App() {
     kind: 'sample' | 'import' | 'compare' | 'history',
     payload: Record<string, unknown> = {},
   ) {
+    if (kind === 'import') setAutomaticResetKey((value) => value + 1);
     worker.current?.terminate();
     const id = ++taskId.current;
     setBusy(kind);
@@ -203,6 +214,15 @@ export default function App() {
         if (data.error) {
           setFeedbackScope(scope);
           setError(data.error);
+          if (kind === 'import' && Array.isArray(data.assignments))
+            setAssignments(
+              data.assignments.filter(
+                (item: ImportAssignment) =>
+                  item &&
+                  typeof item.name === 'string' &&
+                  typeof item.reason === 'string',
+              ),
+            );
           return;
         }
         if (kind === 'history') {
@@ -215,6 +235,7 @@ export default function App() {
         }
         const next = data.result as Report;
         setReport(next);
+        setAssignments([]);
         setImportOpen(false);
         setReplaceSample(false);
         setFeedbackScope('results');
@@ -228,7 +249,11 @@ export default function App() {
         setNotice(
           next.dataset.sample
             ? 'Synthetic sample loaded. No Instagram account was checked.'
-            : 'Your selected files were processed locally. Review source completeness below.',
+            : next.dataset.comparisonBasis === 'supplied_files'
+              ? 'Your selected files were compared locally. Your uploaded comparison is ready.'
+              : next.comparison.negativesWithheld
+                ? 'Acquired source records were compared. Incomplete lists cannot establish non-followers.'
+                : 'Acquired source records were compared with their recorded completeness.',
           true,
         );
       };
@@ -238,7 +263,12 @@ export default function App() {
           setFeedbackScope(scope);
           setBusy(null);
           setError(
-            'Local processing could not start. Your data was not sent to a server. Try a browser that supports module workers.',
+            kind === 'compare' &&
+              (payload.dataset as Dataset | undefined)?.comparisonBasis !==
+                'supplied_files' &&
+              !(payload.dataset as Dataset | undefined)?.sample
+              ? 'Local comparison of the acquired source records could not start. Your current report is unchanged. Try a browser that supports module workers.'
+              : 'Local processing could not start. Your files were not uploaded. Try a browser that supports module workers.',
           );
           instance.terminate();
           worker.current = null;
@@ -278,9 +308,11 @@ export default function App() {
     try {
       if (!files.length)
         throw new Error(
-          'Select a ZIP archive or all relevant JSON files first.',
+          'Select your followers and following JSON, HTML or ZIP files first.',
         );
-      const normalized = normalizeUsername(account);
+      const normalized = account.trim()
+        ? normalizeUsername(account)
+        : undefined;
       const timestamp = collectedAt
         ? new Date(collectedAt).toISOString()
         : undefined;
@@ -289,8 +321,8 @@ export default function App() {
       process('import', {
         files,
         options: {
-          account: { username: normalized },
-          confirmedComplete: complete,
+          ...(normalized ? { account: { username: normalized } } : {}),
+          directions,
           collectedAt: timestamp,
         },
       });
@@ -303,6 +335,7 @@ export default function App() {
     }
   }
   function clearReport(startOver = false) {
+    setAutomaticResetKey((value) => value + 1);
     invalidate();
     ++storageGeneration.current;
     setReport(null);
@@ -321,8 +354,8 @@ export default function App() {
       if (fileInput.current) fileInput.current.value = '';
       setAccount('');
       setCollectedAt('');
-      setComplete(false);
-      setUsername('');
+      setAssignments([]);
+      setDirections({});
       setBeforeId('');
       setAfterId('');
       setHistoryOpen(false);
@@ -338,6 +371,7 @@ export default function App() {
     );
   }
   function requestSample() {
+    setAutomaticResetKey((value) => value + 1);
     invalidate();
     setError('');
     setNotice('');
@@ -355,9 +389,18 @@ export default function App() {
       if (busy) cancel();
       setReplaceSample(false);
       if (window.location.hash === '#import') {
+        setAutomaticResetKey((value) => value + 1);
         setImportOpen(true);
         requestAnimationFrame(() =>
           document.getElementById('import-title')?.focus(),
+        );
+      }
+      if (window.location.hash === '#automatic') {
+        document.getElementById('automatic')?.setAttribute('open', '');
+        requestAnimationFrame(() =>
+          document
+            .getElementById('automatic')
+            ?.scrollIntoView({ block: 'start' }),
         );
       }
       if (window.location.hash === '#history') {
@@ -382,6 +425,7 @@ export default function App() {
     void refreshSnapshots();
   }
   function openImport() {
+    setAutomaticResetKey((value) => value + 1);
     setImportOpen(true);
     if (busy) cancel();
     requestAnimationFrame(() =>
@@ -491,7 +535,25 @@ export default function App() {
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE,
   );
-  const categoryLabel = categories.find((item) => item.key === category)!.label;
+  const uploadedFiles = report?.dataset.comparisonBasis === 'supplied_files';
+  const provisionalFiles =
+    report?.comparison.negativeBasis === 'provisional_files';
+  const categoryName = (key: Category) =>
+    provisionalFiles && key === 'notFollowingBack'
+      ? 'Not found in supplied followers'
+      : provisionalFiles && key === 'notFollowedBackByYou'
+        ? 'Not found in supplied following'
+        : categories.find((item) => item.key === key)!.label;
+  const categoryLabel = categoryName(category);
+  const resultScope = report?.dataset.sample
+    ? 'Synthetic example only. No Instagram account was checked.'
+    : uploadedFiles
+      ? `Based on your uploaded files. ${category === 'notFollowingBack' ? 'These accounts appear in your following list but not your followers list.' : category === 'notFollowedBackByYou' ? 'These accounts appear in your followers list but not your following list.' : 'This category compares the supplied records.'}`
+      : 'Based on acquired source records and the recorded source completeness.';
+  const reportLabel = report?.dataset.account.username
+    ? `@${report.dataset.account.username}`
+    : 'Your uploaded files';
+
   const withheld =
     report?.comparison.negativesWithheld &&
     (category === 'notFollowingBack' || category === 'notFollowedBackByYou');
@@ -603,96 +665,33 @@ export default function App() {
             <div className="section-eyebrow">
               YOUR CONNECTIONS, WITH CONTEXT
             </div>
-            <section className="entry-section" aria-labelledby="entry-title">
+            <section
+              className="entry-section upload-entry"
+              aria-labelledby="entry-title"
+            >
               <div className="intro">
                 <h1 id="entry-title" tabIndex={-1}>
-                  A clearer view of <br />
-                  who follows you back.
+                  Find who doesn’t follow you back.
                 </h1>
                 <p>
-                  Understand the overlap between followers and following, with
-                  readable lists and the source behind every result.
+                  Choose your Instagram relationship files to see who appears in
+                  following but not followers. No username, date or confirmation
+                  is required.
                 </p>
-              </div>
-              <div className="entry-panel">
-                <div className="panel-label">
-                  <span className="status-dot" />
-                  Automatic check{' '}
-                  <span className="status-tag">
-                    {capabilityError
-                      ? 'Unverified'
-                      : capability
-                        ? 'Unavailable'
-                        : 'Loading'}
-                  </span>
-                </div>
-                <label htmlFor="automatic-username">Instagram username</label>
-                <div className="username-field">
-                  <span aria-hidden="true">@</span>
-                  <input
-                    id="automatic-username"
-                    disabled
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    placeholder="your.username"
-                    autoComplete="off"
-                    autoCapitalize="none"
-                    spellCheck={false}
-                    aria-describedby="automatic-status"
-                  />
-                </div>
-                <button
-                  className="button primary full-width"
-                  disabled
-                  aria-describedby="automatic-status"
-                >
-                  Check automatically <span aria-hidden="true">↗</span>
-                </button>
-                <p id="automatic-status" className="availability-copy">
-                  <strong>Preview only.</strong>{' '}
-                  {capabilityError
-                    ? 'Availability could not be verified. Automatic checking remains unavailable.'
-                    : capability?.automatic.reason ||
-                      'Checking availability… Automatic checking remains unavailable.'}
-                </p>
-                {capabilityError && (
-                  <button
-                    className="button small"
-                    onClick={() => setAvailabilityAttempt((value) => value + 1)}
-                  >
-                    Retry availability
-                  </button>
-                )}
-                <div className="entry-secondary">
-                  <button
-                    className="text-button"
-                    onClick={sampleEntry}
-                    disabled={!!busy}
-                  >
-                    Explore synthetic sample <span aria-hidden="true">→</span>
-                  </button>
-                  <a href="#import" onClick={openImport}>
-                    Import your Instagram export
-                  </a>
-                </div>
               </div>
             </section>
-            <div className="trust-strip">
-              <span>
-                <span aria-hidden="true">○</span> Ad-free checker
-              </span>
-              <span>
-                <span aria-hidden="true">○</span> Local file processing
-              </span>
-              <span>
-                <span aria-hidden="true">○</span> Saving is always your choice
-              </span>
-            </div>
           </>
         )}
         {!report && (
           <>
             {feedback('entry')}
+            <button
+              className="text-button"
+              onClick={sampleEntry}
+              disabled={!!busy}
+            >
+              Explore synthetic sample
+            </button>
             <button className="text-button" onClick={() => clearReport(true)}>
               Start over
             </button>
@@ -728,10 +727,12 @@ export default function App() {
                 <div className="section-eyebrow">
                   {report.dataset.sample
                     ? 'SYNTHETIC SAMPLE · NOT A LIVE CHECK'
-                    : 'LOCAL IMPORT REPORT'}
+                    : uploadedFiles
+                      ? 'UPLOADED FILES REPORT'
+                      : 'AUTOMATIC SOURCE REPORT'}
                 </div>
                 <h2 id="results-title" ref={resultsHeading} tabIndex={-1}>
-                  @{report.dataset.account.username}
+                  {reportLabel}
                 </h2>
               </div>
               <div className="result-actions">
@@ -747,13 +748,19 @@ export default function App() {
                 >
                   Export JSON
                 </button>
-                <button
-                  className="button small"
-                  onClick={saveCurrent}
-                  disabled={storageBusy}
-                >
-                  Save snapshot locally
-                </button>
+                <details className="snapshot-options">
+                  <summary>Snapshot options</summary>
+                  <p>
+                    Save only if you want this report to remain in this browser.
+                  </p>
+                  <button
+                    className="button small"
+                    onClick={saveCurrent}
+                    disabled={storageBusy}
+                  >
+                    Save snapshot locally
+                  </button>
+                </details>
                 <button className="text-button" onClick={() => clearReport()}>
                   Clear report
                 </button>
@@ -792,11 +799,23 @@ export default function App() {
                 </div>
               </div>
             )}
-            {report.dataset.sample && (
-              <p className="sample-note">
-                Fictional records for exploring the interface. No Instagram
-                account was checked.
-              </p>
+            <p className="sample-note result-scope">{resultScope}</p>
+            {provisionalFiles && (
+              <div className="notice warning upload-limitation">
+                <strong>Some supplied data could not be included.</strong>
+                <p>
+                  These results mean not found in the usable supplied records.
+                  Missing parts or unreadable identities may change the result.
+                </p>
+                <details>
+                  <summary>Review upload limitations</summary>
+                  <ul>
+                    {report.comparison.warnings.map((warning, index) => (
+                      <li key={index}>{warning}</li>
+                    ))}
+                  </ul>
+                </details>
+              </div>
             )}
             <div className="report-overview">
               <div>
@@ -816,16 +835,57 @@ export default function App() {
                 <span>observed mutuals</span>
               </div>
             </div>
-            <p className="report-source">
-              <strong>
-                {report.comparison.negativesWithheld
-                  ? 'Incomplete / unverified'
-                  : 'Complete for supplied source'}
-              </strong>
-              <span>Imported {date(report.dataset.importedAt)}</span>
-            </p>
+            {uploadedFiles && (
+              <p className="import-summary" aria-label="Import summary">
+                <span>
+                  {number(
+                    report.dataset.importSummary?.relevantFiles ??
+                      new Set([
+                        ...(report.dataset.followers.metadata.files ?? []),
+                        ...(report.dataset.following.metadata.files ?? []),
+                      ]).size,
+                  )}{' '}
+                  relevant files
+                </span>
+                <span>
+                  {number(
+                    report.dataset.importSummary?.duplicatesCombined ??
+                      (report.dataset.followers.metadata.duplicateCount ?? 0) +
+                        (report.dataset.following.metadata.duplicateCount ?? 0),
+                  )}{' '}
+                  duplicates combined
+                </span>
+                <span>
+                  {number(
+                    report.dataset.importSummary?.skippedRecords ??
+                      (report.dataset.followers.metadata.skippedCount ?? 0) +
+                        (report.dataset.following.metadata.skippedCount ?? 0),
+                  )}{' '}
+                  records skipped
+                </span>
+                <span>
+                  {number(report.comparison.quarantinedCount ?? 0)} ambiguous
+                  identities isolated
+                </span>
+              </p>
+            )}
+            {!uploadedFiles && (
+              <p className="report-source">
+                <strong>
+                  {report.comparison.negativesWithheld
+                    ? 'Incomplete / unverified'
+                    : 'Complete for supplied source'}
+                </strong>
+              </p>
+            )}
             <details className="provenance">
-              <summary>Source, timestamps & completeness</summary>
+              <summary>Optional source details & timestamps</summary>
+              <p>
+                Processed {date(report.dataset.importedAt)}.{' '}
+                {uploadedFiles
+                  ? 'Uploaded records are the working dataset; their completeness on Instagram is not independently verified.'
+                  : 'Source evidence controls whether negative relationships can be shown.'}
+              </p>
               <p>
                 Completeness describes the supplied source, not a guaranteed
                 live Instagram snapshot. Import time is not the time someone
@@ -921,7 +981,7 @@ export default function App() {
                       setPage(1);
                     }}
                   >
-                    <span>{item.label}</span>
+                    <span>{categoryName(item.key)}</span>
                     <span className="category-count">
                       {restricted
                         ? 'Withheld'
@@ -979,7 +1039,10 @@ export default function App() {
                 disabled={!!withheld}
                 onClick={() =>
                   download(
-                    exportCsv(rows),
+                    exportCsv(rows, {
+                      scope: `${categoryLabel}. ${resultScope}`,
+                      limitations: report.comparison.warnings,
+                    }),
                     `mutuallens-${report.dataset.sample ? 'synthetic-' : ''}${category}.csv`,
                     'text/csv;charset=utf-8',
                   )
@@ -1104,88 +1167,100 @@ export default function App() {
           onToggle={(event) => setImportOpen(event.currentTarget.open)}
         >
           <summary>
-            Import local files <span>Optional · processed on this device</span>
+            Upload your Instagram files{' '}
+            <span>Compared privately on this device</span>
           </summary>
           <section className="import-section" aria-labelledby="import-title">
             <div>
-              <div className="section-eyebrow">SECONDARY WORKFLOW</div>
               <h2 id="import-title" tabIndex={-1}>
-                Bring your own export.
+                Choose followers and following
               </h2>
               <p>
-                Compare supported Instagram JSON files here in your browser.
-                This optional preview feature is separate from the unavailable
-                automatic workflow.
+                Include available split parts. Supported relationship JSON, HTML
+                and ZIP files stay on this device.{' '}
+                <a href={`${site}/guides/download-instagram-followers/`}>
+                  File preparation guide
+                </a>
               </p>
-              <p className="muted">
-                Select a ZIP, or both directions’ JSON files including every
-                split part. Files are not uploaded. Unsupported formats and
-                incomplete data receive explicit errors or warnings.
-              </p>
-              <a href={`${site}/guides/download-instagram-followers/`}>
-                Export preparation guide <span aria-hidden="true">↗</span>
-              </a>
             </div>
-            <form onSubmit={importFiles} className="import-form">
-              <label htmlFor="import-account">
-                Account these files belong to
-              </label>
-              <input
-                id="import-account"
-                required
-                value={account}
-                onChange={(event) => setAccount(event.target.value)}
-                placeholder="@your.username"
-                autoComplete="off"
-                autoCapitalize="none"
-                spellCheck={false}
-              />
-              <label htmlFor="import-files">Instagram ZIP or JSON files</label>
+            <form
+              onSubmit={importFiles}
+              className="import-form"
+              onDragOver={(event) => event.preventDefault()}
+              onDrop={(event) => {
+                event.preventDefault();
+                if (busy) return;
+                const chosen = Array.from(event.dataTransfer.files);
+                if (chosen.length) {
+                  setImportOpen(true);
+                  setFiles(chosen);
+                  setAssignments([]);
+                  setDirections({});
+                  if (fileInput.current) {
+                    fileInput.current.files = event.dataTransfer.files;
+                  }
+                }
+              }}
+            >
+              <label htmlFor="import-files">Choose your Instagram files</label>
               <input
                 ref={fileInput}
                 id="import-files"
                 type="file"
                 multiple
-                accept=".zip,.json,application/zip,application/json"
+                accept=".zip,.json,.html,.htm,application/zip,application/json,text/html"
                 onChange={(event) => {
+                  setImportOpen(true);
                   setFiles(Array.from(event.target.files || []));
-                  setComplete(false);
+                  setAssignments([]);
+                  setDirections({});
                 }}
               />
               <p className="field-help">
                 {files.length
-                  ? `${files.length} file${files.length === 1 ? '' : 's'} selected. Include all followers and following parts.`
-                  : 'HTML exports are not supported. There is no follower-count cutoff.'}
+                  ? `${files.length} file${files.length === 1 ? '' : 's'} selected. Include both followers and following, including split parts.`
+                  : 'Choose or drop JSON, HTML or ZIP files. Files stay on this device.'}
               </p>
-              <label htmlFor="collected-at">
-                Source collection date <span className="muted">(optional)</span>
-              </label>
-              <input
-                id="collected-at"
-                type="datetime-local"
-                value={collectedAt}
-                onChange={(event) => setCollectedAt(event.target.value)}
-              />
-              <p className="field-help">
-                Only enter a date you know from the source. Unknown dates
-                prevent historical conclusions.
-              </p>
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={complete}
-                  onChange={(event) => setComplete(event.target.checked)}
-                />
-                <span>
-                  I confirm these files belong to this account and contain every
-                  part of both followers and following from this export.
-                </span>
-              </label>
-              <p className="field-help">
-                Without confirmation, negative relationship categories are
-                withheld. Confirmation cannot verify what Instagram included in
-                the export.
-              </p>
+              {files.length > 0 && (
+                <ul className="selected-files" aria-label="Selected files">
+                  {files.map((file, index) => (
+                    <li key={`${file.name}-${index}`}>{file.name}</li>
+                  ))}
+                </ul>
+              )}
+              {assignments.length > 0 && (
+                <fieldset className="file-assignments">
+                  <legend>Identify these relationship files</legend>
+                  <p>
+                    Choose the direction from the export, not from the number of
+                    accounts.
+                  </p>
+                  {assignments.map((item, index) => (
+                    <label key={`${item.name}-${index}`}>
+                      {item.name}
+                      <span className="field-help">{item.reason}</span>
+                      <select
+                        required
+                        value={directions[item.name] ?? ''}
+                        onChange={(event) =>
+                          setDirections((current) => ({
+                            ...current,
+                            [item.name]: event.target.value as Direction,
+                          }))
+                        }
+                      >
+                        <option value="">Choose followers or following</option>
+                        <option value="followers">
+                          This file contains followers
+                        </option>
+                        <option value="following">
+                          This file contains following
+                        </option>
+                      </select>
+                    </label>
+                  ))}
+                </fieldset>
+              )}
               {feedback('import')}
               <button
                 className="button primary"
@@ -1194,8 +1269,96 @@ export default function App() {
               >
                 Compare local files <span aria-hidden="true">→</span>
               </button>
+              <details className="optional-import-details">
+                <summary>Optional account label & source date</summary>
+                <p>
+                  Only needed for labeling and compatible historical snapshots.
+                  Neither is required to compare your files.
+                </p>
+                <label htmlFor="import-account">Account label (optional)</label>
+                <input
+                  id="import-account"
+                  value={account}
+                  onChange={(event) => setAccount(event.target.value)}
+                  placeholder="@your.username"
+                  autoComplete="off"
+                  autoCapitalize="none"
+                  spellCheck={false}
+                />
+                <label htmlFor="collected-at">
+                  Source collection date (optional)
+                </label>
+                <input
+                  id="collected-at"
+                  type="datetime-local"
+                  value={collectedAt}
+                  onChange={(event) => setCollectedAt(event.target.value)}
+                />
+                <p className="field-help">
+                  Enter a date only if known from the source. Unknown dates
+                  prevent historical conclusions, not upload comparison.
+                </p>
+              </details>
             </form>
           </section>
+        </details>
+
+        <details id="automatic" className="entry-panel automatic-disclosure">
+          <summary>Username-only automatic checking</summary>
+          <div className="panel-label">
+            <span className="status-dot" />
+            Automatic check{' '}
+            <span className="status-tag">
+              {capabilityError
+                ? 'Unverified'
+                : capability
+                  ? capability.automatic.enabled
+                    ? 'Available'
+                    : 'Unavailable'
+                  : 'Loading'}
+            </span>
+          </div>
+          <p className="field-help">
+            When available, automatic checking sends the username to our server
+            and its Apify source provider, which processes relationship records.
+            Our stored scan data expires after one hour. Provider-side retention
+            is separate; deletion there is requested but cannot be guaranteed by
+            this browser. Local file uploads stay on your device.
+          </p>
+          <AutomaticCheck
+            enabled={
+              !!capability?.automatic.enabled && !capabilityError && !busy
+            }
+            resetKey={automaticResetKey}
+            onResult={(dataset) => process('compare', { dataset })}
+          />
+          <p id="automatic-status" className="availability-copy">
+            <strong>Preview only.</strong>{' '}
+            {capabilityError
+              ? 'Availability could not be verified. Automatic checking remains unavailable.'
+              : capability?.automatic.reason ||
+                'Checking availability… Automatic checking remains unavailable.'}
+          </p>
+          {capabilityError && (
+            <button
+              className="button small"
+              onClick={() => setAvailabilityAttempt((value) => value + 1)}
+            >
+              Retry availability
+            </button>
+          )}
+          <div className="entry-secondary">
+            <button
+              className="text-button"
+              onClick={sampleEntry}
+              disabled={!!busy}
+            >
+              Explore synthetic sample <span aria-hidden="true">→</span>
+            </button>
+            <a href="#import" onClick={openImport}>
+              Import your Instagram export
+            </a>
+          </div>
         </details>
 
         <section
@@ -1238,7 +1401,9 @@ export default function App() {
                     <div className="snapshot-row" key={snapshot.id}>
                       <div>
                         <strong>
-                          @{snapshot.dataset.account.username}
+                          {snapshot.dataset.account.username
+                            ? `@${snapshot.dataset.account.username}`
+                            : 'Unlabeled uploaded files'}
                           {snapshot.dataset.sample ? ' · Synthetic' : ''}
                         </strong>
                         <span>
@@ -1254,7 +1419,18 @@ export default function App() {
                         className="button small"
                         onClick={() =>
                           download(
-                            JSON.stringify(snapshot, null, 2),
+                            JSON.stringify(
+                              {
+                                ...snapshot,
+                                dataset: JSON.parse(
+                                  exportDataset(snapshot.dataset),
+                                ),
+                                exportScope:
+                                  'Saved snapshot of supplied data, not verified current relationship changes.',
+                              },
+                              null,
+                              2,
+                            ),
                             `mutuallens-snapshot-${snapshot.dataset.sample ? 'synthetic-' : ''}${snapshot.id}.json`,
                             'application/json',
                             'history',
@@ -1283,8 +1459,10 @@ export default function App() {
                       <option value="">Select earlier snapshot</option>
                       {snapshots.map((item) => (
                         <option key={item.id} value={item.id}>
-                          @{item.dataset.account.username} ·{' '}
-                          {date(item.dataset.followers.metadata.endedAt)} ·
+                          {item.dataset.account.username
+                            ? `@${item.dataset.account.username}`
+                            : 'Unlabeled uploaded files'}{' '}
+                          · {date(item.dataset.followers.metadata.endedAt)} ·
                           saved {date(item.savedAt)}
                         </option>
                       ))}
@@ -1304,8 +1482,10 @@ export default function App() {
                       <option value="">Select later snapshot</option>
                       {snapshots.map((item) => (
                         <option key={item.id} value={item.id}>
-                          @{item.dataset.account.username} ·{' '}
-                          {date(item.dataset.followers.metadata.endedAt)} ·
+                          {item.dataset.account.username
+                            ? `@${item.dataset.account.username}`
+                            : 'Unlabeled uploaded files'}{' '}
+                          · {date(item.dataset.followers.metadata.endedAt)} ·
                           saved {date(item.savedAt)}
                         </option>
                       ))}
@@ -1355,7 +1535,10 @@ export default function App() {
                       rows={history[item.key]}
                       onExport={() =>
                         download(
-                          exportCsv(history[item.key]),
+                          exportCsv(history[item.key], {
+                            scope: `${item.label}. Differences between supplied snapshots, not verified current relationship changes.`,
+                            limitations: history.warnings,
+                          }),
                           `mutuallens-${snapshots.find((snapshot) => snapshot.id === beforeId)?.dataset.sample ? 'synthetic-' : ''}${item.key}.csv`,
                           'text/csv;charset=utf-8',
                           'history',

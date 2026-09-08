@@ -1,0 +1,51 @@
+{
+  "kind": "WIP_BROWSER_BUILD_BOUNDARY_AND_SYNTHETIC_WORKER_TEST",
+  "recordedAt": "2026-09-08T05:24:44.131Z",
+  "build": {
+    "commit": "abcbcb29901661951069d3ae7b4d65b08908a3aa",
+    "sourceHash": "726c51bd227169444661e1ef6255bbbf01f9f034f29af7c786f1786864aeae2d",
+    "builtAt": "2026-09-08T05:22:03.593Z"
+  },
+  "caveat": "WIP stamped source artifact, not deployed acceptance or a clean committed build; actual UI journey is covered separately. A synthetic HTML harness and the exact built worker bytes were fulfilled in memory by Playwright routing. No real server or network endpoint was contacted.",
+  "assets": [
+    {
+      "asset": "index-DqExBCza.js",
+      "bytes": 243530,
+      "sha256": "9535b7c0e19488d182cffcf001882d134318476da5aabeab8addd1fbba158c81",
+      "forbiddenMatches": []
+    },
+    {
+      "asset": "processing.worker-BoAbIY2g.js",
+      "bytes": 89307,
+      "sha256": "2510d70452043345a00f407af4b27c5415ce8731c65702d243e16b068bc33094",
+      "forbiddenMatches": []
+    }
+  ],
+  "workerResult": {
+    "kind": "BUILT_WORKER_SYNTHETIC_HTML_JSON_IMPORT",
+    "requestId": 902,
+    "comparisonBasis": "supplied_files",
+    "followers": 1,
+    "following": 2,
+    "mutuals": 1,
+    "notFollowingBack": [
+      "synthetic_not_back"
+    ],
+    "negativesWithheld": false
+  },
+  "harnessServedRequests": [
+    {
+      "url": "https://synthetic-mutuallens.invalid/review",
+      "method": "GET"
+    },
+    {
+      "url": "https://synthetic-mutuallens.invalid/processing.worker.js",
+      "method": "GET"
+    }
+  ],
+  "unexpectedImportRequests": [],
+  "pageErrors": [],
+  "noServerStarted": true,
+  "liveProviderRuns": 0,
+  "result": "PASS"
+}

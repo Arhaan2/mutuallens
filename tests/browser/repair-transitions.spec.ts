@@ -1,3 +1,4 @@
+import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect, type Page, type Worker } from '@playwright/test';
 import { expectedDevelopmentAbort } from './browser-events';
 import { readFile } from 'node:fs/promises';
@@ -27,11 +28,9 @@ async function form(
   files: ReturnType<typeof small>,
   owner: string,
 ) {
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import > summary').click();
+  await openImportDetails(page);
   await page.locator('#import-account').fill(owner);
   await page.locator('#import-files').setInputFiles(files);
-  await page.getByLabel('I confirm these files').check();
 }
 function observe(page: Page) {
   const workers = new Set<Worker>();
@@ -103,6 +102,7 @@ test('repair: repeated sample activation and pending saves leave one coherent re
     page.getByRole('button', { name: 'Mutuals 4,500', exact: true }),
   ).toBeVisible();
   await expect.poll(() => observed.workers.size).toBe(0);
+  await openSnapshotOptions(page);
   await page
     .getByRole('button', { name: 'Save snapshot locally' })
     .evaluate((button: HTMLButtonElement) => {
@@ -189,6 +189,7 @@ test('repair: real large import cancels, retries with exact data, and repeated h
       (record: { username: string }) => record.username,
     ),
   ).toEqual(['synthetic_mutual', 'synthetic_followed']);
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.locator('.snapshot-row')).toHaveCount(1);
 

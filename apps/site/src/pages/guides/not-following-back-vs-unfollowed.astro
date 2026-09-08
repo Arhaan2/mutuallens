@@ -14,7 +14,7 @@ import Page from '../../layouts/Page.astro';
     over time. A single report cannot bridge that gap.
   </p>
   <h2>One report describes a present comparison</h2><p>
-    If an account is in your following list and absent from a complete supplied
+    If an account is in your following list and absent from your supplied
     followers list, it belongs in “not following you back” for that source. It
     may never have followed you. That label does not say whether a change
     happened or when.
@@ -35,7 +35,11 @@ import Page from '../../layouts/Page.astro';
     <li>
       Both snapshots must describe the same account. Stable IDs help where the
       source provides them.
-    </li><li>Both need compatible schemas and sufficient completeness.</li><li>
+    </li><li>
+      Both need compatible sources and comparison scopes; known upload omissions
+      remain qualifications. Automatic-source snapshots require source
+      completeness.
+    </li><li>
       The source collection dates must be known and ordered. A file’s import or
       save date does not establish when its contents were collected.
     </li><li>

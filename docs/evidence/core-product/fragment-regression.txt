@@ -1,0 +1,24 @@
+
+> mutuallens@0.1.0 test:browser
+> playwright test --grep JSON, inert HTML
+
+[WebServer] (node:37239) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:37281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:37121) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:37413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/browser/core-product.spec.ts:119:1 › JSON, inert HTML and nested ZIP relationship data give equivalent results without external loads (377ms)
+(node:37437) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [webkit] › tests/browser/core-product.spec.ts:119:1 › JSON, inert HTML and nested ZIP relationship data give equivalent results without external loads (663ms)
+(node:37486) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [firefox] › tests/browser/core-product.spec.ts:119:1 › JSON, inert HTML and nested ZIP relationship data give equivalent results without external loads (913ms)
+
+  3 passed (6.8s)

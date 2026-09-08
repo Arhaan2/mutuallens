@@ -1342,3 +1342,145 @@ input:disabled {
     font-size: 0.8125rem;
   }
 }
+
+/* Upload comparison is the primary local workflow; metadata stays optional. */
+.automatic-disclosure > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.automatic-disclosure[open] > summary {
+  margin-bottom: 20px;
+}
+.optional-import-details {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.optional-import-details > summary,
+.snapshot-options > summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.optional-import-details p {
+  margin: 14px 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.optional-import-details input {
+  margin-bottom: 16px;
+}
+.selected-files {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+.file-assignments {
+  border: 1px solid var(--line);
+  padding: 18px;
+  margin: 18px 0;
+  min-width: 0;
+  border-radius: 7px;
+}
+.file-assignments legend {
+  font-weight: 600;
+  padding: 0 6px;
+}
+.file-assignments label {
+  overflow-wrap: anywhere;
+  margin-bottom: 16px;
+}
+.file-assignments .field-help {
+  display: block;
+  margin: 8px 0;
+}
+.import-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 14px 0;
+}
+.snapshot-options {
+  position: relative;
+  max-width: 280px;
+}
+.snapshot-options p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 12px 0;
+}
+.upload-limitation p {
+  margin: 8px 0;
+}
+.result-scope {
+  max-width: 900px;
+}
+.upload-entry {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.upload-entry .intro {
+  padding-top: 0;
+}
+.upload-entry h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 14px;
+}
+.upload-entry .intro p {
+  max-width: 760px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.import-disclosure .import-section {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+.import-section > div > p {
+  max-width: 780px;
+  margin-bottom: 8px;
+}
+.import-section h2 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+.import-disclosure {
+  margin-top: 22px;
+}
+.automatic-disclosure {
+  margin-top: 32px;
+}
+.automatic-disclosure .username-field {
+  max-width: 480px;
+}
+.automatic-disclosure .full-width {
+  max-width: 480px;
+}
+.automatic-job {
+  max-width: 780px;
+}
+.automatic-job > input {
+  max-width: 480px;
+}
+.automatic-job [role='status'] {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 16px;
+}
+.automatic-counts {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 16px;
+  background: var(--bg);
+}
+.automatic-counts p {
+  margin: 0 0 8px;
+}
+.automatic-counts p:last-child {
+  margin-bottom: 0;
+}

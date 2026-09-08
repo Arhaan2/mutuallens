@@ -50,9 +50,9 @@ test('navigation: public destinations, mobile navigation and 404 recovery work a
   }
   await page.goto(publicOrigin);
   await page
-    .getByRole('link', { name: 'Check automatically', exact: true })
+    .getByRole('link', { name: 'Automatic checking status', exact: true })
     .click();
-  await expect(page).toHaveURL(`${checkerOrigin}/`);
+  await expect(page).toHaveURL(`${checkerOrigin}/#automatic`);
   await expect(
     page.getByRole('button', { name: 'Check automatically', exact: true }),
   ).toBeDisabled();
@@ -61,10 +61,10 @@ test('navigation: public destinations, mobile navigation and 404 recovery work a
   );
   await page.goto(publicOrigin);
   await page
-    .getByRole('link', { name: 'Import your Instagram export', exact: true })
+    .getByRole('link', { name: 'Upload your Instagram files', exact: true })
     .click();
   await expect(page).toHaveURL(`${checkerOrigin}/#import`);
-  await expect(page.locator('#import-account')).toBeVisible();
+  await expect(page.locator('#import-files')).toBeVisible();
   for (const origin of [publicOrigin, checkerOrigin]) {
     const response = await page.goto(`${origin}/synthetic-missing-route`);
     expect(response?.status()).toBe(404);

@@ -1,0 +1,87 @@
+{
+  "evidenceType": "PUBLIC_DOCUMENTATION_AND_METADATA_ONLY",
+  "liveActorRuns": 0,
+  "credentialedAccountRequests": 0,
+  "instagramTargetRequests": 0,
+  "publicActor": {
+    "url": "https://api.apify.com/v2/acts/seemuapps~instagram-followers-scraper",
+    "retrievedAt": "2026-09-08T04:59:45.013Z",
+    "sha256": "754631bebd3e7ea7434211725d8c89cb024dd7307af0f5b0ef7a8f0871fc5430",
+    "actorId": "2nsQrloj1Sl16uh4z",
+    "name": "instagram-followers-scraper",
+    "username": "seemuapps",
+    "modifiedAt": "2026-08-12T00:20:28.328Z",
+    "isSourceCodeHidden": true,
+    "defaultRunOptions": {
+      "build": "latest",
+      "timeoutSecs": 3600,
+      "memoryMbytes": 256
+    },
+    "pricing": {
+      "model": "PAY_PER_EVENT",
+      "startedAt": "2026-04-12T12:56:41.164Z",
+      "minimalMaxTotalChargeUsd": null,
+      "events": {
+        "apify-actor-start": {
+          "eventPriceUsd": 0.00005,
+          "isOneTimeEvent": true
+        },
+        "apify-default-dataset-item": {
+          "eventPriceUsd": 0.00001,
+          "isOneTimeEvent": false
+        },
+        "user-batch-50": {
+          "eventPriceUsd": 0.009,
+          "isOneTimeEvent": false
+        }
+      }
+    },
+    "httpStatus": 200
+  },
+  "publicBuild": {
+    "url": "https://api.apify.com/v2/acts/seemuapps~instagram-followers-scraper/builds/default",
+    "status": "SUCCEEDED",
+    "retrievedAt": "2026-09-08T04:59:44.978Z",
+    "sha256": "d908f38950c7e9352025c6d96a829761969a25949957cfc12173858952615b2f",
+    "id": "qZHBzZiV6QmFCKDym",
+    "buildNumber": "1.0.35",
+    "statusScope": "ACTOR_BUILD_ONLY_NOT_SCRAPING_RUN",
+    "finishedAt": "2026-08-12T00:20:28.328Z",
+    "inputSchemaVersion": 1,
+    "inputSchemaSha256": "55b5191c3a30673d0c4feb9db871c210d0bba2438e4230fdb58a6dcfe34e64ea",
+    "inputFields": {
+      "username": {
+        "type": "string"
+      },
+      "mode": {
+        "type": "string",
+        "default": "followers",
+        "enum": [
+          "followers",
+          "following",
+          "both"
+        ]
+      },
+      "pageId": {
+        "type": "string"
+      },
+      "maxItems": {
+        "type": "integer",
+        "default": 500,
+        "minimum": 0
+      }
+    },
+    "httpStatus": 200
+  },
+  "pricingIssue": {
+    "url": "https://apify.com/seemuapps/instagram-followers-scraper/issues/question-pricing-x83vCvl0FjgjxiPyN",
+    "retrievedAt": "2026-09-08T04:59:44.752Z",
+    "sha256": "de99cce0b22816b45c4d9749a37616593bab23137b036a3643f045fd7b5de924",
+    "issueId": "x83vCvl0FjgjxiPyN",
+    "vendorReplyDateObserved": "2026-07-21T02:49:45.673Z",
+    "issueHasVendorBatchConfirmation": true,
+    "issueHasPartialBatchRounding": true,
+    "paraphrase": "The vendor confirms billing by batches of 50 identities, with a partially filled batch billed as a whole batch. This is a vendor explanation, not measured account-specific usage.",
+    "httpStatus": 200
+  }
+}

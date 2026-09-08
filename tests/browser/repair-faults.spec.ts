@@ -1,3 +1,4 @@
+import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect, type Page } from '@playwright/test';
 
 // Fault injection only. Normal built-preview journeys belong to the other suite.
@@ -11,7 +12,7 @@ const validCapability = {
   ads: false,
 };
 const sampleButton = (page: Page) =>
-  page.getByRole('button', { name: /Explore synthetic sample/ });
+  page.getByRole('button', { name: /Explore synthetic sample/ }).first();
 const visibleAlert = (page: Page) => page.locator('[role="alert"]:visible');
 const file = (name: string, value: unknown) => ({
   name,
@@ -37,8 +38,7 @@ async function importAndSave(
   date: string,
   count: number,
 ) {
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import > summary').click();
+  await openImportDetails(page);
   await page.locator('#import-account').fill('synthetic_owner');
   await page.locator('input[type=file]').setInputFiles([
     file('followers.json', records([marker, 'mutual'])),
@@ -47,12 +47,12 @@ async function importAndSave(
     }),
   ]);
   await page.locator('#collected-at').fill(date);
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(page.locator('#results-title')).toContainText('synthetic_owner');
   await page.getByRole('button', { name: /All followers/ }).click();
   await expect(page.locator('.account-list')).toContainText(`@${marker}`);
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.locator('.snapshot-row')).toHaveCount(count);
 }
@@ -150,13 +150,11 @@ for (const [name, response] of [
         body: calls === 1 ? response : JSON.stringify(validCapability),
       });
     });
-    await page.goto('/');
+    await page.goto('/#automatic');
     await expect(page.locator('#automatic-status')).toContainText(
       'Availability could not be verified',
     );
-    await expect(
-      page.getByRole('button', { name: /Check automatically/ }),
-    ).toBeDisabled();
+    await expect(page.locator('#automatic .button.primary')).toBeDisabled();
     await expect(
       page.getByRole('button', { name: 'Retry availability' }),
     ).toBeVisible();
@@ -180,9 +178,7 @@ test('fault: capability network failure keeps local sample functional', async ({
   await expect(page.locator('#automatic-status')).toContainText(
     'Availability could not be verified',
   );
-  await expect(
-    page.getByRole('button', { name: /Check automatically/ }),
-  ).toBeDisabled();
+  await expect(page.locator('#automatic .button.primary')).toBeDisabled();
   await assertSampleWorks(page);
   expect(errors).toEqual([]);
 });
@@ -200,7 +196,7 @@ test('fault: hung capability times out at 8s without blocking local mode', async
   await page.route('**/api/capabilities', () => {
     requested();
   });
-  await page.goto('/');
+  await page.goto('/#automatic');
   await requestStarted;
   await expect(page.locator('#automatic-status')).toContainText(
     /Checking (?:service )?availability/,
@@ -413,6 +409,7 @@ test('fault: IndexedDB denied keeps report usable and reports saving failure loc
   });
   await page.goto('/');
   await assertSampleWorks(page);
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(visibleAlert(page)).toContainText(/storage|sav/i);
   await expect(page.locator('#results-title')).toContainText(

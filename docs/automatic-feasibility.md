@@ -1,3 +1,5 @@
+> **Current amendment:** See [Core product delivery](core-product-delivery.md) and [the controlling user amendment](specification/Core_Product_Amendment.md). The evidence below retains its original dates, source commits and scope. In particular, the old upload-checkbox policy and earlier per-profile provider economics do not govern the new supplied-file comparison or the newly investigated Seemuapps batch-billed candidate.
+
 # Automatic acquisition feasibility
 
 **Gate: BLOCKED. Mandatory website-only automatic checking is not implemented or proven.**

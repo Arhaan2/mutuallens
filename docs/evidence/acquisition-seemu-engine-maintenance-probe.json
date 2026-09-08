@@ -1,0 +1,38 @@
+{
+  "type": "SYNTHETIC_INDEPENDENT_ENGINE_REGRESSION",
+  "retrievedAt": "2026-09-08T05:26:13.158Z",
+  "liveRuns": 0,
+  "sourceHashes": {
+    "jobs.ts": "9e9e4ad8d4ef044eb81b24fe9900ead8452c642421e3635c4bd674b0c7eba70a",
+    "store.ts": "686fd957a8cb22b0037a97fa346a277e058e6afc35e0b063970e938c273d8b95"
+  },
+  "findings": [
+    {
+      "case": "successful charge-limited 250-record null-cursor fixture; next .009 batch cannot fit .05 ceiling",
+      "status": "partial",
+      "followersComplete": false,
+      "followingComplete": false,
+      "syntheticRunStarts": 1,
+      "passesConservativeGate": true
+    },
+    {
+      "case": "expired graph with provider deletion unavailable",
+      "recordsBeforeExpiry": 1,
+      "cleanup": {
+        "removed": 1,
+        "pending": 1
+      },
+      "recordsAfterCleanup": 0,
+      "passesLocalErasureGate": true
+    },
+    {
+      "case": "provider run read and abort both unavailable after successful start",
+      "status": "partial",
+      "ledger": {
+        "spent": 3000000,
+        "reserved": 0
+      },
+      "passesUncertainReservationGate": true
+    }
+  ]
+}

@@ -87,10 +87,12 @@ try {
   for (const port of ports) {
     await new Promise((resolve, reject) => {
       const probe = createServer();
-      probe.once('error', () =>
+      probe.once('error', (error) =>
         reject(
           new Error(
-            `Port ${port} is occupied. Stop its owning process yourself, then retry. No existing process was changed.`,
+            error.code === 'EADDRINUSE'
+              ? `Port ${port} is occupied. Stop its owning process yourself, then retry. No existing process was changed.`
+              : `Cannot bind local port ${port} (${error.code ?? 'unknown error'}). Check local runtime permissions before retrying. No existing process was changed.`,
           ),
         ),
       );

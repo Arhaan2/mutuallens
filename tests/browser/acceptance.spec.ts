@@ -1,3 +1,4 @@
+import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { zipSync, strToU8 } from 'fflate';
@@ -73,9 +74,7 @@ test('synthetic target, search, pagination, keyboard, exports, no external reque
   page.on('request', (r) => requests.push(r.url()));
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
-  await expect(
-    page.getByRole('button', { name: 'Check automatically' }),
-  ).toBeDisabled();
+  await expect(page.locator('#automatic .button.primary')).toBeDisabled();
   await page.keyboard.press(keyboardTab(browserName));
   await expect(
     page.getByRole('link', { name: 'Skip to checker' }),
@@ -142,18 +141,15 @@ test('synthetic target, search, pagination, keyboard, exports, no external reque
   });
 });
 
-test('local loose imports withhold absences by default and do not transmit files', async ({
+test('local loose imports show supplied-list absences without mandatory identity and do not transmit files', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#import');
   await expect(page.locator('#automatic-status')).toContainText(
     'not available',
   );
   const requests: string[] = [];
   page.on('request', (r) => requests.push(`${r.method()} ${r.url()}`));
-  await page.locator('#import-account').fill('synthetic_owner');
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import > summary').click();
   await page
     .locator('input[type=file]')
     .setInputFiles([
@@ -161,19 +157,19 @@ test('local loose imports withhold absences by default and do not transmit files
       file('following.json', followingFile(['beta', 'mutual'])),
     ]);
   await page.getByRole('button', { name: /Compare local files/ }).click();
-  await expect(page.locator('#results-title')).toContainText('synthetic_owner');
-  await expect(
-    page.getByRole('button', { name: /Not following you back Withheld/ }),
-  ).toBeVisible();
-  await page
-    .getByRole('button', { name: /Not following you back Withheld/ })
-    .click();
-  await expect(
-    page.getByRole('heading', { name: 'Missing doesn’t mean not following.' }),
-  ).toBeVisible();
+  await expect(page.locator('#results-title')).toContainText(
+    'Your uploaded files',
+  );
+  await expect(page.locator('.category.active')).toHaveAccessibleName(
+    'Not following you back 1',
+  );
+  await expect(page.locator('.account-list')).toContainText('@beta');
+  await expect(page.locator('.result-scope')).toContainText(
+    'Based on your uploaded files',
+  );
   await expect(
     page.getByRole('button', { name: 'Export filtered CSV' }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   expect(
     requests.filter(
       (r) =>
@@ -187,6 +183,7 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
   page,
 }) => {
   await page.goto('/');
+  await openImportDetails(page);
   await page.locator('#import-account').fill('synthetic_owner');
   const zip = zipSync({
     'connections/followers_1.json': strToU8(followerFile(['alpha'])),
@@ -198,34 +195,29 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
     mimeType: 'application/zip',
     buffer: Buffer.from(zip),
   });
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(
     page.getByRole('button', { name: /Not following you back 1$/ }),
   ).toBeVisible();
   await expect(page.locator('.account-list')).toContainText('@beta');
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import > summary').click();
+  await openImportDetails(page);
   await page
     .locator('input[type=file]')
     .setInputFiles([
       file('followers.json', '[]'),
       file('following.json', '{"relationships_following":[]}'),
     ]);
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(
     page.getByRole('heading', { name: 'No accounts in this category' }),
   ).toBeVisible();
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import > summary').click();
+  await openImportDetails(page);
   await page
     .locator('input[type=file]')
     .setInputFiles(file('following.json', followingFile(['beta'])));
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.getByRole('alert')).toContainText('Missing followers');
-  if (!(await page.locator('#import-account').isVisible()))
-    await page.locator('details#import > summary').click();
+  await openImportDetails(page);
   await page
     .locator('input[type=file]')
     .setInputFiles([
@@ -246,6 +238,7 @@ test('explicit snapshots, reload persistence, delete-all and public origin stora
   expect(
     await page.evaluate(async () => (await indexedDB.databases()).length),
   ).toBe(0);
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.getByRole('status')).toContainText('Snapshot saved');
   const publicPage = await context.newPage();
@@ -451,8 +444,7 @@ test('snapshot comparison visible semantics and incompatible identity rejection'
     followers: string[],
     date: string,
   ) {
-    if (!(await page.locator('#import-account').isVisible()))
-      await page.locator('details#import > summary').click();
+    await openImportDetails(page);
     await page.locator('#import-account').fill(owner);
     await page
       .locator('input[type=file]')
@@ -461,12 +453,12 @@ test('snapshot comparison visible semantics and incompatible identity rejection'
         file('following.json', followingFile(['mutual'])),
       ]);
     await page.locator('#collected-at').fill(date);
-    await page.getByLabel('I confirm these files').check();
     await page.getByRole('button', { name: /Compare local files/ }).click();
     await expect(page.locator('#results-title')).toContainText(owner);
     await expect(page.getByRole('status')).toContainText(
-      'selected files were processed',
+      'selected files were compared locally',
     );
+    await openSnapshotOptions(page);
     await page.getByRole('button', { name: 'Save snapshot locally' }).click();
     await expect(page.getByRole('status')).toContainText('Snapshot saved');
   }

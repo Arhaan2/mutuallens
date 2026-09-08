@@ -1,6 +1,8 @@
 # MutualLens
 
-**Preview only. The mandatory website-only automatic Instagram checker is blocked, not complete.** No complete-list source has passed the consented live ~6,000 followers × ~6,000 following and recurring zero-cash gate. Local import and synthetic examples are secondary preview features, not a substitute.
+**Upload your Instagram relationship files and compare immediately.** The noindexed, ad-free preview calculates who appears in following but not followers without a username, date or completeness checkbox. JSON, inert HTML, ZIPs, split files and validated MutualLens dataset exports are supported. Known partial inputs show qualified results.
+
+Username-only automatic checking has a real server adapter and resumable job implementation, but credentialed live tests are **NOT RUN** pending an existing Apify Free token and an explicitly authorized Instagram target. The deployed API stays disabled until applicable source/account/runtime gates pass; no production completion is claimed.
 
 Source: https://github.com/Arhaan2/mutuallens
 
@@ -37,26 +39,27 @@ Both commands build the current files, refuse occupied ports, start the required
 
 The startup log records the Git commit and a source-content hash also served at `/build-info.json` on each built origin. A dirty-tree build is explicitly labeled. `npm run test:browser` starts a fresh built runtime (never reuses a server) and tests Chromium, WebKit, and Firefox. `npm run test:browser:dev` runs the normal workflows/transitions in the complete development stack; production headers/404/fault injection are checked in the built suite. Stop an interactive local session before running tests.
 
-See [the repair ledger](docs/ui-functional-repair.md) for browser evidence, reset contracts, external blockers, and current branch/CI status.
+See [the core product ledger](docs/core-product-delivery.md) for this amendment’s tests and deployment evidence; [the repair ledger](docs/ui-functional-repair.md) preserves earlier evidence.
 
 ## Structure
 
 - `apps/site`: Astro public guides and policies, prepared for SEO but noindexed while preview-only.
 - `apps/checker`: React/Vite checker, module-worker file processing, explicit checker-origin IndexedDB snapshots; same-origin Pages API.
 - `packages/core`: tested normalization, import, source-aware comparison, CSV/JSON and snapshot semantics.
-- `packages/acquisition`: fail-closed capability boundary. **No approved live provider adapter exists.**
-- `docs/specification`: unchanged provided specification/checklist, not completed test evidence.
-- `docs/automatic-feasibility.md`: provider documentation, auth probes, economics, and missing live evidence.
+- `packages/acquisition`: pinned Apify adapter, Free-account/price guards, resumable jobs and D1 capacity accounting; disabled until live validation.
+- `apps/maintenance`: prospective scheduled expiry and provider-cleanup Worker.
+- `docs/specification`: original specifications plus the controlling Core Product Amendment, not completed test evidence.
+- `docs/acquisition-seemuapps.md`: current concrete provider investigation; `docs/automatic-integration.md`: configuration and remaining live gates.
 - `docs/release-evidence.md`: actual release/test/deployment status and rollback.
 
 ## Privacy and limits
 
-Selected imports stay on the checker origin in browser memory unless explicitly saved locally. No ad SDK, tracking, session replay, remote avatar, or Instagram credentials. The hosting service can process ordinary network/security metadata. A future automatic mode would involve our server and a named provider and needs a new privacy review. No arbitrary record cutoff; defensive byte/ZIP resource limits fail explicitly. Partial inputs withhold negative categories.
+Selected imports stay on the checker origin in browser memory unless explicitly saved locally. No ad SDK, tracking, session replay, remote avatar, or Instagram credentials. The hosting service can process ordinary network/security metadata. Configured automatic scans involve our server and the named Apify provider; the deployed preview has no provider binding. No arbitrary record cutoff; defensive byte/ZIP resource limits fail explicitly. Known partial uploads show provisional differences with export limitations. Incomplete automatic lists withhold confirmed negatives.
 
 Public pages and checker require **different origins**. Build origins use `PUBLIC_SITE_ORIGIN`, `PUBLIC_CHECKER_ORIGIN`, and `VITE_SITE_ORIGIN`; local defaults are `http://localhost:4321` / `http://localhost:5173`. Production origins must come from actual host reservations. No names/graphs/tokens are passed between origins. All preview documents receive noindex and all ads remain disabled. There is no production-enabling environment switch: release gates must be satisfied and reviewed code must change.
 
 ## Deploy
 
-Cloudflare Pages hosts the two separate previews through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. The application source deployed is `75a340ec010b62cc90db3f6275313173e9b0ac77`. No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. GitHub Pages is not enabled. CI tests source with read-only permissions and contains no deployment/provider credentials. Direct deployment is owned by the integrator; no untrusted PR can trigger a privileged deployment.
+Cloudflare Pages hosts the two separate previews through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. The source and deployment IDs are recorded in [the current delivery ledger](docs/core-product-delivery.md). No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. GitHub Pages is not enabled. CI tests source with read-only permissions and contains no deployment/provider credentials. Direct deployment is owned by the integrator; no untrusted PR can trigger a privileged deployment.
 
 See `AGENTS.md` for ownership and release rules. Use only synthetic data in tests, issues, screenshots and public evidence. Never attach your Instagram export to a public issue.

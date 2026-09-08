@@ -1,3 +1,4 @@
+import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect, type Page, type Download } from '@playwright/test';
 import { zipSync, strToU8 } from 'fflate';
 import { expectedDevelopmentAbort } from './browser-events';
@@ -30,27 +31,13 @@ const pair = (followers: string[], following: string[]) => [
 ];
 
 async function openImport(page: Page) {
-  if (await page.locator('#import-account').isVisible()) return;
-  const entry = page
-    .getByRole('link', {
-      name: /Import your Instagram export|Import another|Import files|Bring your own/i,
-    })
-    .first();
-  if (await entry.count()) await entry.click();
-  const details = page.locator('#import details, details#import');
-  if (
-    !(await page.locator('#import-account').isVisible()) &&
-    (await details.count())
-  ) {
-    await details.first().locator('summary').click();
-  }
-  await expect(page.locator('#import-account')).toBeVisible();
+  await openImportDetails(page);
 }
 async function importLists(
   page: Page,
   followers: string[],
   following: string[],
-  options: { owner?: string; sourceDate?: string; complete?: boolean } = {},
+  options: { owner?: string; sourceDate?: string } = {},
 ) {
   await openImport(page);
   await page
@@ -60,9 +47,6 @@ async function importLists(
   await page
     .locator('#collected-at')
     .fill(options.sourceDate ?? '2025-01-01T12:00');
-  await page
-    .getByLabel('I confirm these files')
-    .setChecked(options.complete !== false);
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText(
     options.owner ?? 'synthetic_owner',
@@ -71,6 +55,7 @@ async function importLists(
 }
 async function save(page: Page) {
   const before = await page.locator('.snapshot-row').count();
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.locator('.snapshot-row')).toHaveCount(before + 1);
 }
@@ -173,7 +158,9 @@ test('repair: missing import input has visible nearby feedback', async ({
   await openImport(page);
   await page.locator('#import-account').fill('synthetic_owner');
   await page.getByRole('button', { name: /Compare local files/ }).click();
-  const alert = page.getByRole('alert').filter({ hasText: 'Select a ZIP' });
+  const alert = page
+    .getByRole('alert')
+    .filter({ hasText: 'Select your followers and following' });
   await expect(alert).toBeVisible();
   const box = await alert.boundingBox();
   expect(box).not.toBeNull();
@@ -229,6 +216,8 @@ test('repair: all snapshot differences are browsable and full exports contain ev
       'id',
       'display_name',
       'source',
+      'comparison_scope',
+      'limitations',
     ]);
     expect(rows.slice(1).map((row) => row[0])).toEqual(names(prefix));
     await group.getByRole('button', { name: 'Previous', exact: true }).click();
@@ -403,13 +392,13 @@ test('repair: sample replacement requires explicit choice and clearing differs f
       .locator('#import-files')
       .evaluate((element: HTMLInputElement) => element.files?.length),
   ).toBe(2);
-  await expect(page.getByLabel('I confirm these files')).toBeChecked();
+  await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
   await page.getByRole('button', { name: 'Start over', exact: true }).click();
   await expect(page.locator('#results-title')).toHaveCount(0);
   await openImport(page);
   await expect(page.locator('#import-account')).toHaveValue('');
   await expect(page.locator('#collected-at')).toHaveValue('');
-  await expect(page.getByLabel('I confirm these files')).not.toBeChecked();
+  await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
   expect(
     await page
       .locator('#import-files')
@@ -443,7 +432,6 @@ test('repair: ZIP split parts deduplicate correctly and selecting same files aga
     buffer: Buffer.from(zip),
   };
   await page.locator('#import-files').setInputFiles(input);
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText('synthetic_owner');
   await expect(
@@ -474,8 +462,7 @@ test('repair: ZIP split parts deduplicate correctly and selecting same files aga
       .evaluate((element: HTMLInputElement) => element.files?.length),
   ).toBe(0);
   await page.locator('#import-files').setInputFiles(input);
-  await expect(page.getByLabel('I confirm these files')).not.toBeChecked();
-  await page.getByLabel('I confirm these files').check();
+  await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(
@@ -494,28 +481,31 @@ test('repair: ZIP split parts deduplicate correctly and selecting same files aga
   );
 });
 
-test('repair: partial input withholds negatives; missing malformed and unsupported files fail clearly', async ({
+test('repair: known missing parts qualify useful negatives; missing malformed and unsupported data fail clearly', async ({
   page,
 }) => {
   await page.goto(`${CHECKER}/#import`);
-  await importLists(
-    page,
-    ['synthetic_a', 'synthetic_mutual'],
-    ['synthetic_b', 'synthetic_mutual'],
-    { complete: false, sourceDate: '' },
-  );
+  await openImport(page);
+  await page.locator('#import-account').fill('synthetic_owner');
   await page
-    .getByRole('button', {
-      name: 'Not following you back Withheld',
-      exact: true,
-    })
-    .click();
-  await expect(
-    page.getByRole('heading', { name: 'Missing doesn’t mean not following.' }),
-  ).toBeVisible();
+    .locator('#import-files')
+    .setInputFiles([
+      jsonFile('followers_1.json', followerText(['synthetic_a'])),
+      jsonFile('followers_3.json', followerText(['synthetic_mutual'])),
+      jsonFile(
+        'following.json',
+        followingText(['synthetic_b', 'synthetic_mutual']),
+      ),
+    ]);
+  await page.getByRole('button', { name: /Compare local files/ }).click();
+  await expect(page.locator('.category.active')).toHaveAccessibleName(
+    'Not found in supplied followers 1',
+  );
+  await expect(page.locator('.account-list')).toContainText('@synthetic_b');
+  await expect(page.locator('.upload-limitation')).toBeVisible();
   await expect(
     page.getByRole('button', { name: 'Export filtered CSV' }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await page.getByRole('button', { name: 'Mutuals 1', exact: true }).click();
   await expect(page.locator('.account-list')).toContainText(
     '@synthetic_mutual',
@@ -534,7 +524,8 @@ test('repair: partial input withholds negatives; missing malformed and unsupport
     },
     {
       files: [jsonFile('followers.html', '<html>unsupported</html>')],
-      expected: /unsupported|ZIP|JSON/i,
+      expected:
+        /recognized relationship|unsupported|relationship.*HTML|HTML.*relationship/i,
     },
   ]) {
     await openImport(page);
