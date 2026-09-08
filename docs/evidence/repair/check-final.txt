@@ -14,8 +14,9 @@
 > @mutuallens/site@0.1.0 check
 > ASTRO_TELEMETRY_DISABLED=1 astro check
 
-18:37:48 [types] Generated 35ms
-18:37:48 [check] Getting diagnostics for Astro files in /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site...
+18:59:26 [vite] Re-optimizing dependencies because vite config has changed
+18:59:26 [types] Generated 58ms
+18:59:26 [check] Getting diagnostics for Astro files in /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site...
 Result (17 files): 
 - 0 errors
 - 0 warnings

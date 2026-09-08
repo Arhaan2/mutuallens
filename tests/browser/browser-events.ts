@@ -8,7 +8,7 @@ export function expectedDevelopmentAbort(request: Request): boolean {
     process.env.MUTUALLENS_TEST_MODE === 'dev' &&
     request.method() === 'GET' &&
     request.url() === 'http://localhost:5173/api/capabilities' &&
-    /^(net::ERR_ABORTED|cancelled|NS_BINDING_ABORTED)$/.test(
+    /^(net::ERR_ABORTED|cancelled|Load request cancelled|NS_BINDING_ABORTED)$/.test(
       request.failure()?.errorText || '',
     );
   if (expected)
