@@ -1,0 +1,33 @@
+
+> mutuallens@0.1.0 test:browser
+> playwright test --grep local loose imports|navigation: public destinations|repeated sample activation|real large import cancels --output=/tmp/mutuallens-ci-correction-artifacts
+
+[WebServer] (node:52147) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52186) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:52029) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 12 tests using 1 worker
+
+(node:52253) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/browser/acceptance.spec.ts:144:1 › local loose imports show supplied-list absences without mandatory identity and do not transmit files (285ms)
+  ✓   2 [chromium] › tests/browser/navigation.spec.ts:6:1 › navigation: public destinations, mobile navigation and 404 recovery work across origins (1.1s)
+  ✓   3 [chromium] › tests/browser/repair-transitions.spec.ts:80:1 › repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot (407ms)
+  ✓   4 [chromium] › tests/browser/repair-transitions.spec.ts:129:1 › repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work (5.5s)
+(node:53298) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [webkit] › tests/browser/acceptance.spec.ts:144:1 › local loose imports show supplied-list absences without mandatory identity and do not transmit files (605ms)
+  ✓   6 [webkit] › tests/browser/navigation.spec.ts:6:1 › navigation: public destinations, mobile navigation and 404 recovery work across origins (1.5s)
+  ✓   7 [webkit] › tests/browser/repair-transitions.spec.ts:80:1 › repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot (532ms)
+  ✓   8 [webkit] › tests/browser/repair-transitions.spec.ts:129:1 › repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work (2.9s)
+(node:53360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [firefox] › tests/browser/acceptance.spec.ts:144:1 › local loose imports show supplied-list absences without mandatory identity and do not transmit files (825ms)
+  ✓  10 [firefox] › tests/browser/navigation.spec.ts:6:1 › navigation: public destinations, mobile navigation and 404 recovery work across origins (1.6s)
+  ✓  11 [firefox] › tests/browser/repair-transitions.spec.ts:80:1 › repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot (462ms)
+  ✓  12 [firefox] › tests/browser/repair-transitions.spec.ts:129:1 › repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work (2.2s)
+
+  12 passed (52.8s)

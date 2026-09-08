@@ -1,0 +1,573 @@
+{
+  "config": {
+    "argv": [
+      "/Users/arhaan/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/.bin/playwright",
+      "test",
+      "--grep",
+      "local loose imports|navigation: public destinations|repeated sample activation|real large import cancels",
+      "--output=/tmp/mutuallens-ci-correction-artifacts"
+    ],
+    "configFile": "/Users/arhaan/Documents/ChatGPT/mutuallens/playwright.config.ts",
+    "rootDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/mutuallens-ci-correction-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/mutuallens-ci-correction-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/mutuallens-ci-correction-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run preview",
+      "wait": {
+        "stdout": {}
+      },
+      "reuseExistingServer": false,
+      "timeout": 60000,
+      "gracefulShutdown": {
+        "signal": "SIGTERM",
+        "timeout": 5000
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "acceptance.spec.ts",
+      "file": "acceptance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "local loose imports show supplied-list absences without mandatory identity and do not transmit files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 285,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:37.177Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf654160f377cf56a60-60e6795f00f05f5b302a",
+          "file": "acceptance.spec.ts",
+          "line": 144,
+          "column": 1
+        },
+        {
+          "title": "local loose imports show supplied-list absences without mandatory identity and do not transmit files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 605,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:44.866Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf654160f377cf56a60-1f9fb6425c185165b70b",
+          "file": "acceptance.spec.ts",
+          "line": 144,
+          "column": 1
+        },
+        {
+          "title": "local loose imports show supplied-list absences without mandatory identity and do not transmit files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 825,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:50.855Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6bf654160f377cf56a60-19e6255153bf97de99e9",
+          "file": "acceptance.spec.ts",
+          "line": 144,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "navigation.spec.ts",
+      "file": "navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "navigation: public destinations, mobile navigation and 404 recovery work across origins",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1136,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:37.566Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5d2868f7d23420c27cca-870d4a3ac2e3b2c4fe17",
+          "file": "navigation.spec.ts",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "navigation: public destinations, mobile navigation and 404 recovery work across origins",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1501,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:45.666Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5d2868f7d23420c27cca-4f57ae593c82968c6c34",
+          "file": "navigation.spec.ts",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "navigation: public destinations, mobile navigation and 404 recovery work across origins",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1596,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:52.171Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5d2868f7d23420c27cca-1324dd34283048db6b1e",
+          "file": "navigation.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "repair-transitions.spec.ts",
+      "file": "repair-transitions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:38.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-83c666d15ded95808432",
+          "file": "repair-transitions.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5496,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:39.120Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "real-worker-cancellation-environment",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJtb2NrZWQiOiBmYWxzZSwKICAiaW5wdXRCeXRlcyI6IDQ5MDAwMDMwLAogICJmb2xsb3dlcnMiOiAxMDAwMDAsCiAgImZvbGxvd2luZyI6IDEwMDAwMCwKICAiYnJvd3NlciI6ICJjaHJvbWl1bSIsCiAgInZlcnNpb24iOiAiMTUzLjAuODAxMC4xMiIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJSZXNvdXJjZS1zYWZlIGlucHV0cyBleGVyY2lzZSBjYW5jZWxsYXRpb247IHRoaXMgaXMgbm90IGNvbXBsZXRlZCAxMDAsMDAwLXJlY29yZCByZXN1bHQgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-5d19c02b819270205219",
+          "file": "repair-transitions.spec.ts",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 532,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:47.175Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-786f7efe61f4090c9cc3",
+          "file": "repair-transitions.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2872,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:47.711Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "real-worker-cancellation-environment",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJtb2NrZWQiOiBmYWxzZSwKICAiaW5wdXRCeXRlcyI6IDQ5MDAwMDMwLAogICJmb2xsb3dlcnMiOiAxMDAwMDAsCiAgImZvbGxvd2luZyI6IDEwMDAwMCwKICAiYnJvd3NlciI6ICJ3ZWJraXQiLAogICJ2ZXJzaW9uIjogIjI2LjYiLAogICJwbGF0Zm9ybSI6ICJkYXJ3aW4iLAogICJhcmNoaXRlY3R1cmUiOiAiYXJtNjQiLAogICJjYXZlYXQiOiAiUmVzb3VyY2Utc2FmZSBpbnB1dHMgZXhlcmNpc2UgY2FuY2VsbGF0aW9uOyB0aGlzIGlzIG5vdCBjb21wbGV0ZWQgMTAwLDAwMC1yZWNvcmQgcmVzdWx0IG9yIGxpdmUgYWNxdWlzaXRpb24gZXZpZGVuY2UuIgp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-ef9540c57d2012dbaafe",
+          "file": "repair-transitions.spec.ts",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:53.774Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-ae553410298bc1fdd9d4",
+          "file": "repair-transitions.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2159,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:47:54.240Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "real-worker-cancellation-environment",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJtb2NrZWQiOiBmYWxzZSwKICAiaW5wdXRCeXRlcyI6IDQ5MDAwMDMwLAogICJmb2xsb3dlcnMiOiAxMDAwMDAsCiAgImZvbGxvd2luZyI6IDEwMDAwMCwKICAiYnJvd3NlciI6ICJmaXJlZm94IiwKICAidmVyc2lvbiI6ICIxNTUuMCIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJSZXNvdXJjZS1zYWZlIGlucHV0cyBleGVyY2lzZSBjYW5jZWxsYXRpb247IHRoaXMgaXMgbm90IGNvbXBsZXRlZCAxMDAsMDAwLXJlY29yZCByZXN1bHQgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-f1e09f091173d18bda1b",
+          "file": "repair-transitions.spec.ts",
+          "line": 129,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-08T05:47:03.815Z",
+    "duration": 52800.172,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

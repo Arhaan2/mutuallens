@@ -1,0 +1,24 @@
+{
+  "repository": "Arhaan2/mutuallens",
+  "requestedCommit": "a5d7f32b14fa69240e3e4c4322f0042eb3b00a3e",
+  "source": "GitHub connector fetch_commit_workflow_runs",
+  "response": {
+    "workflow_runs": [
+      {
+        "id": 34191941803,
+        "name": "Verify preview",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 8,
+        "jobs_url": "https://api.github.com/repos/Arhaan2/mutuallens/actions/runs/34191941803/jobs",
+        "logs_url": "https://api.github.com/repos/Arhaan2/mutuallens/actions/runs/34191941803/logs",
+        "workflow_id": 352677182
+      }
+    ]
+  },
+  "cliWatch": {
+    "runId": 34191941803,
+    "exitCode": 0,
+    "log": "ci-success-watch.txt"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "recordedAt": "2026-09-08T05:42:30.894042+00:00",
+  "sourceCommit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+  "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+  "buildTimestamp": "2026-09-08T05:37:32.494Z",
+  "cleanGitTreeBeforeBuild": true,
+  "environment": "preview",
+  "branch": "codex/ui-functional-repair",
+  "automaticConfigured": false,
+  "adsEnabled": false,
+  "indexing": "noindex",
+  "workersPlan": "Free, owner-confirmed; subscription API not available in existing scope",
+  "productionDeploymentCreated": false,
+  "newDatabaseOrMaintenanceWorkerCreated": false,
+  "rollbackExecuted": false,
+  "deployments": [
+    {
+      "application": "site",
+      "project": "mutuallens",
+      "id": "10037ccf-bdb4-4468-a434-3a5964ea2965",
+      "immutableUrl": "https://10037ccf.mutuallens-ddm.pages.dev",
+      "alias": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev"
+    },
+    {
+      "application": "checker",
+      "project": "mutuallens-app",
+      "id": "80455a41-ebc5-4407-9340-9574ae76db16",
+      "immutableUrl": "https://80455a41.mutuallens-app.pages.dev",
+      "alias": "https://codex-ui-functional-repair.mutuallens-app.pages.dev"
+    }
+  ],
+  "scope": "Initial fully browser-verified two-origin deployment; subsequent checker-only stamp update recorded separately below.",
+  "subsequentCheckerDeployment": {
+    "shortId": "50318048",
+    "immutableUrl": "https://50318048.mutuallens-app.pages.dev",
+    "commit": "a5d7f32b14fa69240e3e4c4322f0042eb3b00a3e",
+    "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+    "result": "Wrangler deployment complete, exit0",
+    "fullDeploymentId": null,
+    "hostedReadback": "PASS21/21; final-readback.json confirms current branch and immutable commit/source plus actual uploaded comparison",
+    "warning": "Wrangler reported an untracked dependency symlink in the isolated checkout. Tracked source was unchanged, and its source hash matched the preceding deployment. The link was then replaced with an ignored dependency directory; git status became clean."
+  },
+  "publicStampRefresh": {
+    "status": "BLOCKED",
+    "executed": false,
+    "attempts": 2,
+    "reason": "Automatic permission approval review did not finish before its deadline. Both failures occurred before process creation.",
+    "retainedCommit": "f0165de28d71180f9018eed8c1bd30633bfd6415"
+  }
+}

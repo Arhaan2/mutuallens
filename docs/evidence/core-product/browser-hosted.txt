@@ -1,0 +1,23 @@
+
+Running 12 tests using 1 worker
+
+(node:46079) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/hosted/hosted.spec.ts:142:1 › hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports (2.8s)
+  ✓   2 [chromium] › tests/hosted/hosted.spec.ts:211:1 › hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives (984ms)
+  ✓   3 [chromium] › tests/hosted/hosted.spec.ts:284:1 › hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed (2.1s)
+  ✓   4 [chromium] › tests/hosted/hosted.spec.ts:351:1 › hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML (2.4s)
+(node:46118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [webkit] › tests/hosted/hosted.spec.ts:142:1 › hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports (1.9s)
+  ✓   6 [webkit] › tests/hosted/hosted.spec.ts:211:1 › hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives (1.7s)
+  ✓   7 [webkit] › tests/hosted/hosted.spec.ts:284:1 › hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed (6.0s)
+  ✓   8 [webkit] › tests/hosted/hosted.spec.ts:351:1 › hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML (2.1s)
+(node:46809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [firefox] › tests/hosted/hosted.spec.ts:142:1 › hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports (3.5s)
+  ✓  10 [firefox] › tests/hosted/hosted.spec.ts:211:1 › hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives (858ms)
+  ✓  11 [firefox] › tests/hosted/hosted.spec.ts:284:1 › hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed (3.0s)
+  ✓  12 [firefox] › tests/hosted/hosted.spec.ts:351:1 › hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML (2.4s)
+
+  12 passed (31.2s)

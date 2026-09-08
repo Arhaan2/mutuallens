@@ -1,0 +1,81 @@
+{
+  "testedAt": "2026-09-08T05:44:45.490Z",
+  "browser": "Chromium",
+  "version": "153.0.8010.12",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "provenance": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "status": 200,
+      "commit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+      "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+      "builtAt": "2026-09-08T05:37:32.494Z"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "status": 200,
+      "commit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+      "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+      "builtAt": "2026-09-08T05:37:32.494Z"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+      "state": "public entry",
+      "overflow": false,
+      "axe": []
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+      "state": "checker entry",
+      "buttonHorizontalGap": 10,
+      "firstButton": {
+        "x": 20,
+        "y": 370.3125,
+        "width": 166.078125,
+        "height": 36
+      },
+      "secondButton": {
+        "x": 196.078125,
+        "y": 370.3125,
+        "width": 65.375,
+        "height": 36
+      },
+      "overflow": false,
+      "axe": []
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+      "state": "real uploaded synthetic6000x6000 results",
+      "followers": 6000,
+      "following": 6000,
+      "mutuals": 4500,
+      "nonfollowers": 1500,
+      "overflow": false,
+      "axe": []
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "externalRequests": [],
+  "nonReadRequests": [],
+  "simulatedProfileNavigation": {
+    "actualWebsiteSource": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+    "target": "https://www.instagram.com/mobile_fixture_06001/",
+    "destination": "Playwright route fulfillment; no real Instagram destination response",
+    "intercepted": [
+      {
+        "url": "https://www.instagram.com/mobile_fixture_06001/",
+        "method": "GET",
+        "fulfilledLocally": true
+      }
+    ],
+    "openerIsNull": true,
+    "referrer": "",
+    "title": "Simulated profile destination"
+  }
+}

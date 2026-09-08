@@ -1,0 +1,148 @@
+{
+  "stamp": {
+    "commit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+    "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+    "builtAt": "2026-09-08T05:37:32.494Z"
+  },
+  "applications": {
+    "site": {
+      "origin": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+      "fileCount": 16,
+      "totalBytes": 72147,
+      "files": [
+        {
+          "path": "404.html",
+          "bytes": 2828,
+          "sha256": "95291bd57229a5d528507caa3b8260d268724fad3c61d610ac507d7ea88fab5c"
+        },
+        {
+          "path": "_astro/Page.DWSNgpg8.css",
+          "bytes": 12293,
+          "sha256": "e8430b8333daf2190cbbcf74f9097de45f37c1e2c1eccb7ef9574c5bf623f7ee"
+        },
+        {
+          "path": "_headers",
+          "bytes": 460,
+          "sha256": "63285ec265b706685ee17dcc99d7b039b33e34f54682beeaee01f66e180c5278"
+        },
+        {
+          "path": "about/index.html",
+          "bytes": 4131,
+          "sha256": "a78e67f6c8073ac5a10d69d8b55053ff45579c99ec98748293ac147b88c77fd7"
+        },
+        {
+          "path": "build-info.json",
+          "bytes": 170,
+          "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+        },
+        {
+          "path": "contact/index.html",
+          "bytes": 3884,
+          "sha256": "f15a1faff09503f80954d26c294ab9140a6f83f1ba0d7203424d9d45071df7e2"
+        },
+        {
+          "path": "guides/download-instagram-followers/index.html",
+          "bytes": 6391,
+          "sha256": "eddb955bc15c8d630c04bd8b91ccfd8e6a6c6cfea6ac65fa668719d0a3d504e9"
+        },
+        {
+          "path": "guides/followers-vs-following/index.html",
+          "bytes": 5256,
+          "sha256": "6f17fb3e7bbddb46e485fb73a4af056bea2489559651575b62637a80ba27e4cb"
+        },
+        {
+          "path": "guides/instagram-export-troubleshooting/index.html",
+          "bytes": 5454,
+          "sha256": "79e09a9221399886ff69e7cf59438e525c795343da04096cbbb8bf58af08058b"
+        },
+        {
+          "path": "guides/not-following-back-vs-unfollowed/index.html",
+          "bytes": 4993,
+          "sha256": "90aa8fb7d5038bd1e18b9215b2e913556ba2cb5687d6392926f2520bfe455732"
+        },
+        {
+          "path": "index.html",
+          "bytes": 7926,
+          "sha256": "7b2f4b18769070572aeb15d6538aa88482b370147b63370fce89d86d2bee486b"
+        },
+        {
+          "path": "instagram-follow-back-checker/index.html",
+          "bytes": 6247,
+          "sha256": "7bb287b948fc9473ddd1ae98c90a1ae0c2cbfc43aa1618d6f19b559204fb314d"
+        },
+        {
+          "path": "privacy/index.html",
+          "bytes": 6250,
+          "sha256": "d83170da43e1cccbb3fb064213bf5b1d2d32d2f776c39bca50fd33aced6dc19f"
+        },
+        {
+          "path": "robots.txt",
+          "bytes": 96,
+          "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d"
+        },
+        {
+          "path": "sitemap.xml",
+          "bytes": 1131,
+          "sha256": "524e282361206662b15bc5d3991b713faf6f0ca021703befd4b98aecd67e39e8"
+        },
+        {
+          "path": "terms/index.html",
+          "bytes": 4637,
+          "sha256": "cb304e5407c4f6c8c1b7339a3c6709f1b508783bbb2837755e3db7825dfdc787"
+        }
+      ]
+    },
+    "checker": {
+      "origin": "https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+      "fileCount": 9,
+      "totalBytes": 355659,
+      "files": [
+        {
+          "path": "404.html",
+          "bytes": 354,
+          "sha256": "399ff468a87d9736f71c1d0b40f2c9a5022b89492fba6a9bd7932e11f4aa3c59"
+        },
+        {
+          "path": "_headers",
+          "bytes": 460,
+          "sha256": "63285ec265b706685ee17dcc99d7b039b33e34f54682beeaee01f66e180c5278"
+        },
+        {
+          "path": "_routes.json",
+          "bytes": 47,
+          "sha256": "7cc274574ae8daabe5fb9aaf7b32e00ad75df679bf3c2b6a0ed45625ebd7b87d"
+        },
+        {
+          "path": "assets/index-C2ydvX6I.js",
+          "bytes": 243638,
+          "sha256": "16da2f253e05c882eafa620bd040db71240f8cfc5d9a8e326035b9fbff1b5732"
+        },
+        {
+          "path": "assets/index-DngKauON.css",
+          "bytes": 20796,
+          "sha256": "97e33aacc321ca30139241ee081ad7782ba0e697c9dce7d5fa5149e162276c4e"
+        },
+        {
+          "path": "assets/processing.worker-BoAbIY2g.js",
+          "bytes": 89307,
+          "sha256": "2510d70452043345a00f407af4b27c5415ce8731c65702d243e16b068bc33094"
+        },
+        {
+          "path": "build-info.json",
+          "bytes": 170,
+          "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+        },
+        {
+          "path": "index.html",
+          "bytes": 791,
+          "sha256": "410ff5f9c40ae065c5ed280e2dff50ec5f334741331ed634cc04f00d801bbc3d"
+        },
+        {
+          "path": "robots.txt",
+          "bytes": 96,
+          "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d"
+        }
+      ]
+    }
+  }
+}

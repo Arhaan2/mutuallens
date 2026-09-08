@@ -1,0 +1,212 @@
+{
+  "kind": "ACTUAL_HOSTED_FINAL_READBACK",
+  "startedAt": "2026-09-08T18:26:00.919Z",
+  "expected": {
+    "siteCommit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+    "checkerCommit": "a5d7f32b14fa69240e3e4c4322f0042eb3b00a3e",
+    "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1"
+  },
+  "observations": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-robots-tag": "noindex, nofollow",
+        "access-control-allow-origin": "*"
+      },
+      "setsCookie": false,
+      "body": {
+        "commit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+        "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+        "builtAt": "2026-09-08T05:37:32.494Z"
+      }
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "cache-control": "private, no-store",
+        "x-robots-tag": "noindex, nofollow",
+        "access-control-allow-origin": null
+      },
+      "setsCookie": false,
+      "body": {
+        "release": "preview",
+        "automatic": {
+          "enabled": false,
+          "status": "blocked",
+          "reason": "Automatic checking is awaiting provider account setup and authorized live validation. File comparison is available now."
+        },
+        "ads": false
+      }
+    },
+    {
+      "url": "https://50318048.mutuallens-app.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-robots-tag": "noindex, nofollow",
+        "access-control-allow-origin": "*"
+      },
+      "setsCookie": false,
+      "body": {
+        "commit": "a5d7f32b14fa69240e3e4c4322f0042eb3b00a3e",
+        "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+        "builtAt": "2026-09-08T05:48:34.043Z"
+      }
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-robots-tag": "noindex, nofollow",
+        "access-control-allow-origin": "*"
+      },
+      "setsCookie": false,
+      "body": {
+        "commit": "a5d7f32b14fa69240e3e4c4322f0042eb3b00a3e",
+        "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1",
+        "builtAt": "2026-09-08T05:48:34.043Z"
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "name": "codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json returns200",
+      "passed": true
+    },
+    {
+      "name": "codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities returns200",
+      "passed": true
+    },
+    {
+      "name": "50318048.mutuallens-app.pages.dev/build-info.json returns200",
+      "passed": true
+    },
+    {
+      "name": "codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json returns200",
+      "passed": true
+    },
+    {
+      "name": "all four bounded HTTPS reads completed",
+      "passed": true
+    },
+    {
+      "name": "public remains f0165de with expected source",
+      "passed": true
+    },
+    {
+      "name": "checker branch is a5d7f32 with expected source",
+      "passed": true
+    },
+    {
+      "name": "checker immutable is a5d7f32 with expected source",
+      "passed": true
+    },
+    {
+      "name": "preview automatic and ads disabled",
+      "passed": true
+    },
+    {
+      "name": "capabilities private no-store, no CORS or cookie",
+      "passed": true
+    },
+    {
+      "name": "checker page HTTPS200",
+      "passed": true
+    },
+    {
+      "name": "upload works without account or date",
+      "passed": true
+    },
+    {
+      "name": "synthetic category: Not following you back 1",
+      "passed": true
+    },
+    {
+      "name": "synthetic category: Mutuals 1",
+      "passed": true
+    },
+    {
+      "name": "synthetic category: You don’t follow back 1",
+      "passed": true
+    },
+    {
+      "name": "synthetic category: All followers 2",
+      "passed": true
+    },
+    {
+      "name": "synthetic category: All following 2",
+      "passed": true
+    },
+    {
+      "name": "only expected synthetic non-follower is shown",
+      "passed": true
+    },
+    {
+      "name": "uploaded source scope is visible",
+      "passed": true
+    },
+    {
+      "name": "no third-party or upload request attempted",
+      "passed": true
+    },
+    {
+      "name": "no browser runtime/request errors",
+      "passed": true
+    }
+  ],
+  "liveProviderRuns": 0,
+  "realInstagramTargets": 0,
+  "readErrors": [],
+  "browser": {
+    "engine": "Chromium",
+    "fixtureType": "synthetic Instagram-shaped JSON supplied by file input, browser-local only",
+    "inputCounts": {
+      "followers": 2,
+      "following": 2
+    },
+    "categoryNames": [
+      "Not following you back 1",
+      "Mutuals 1",
+      "You don’t follow back 1",
+      "All followers 2",
+      "All following 2"
+    ],
+    "requests": [
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-C2ydvX6I.js",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-DngKauON.css",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-BoAbIY2g.js",
+        "method": "GET"
+      }
+    ],
+    "runtimeErrors": [],
+    "requestFailures": [],
+    "comparisonTitle": "Your uploaded files",
+    "comparisonBasis": "Based on your uploaded files. These accounts appear in your following list but not your followers list."
+  },
+  "result": "PASS",
+  "finishedAt": "2026-09-08T18:26:02.506Z",
+  "assertionsPassed": 21
+}
