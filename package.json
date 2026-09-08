@@ -22,7 +22,11 @@
     "test:browser": "playwright test",
     "build": "npm run build -w @mutuallens/checker && npm run build -w @mutuallens/site && node scripts/build-security.mjs",
     "dev:checker": "npm run dev -w @mutuallens/checker",
-    "dev:site": "npm run dev -w @mutuallens/site"
+    "dev:site": "npm run dev -w @mutuallens/site",
+    "dev": "node scripts/serve.mjs dev",
+    "preview": "node scripts/serve.mjs preview",
+    "test:browser:dev": "MUTUALLENS_TEST_MODE=dev playwright test repair-workflows repair-transitions",
+    "test:startup": "node scripts/test-startup.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

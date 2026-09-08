@@ -1,10 +1,13 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { sourceStamp } from './source-stamp.mjs';
+const stamp = await sourceStamp();
 const checker = new URL('../apps/checker/dist/', import.meta.url);
 const site = new URL('../apps/site/dist/', import.meta.url);
 const policy =
   "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'";
 for (const folder of [site, checker]) {
   await mkdir(folder, { recursive: true });
+  await writeFile(new URL('build-info.json', folder), JSON.stringify(stamp));
   await writeFile(
     new URL('_headers', folder),
     `/*\n  X-Robots-Tag: noindex, nofollow\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()\n  Content-Security-Policy: ${policy}\n`,

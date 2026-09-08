@@ -13,11 +13,29 @@ npm ci
 npm run check
 npm test
 npm run build
-npx playwright install chromium
+npx playwright install chromium webkit firefox
 npm run test:browser
+npm run test:browser:dev
+npm run test:startup
 ```
 
-Development: run `npm run dev:site`, `npm run dev:checker`, and in another terminal `npx wrangler pages dev dist --cwd apps/checker --port 8788` (or run the browser tests, which start the two built local servers). The checker dev proxy targets port 8788. No provider key is needed for the disabled preview. Exact preview-server commands are in `playwright.config.ts`.
+Start the complete local application from one terminal:
+
+```sh
+npm run dev
+```
+
+For the built preview with the real local Pages API:
+
+```sh
+npm run preview
+```
+
+Both commands build the current files, refuse occupied ports, start the required processes, and verify readiness. Public site: `http://localhost:4321`; checker: `http://localhost:5173`. Development additionally starts its local API on `127.0.0.1:8788`; Vite proxies it through the checker origin. Ctrl+C stops only the processes started by this command. No provider key or hosting login is needed. These are localhost addresses, not deployed previews.
+
+The startup log records the Git commit and a source-content hash also served at `/build-info.json` on each built origin. A dirty-tree build is explicitly labeled. `npm run test:browser` starts a fresh built runtime (never reuses a server) and tests Chromium, WebKit, and Firefox. `npm run test:browser:dev` runs the normal workflows/transitions in the complete development stack; production headers/404/fault injection are checked in the built suite. Stop an interactive local session before running tests.
+
+See [the repair ledger](docs/ui-functional-repair.md) for browser evidence, reset contracts, external blockers, and current branch/CI status.
 
 ## Structure
 

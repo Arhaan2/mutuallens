@@ -30,5 +30,7 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm audit --audit-level=high
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit firefox
       - run: npm run test:browser
+      - run: npm run test:browser:dev
+      - run: npm run test:startup
