@@ -4,6 +4,8 @@
 
 Source: https://github.com/Arhaan2/mutuallens
 
+Verified hosted previews: [public website](https://codex-ui-functional-repair.mutuallens-ddm.pages.dev) · [checker](https://codex-ui-functional-repair.mutuallens-app.pages.dev). Both are noindexed and ad-free. [Deployment and browser evidence](docs/cloudflare-preview.md).
+
 ## Run locally
 
 Use Node 24 and npm 11 (tested versions recorded in `docs/evidence/`).
@@ -55,6 +57,6 @@ Public pages and checker require **different origins**. Build origins use `PUBLI
 
 ## Deploy
 
-Cloudflare Pages is the intended free host; account access and plan must be verified before deployment. No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. GitHub Pages is not enabled. CI tests source with read-only permissions and contains no deployment/provider credentials. Direct deployment is owned by the integrator; no untrusted PR can trigger a privileged deployment.
+Cloudflare Pages hosts the two separate previews through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. The application source deployed is `75a340ec010b62cc90db3f6275313173e9b0ac77`. No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. GitHub Pages is not enabled. CI tests source with read-only permissions and contains no deployment/provider credentials. Direct deployment is owned by the integrator; no untrusted PR can trigger a privileged deployment.
 
 See `AGENTS.md` for ownership and release rules. Use only synthetic data in tests, issues, screenshots and public evidence. Never attach your Instagram export to a public issue.

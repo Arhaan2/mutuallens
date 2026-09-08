@@ -1,0 +1,426 @@
+{
+  "testedAt": "2026-09-08T02:44:16.179Z",
+  "browser": "153.0.8010.12",
+  "site": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+  "checker": "https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+  "syntheticOnly": true,
+  "buildInfo": {
+    "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev": {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "status": 200,
+      "body": "{\"commit\":\"75a340ec010b62cc90db3f6275313173e9b0ac77\",\"sourceHash\":\"947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157\",\"builtAt\":\"2026-09-08T02:41:33.672Z\"}"
+    },
+    "https://codex-ui-functional-repair.mutuallens-app.pages.dev": {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "status": 200,
+      "body": "{\"commit\":\"75a340ec010b62cc90db3f6275313173e9b0ac77\",\"sourceHash\":\"947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157\",\"builtAt\":\"2026-09-08T02:41:33.672Z\"}"
+    }
+  },
+  "viewports": [
+    {
+      "width": 390,
+      "states": {
+        "home": {
+          "width": 390,
+          "height": 900,
+          "documentWidth": 390,
+          "scrollY": 0,
+          "focus": "Skip to contentPRODUCT PREVIEW Automatic checking is unavailable. Sample and loc",
+          "h1": "A clearer view of who follows you back.",
+          "robots": "noindex, follow",
+          "scripts": []
+        },
+        "entry": {
+          "width": 390,
+          "height": 900,
+          "documentWidth": 390,
+          "scrollY": 0,
+          "focus": "\n    Skip to checkerMutualLensHow it worksPrivacyPreviewYOUR CONNECTIONS, WITH C",
+          "h1": "A clearer view of who follows you back.",
+          "robots": "noindex, nofollow",
+          "scripts": [
+            "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js"
+          ]
+        },
+        "sampleNatural": {
+          "width": 390,
+          "height": 900,
+          "documentWidth": 390,
+          "scrollY": 0,
+          "focus": "@synthetic_example",
+          "h1": "Your local report",
+          "robots": "noindex, nofollow",
+          "scripts": [
+            "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js"
+          ],
+          "headingRect": {
+            "x": 20,
+            "y": 334.5,
+            "width": 308.265625,
+            "height": 30.625,
+            "top": 334.5,
+            "right": 328.265625,
+            "bottom": 365.125,
+            "left": 20
+          },
+          "firstRowRect": {
+            "x": 21,
+            "y": 1126.875,
+            "width": 348,
+            "height": 67,
+            "top": 1126.875,
+            "right": 369,
+            "bottom": 1193.875,
+            "left": 21
+          }
+        },
+        "sample": {
+          "width": 390,
+          "height": 900,
+          "documentWidth": 390,
+          "scrollY": 281,
+          "focus": "@synthetic_example",
+          "h1": "Your local report",
+          "robots": "noindex, nofollow",
+          "scripts": [
+            "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js"
+          ],
+          "headingRect": {
+            "x": 20,
+            "y": 53.5,
+            "width": 308.265625,
+            "height": 30.625,
+            "top": 53.5,
+            "right": 328.265625,
+            "bottom": 84.125,
+            "left": 20
+          },
+          "firstRowRect": {
+            "x": 21,
+            "y": 845.875,
+            "width": 348,
+            "height": 67,
+            "top": 845.875,
+            "right": 369,
+            "bottom": 912.875,
+            "left": 21
+          }
+        }
+      },
+      "homeStatus": 200,
+      "homeHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a37a9c422df5cd6e-SJC",
+        "content-encoding": "br",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Tue, 08 Sep 2026 02:44:16 GMT",
+        "etag": "W/\"8a77f5cea15e1c9a215fab1164ad7290\"",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ksBDMJ1Ub6g2Y5gqC%2FucxdC7TJfRAiRYLUccL3KT6f%2FL8zUnLMGWJz6AbiB280%2B6%2FotD%2B2iBxOS3bdaPul4GPIilg28DoP%2FKgXJqh0VNmKhsyoY%2BqXPR6MMk76SFLS%2BUM82Fq%2B7juroYHRxPtUKzKz9AGO4QAVV7CFvuy0idBiUgXuch%2BnQ%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-robots-tag": "noindex, nofollow"
+      },
+      "sampleHref": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/#sample",
+      "homeAxe": [],
+      "checkerStatus": 200,
+      "checkerHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a37a9c45a84c810a-SJC",
+        "content-encoding": "br",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Tue, 08 Sep 2026 02:44:16 GMT",
+        "etag": "W/\"983026517338d7f15ed6255de7ed022a\"",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=yyF3hWLQpXxxwarx6n%2FruaapLilOkurBwJQP07tAdoAI47AuoxnPpfN1mXbW4UfPby%2BpouyFirmnaKKAmLFX3iPjVMXeFuwwX1CkK5VVKuJtVxwDgbpn7HWq7IWnL54aM24pw6JBCIPoRSVeuCagGuK08pYtckS8qsejuXa1x4LmURvxIaY%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-robots-tag": "noindex, nofollow"
+      },
+      "capabilities": {
+        "release": "preview",
+        "automatic": {
+          "enabled": false,
+          "status": "blocked",
+          "reason": "Automatic checks are not available: complete-list access at the live target scale and a recurring zero-cash allowance have not been verified."
+        },
+        "ads": false
+      },
+      "entryAxe": [],
+      "sampleFinalUrl": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/#sample",
+      "sampleCounts": "Not following you back\n1,500\nMutuals\n4,500\nYou don’t follow back\n1,500\nAll followers\n6,000\nAll following\n6,000",
+      "sampleRows": 50,
+      "sampleAxe": [],
+      "requests": [
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+          "resourceType": "script"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+          "resourceType": "fetch"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+          "resourceType": "script"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-D3jCi-6S.js",
+          "resourceType": "script"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+          "resourceType": "fetch"
+        }
+      ],
+      "failed": []
+    },
+    {
+      "width": 1440,
+      "states": {
+        "home": {
+          "width": 1440,
+          "height": 900,
+          "documentWidth": 1440,
+          "scrollY": 0,
+          "focus": "Skip to contentPRODUCT PREVIEW Automatic checking is unavailable. Sample and loc",
+          "h1": "A clearer view of\nwho follows you back.",
+          "robots": "noindex, follow",
+          "scripts": []
+        },
+        "entry": {
+          "width": 1440,
+          "height": 900,
+          "documentWidth": 1440,
+          "scrollY": 0,
+          "focus": "\n    Skip to checkerMutualLensHow it worksPrivacyPreviewYOUR CONNECTIONS, WITH C",
+          "h1": "A clearer view of\nwho follows you back.",
+          "robots": "noindex, nofollow",
+          "scripts": [
+            "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js"
+          ]
+        },
+        "sampleNatural": {
+          "width": 1440,
+          "height": 900,
+          "documentWidth": 1440,
+          "scrollY": 0,
+          "focus": "@synthetic_example",
+          "h1": "Your local report",
+          "robots": "noindex, nofollow",
+          "scripts": [
+            "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js"
+          ],
+          "headingRect": {
+            "x": 136,
+            "y": 246.1875,
+            "width": 308.265625,
+            "height": 38.96875,
+            "top": 246.1875,
+            "right": 444.265625,
+            "bottom": 285.15625,
+            "left": 136
+          },
+          "firstRowRect": {
+            "x": 137,
+            "y": 711.96875,
+            "width": 1166,
+            "height": 67,
+            "top": 711.96875,
+            "right": 1303,
+            "bottom": 778.96875,
+            "left": 137
+          }
+        },
+        "sample": {
+          "width": 1440,
+          "height": 900,
+          "documentWidth": 1440,
+          "scrollY": 193,
+          "focus": "@synthetic_example",
+          "h1": "Your local report",
+          "robots": "noindex, nofollow",
+          "scripts": [
+            "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js"
+          ],
+          "headingRect": {
+            "x": 136,
+            "y": 53.1875,
+            "width": 308.265625,
+            "height": 38.96875,
+            "top": 53.1875,
+            "right": 444.265625,
+            "bottom": 92.15625,
+            "left": 136
+          },
+          "firstRowRect": {
+            "x": 137,
+            "y": 518.96875,
+            "width": 1166,
+            "height": 67,
+            "top": 518.96875,
+            "right": 1303,
+            "bottom": 585.96875,
+            "left": 137
+          }
+        }
+      },
+      "homeStatus": 200,
+      "homeHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a37a9c524fbdfca9-SJC",
+        "content-encoding": "br",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Tue, 08 Sep 2026 02:44:18 GMT",
+        "etag": "W/\"8a77f5cea15e1c9a215fab1164ad7290\"",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=dViBKc3XRQE6m2u%2BHCiICM%2B5fJYf6yMgeB1uP3Bdrxxu5e9zVbCst9sZo5%2F2%2FJUY%2FqyLd9id24fZvQgjZ8P0IhOCHVgxYQVbaGprqVe2J8O2HkWub82ymcL%2F1%2FKhH%2FrtB%2FB2oYt%2BTDfz4%2FEVLSZ2MfM1qEvT2uH4S62ikCa086Sc1xMFvlU%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-robots-tag": "noindex, nofollow"
+      },
+      "sampleHref": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/#sample",
+      "homeAxe": [],
+      "checkerStatus": 200,
+      "checkerHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a37a9c549a2a78eb-SJC",
+        "content-encoding": "br",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Tue, 08 Sep 2026 02:44:19 GMT",
+        "etag": "W/\"983026517338d7f15ed6255de7ed022a\"",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "no-referrer",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=gqZQyxJrHz4SCMTiOMwHA6a9qmPqO6N%2BwdZwJZcwFwzyAUWpxVjlDpqmoCijP%2Bn%2FlVa3j1gDJIcqfwAp9jOlFOIukPLux4Qevh25kMXevUTY7Dbh4occ4HH9OCJaxmnUPvl13nWyHIHedZ79Z6IgnAELfPFR1WM2%2FEl89OAbQ2uQLek5Yik%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-robots-tag": "noindex, nofollow"
+      },
+      "capabilities": {
+        "release": "preview",
+        "automatic": {
+          "enabled": false,
+          "status": "blocked",
+          "reason": "Automatic checks are not available: complete-list access at the live target scale and a recurring zero-cash allowance have not been verified."
+        },
+        "ads": false
+      },
+      "entryAxe": [],
+      "sampleFinalUrl": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/#sample",
+      "sampleCounts": "Not following you back\n1,500\nMutuals\n4,500\nYou don’t follow back\n1,500\nAll followers\n6,000\nAll following\n6,000",
+      "sampleRows": 50,
+      "sampleAxe": [],
+      "requests": [
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+          "resourceType": "script"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+          "resourceType": "fetch"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+          "resourceType": "document"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+          "resourceType": "script"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+          "resourceType": "stylesheet"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-D3jCi-6S.js",
+          "resourceType": "script"
+        },
+        {
+          "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+          "resourceType": "fetch"
+        }
+      ],
+      "failed": []
+    }
+  ],
+  "errors": []
+}

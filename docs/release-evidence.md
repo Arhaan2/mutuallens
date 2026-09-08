@@ -1,10 +1,18 @@
 # MutualLens release evidence
 
-> **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition and hosted preview remain BLOCKED; no production completion is claimed.
+> **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition remains BLOCKED. Hosted preview was subsequently deployed and verified; see the current hosting addendum below. No production completion is claimed.
 
-**Overall: PREVIEW-ONLY. Automatic gate: BLOCKED. Hosted deployment: BLOCKED.**
+**Overall: PREVIEW-ONLY. Automatic gate: BLOCKED. Hosted preview: PASS.**
 
 The independent preview is implemented and locally tested. Website-only automatic acquisition has not met the fixed product brief. No source adapter is selected; no real Instagram list was acquired; no 6,000 × 6,000 live run or source reconciliation occurred. Signup credits, API schemas, 401 probes, and synthetic tests are not substituted for that gate.
+
+## Current hosting addendum — September 7, 2026 PDT
+
+Two noindexed, ad-free Cloudflare previews are deployed and browser-verified from source `75a340ec010b62cc90db3f6275313173e9b0ac77`, whose [CI run 34178568380](https://github.com/Arhaan2/mutuallens/actions/runs/34178568380) succeeded. [Actual URLs, deployment IDs, owner-confirmed Free plan, hosted tests, screenshots and rollback limits](cloudflare-preview.md). This supersedes hosting BLOCKED/NOT RUN entries in the historical baseline below. The nine hosted functional scenarios passed across Chromium/WebKit/Firefox; Chromium visual checks passed at 390/1440px. Automatic acquisition and live target-scale testing remain BLOCKED/NOT RUN. Host rollback and free-quota exhaustion were not executed.
+
+## Historical baseline evidence
+
+The following entries retain their original implementation and execution scope. They are not current statements about hosting access or deployment status.
 
 ## Repository and acceptance
 

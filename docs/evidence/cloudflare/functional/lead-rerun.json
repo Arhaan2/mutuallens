@@ -1,0 +1,19 @@
+{
+  "testedAt": "2026-09-08T02:49:56.578Z",
+  "command": "npx playwright test --config tests/hosted/playwright.config.ts",
+  "stats": {
+    "startTime": "2026-09-08T02:49:56.578Z",
+    "duration": 11261.492,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "runtimeSourceHash": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+  "checks": [
+    "npm run check PASS",
+    "npm run format:check PASS",
+    "git diff --check PASS"
+  ],
+  "scope": "Only evidence/docs and hosted tests changed after deployed source; application/runtime source hash unchanged. Afterwards corrected reporter output path to the root ignored test-results folder; test logic unchanged."
+}

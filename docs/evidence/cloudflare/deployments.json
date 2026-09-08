@@ -1,0 +1,92 @@
+{
+  "observedAt": "2026-09-08T02:43:46.477Z",
+  "workerPlan": {
+    "value": "Free",
+    "evidence": "Owner explicitly confirmed Free in this task after opening account Workers plan page. Subscription API access was denied by deliberately scoped OAuth; plan not independently API-verified."
+  },
+  "billingChanges": "NONE",
+  "sourceCommit": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+  "projects": [
+    {
+      "name": "mutuallens",
+      "id": "2d7050cb-1333-4c6c-a5bc-d4c951185cce",
+      "subdomain": "mutuallens-ddm.pages.dev",
+      "created_on": "2026-09-08T02:38:41.533219Z",
+      "production_branch": "main",
+      "canonical_deployment": null,
+      "latest_deployment": {
+        "id": "aa38049e-b79b-4ead-b9e1-0c67156d461c",
+        "url": "https://aa38049e.mutuallens-ddm.pages.dev",
+        "environment": "preview",
+        "aliases": [
+          "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev"
+        ],
+        "created_on": "2026-09-08T02:42:05.530649Z",
+        "latest_stage": {
+          "name": "deploy",
+          "started_on": null,
+          "ended_on": "2026-09-08T02:42:06.795266Z",
+          "status": "success"
+        },
+        "deployment_trigger": {
+          "type": "ad_hoc",
+          "metadata": {
+            "branch": "codex/ui-functional-repair",
+            "commit_hash": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+            "commit_message": "Verified MutualLens preview; automatic acquisition blocked",
+            "commit_dirty": false
+          }
+        }
+      },
+      "configuration": {
+        "preview": {
+          "compatibility_date": "2026-09-07",
+          "compatibility_flags": [],
+          "fail_open": true
+        }
+      }
+    },
+    {
+      "name": "mutuallens-app",
+      "id": "609854bb-763b-43cb-a91d-2659c35b433d",
+      "subdomain": "mutuallens-app.pages.dev",
+      "created_on": "2026-09-08T02:38:56.446277Z",
+      "production_branch": "main",
+      "canonical_deployment": null,
+      "latest_deployment": {
+        "id": "06df080b-3142-4713-ab77-cd80cedc70d2",
+        "url": "https://06df080b.mutuallens-app.pages.dev",
+        "environment": "preview",
+        "aliases": [
+          "https://codex-ui-functional-repair.mutuallens-app.pages.dev"
+        ],
+        "created_on": "2026-09-08T02:42:35.530377Z",
+        "latest_stage": {
+          "name": "deploy",
+          "started_on": null,
+          "ended_on": "2026-09-08T02:42:37.10118Z",
+          "status": "success"
+        },
+        "deployment_trigger": {
+          "type": "ad_hoc",
+          "metadata": {
+            "branch": "codex/ui-functional-repair",
+            "commit_hash": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+            "commit_message": "Verified MutualLens checker preview; automatic acquisition blocked",
+            "commit_dirty": false
+          }
+        }
+      },
+      "configuration": {
+        "preview": {
+          "compatibility_date": "2026-09-07",
+          "compatibility_flags": [
+            "nodejs_compat"
+          ],
+          "fail_open": true
+        }
+      }
+    }
+  ],
+  "postDeploymentConfiguration": "The initial project metadata below predates the checker fail_open=false update; see fail-closed.json for the subsequent verified setting."
+}
