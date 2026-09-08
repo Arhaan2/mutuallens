@@ -1,0 +1,37 @@
+{
+  "assessed_at": "2026-09-07",
+  "gate": "BLOCKED",
+  "selected_provider": null,
+  "target_test_status": "NOT RUN",
+  "target_scale": { "followers_approximate": 6000, "following_approximate": 6000 },
+  "consented_target_available_to_investigator": false,
+  "provider_credentials_available_to_investigator": false,
+  "live_statistics": {
+    "followers_raw": null,
+    "followers_unique": null,
+    "following_raw": null,
+    "following_unique": null,
+    "follower_pages": null,
+    "following_pages": null,
+    "duplicates": null,
+    "elapsed_seconds": null,
+    "errors": null,
+    "retries": null,
+    "credits_consumed": null,
+    "follower_terminal_evidence": null,
+    "following_terminal_evidence": null,
+    "reference_reconciliation": null
+  },
+  "blocking_prerequisites": [
+    "An authorized source with verified complete followers and following access",
+    "A recurring free allowance sufficient for a full target scan and provider-enforced zero cash spending",
+    "Applicable public-commercial-use and upstream permission evidence",
+    "A consented approximately 6000-by-6000 test target",
+    "Successful measured target pagination and reference reconciliation",
+    "Actual free-runtime and durable budget/session security tests"
+  ],
+  "production_automatic_enabled": false,
+  "preview_required": true,
+  "preview_noindex_required": true,
+  "ads_enabled": false
+}

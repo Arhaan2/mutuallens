@@ -1,0 +1,72 @@
+---
+import Page from '../../layouts/Page.astro';
+---
+
+<Page
+  article
+  title="Instagram export troubleshooting: missing files and incomplete lists"
+  description="Resolve missing followers or following files, split JSON exports, unsupported formats, source-date uncertainty, and browser memory safeguards."
+>
+  <p class="eyebrow">GUIDE · LOCAL IMPORT TROUBLESHOOTING</p><h1>
+    When an export looks incomplete.
+  </h1><p class="lede">
+    A convincing list can still be missing data. Start with the source and the
+    error message before drawing conclusions about a relationship.
+  </p>
+  <h2>“A required direction is missing”</h2><p>
+    A follower count is not a followers list. The checker needs supported
+    records for both followers and following. Select the full ZIP or the
+    relevant JSON files for both directions. A missing file is different from a
+    valid, explicitly empty list, and MutualLens must not silently turn one into
+    the other.
+  </p>
+  <h2>“Not following you back” is withheld</h2><p>
+    Without complete, compatible inputs, absence cannot be classified safely.
+    Confirm that you selected all the parts from both directions and that they
+    belong to the same account and export. The all-parts checkbox defaults off.
+    Some detected problems, such as missing numbered parts or ambiguous
+    identities, can still prevent a complete result after confirmation.
+  </p>
+  <h2>Followers are spread across several files</h2><p>
+    Keep every numbered part. A <code>followers_1.json</code> file does not guarantee
+    it is the only follower file. Selecting multiple relevant JSON files lets the
+    parser combine their records. Mixing files from separate exports can introduce
+    duplicates, date mismatches, or identity problems; use one consistent source.
+  </p>
+  <h2>The file is HTML or an unknown JSON schema</h2><p>
+    The current preview supports tested JSON export shapes. Renaming a file does
+    not change its format. Request a suitable JSON export through Meta’s
+    official controls where available, or preserve the error details for a
+    parser-format report. Never share real graph files in a public issue.
+  </p>
+  <h2>The file exceeds a memory safeguard</h2><p>
+    The preview’s local input budget is 64 MiB across at most 2,000 selected
+    files. The parser separately enforces expanded archive, per-file, path,
+    entry, and compression-ratio safeguards. These limits protect browser
+    resources; they do not truncate a dataset at a follower count.
+  </p><p>
+    A full account archive may contain unnecessary media and messages. Select
+    only the relevant followers and following JSON parts from your own export.
+    If those still exceed the supported resource budget, the preview cannot
+    safely process them on this path.
+  </p>
+  <h2>Snapshot comparison rejects dates or identity</h2><p>
+    The same save date does not mean the same collection date. Both sources need
+    known collection dates and must describe the same account. Where only a
+    username is available, the comparison carries rename and reactivation
+    uncertainty. Keep an unknown source date blank instead of guessing.
+  </p>
+  <h2>The totals differ from Instagram’s profile</h2><p>
+    A profile counter and a source collected at another time may differ.
+    Duplicates, account changes, or source omissions can also matter. Do not
+    adjust the data until a total looks right. A matching total is supporting
+    context, not proof that every account was retrieved.
+  </p>
+  <p>
+    Review the <a href="/guides/download-instagram-followers/"
+      >export preparation guide</a
+    > or <a href="/contact/"
+      >report a reproducible problem without private data</a
+    >.
+  </p>
+</Page>

@@ -1,0 +1,9 @@
+package-lock.json
+docs/specification/
+docs/evidence/
+dist/
+node_modules/
+.astro/
+.wrangler/
+test-results/
+playwright-report/

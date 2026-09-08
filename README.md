@@ -1,0 +1,42 @@
+# MutualLens
+
+**Preview only. The mandatory website-only automatic Instagram checker is blocked, not complete.** No complete-list source has passed the consented live ~6,000 followers × ~6,000 following and recurring zero-cash gate. Local import and synthetic examples are secondary preview features, not a substitute.
+
+Source: https://github.com/Arhaan2/mutuallens
+
+## Run locally
+
+Use Node 24 and npm 11 (tested versions recorded in `docs/evidence/`).
+
+```sh
+npm ci
+npm run check
+npm test
+npm run build
+npx playwright install chromium
+npm run test:browser
+```
+
+Development: run `npm run dev:site`, `npm run dev:checker`, and in another terminal `npx wrangler pages dev dist --cwd apps/checker --port 8788` (or run the browser tests, which start the two built local servers). The checker dev proxy targets port 8788. No provider key is needed for the disabled preview. Exact preview-server commands are in `playwright.config.ts`.
+
+## Structure
+
+- `apps/site`: Astro public guides and policies, prepared for SEO but noindexed while preview-only.
+- `apps/checker`: React/Vite checker, module-worker file processing, explicit checker-origin IndexedDB snapshots; same-origin Pages API.
+- `packages/core`: tested normalization, import, source-aware comparison, CSV/JSON and snapshot semantics.
+- `packages/acquisition`: fail-closed capability boundary. **No approved live provider adapter exists.**
+- `docs/specification`: unchanged provided specification/checklist, not completed test evidence.
+- `docs/automatic-feasibility.md`: provider documentation, auth probes, economics, and missing live evidence.
+- `docs/release-evidence.md`: actual release/test/deployment status and rollback.
+
+## Privacy and limits
+
+Selected imports stay on the checker origin in browser memory unless explicitly saved locally. No ad SDK, tracking, session replay, remote avatar, or Instagram credentials. The hosting service can process ordinary network/security metadata. A future automatic mode would involve our server and a named provider and needs a new privacy review. No arbitrary record cutoff; defensive byte/ZIP resource limits fail explicitly. Partial inputs withhold negative categories.
+
+Public pages and checker require **different origins**. Build origins use `PUBLIC_SITE_ORIGIN`, `PUBLIC_CHECKER_ORIGIN`, and `VITE_SITE_ORIGIN`; local defaults are `http://localhost:4321` / `http://localhost:5173`. Production origins must come from actual host reservations. No names/graphs/tokens are passed between origins. All preview documents receive noindex and all ads remain disabled. There is no production-enabling environment switch: release gates must be satisfied and reviewed code must change.
+
+## Deploy
+
+Cloudflare Pages is the intended free host; account access and plan must be verified before deployment. No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. GitHub Pages is not enabled. CI tests source with read-only permissions and contains no deployment/provider credentials. Direct deployment is owned by the integrator; no untrusted PR can trigger a privileged deployment.
+
+See `AGENTS.md` for ownership and release rules. Use only synthetic data in tests, issues, screenshots and public evidence. Never attach your Instagram export to a public issue.

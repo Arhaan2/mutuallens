@@ -1,0 +1,77 @@
+---
+import Page from '../layouts/Page.astro';
+---
+
+<Page
+  article
+  title="Privacy draft: local files, snapshots & future automatic checks"
+  description="How the MutualLens preview handles locally imported files, optional IndexedDB snapshots, origin separation, hosting traffic, and disabled advertising."
+>
+  <p class="eyebrow">PRIVACY · PREVIEW DRAFT</p><h1>
+    Your data has context.<br />So should its handling.
+  </h1><p class="lede">
+    This describes the current preview. It is a product disclosure draft, not a
+    claim that legal review has been completed. Updated September 7, 2026.
+  </p>
+  <h2>Local imports and sample data</h2><p>
+    Files selected in the checker are read and compared in your browser. The
+    import interface does not upload their contents or account lists to
+    MutualLens’s server. Reports remain in memory unless you explicitly choose
+    to save a local snapshot or download a file. Synthetic sample records are
+    fictional.
+  </p><p>
+    Closing or refreshing the page loses the current in-memory report. Clearing
+    a report removes it from the interface, but is not a secure memory-erasure
+    guarantee. Your device and browser may manage memory outside the app’s
+    control.
+  </p>
+  <h2>Optional local snapshots</h2><p>
+    Choosing “Save snapshot locally” stores the supplied dataset and provenance
+    in IndexedDB on the checker origin. Saving defaults off. Anyone using the
+    same browser profile may access these snapshots, so consider shared-device
+    access before saving.
+  </p><p>
+    “Delete all local snapshots” clears the app’s snapshot store on that checker
+    origin. It cannot remove files you downloaded, copies in another browser
+    profile, browser backups, or data stored by other services. Browser settings
+    may also clear local data without preserving a backup.
+  </p>
+  <h2>Automatic checks</h2><p>
+    Automatic acquisition is unavailable. The preview requests the checker’s
+    capability status; it does not start an Instagram scan or send the username
+    field to an acquisition provider.
+  </p><p>
+    If a future automatic integration is approved, MutualLens’s backend and its
+    provider would process the requested account and returned relationship data.
+    That workflow would not be entirely on-device. Its provider, retention,
+    operational logging, and access controls must be disclosed and reviewed
+    before activation.
+  </p>
+  <h2>Separate origins</h2><p>
+    The public pages and checker use different browser origins. The public pages
+    cannot ordinarily read the checker’s DOM or IndexedDB under the browser’s
+    same-origin protections. Navigation links do not carry usernames, graph
+    data, or session tokens. Clicking an external Instagram profile link takes
+    you to Instagram under its own policies.
+  </p>
+  <h2>Website requests and hosting</h2><p>
+    Opening either website sends normal network requests to its hosting
+    provider. Infrastructure may process IP addresses, request metadata, and
+    security logs. The preview does not claim that there is no infrastructure
+    data processing. The application avoids graph data and target usernames in
+    URLs, and it contains no marketing analytics, session replay, or social
+    embeds.
+  </p>
+  <h2>Advertising and consent</h2><p>
+    Ads are disabled everywhere in the preview, with no advertising-network
+    scripts loaded. A future public-content advertising launch needs actual
+    publisher approval and identifiers, appropriate consent configuration, and
+    completed operator disclosures. The checker will remain ad-free.
+  </p>
+  <h2>Contact and open items</h2><p>
+    The project owner is Arhaan Aggarwal. A dedicated private support or
+    privacy-request channel has not yet been supplied and is a public-launch
+    dependency. <a href="/contact/">The contact page</a> links to public project feedback;
+    do not put personal data or account exports there.
+  </p>
+</Page>

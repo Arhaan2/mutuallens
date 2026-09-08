@@ -1,0 +1,33 @@
+{
+  "observed_date_utc": "2026-09-07",
+  "evidence_kind": "Metadata transcribed from executed exploratory documentation-fetch output; raw schemas intentionally not retained because examples contain real profile data",
+  "observations": [
+    {
+      "url": "https://api.hikerapi.com/openapi.json",
+      "schema_version": "1.8.1",
+      "sha256": "3d5122a9eef33248dde201c891e43340d007b9e08498b4d6d8c20d249e3ca872",
+      "authentication_header_name": "x-access-key",
+      "authentication_sent": false,
+      "target_sent": false,
+      "endpoints": ["/g2/user/followers", "/g2/user/following"],
+      "required_query_parameter": "user_id",
+      "optional_query_parameter": "page_id",
+      "response_schema_ref": "#/components/schemas/PageResponse",
+      "followers_example_limitation_field": "response.should_limit_list_of_followers",
+      "followers_example_limitation_value": true,
+      "later_probe_result": "401; see acquisition-probe-results.json",
+      "live_list_test": "NOT RUN"
+    },
+    {
+      "url": "https://www.socialcrawl.dev/v1/openapi.json",
+      "schema_version": "1.0.0",
+      "sha256": "80ad52d1ca0b5da3f25e0726d251fc16b7f3226b9896386d45a562d9217f0f67",
+      "authentication_header_name": "x-api-key",
+      "authentication_sent": false,
+      "target_sent": false,
+      "endpoints": ["/instagram/followers", "/instagram/following"],
+      "credit_cost_each_page": 5,
+      "live_list_test": "NOT RUN"
+    }
+  ]
+}

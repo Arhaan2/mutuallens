@@ -1,0 +1,26 @@
+---
+/**
+ * Deliberately inert activation boundary. No advertising code or network request
+ * is shipped in preview. Production activation requires a reviewed implementation,
+ * actual publisher/site approval, verified publisher + slot IDs, eligible pages,
+ * applicable consent/CMP configuration, and complete operator/contact policies.
+ * An environment variable alone cannot activate advertising.
+ */
+const release = 'preview';
+const publisherApproved = false;
+const publisherId = '';
+const slotId = '';
+const applicableConsentConfigured = false;
+const operatorDetailsVerified = false;
+const activationReady =
+  release !== 'preview' &&
+  publisherApproved &&
+  publisherId.length > 0 &&
+  slotId.length > 0 &&
+  applicableConsentConfigured &&
+  operatorDetailsVerified;
+if (activationReady)
+  throw new Error(
+    'Advertising activation requires independent release review and implementation.',
+  );
+---

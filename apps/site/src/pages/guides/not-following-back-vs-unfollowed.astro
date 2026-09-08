@@ -1,0 +1,58 @@
+---
+import Page from '../../layouts/Page.astro';
+---
+
+<Page
+  article
+  title="Not following back vs. unfollowed: what a report proves"
+  description="A current follow-back report cannot prove a historical unfollow. Learn how to interpret qualified differences between compatible snapshots."
+>
+  <p class="eyebrow">GUIDE · READING RESULTS</p><h1>
+    Not following back isn’t the same as unfollowed.
+  </h1><p class="lede">
+    One describes a relationship in supplied data. The other describes a change
+    over time. A single report cannot bridge that gap.
+  </p>
+  <h2>One report describes a present comparison</h2><p>
+    If an account is in your following list and absent from a complete supplied
+    followers list, it belongs in “not following you back” for that source. It
+    may never have followed you. That label does not say whether a change
+    happened or when.
+  </p>
+  <h2>Two snapshots can reveal a difference</h2><p>
+    Suppose a fictional account called ada appears in an earlier complete
+    followers snapshot and is absent from a later compatible snapshot. The
+    careful description is: <strong
+      >present in the earlier snapshot; absent in the later snapshot</strong
+    >.
+  </p><p>
+    That observation is stronger than a single current report, but it still does
+    not establish an exact unfollow time, a reason, or intent. Username changes,
+    deactivation, source behavior, and collection-window differences can
+    complicate interpretation.
+  </p>
+  <h2>Compatible inputs come first</h2><ul>
+    <li>
+      Both snapshots must describe the same account. Stable IDs help where the
+      source provides them.
+    </li><li>Both need compatible schemas and sufficient completeness.</li><li>
+      The source collection dates must be known and ordered. A file’s import or
+      save date does not establish when its contents were collected.
+    </li><li>
+      If identity is based only on usernames, rename and reactivation
+      uncertainty remains.
+    </li>
+  </ul>
+  <h2>Local snapshots are optional</h2><p>
+    MutualLens saves a snapshot only when you choose to do so. It stays on the
+    checker’s browser origin. This is convenient for comparing your own records,
+    but anyone using the same browser profile may be able to view those saved
+    lists. Export a snapshot if you need your own backup, and delete local
+    copies when appropriate.
+  </p>
+  <p>
+    <a href="/privacy/">Read the storage details</a> or return to <a
+      href="/guides/followers-vs-following/">followers vs. following</a
+    >.
+  </p>
+</Page>

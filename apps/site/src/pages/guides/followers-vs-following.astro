@@ -1,0 +1,77 @@
+---
+import Page from '../../layouts/Page.astro';
+---
+
+<Page
+  article
+  title="Followers vs. following: understand the overlap"
+  description="A concrete example explains followers, following, mutuals, and the two non-mutual groups, with clear limits for incomplete source data."
+>
+  <p class="eyebrow">GUIDE · THE BASICS</p><h1>Followers vs. following.</h1><p
+    class="lede"
+  >
+    The words look similar, but the direction changes everything. Your followers
+    list points toward you. Your following list points toward other accounts.
+  </p>
+  <h2>Start with a small example</h2><p>
+    Imagine your supplied followers list contains <strong
+      >ada, ben, and cam</strong
+    >. Your supplied following list contains <strong>ben, cam, and dev</strong>.
+    These names are fictional.
+  </p>
+  <div class="comparison-table">
+    <table>
+      <caption>What the two fictional lists show</caption><thead
+        ><tr
+          ><th scope="col">Group</th><th scope="col">Accounts</th><th
+            scope="col">Why</th
+          ></tr
+        ></thead
+      ><tbody
+        ><tr
+          ><th scope="row">Mutuals</th><td>ben, cam</td><td
+            >Present in both lists.</td
+          ></tr
+        ><tr
+          ><th scope="row">Not following you back</th><td>dev</td><td
+            >In following, absent from followers.</td
+          ></tr
+        ><tr
+          ><th scope="row">You don’t follow back</th><td>ada</td><td
+            >In followers, absent from following.</td
+          ></tr
+        ></tbody
+      >
+    </table>
+  </div>
+  <p>
+    This classification assumes both supplied lists are complete and compatible.
+    If a follower file were missing, dev’s absence would not establish anything.
+  </p>
+  <h2>Counts do not tell you who overlaps</h2><p>
+    Two accounts can both have 6,000 followers and follow 6,000 accounts, yet
+    have very different mutual groups. Matching totals do not identify
+    individual accounts. Complete account lists are necessary to compare
+    relationships, and a count match alone cannot establish that a source was
+    not sampled or truncated.
+  </p>
+  <h2>Follow-back is a description, not an obligation</h2><p>
+    A one-way connection can be intentional: someone may follow a publication,
+    artist, or community without expecting a return follow. The report describes
+    supplied data. It does not score friendships, assign motives, or tell you
+    whom to unfollow.
+  </p>
+  <h2>Read the source before the result</h2><p>
+    Check the account identity, collection dates, and completeness status. A
+    recent import can contain an older export. Separate collections may also
+    have different time windows; neither is a perfect atomic record of a
+    changing platform.
+  </p>
+  <p>
+    Next: <a href="/guides/not-following-back-vs-unfollowed/"
+      >why “not following back” and “unfollowed” mean different things</a
+    >, or <a href="/instagram-follow-back-checker/"
+      >see the current checker preview</a
+    >.
+  </p>
+</Page>

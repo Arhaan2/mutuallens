@@ -1,0 +1,7 @@
+{
+  "scope": "Current source, tests, docs, CI and built text assets; known-pattern scan, not exhaustive secret proof",
+  "filesScanned": 100,
+  "findings": [],
+  "providerConfigured": false,
+  "fixtures": "Generated synthetic data only; no real export supplied"
+}

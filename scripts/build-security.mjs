@@ -1,0 +1,27 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+const checker = new URL('../apps/checker/dist/', import.meta.url);
+const site = new URL('../apps/site/dist/', import.meta.url);
+const policy =
+  "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'";
+for (const folder of [site, checker]) {
+  await mkdir(folder, { recursive: true });
+  await writeFile(
+    new URL('_headers', folder),
+    `/*\n  X-Robots-Tag: noindex, nofollow\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()\n  Content-Security-Policy: ${policy}\n`,
+  );
+  await writeFile(
+    new URL('robots.txt', folder),
+    'User-agent: *\nAllow: /\n# Preview: documents carry noindex; crawling remains allowed to read it.\n',
+  );
+}
+await writeFile(
+  new URL('_routes.json', checker),
+  JSON.stringify({ version: 1, include: ['/api/*'], exclude: [] }),
+);
+const html = await readFile(new URL('index.html', checker), 'utf8');
+if (!/noindex/i.test(html)) throw new Error('Checker noindex is required');
+// A real 404 document avoids Pages SPA fallback for arbitrary, potentially identifying URLs.
+await writeFile(
+  new URL('404.html', checker),
+  '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex, nofollow"><title>Page not found · MutualLens</title></head><body><main><h1>Page not found</h1><p>This preview has no public account or results pages.</p><a href="/">Open MutualLens</a></main></body></html>',
+);

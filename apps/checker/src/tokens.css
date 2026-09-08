@@ -1,0 +1,11 @@
+:root {
+  --font:
+    ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: #f7f8f5;
+  --surface: #fff;
+  --ink: #263020;
+  --muted: #646d5c;
+  --accent: #3c5b29;
+  --line: #dde2d7;
+  color-scheme: light;
+}

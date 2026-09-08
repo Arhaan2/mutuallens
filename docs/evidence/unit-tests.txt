@@ -1,0 +1,13 @@
+
+> mutuallens@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.0 /Users/arhaan/Documents/ChatGPT/mutuallens
+
+
+ Test Files  3 passed (3)
+      Tests  130 passed (130)
+   Start at  16:48:24
+   Duration  694ms (tests 83%, transform 13%, import 4%, worker 1%)
+

@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-09-07T23:58:20.039Z",
+  "environment": "macOS local Workers runtime; Chromium 153.0.8010.12; no network/CPU throttling",
+  "lcpMs": 32,
+  "cls": 0,
+  "fcpMs": 32,
+  "domContentLoadedMs": 7.5,
+  "transferBytes": 2715,
+  "fieldCoreWebVitals": "NOT MEASURED",
+  "caveat": "Single local initial-load lab observation; not field percentiles, production latency, or automatic acquisition timing."
+}

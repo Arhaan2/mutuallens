@@ -1,0 +1,235 @@
+{
+  "observed_at_utc": "2026-09-07T23:39:31.140405+00:00",
+  "purpose": "Public schema and authentication-boundary observations only; no live list test",
+  "live_target_test": "NOT RUN",
+  "observations": [
+    {
+      "label": "hiker-schema",
+      "method": "GET",
+      "url": "https://api.hikerapi.com/openapi.json",
+      "authentication_sent": false,
+      "target_sent": false,
+      "status": 401,
+      "final_url": "https://api.hikerapi.com/openapi.json",
+      "content_type": "application/json",
+      "sha256": "5e1003e6b67ed3f81a4557fb7e9f5f34b2fc8fd0cb5b4801bbf9dae8955943c3",
+      "body_keys": [
+        "error",
+        "state"
+      ],
+      "elapsed_seconds": 0.248
+    },
+    {
+      "label": "socialcrawl-schema",
+      "method": "GET",
+      "url": "https://www.socialcrawl.dev/v1/openapi.json",
+      "authentication_sent": false,
+      "target_sent": false,
+      "status": 200,
+      "final_url": "https://www.socialcrawl.dev/v1/openapi.json",
+      "content_type": "application/json",
+      "sha256": "80ad52d1ca0b5da3f25e0726d251fc16b7f3226b9896386d45a562d9217f0f67",
+      "schema_version": "1.0.0",
+      "openapi_version": "3.1.0",
+      "endpoints": {
+        "/instagram/followers": {
+          "parameters": [
+            {
+              "name": "handle",
+              "in": "query",
+              "required": false
+            },
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": false
+            },
+            {
+              "name": "cursor",
+              "in": "query",
+              "required": false
+            },
+            {
+              "name": "Cache-Control",
+              "in": "header",
+              "required": false
+            },
+            {
+              "name": "Idempotency-Key",
+              "in": "header",
+              "required": false
+            }
+          ],
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "credit_cost": 5,
+          "response_schema_ref": null,
+          "response_fields": [
+            "cached",
+            "credits_remaining",
+            "credits_used",
+            "data",
+            "endpoint",
+            "idempotent_replay",
+            "pagination",
+            "platform",
+            "request_id",
+            "success"
+          ],
+          "pagination_fields": [
+            "has_more",
+            "next_cursor",
+            "page_size"
+          ],
+          "data_fields": [
+            "_warnings",
+            "dropped",
+            "items",
+            "next_cursor",
+            "total"
+          ],
+          "example_response_field_names_only": []
+        },
+        "/instagram/following": {
+          "parameters": [
+            {
+              "name": "handle",
+              "in": "query",
+              "required": false
+            },
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": false
+            },
+            {
+              "name": "cursor",
+              "in": "query",
+              "required": false
+            },
+            {
+              "name": "Cache-Control",
+              "in": "header",
+              "required": false
+            },
+            {
+              "name": "Idempotency-Key",
+              "in": "header",
+              "required": false
+            }
+          ],
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "credit_cost": 5,
+          "response_schema_ref": null,
+          "response_fields": [
+            "cached",
+            "credits_remaining",
+            "credits_used",
+            "data",
+            "endpoint",
+            "idempotent_replay",
+            "pagination",
+            "platform",
+            "request_id",
+            "success"
+          ],
+          "pagination_fields": [
+            "has_more",
+            "next_cursor",
+            "page_size"
+          ],
+          "data_fields": [
+            "_warnings",
+            "dropped",
+            "items",
+            "next_cursor",
+            "total"
+          ],
+          "example_response_field_names_only": []
+        }
+      },
+      "elapsed_seconds": 3.656
+    },
+    {
+      "label": "hiker-followers-auth",
+      "method": "GET",
+      "url": "https://api.hikerapi.com/g2/user/followers",
+      "authentication_sent": false,
+      "target_sent": false,
+      "status": 401,
+      "final_url": "https://api.hikerapi.com/g2/user/followers",
+      "content_type": "application/json",
+      "sha256": "5e1003e6b67ed3f81a4557fb7e9f5f34b2fc8fd0cb5b4801bbf9dae8955943c3",
+      "body_keys": [
+        "error",
+        "state"
+      ],
+      "elapsed_seconds": 0.22
+    },
+    {
+      "label": "hiker-following-auth",
+      "method": "GET",
+      "url": "https://api.hikerapi.com/g2/user/following",
+      "authentication_sent": false,
+      "target_sent": false,
+      "status": 401,
+      "final_url": "https://api.hikerapi.com/g2/user/following",
+      "content_type": "application/json",
+      "sha256": "5e1003e6b67ed3f81a4557fb7e9f5f34b2fc8fd0cb5b4801bbf9dae8955943c3",
+      "body_keys": [
+        "error",
+        "state"
+      ],
+      "elapsed_seconds": 0.213
+    },
+    {
+      "label": "socialcrawl-followers-auth",
+      "method": "GET",
+      "url": "https://www.socialcrawl.dev/v1/instagram/followers",
+      "authentication_sent": false,
+      "target_sent": false,
+      "status": 401,
+      "final_url": "https://www.socialcrawl.dev/v1/instagram/followers",
+      "content_type": "application/json",
+      "sha256": "8d0f9dfd466e3f37385df24c16a5ad509c20803feefa0a19dfb207815a0c2722",
+      "body_keys": [
+        "credits_remaining",
+        "credits_used",
+        "error",
+        "request_id",
+        "success"
+      ],
+      "error_type": "MISSING_API_KEY",
+      "credits_used": 0,
+      "elapsed_seconds": 0.198
+    },
+    {
+      "label": "socialcrawl-following-auth",
+      "method": "GET",
+      "url": "https://www.socialcrawl.dev/v1/instagram/following",
+      "authentication_sent": false,
+      "target_sent": false,
+      "status": 401,
+      "final_url": "https://www.socialcrawl.dev/v1/instagram/following",
+      "content_type": "application/json",
+      "sha256": "61cebab2e91a16a119612c891b20efe189f41c8aab0cae93bb3ba69e59ef57fe",
+      "body_keys": [
+        "credits_remaining",
+        "credits_used",
+        "error",
+        "request_id",
+        "success"
+      ],
+      "error_type": "MISSING_API_KEY",
+      "credits_used": 0,
+      "elapsed_seconds": 0.199
+    }
+  ]
+}

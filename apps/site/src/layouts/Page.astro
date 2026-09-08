@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import AdReadiness from '../components/AdReadiness.astro';
+interface Props {
+  title: string;
+  description: string;
+  article?: boolean;
+}
+const { title, description, article = false } = Astro.props;
+const origin = import.meta.env.PUBLIC_SITE_ORIGIN || 'http://localhost:4321';
+const checker =
+  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+const canonical = new URL(Astro.url.pathname, origin).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#f7f8f5" />
+    <title>{title} · MutualLens</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={`${title} · MutualLens`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="MutualLens" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} · MutualLens`} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="preview-bar" role="region" aria-label="Preview availability">
+      PRODUCT PREVIEW <span
+        >Automatic checking is unavailable. Sample and local-import tools are
+        available.</span
+      >
+    </div>
+    <header class="site-header wrap">
+      <a class="wordmark" href="/" aria-label="MutualLens home"
+        >Mutual<span>Lens</span><span class="wordmark-dot" aria-hidden="true"
+        ></span></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="/instagram-follow-back-checker/">The checker</a><a
+          href="/guides/followers-vs-following/">Guides</a
+        ><a href="/about/">About</a><a class="nav-cta" href={checker}
+          >Open preview <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main" class:list={['wrap', article && 'article-layout']}>
+      <slot />
+    </main>
+    <AdReadiness />
+    <footer class="site-footer wrap">
+      <div class="footer-top">
+        <div>
+          <a class="wordmark" href="/">Mutual<span>Lens</span></a><p>
+            Clarity over assumptions.
+          </p>
+        </div><div class="footer-links">
+          <a href="/about/">About</a><a href="/privacy/">Privacy</a><a
+            href="/terms/">Terms</a
+          ><a href="/contact/">Contact</a>
+        </div>
+      </div><div class="footer-bottom">
+        <span>© {new Date().getFullYear()} MutualLens · Preview only</span><span
+          >Not affiliated with Instagram or Meta. Ads are disabled.</span
+        >
+      </div>
+    </footer>
+  </body>
+</html>

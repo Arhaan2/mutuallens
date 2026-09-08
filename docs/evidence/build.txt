@@ -1,0 +1,56 @@
+
+> mutuallens@0.1.0 build
+> npm run build -w @mutuallens/checker && npm run build -w @mutuallens/site && node scripts/build-security.mjs
+
+
+> @mutuallens/checker@0.1.0 build
+> vite build
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "../../scripts/origins" without a file extension (vite.config.ts:3:32). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 25 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.77 kB │ gzip:  0.43 kB
+dist/assets/processing.worker-D3jCi-6S.js   21.90 kB
+dist/assets/index-CzIgGHvW.css              15.10 kB │ gzip:  3.84 kB
+dist/assets/index-B6hdRVjx.js              216.85 kB │ gzip: 68.02 kB
+
+✓ built in 88ms
+
+> @mutuallens/site@0.1.0 build
+> ASTRO_TELEMETRY_DISABLED=1 astro build
+
+16:57:55 [types] Generated 16ms
+16:57:55 [build] output: "static"
+16:57:55 [build] mode: "static"
+16:57:55 [build] directory: /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site/dist/
+16:57:55 [build] Collecting build info...
+16:57:55 [build] ✓ Completed in 28ms.
+16:57:55 [build] Building static entrypoints...
+16:57:55 [vite] ✓ built in 79ms
+16:57:55 [vite] ✓ built in 10ms
+16:57:55 [build] Rearranging server assets...
+
+ generating static routes 
+16:57:55   ├─ /404.html (+6ms) 
+16:57:55   ├─ /about/index.html (+1ms) 
+16:57:55   ├─ /contact/index.html (+1ms) 
+16:57:55   ├─ /guides/download-instagram-followers/index.html (+1ms) 
+16:57:55   ├─ /guides/followers-vs-following/index.html (+1ms) 
+16:57:55   ├─ /guides/instagram-export-troubleshooting/index.html (+1ms) 
+16:57:55   ├─ /guides/not-following-back-vs-unfollowed/index.html (+1ms) 
+16:57:55   ├─ /instagram-follow-back-checker/index.html (+1ms) 
+16:57:55   ├─ /privacy/index.html (+1ms) 
+16:57:55   ├─ /robots.txt (+1ms) 
+16:57:55   ├─ /sitemap.xml (+1ms) 
+16:57:55   ├─ /terms/index.html (+1ms) 
+16:57:55   ├─ /index.html (+1ms) 
+16:57:55 ✓ Completed in 24ms.
+
+16:57:55 [build] ✓ Completed in 125ms.
+16:57:55 [build] 11 page(s) built in 156ms
+16:57:55 [build] Complete!

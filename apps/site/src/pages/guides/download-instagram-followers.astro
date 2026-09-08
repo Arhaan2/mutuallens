@@ -1,0 +1,84 @@
+---
+import Page from '../../layouts/Page.astro';
+const checker =
+  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+---
+
+<Page
+  article
+  title="Prepare your Instagram followers export for local comparison"
+  description="Use Meta’s official export instructions, then prepare JSON files for local comparison. Include both directions, every split part, and a known source date."
+>
+  <p class="eyebrow">GUIDE · OPTIONAL LOCAL IMPORT</p><h1>
+    Prepare your Instagram export.
+  </h1><p class="lede">
+    If you already have an export, you can compare its supported JSON files
+    locally in the MutualLens preview. An export is not the required automatic
+    workflow.
+  </p>
+  <aside class="article-note">
+    <strong>Verification note · September 7, 2026</strong><p>
+      Meta’s public announcement confirms that Instagram information-download
+      tools are in Accounts Center. The detailed Help Center page redirected to
+      a login screen during review, so the current exact menu sequence and
+      export-generation flow have not been verified live here. Follow Meta’s
+      current instructions if its labels differ.
+    </p>
+  </aside>
+  <h2>Use the official export controls</h2><p>
+    Open <a
+      href="https://www.facebook.com/help/instagram/181231772500920"
+      rel="noopener noreferrer"
+      target="_blank">Instagram’s official information-export guide</a
+    > and follow the instructions for your account. Meta describes the information-download
+    tools in <a
+      href="https://about.fb.com/news/2023/10/manage-your-information-across-apps/"
+      rel="noopener noreferrer"
+      target="_blank">its Accounts Center announcement</a
+    >. Any account authentication belongs on Meta’s own website or app.
+  </p>
+  <h2>Prepare files the checker can read</h2><ol>
+    <li>
+      <strong>Use the account you own or manage.</strong> Confirm the selected profile
+      before preparing its information.
+    </li><li>
+      <strong>Choose JSON for this checker.</strong> MutualLens’s tested parser supports
+      JSON relationships data, not HTML pages. Where export controls offer information
+      categories, choose followers and following to avoid unnecessary unrelated files.
+    </li><li>
+      <strong>Include both directions and all parts.</strong> Supported names include
+      <code>followers_1.json</code>, additional numbered follower parts, and <code
+        >following.json</code
+      >. Keep split files together. Select an all-time date range where the
+      official controls offer one; a limited range may be unsuitable for
+      establishing absence.
+    </li><li>
+      <strong>Keep the source date if known.</strong> Do not substitute the date you
+      opened or imported the ZIP. Leave an unknown collection date blank.
+    </li><li>
+      <strong>Select the ZIP or all relevant loose JSON files.</strong> The checker
+      asks for the account identity and an explicit all-parts confirmation. It processes
+      files on your device.
+    </li>
+  </ol>
+  <h2>Confirmation has a specific meaning</h2><p>
+    The all-parts checkbox says that you selected every part you received for
+    both directions. It does not independently prove that the platform export is
+    complete, current, or free from omissions. Results are labeled complete for
+    the supplied source only when the import’s completeness rules are met.
+  </p>
+  <h2>If the export does not work</h2><p>
+    Keep the original files. Read the checker’s specific error before changing
+    anything. Do not rename unrelated JSON to a follower filename or remove
+    malformed records to force a report. A fresh supported export may be needed
+    when formats change.
+  </p><p>
+    <a href="/guides/instagram-export-troubleshooting/"
+      >Troubleshoot missing or unsupported files</a
+    >, or <a href={`${checker}/#import`}>open the local import preview</a>.
+  </p>
+  <p class="small muted">
+    This is preparation guidance for a tested local parser, not evidence of a
+    successful live Instagram export or automatic account scan.
+  </p>
+</Page>

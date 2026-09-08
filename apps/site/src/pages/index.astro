@@ -1,0 +1,146 @@
+---
+import Page from '../layouts/Page.astro';
+const checker =
+  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+---
+
+<Page
+  title="A clearer view of who follows you back"
+  description="MutualLens is a follow-back checker in preview. Understand followers and following with readable reports, explicit source completeness, and local import tools."
+>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">YOUR CONNECTIONS, WITH CONTEXT</p><h1>
+        A clearer view of<br />who follows you back.
+      </h1><p class="hero-description">
+        Less guesswork. More perspective. MutualLens puts followers and
+        following side by side, so you can understand the overlap.
+      </p><div class="hero-actions">
+        <a class="button primary" href={checker}
+          >Check automatically <span aria-hidden="true">↗</span></a
+        ><a class="secondary-link" href={`${checker}/#import`}
+          >Import your Instagram export</a
+        >
+      </div><p class="availability">
+        <span aria-hidden="true">○</span> Automatic checking is unavailable in this
+        preview.
+      </p><a class="sample-link" href={checker}
+        >Explore clearly labeled synthetic sample data <span aria-hidden="true"
+          >→</span
+        ></a
+      >
+    </div>
+    <div
+      class="report-preview"
+      aria-label="Illustrative synthetic report, not live Instagram data"
+    >
+      <div class="preview-top">
+        <span>YOUR CONNECTIONS</span><span class="mini-label"
+          >Synthetic example</span
+        >
+      </div><div class="preview-report-title">The overlap, made clear.</div><div
+        class="preview-metrics"
+      >
+        <div><strong>6,000</strong><span>Followers</span></div><div>
+          <strong>6,000</strong><span>Following</span>
+        </div><div><strong>4,500</strong><span>Mutuals</span></div>
+      </div><div class="preview-category">
+        <span>Not following you back</span><span>1,500</span>
+      </div><div class="preview-rows">
+        {
+          ['user06001', 'user06002', 'user06003', 'user06004'].map(
+            (username) => (
+              <div>
+                <>
+                  <span class="account-marker" aria-hidden="true">
+                    U
+                  </span>
+                  <strong>@{username}</strong>
+                  <span>Synthetic</span>
+                </>
+              </div>
+            ),
+          )
+        }
+      </div><p class="preview-caption">
+        An illustration using fictional records. No account was checked.
+      </p>
+    </div>
+  </section>
+  <div class="principles">
+    <span><span aria-hidden="true">01</span> Readable lists</span><span
+      ><span aria-hidden="true">02</span> Context with every result</span
+    ><span><span aria-hidden="true">03</span> An ad-free checker</span>
+  </div>
+  <section class="section-block explanation">
+    <div>
+      <p class="eyebrow">TWO LISTS. A BETTER PICTURE.</p><h2>
+        Make sense of<br />your connections.
+      </h2><p>
+        Followers and following describe different directions. A follow-back
+        report compares them, without making assumptions about anyone’s reasons.
+      </p><a class="text-link" href="/guides/followers-vs-following/"
+        >Understand the three groups <span aria-hidden="true">→</span></a
+      >
+    </div><div class="definition-list">
+      <article>
+        <span class="definition-number">01</span><div>
+          <h3>Mutuals</h3><p>
+            You follow them, and they appear in your followers list.
+          </p>
+        </div><span class="relation-symbol" aria-hidden="true">↔</span>
+      </article><article>
+        <span class="definition-number">02</span><div>
+          <h3>Not following you back</h3><p>
+            You follow them, but they are absent from a complete supplied
+            followers list.
+          </p>
+        </div><span class="relation-symbol" aria-hidden="true">→</span>
+      </article><article>
+        <span class="definition-number">03</span><div>
+          <h3>You don’t follow back</h3><p>
+            They follow you, but are absent from your complete supplied
+            following list.
+          </p>
+        </div><span class="relation-symbol" aria-hidden="true">←</span>
+      </article>
+    </div>
+  </section>
+  <section class="integrity-panel">
+    <div class="eyebrow">A NOTE ON AVAILABILITY</div><h2>
+      Useful results need complete sources.
+    </h2><p>
+      MutualLens is still a preview. Website-only automatic acquisition has not
+      passed its live completeness, scale, and recurring free-allowance checks.
+      The sample demonstrates the interface; local import lets you inspect your
+      own supplied files. Neither is proof that automatic checking works.
+    </p><a class="text-link" href="/instagram-follow-back-checker/"
+      >See what is available today <span aria-hidden="true">→</span></a
+    >
+  </section>
+  <section class="section-block guides-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A LITTLE CONTEXT GOES A LONG WAY</p><h2>
+          Read before you interpret.
+        </h2>
+      </div><span class="muted">Practical guides, without the guesswork.</span>
+    </div><div class="guide-grid">
+      <a class="guide-card" href="/guides/followers-vs-following/"
+        ><span>THE BASICS</span><h3>Followers vs. following</h3><p>
+          Two directions, three useful groups. Start with a simple example.
+        </p><span class="guide-arrow" aria-hidden="true">↗</span></a
+      ><a class="guide-card" href="/guides/not-following-back-vs-unfollowed/"
+        ><span>READING RESULTS</span><h3>
+          Not following back isn’t the same as unfollowed
+        </h3><p>
+          What one report can tell you, and what requires a history.
+        </p><span class="guide-arrow" aria-hidden="true">↗</span></a
+      ><a class="guide-card" href="/guides/instagram-export-troubleshooting/"
+        ><span>LOCAL IMPORTS</span><h3>When an export looks incomplete</h3><p>
+          Missing directions, split files, and source dates explained.
+        </p><span class="guide-arrow" aria-hidden="true">↗</span></a
+      >
+    </div>
+  </section>
+</Page>

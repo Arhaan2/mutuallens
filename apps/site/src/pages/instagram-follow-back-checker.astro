@@ -1,0 +1,80 @@
+---
+import Page from '../layouts/Page.astro';
+const checker =
+  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+---
+
+<Page
+  article
+  title="Instagram follow-back checker: preview & limitations"
+  description="What the MutualLens checker can currently do, how complete-list comparisons work, and why automatic Instagram checking is still blocked."
+>
+  <p class="eyebrow">THE MUTUALLENS CHECKER</p><h1>
+    Follow-back checking,<br />with the context intact.
+  </h1><p class="lede">
+    A list is only useful when you know what it represents. MutualLens puts
+    source, collection dates, and completeness alongside the result.
+  </p>
+  <aside class="article-note">
+    <strong>Preview status: automatic checks unavailable.</strong><p>
+      The mandatory website-only automatic workflow has not passed its
+      complete-list, approximately 6,000 × 6,000 live-account, and recurring
+      zero-cash gates. The current product is a preview, not a finished
+      automatic service.
+    </p>
+  </aside>
+  <h2>What you can do now</h2><p>
+    Explore a clearly labeled synthetic dataset with 6,000 records in each
+    direction, or select supported Instagram JSON export files for local
+    comparison. Search the resulting lists, change categories, sort by username,
+    and download CSV or JSON reports. You can explicitly save snapshots in this
+    browser and compare compatible sources.
+  </p><p>
+    The import workflow is optional. It does not fulfill or replace the
+    automatic checking requirement.
+  </p>
+  <div class="article-actions">
+    <a class="button primary" href={checker}
+      >Check automatically <span aria-hidden="true">↗</span></a
+    ><a href={`${checker}/#import`}>Import your Instagram export</a>
+  </div><p class="small muted">
+    The automatic entry opens the checker’s honest unavailable state. No real
+    request returns sample results.
+  </p>
+  <h2>What a complete report means</h2><p>
+    The checker compares the accounts present in the supplied followers and
+    following lists. Mutuals appear in both. Each non-mutual category is the
+    difference between the lists. “Complete for supplied source” describes that
+    source, not a guarantee that Instagram’s current state is identical.
+  </p><p>
+    If a direction is missing, incomplete, or has conflicting identities, the
+    checker withholds definitive negative categories. An observed mutual is
+    still an observation; an unobserved account cannot safely be called absent
+    from an incomplete list.
+  </p>
+  <h2>No arbitrary account-size cutoff</h2><p>
+    The comparison does not truncate lists at a follower or following count.
+    Browser memory protections and source limits still matter. A safe resource
+    failure should explain the limit and stop processing, not quietly return a
+    smaller complete-looking report.
+  </p>
+  <h2>Privacy follows the workflow</h2><p>
+    Imported files are processed on your device. Saving is off by default, and
+    you can delete app-controlled local snapshots. A future automatic workflow
+    would involve MutualLens’s backend and an acquisition provider processing
+    the requested account data; it would not be entirely on-device.
+  </p><p>
+    The checker runs on a separate browser origin from these public pages and
+    contains no advertising or marketing scripts. Read the <a href="/privacy/"
+      >privacy draft</a
+    > for storage and hosting limitations.
+  </p>
+  <h2>One report cannot explain intent</h2><p>
+    An account absent from a supplied list may never have followed you, may have
+    changed its username, or may reflect a source or timing difference. A
+    current report does not prove a historical unfollow. <a
+      href="/guides/not-following-back-vs-unfollowed/"
+      >Learn how to interpret changes.</a
+    >
+  </p>
+</Page>

@@ -1,0 +1,159 @@
+
+> mutuallens@0.1.0 test
+> vitest run --reporter=verbose
+
+
+ RUN  v5.0.0 /Users/arhaan/Documents/ChatGPT/mutuallens
+
+ ✓ tests/unit/origins.test.ts > enforces different browser origins and matching navigation before building 1ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > publishes honest noindex and non-cacheable capability without secrets 12ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > rejects cross-origin or missing-origin POST requests 1ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > rejects cross-origin or missing-origin DELETE requests 0ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > rejects cross-origin or missing-origin PATCH requests 0ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > cannot create jobs, fetch arbitrary URLs, incur provider calls, or return synthetic results 1ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > job status cannot expose a graph to any session 0ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > job advance cannot expose a graph to any session 0ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > job result cannot expose a graph to any session 0ms
+ ✓ tests/unit/api.test.ts > unavailable acquisition boundary (not live job authorization) > unknown API paths are JSON 404s 0ms
+ ✓ tests/review/worker-preflight.test.ts > independent worker memory boundary; declared-size test doubles allocate no oversized payload > rejects total selected byte overflow before any file read 23ms
+ ✓ tests/review/worker-preflight.test.ts > independent worker memory boundary; declared-size test doubles allocate no oversized payload > rejects excessive file count before any file read even when declared byte size is zero 1ms
+ ✓ tests/review/worker-preflight.test.ts > independent worker memory boundary; declared-size test doubles allocate no oversized payload > allows safe files through and retains unverified negatives by default 3ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > does not silently drop malformed relationship part followers_0.json from an otherwise complete ZIP 4ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > does not silently drop malformed relationship part followers_01.json from an otherwise complete ZIP 1ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > does not silently drop malformed relationship part following_0.json from an otherwise complete ZIP 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > rejects an invalid, timezone-ambiguous or future collection date 2025-02-30T00:00:00Z 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > rejects an invalid, timezone-ambiguous or future collection date 2026-01-01T24:00:00Z 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > rejects an invalid, timezone-ambiguous or future collection date 2026-01-01T12:00:00 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > rejects an invalid, timezone-ambiguous or future collection date 2099-01-01T00:00:00Z 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > retains an explicit incomplete state when expected total contradicts actual records 1ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > does not trust a stale unique-count metadata label 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > keeps ID collisions distinct under record and list permutations 0ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > rejects historical comparison when known totals contradict terminal metadata 2ms
+ ✓ tests/review/adversarial.test.ts > independent adversarial correctness review; synthetic data only > neutralizes formula prefixes in every exported field, preserving quoting 0ms
+ ✓ tests/review/adversarial.test.ts > independent disabled boundary review; not live-job security proof > refuses acquisition without consuming even a malformed request body 9ms
+ ✓ tests/review/adversarial.test.ts > independent disabled boundary review; not live-job security proof > does not trust a matching Origin when Fetch Metadata says cross-site 0ms
+ ✓ tests/review/adversarial.test.ts > independent disabled boundary review; not live-job security proof > does not reflect URLs or graph-like request data in errors 0ms
+stdout | packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 50000 records per direction (synthetic)
+{"metric":"synthetic_create_and_compare_ms","sizePerDirection":50000,"elapsedMs":99.01}
+
+ ✓ packages/core/test/core.test.ts > username validation > normalizes   @Alice.Example_2   without deleting punctuation 1ms
+ ✓ packages/core/test/core.test.ts > username validation > normalizes https://www.instagram.com/Alice.Example_2/?igsh=example without deleting punctuation 0ms
+ ✓ packages/core/test/core.test.ts > username validation > normalizes https://instagram.com/_u/Some_User without deleting punctuation 0ms
+ ✓ packages/core/test/core.test.ts > username validation > normalizes a.b_c without deleting punctuation 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input  0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input @@alice 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input a b 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input ../alice 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input http://instagram.com/alice 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://instagram.com.evil.example/alice 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://evil.example/alice 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://alice@instagram.com/bob 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://instagram.com/p/abc 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://instagram.com/alice/bob 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://instagram.com:444/alice 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input javascript:alert(1) 0ms
+ ✓ packages/core/test/core.test.ts > username validation > rejects unsafe/non-profile input https://instagram.com/%2e%2e%2fsecret 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > matches the specified synthetic 6,000 × 6,000 result 14ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 2499 records per direction (synthetic) 4ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 2500 records per direction (synthetic) 4ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 2501 records per direction (synthetic) 4ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 6000 records per direction (synthetic) 11ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 6001 records per direction (synthetic) 9ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not cap 50000 records per direction (synthetic) 99ms
+stdout | packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 6000 synthetic records per direction
+{"metric":"synthetic_json_parse_and_compare_ms","sizePerDirection":6000,"inputBytes":1572030,"elapsedMs":18.59,"heapUsedBytes":55747920}
+
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > accepts explicitly supplied empty lists 1ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > withholds all negatives when followers are partial 16ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > withholds all negatives when followers are unverified 8ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > requires terminal source evidence even with a complete label 9ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > withholds negatives for inconsistent expected count provenance 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > withholds negatives for inconsistent unique count provenance 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > withholds negatives for inconsistent raw count provenance 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > withholds negatives for inconsistent pages provenance 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > deduplicates case variants and preserves dot and underscore distinctions 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > matches a stable ID across a rename 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > uses a unique known ID for mixed ID/username source rows, with uncertainty 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not silently merge conflicting IDs sharing a username 0ms
+ ✓ packages/core/test/core.test.ts > deterministic identity and comparison > does not mutate the original dataset 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > reads both tested following value/title variants and follower wrappers 1ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > produces equivalent split loose and ZIP results while ignoring irrelevant archive files 2ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 2499 synthetic records per direction 12ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 2500 synthetic records per direction 9ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 2501 synthetic records per direction 10ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 6000 synthetic records per direction 22ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 6001 synthetic records per direction 22ms
+stdout | packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 50000 synthetic records per direction
+{"metric":"synthetic_json_parse_and_compare_ms","sizePerDirection":50000,"inputBytes":13100030,"elapsedMs":165.27,"heapUsedBytes":128859784}
+
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses and compares all 50000 synthetic records per direction 193ms
+stdout | packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses the compressed 6,000 × 6,000 synthetic fixture
+{"metric":"synthetic_zip_parse_and_compare_ms","sizePerDirection":6000,"compressedBytes":64265,"elapsedMs":48.3}
+
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > parses the compressed 6,000 × 6,000 synthetic fixture 80ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > defaults to unverified and does not invent collection dates from import/relationship times 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > preserves valid empty inputs separately from missing inputs 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > keeps missing numbered parts partial despite user confirmation 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 0 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 1 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 2 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 3 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 4 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 5 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 6 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects malformed/schema input 7 without fabricated data 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects ambiguous repeated basenames across folders/files 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects mixing numbered and unnumbered copies 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects HTML and unsupported loose filenames 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects unknown/invalid user-supplied collection date yesterday 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects unknown/invalid user-supplied collection date 2025-02-30T00:00:00Z 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects unknown/invalid user-supplied collection date 2999-01-01T00:00:00Z 0ms
+ ✓ packages/core/test/core.test.ts > Instagram JSON import (synthetic format fixtures) > rejects unknown/invalid user-supplied collection date 2025-01-01T25:00:00Z 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects unsupported relationship part followers_0.json instead of silently dropping it 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects unsupported relationship part followers_01.json instead of silently dropping it 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects unsupported relationship part following_invalid.json instead of silently dropping it 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects path ../followers.json before expansion 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects path /followers.json before expansion 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects path C:/followers.json before expansion 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects path a\followers.json before expansion 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects path a/../followers.json before expansion 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects path a/./followers.json before expansion 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects invalid UTF-8 inside ZIP entries 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects dangerous compression ratios before inflating 4ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects excessive directory entries before parsing them 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects expanded total-byte overflow before allocating output 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects forged small size metadata during streaming expansion 25ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects local/central size disagreement 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects invalid checksums even when both headers agree 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects encrypted archives 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects archive symlinks 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects truncated archives 0ms
+ ✓ packages/core/test/core.test.ts > archive resource and integrity safeguards > rejects a total input budget overflow before parsing 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > creates an independent explicitly requested snapshot 3ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > reports qualified presence/absence changes 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible account snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible schema snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible source snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible partial snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible unknown date snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible overlapping date snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > rejects incompatible synthetic mix snapshots 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > discloses username-only historical uncertainty 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > prefers stable subject IDs across a username change 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > withholds historical differences when IDs conflict 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 0 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 1 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 2 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 3 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 4 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 5 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 6 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > neutralizes CSV formula payload 7 0ms
+ ✓ packages/core/test/core.test.ts > snapshots and export safety > quotes commas/newlines and preserves JSON provenance 0ms
+
+ Test Files  5 passed (5)
+      Tests  134 passed (134)
+   Start at  17:01:42
+   Duration  681ms (tests 76%, transform 18%, import 5%, worker 1%)
+
