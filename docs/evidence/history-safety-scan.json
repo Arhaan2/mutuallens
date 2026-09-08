@@ -1,0 +1,9 @@
+{
+  "branch": "main",
+  "commitsScanned": [
+    "0c24c4f1dfc957183048f659263ecaf78f3b47db",
+    "ace396861cc3b5a34c7fd12da0e6c233a62fb906"
+  ],
+  "knownPatternFindings": [],
+  "scope": "Known credential patterns; manual source review supplements this non-exhaustive check. No secrets configured. Public history uses GitHub no-reply author identity."
+}

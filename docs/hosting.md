@@ -25,3 +25,7 @@ Only acquisition/access/budget/target/runtime gates can unlock a future producti
 ## Rollback
 
 After the first verified release, keep its Git SHA and build origins. Redeploy that exact source/build to the same two newly created projects as a rollback, then repeat browser/header smoke tests. Cloudflare also documents a [Pages rollback](https://developers.cloudflare.com/pages/configuration/rollbacks/) to a prior successful production deployment; a preview deployment is not an eligible rollback target. No rollback is currently tested because no deployment exists. Do not delete projects or modify unrelated hosting resources to recover.
+
+## Source CI zero-cash scope
+
+The repository is public and the workflow uses the standard Ubuntu GitHub runner. [GitHub's current billing documentation](https://docs.github.com/en/billing/concepts/product-billing/github-actions) describes standard public-repository runner use as free. No larger runner, artifact upload, paid storage increase or deployment secret is configured. The existing per-repository cache allowance was not raised. Actual successful run and commit are in `evidence/github-ci.json`.

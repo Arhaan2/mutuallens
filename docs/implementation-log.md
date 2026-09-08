@@ -14,3 +14,7 @@
 - Lead integrated and reran 134 unit/security tests including 18 independently authored adversarial cases. Root parser timings and logs retained.
 - Browser run initially exposed mobile select labeling, public text contrast and landmark problems; fixes passed the rerun. Expanded keyboard test found a React DOM-commit focus race, fixed with an effect tied to the committed report. Final 10 browser scenarios passed in two local Wrangler Pages runtimes.
 - Preview build sizes observed: site100KiB and checker272KiB on disk. No remote deployment performed. Native browser-toolbar zoom not run; CSS200% and640px reflow tested.
+
+- Pushed accepted implementation0c24c4f1dfc957183048f659263ecaf78f3b47db to the newly created GitHub repository. GitHub CI run34171998126 completed successfully on the standard Ubuntu runner, including clean install and browser tests. Public commit author uses verified GitHub no-reply identity; published main history known-secret scan found no matches.
+- Local public/checker servers verified reachable separately at localhost4321/5173. Local Wrangler-generated mock CF_PAGES_URL bindings are not deployment evidence and were not treated as real hostnames.
+- Final documentation records actual repository, accepted source, successful CI and build hashes. No hosted URL/deployment/rollback is claimed.

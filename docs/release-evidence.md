@@ -8,8 +8,11 @@ The independent preview is implemented and locally tested. Website-only automati
 
 - Repository created: https://github.com/Arhaan2/mutuallens
 - Identity: existing GitHub connector and network-enabled CLI returned `Arhaan2`; intended repository returned HTTP404 before creation.
-- Source commit/remote CI: filled in the final evidence commit after the tested implementation is pushed.
-- Local preview: Astro public site plus React checker, on separate localhost origins. No public hosting URL is claimed.
+- Accepted implementation commit: `0c24c4f1dfc957183048f659263ecaf78f3b47db` ([source](https://github.com/Arhaan2/mutuallens/commit/0c24c4f1dfc957183048f659263ecaf78f3b47db)).
+- Remote CI: [Verify preview run 34171998126](https://github.com/Arhaan2/mutuallens/actions/runs/34171998126), **SUCCESS**. Clean `npm ci`, formatting, lint/types, 134 unit tests, production builds, audit and 10 browser scenarios completed on the GitHub standard Ubuntu runner. Machine-readable steps/SHA are in `evidence/github-ci.json`.
+- A subsequent evidence commit adds immutable run/manifest references and corrects only the benchmark platform label to read the actual platform; application code remains the accepted implementation above.
+- Local preview verified reachable: [public site](http://localhost:4321) and [checker](http://localhost:5173), running separate local Wrangler Pages runtimes. These are local inspection addresses, not public hosting deployments.
+- Build file counts, byte sizes and SHA-256 hashes: `evidence/build-manifest.json`. Source and published main history known-credential scans found zero matches; these scans are bounded pattern checks, not exhaustive proof.
 - Local checks: 134 unit/security tests and 10 browser scenarios passed; formatting, lint, TypeScript/Astro check, production build, and dependency audit passed. See [full acceptance ledger](acceptance-results.md).
 - Source operations scoped to this new repository and isolated task worktrees; no other projects modified.
 
@@ -29,7 +32,7 @@ No actual usernames/graphs/reference exports are included in public test evidenc
 
 Cloudflare Pages is prepared as two new projects. `npx wrangler whoami` failed because the saved token expired and could not refresh. The in-app browser reached Cloudflare login; an additional existing Chrome-profile check timed out. No project name was reserved, account plan verified, deployment uploaded, deployment ID issued, or production/preview host URL established.
 
-Rollback on a host is **NOT RUN**. The documented procedure in [hosting.md](hosting.md) rebuilds the exact accepted source with recorded origins and redeploys it to the same two intended projects, or uses Cloudflare's eligible prior-deployment rollback after a real release. No unrelated resource should be changed to recover.
+Accepted source is retained as tag `preview-2026-09-07` after the verified CI pass. Rollback on a host is **NOT RUN**. The documented procedure in [hosting.md](hosting.md) rebuilds the exact accepted source with recorded origins and redeploys it to the same two intended projects, or uses Cloudflare's eligible prior-deployment rollback after a real release. No unrelated resource should be changed to recover.
 
 ## Remaining prerequisites
 

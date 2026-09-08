@@ -522,7 +522,7 @@ test('public content accessibility and recorded local paint measurements', async
     JSON.stringify(
       {
         recordedAt: new Date().toISOString(),
-        environment: `macOS local Workers runtime; Chromium ${browser.version()}; no network/CPU throttling`,
+        environment: `${process.platform}/${process.arch} local Workers runtime; Chromium ${browser.version()}; no network/CPU throttling`,
         ...lab,
         fieldCoreWebVitals: 'NOT MEASURED',
         caveat:

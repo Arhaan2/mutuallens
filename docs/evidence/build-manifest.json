@@ -1,0 +1,46 @@
+{
+  "sourceCommit": "0c24c4f1dfc957183048f659263ecaf78f3b47db",
+  "runtime": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "artifacts": {
+    "site": {
+      "files": 15,
+      "totalBytes": 69837,
+      "sha256ByFile": {
+        "index.html": "c24b3ec081019b721f16729fa9c95acac1cf377a650e91a0cc91d7e2f7562c5f",
+        "404.html": "4cc81a65f6a16d6d88e5293bdbf450e2fd81d7da22536c6a331b26a119317bcb",
+        "_headers": "63285ec265b706685ee17dcc99d7b039b33e34f54682beeaee01f66e180c5278",
+        "sitemap.xml": "c73ac7880757023df3f2a0c4c59c567ba8ed5b5619e4364c043dc1bb46f1572f",
+        "robots.txt": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d",
+        "contact/index.html": "3367554e80968567a65f41203d35eee9bb752d0d21833570fce113c955ef2545",
+        "instagram-follow-back-checker/index.html": "dece9d0a814d92e2faf6561c085f20d7c87d50e6fd76555f5050c758eee92dfd",
+        "privacy/index.html": "06cd9235bb0e72d640b80f9c22406a6c6d58aae3f99794de1ca327e621da5904",
+        "terms/index.html": "c58436e22de7135c872a34cdea7e1c528da9533bcb6e3da0fc09ad49fd718094",
+        "about/index.html": "66a56e36c49b936bfa06a67715908a5ad0ef0a2ab503751985b37af177301ef5",
+        "_astro/Page.D5EH2u15.css": "fe06736e0f7b275b0e6edc43e75057bceb1ce4fd3ad24aba1b361d2254db1cbc",
+        "guides/instagram-export-troubleshooting/index.html": "20dc82d65e76366d00c9b1682f078cb3980da5823c84e6677be3f80bdea3f1a1",
+        "guides/download-instagram-followers/index.html": "77de3d7946a01bcc26559e29877a46c18d319e01b668a32a3388097305baf83f",
+        "guides/not-following-back-vs-unfollowed/index.html": "8594dd905d110ac19ce38d6300ac7a5e7ebe37724bef82a672ee5c01faab288c",
+        "guides/followers-vs-following/index.html": "4e37f0c41112d999244878f3e2d6ae63ca9c959f4a1ff38ec0b884b1d102f963"
+      }
+    },
+    "checker": {
+      "files": 8,
+      "totalBytes": 255586,
+      "sha256ByFile": {
+        "index.html": "d86582513905fa4abc2eb8b3e29b7901ee8cde2709b76ddc66ecb05345eb78d3",
+        "404.html": "399ff468a87d9736f71c1d0b40f2c9a5022b89492fba6a9bd7932e11f4aa3c59",
+        "_headers": "63285ec265b706685ee17dcc99d7b039b33e34f54682beeaee01f66e180c5278",
+        "_routes.json": "7cc274574ae8daabe5fb9aaf7b32e00ad75df679bf3c2b6a0ed45625ebd7b87d",
+        "robots.txt": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d",
+        "assets/index-CzIgGHvW.css": "94827c0d3b72dcb4b4842d056f3eba95ee930d6d0c05bc7dd04960f61a5e6c34",
+        "assets/index-B6hdRVjx.js": "568d6ff74962e970614bdb16b5f0a0e8b67887140be9280835974a68fe8ee647",
+        "assets/processing.worker-D3jCi-6S.js": "cc7059a611ae3f52f23a316e06914bc41a9740b560cd06a149bac7b3d7ab87ca"
+      }
+    }
+  },
+  "hostedDeployment": null,
+  "origins": {
+    "site": "http://localhost:4321",
+    "checker": "http://localhost:5173"
+  }
+}
