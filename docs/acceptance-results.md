@@ -1,5 +1,7 @@
 # Executed acceptance ledger
 
+> **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition and hosted preview remain BLOCKED; no production completion is claimed.
+
 Date: September 7, 2026 (America/Los_Angeles). **Overall PREVIEW-ONLY. Mandatory automatic gate BLOCKED.** The original checklist in `specification/` remains unchanged. PASS below is limited to the explicitly tested preview behavior; it cannot stand for unimplemented production functionality.
 
 ## 1. Mandatory acquisition

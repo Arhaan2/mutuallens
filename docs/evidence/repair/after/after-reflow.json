@@ -1,0 +1,20 @@
+[
+  {
+    "url": "http://localhost:4321/",
+    "width": 320,
+    "docWidth": 320,
+    "overflow": []
+  },
+  {
+    "url": "http://localhost:5173/",
+    "width": 320,
+    "docWidth": 320,
+    "overflow": []
+  },
+  {
+    "url": "http://localhost:5173/#sample",
+    "width": 320,
+    "docWidth": 320,
+    "overflow": []
+  }
+]

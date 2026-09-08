@@ -1,0 +1,37 @@
+{
+  "testedAt": "2026-09-08T01:38:30.339Z",
+  "results": [
+    {
+      "scenario": "Export while import error reply queued",
+      "browserVersion": "153.0.8010.12",
+      "sourceDigest": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+      "injection": "Unmodified real Worker result computed; completed delivery gated",
+      "alertInImport": 1,
+      "alertInResults": 0,
+      "alert": "We couldn’t complete that action.\n\nMissing followers JSON input. A missing direction cannot be treated as an empty list.\n\nDismiss",
+      "alertRect": {
+        "x": 52,
+        "y": 337.328125,
+        "width": 286,
+        "height": 169.390625
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "scenario": "Repeat already-active history entry",
+      "browserVersion": "153.0.8010.12",
+      "sourceDigest": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+      "injection": "Unmodified real Worker result computed; completed delivery gated",
+      "hashWhileBusy": "#history",
+      "cancelStillVisibleBeforeRelease": false,
+      "reportAfterRelease": "@synthetic_owner",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

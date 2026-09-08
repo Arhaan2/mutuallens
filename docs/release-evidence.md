@@ -1,5 +1,7 @@
 # MutualLens release evidence
 
+> **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition and hosted preview remain BLOCKED; no production completion is claimed.
+
 **Overall: PREVIEW-ONLY. Automatic gate: BLOCKED. Hosted deployment: BLOCKED.**
 
 The independent preview is implemented and locally tested. Website-only automatic acquisition has not met the fixed product brief. No source adapter is selected; no real Instagram list was acquired; no 6,000 × 6,000 live run or source reconciliation occurred. Signup credits, API schemas, 401 probes, and synthetic tests are not substituted for that gate.

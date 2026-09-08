@@ -1,0 +1,666 @@
+{
+  "testedAt": "2026-09-08T00:42:28.935Z",
+  "engine": "153.0.8010.12",
+  "viewports": [
+    {
+      "width": 360,
+      "states": {
+        "home": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 3593,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 13
+        },
+        "entry": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 2445,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 11
+        },
+        "resultNatural": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 598,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 7045,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "result": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 1003,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 7045,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "import": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5487,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 7045,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "error": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 6212,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 7203,
+          "focused": "<button class=\"button primary\" type=\"submit\">Compare local files <span aria-hidden=\"true\">→</span></button>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "history": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 6420,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 7320,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 27
+        }
+      },
+      "siteNav": "Open preview ↗",
+      "sampleHref": "http://localhost:5173",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(162, 191, 135) solid 3px"
+      },
+      "resultsTop": 1003.046875,
+      "errorRect": {
+        "x": 20,
+        "y": -5302.953125,
+        "width": 320,
+        "height": 140
+      },
+      "submitRect": {
+        "x": 41,
+        "y": 426.953125,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 390,
+      "states": {
+        "home": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 3464,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 13
+        },
+        "entry": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 2378,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 11
+        },
+        "resultNatural": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 578,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 6978,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "result": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 984,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 6978,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "import": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5468,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 6978,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "error": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 6124,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 7115,
+          "focused": "<button class=\"button primary\" type=\"submit\">Compare local files <span aria-hidden=\"true\">→</span></button>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "history": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 6310,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 7210,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 27
+        }
+      },
+      "siteNav": "Open preview ↗",
+      "sampleHref": "http://localhost:5173",
+      "homeAxe": [],
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(162, 191, 135) solid 3px"
+      },
+      "resultsTop": 983.859375,
+      "resultsAxe": [],
+      "errorRect": {
+        "x": 20,
+        "y": -5234.140625,
+        "width": 350,
+        "height": 119
+      },
+      "submitRect": {
+        "x": 41,
+        "y": 427.171875,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 768,
+      "states": {
+        "home": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 2462,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 1848,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 11
+        },
+        "resultNatural": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 6098,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "result": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 817,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 6098,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "import": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4990,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 6098,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "error": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5132,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 6240,
+          "focused": "<button class=\"button primary\" type=\"submit\">Compare local files <span aria-hidden=\"true\">→</span></button>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "history": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5436,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 6336,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 27
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(162, 191, 135) solid 3px"
+      },
+      "resultsTop": 817.09375,
+      "errorRect": {
+        "x": 36,
+        "y": -4391.421875,
+        "width": 696,
+        "height": 124.03125
+      },
+      "submitRect": {
+        "x": 432.5,
+        "y": 643.78125,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 1024,
+      "states": {
+        "home": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 2328,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 1834,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 11
+        },
+        "resultNatural": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 5940,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "result": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 798,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 5940,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "import": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4827,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 5940,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "error": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4969,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 6082,
+          "focused": "<button class=\"button primary\" type=\"submit\">Compare local files <span aria-hidden=\"true\">→</span></button>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "history": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5278,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 6178,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 27
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(162, 191, 135) solid 3px"
+      },
+      "resultsTop": 797.90625,
+      "errorRect": {
+        "x": 36,
+        "y": -4247.609375,
+        "width": 952,
+        "height": 124.03125
+      },
+      "submitRect": {
+        "x": 583,
+        "y": 643.90625,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 1440,
+      "states": {
+        "home": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 2305,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 1758,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 11
+        },
+        "resultNatural": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 5868,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "result": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 779,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 5868,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "import": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4812,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 5868,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "error": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4954,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 6010,
+          "focused": "<button class=\"button primary\" type=\"submit\">Compare local files <span aria-hidden=\"true\">→</span></button>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "history": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5205,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 6105,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 27
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173",
+      "homeAxe": [],
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(162, 191, 135) solid 3px"
+      },
+      "resultsTop": 778.71875,
+      "resultsAxe": [],
+      "errorRect": {
+        "x": 136,
+        "y": -4251.796875,
+        "width": 1168,
+        "height": 124.03125
+      },
+      "submitRect": {
+        "x": 791,
+        "y": 583,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 1920,
+      "states": {
+        "home": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 2305,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 1758,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 11
+        },
+        "resultNatural": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 5868,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "result": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 779,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 5868,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "import": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4812,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 5868,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "error": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4954,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 6010,
+          "focused": "<button class=\"button primary\" type=\"submit\">Compare local files <span aria-hidden=\"true\">→</span></button>",
+          "overflow": [],
+          "smallText": 27
+        },
+        "history": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5205,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 6105,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 27
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(162, 191, 135) solid 3px"
+      },
+      "resultsTop": 778.71875,
+      "errorRect": {
+        "x": 376,
+        "y": -4251.796875,
+        "width": 1168,
+        "height": 124.03125
+      },
+      "submitRect": {
+        "x": 1031,
+        "y": 583,
+        "width": 191.859375,
+        "height": 46
+      }
+    }
+  ],
+  "defects": [],
+  "errors": []
+}

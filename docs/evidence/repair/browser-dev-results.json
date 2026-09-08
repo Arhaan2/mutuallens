@@ -1,0 +1,903 @@
+{
+  "sourceHash": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+  "stats": {
+    "startTime": "2026-09-08T01:43:50.469Z",
+    "duration": 48327.653,
+    "expected": 42,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 634,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 5248,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 718,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2966,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 905,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2121,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: homepage sample entry is direct and survives reload and browser history",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 838,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: missing import input has visible nearby feedback",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 261,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: all snapshot differences are browsable and full exports contain every record",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1517,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1100,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 768,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 581,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: partial input withholds negatives; missing malformed and unsupported files fail clearly",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 962,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for all mutual",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 328,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for no mutual",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 310,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for asymmetric empty following",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 312,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2027,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1597,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: homepage sample entry is direct and survives reload and browser history",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 731,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: missing import input has visible nearby feedback",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 291,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: all snapshot differences are browsable and full exports contain every record",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1738,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1238,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 778,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 669,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: partial input withholds negatives; missing malformed and unsupported files fail clearly",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 993,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for all mutual",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 414,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for no mutual",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 406,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for asymmetric empty following",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 402,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1679,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1204,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities cancelled"
+        }
+      ]
+    },
+    {
+      "title": "repair: homepage sample entry is direct and survives reload and browser history",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 810,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        },
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: missing import input has visible nearby feedback",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 286,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: all snapshot differences are browsable and full exports contain every record",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1368,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1075,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 739,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 586,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: partial input withholds negatives; missing malformed and unsupported files fail clearly",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 989,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for all mutual",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 640,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for no mutual",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 386,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: exact category counts for asymmetric empty following",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 368,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1619,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    },
+    {
+      "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1585,
+          "errors": []
+        }
+      ],
+      "annotations": [
+        {
+          "type": "expected-development-cleanup",
+          "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+        }
+      ]
+    }
+  ],
+  "measurements": [
+    {
+      "test": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "chromium",
+      "name": "real-worker-cancellation-environment",
+      "value": {
+        "synthetic": true,
+        "mocked": false,
+        "inputBytes": 49000030,
+        "followers": 100000,
+        "following": 100000,
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "Resource-safe inputs exercise cancellation; this is not completed 100,000-record result or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "webkit",
+      "name": "real-worker-cancellation-environment",
+      "value": {
+        "synthetic": true,
+        "mocked": false,
+        "inputBytes": 49000030,
+        "followers": 100000,
+        "following": 100000,
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "Resource-safe inputs exercise cancellation; this is not completed 100,000-record result or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "firefox",
+      "name": "real-worker-cancellation-environment",
+      "value": {
+        "synthetic": true,
+        "mocked": false,
+        "inputBytes": 49000030,
+        "followers": 100000,
+        "following": 100000,
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "Resource-safe inputs exercise cancellation; this is not completed 100,000-record result or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "chromium",
+      "name": "synthetic-large-import-performance",
+      "value": {
+        "synthetic": true,
+        "liveAcquisition": false,
+        "followers": 50000,
+        "following": 50000,
+        "importRoundTripMs": 1236.8930420000015,
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "One local automation round trip including file generation transfer and DOM assertions; not a benchmark or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "webkit",
+      "name": "synthetic-large-import-performance",
+      "value": {
+        "synthetic": true,
+        "liveAcquisition": false,
+        "followers": 50000,
+        "following": 50000,
+        "importRoundTripMs": 771.634333,
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "One local automation round trip including file generation transfer and DOM assertions; not a benchmark or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "firefox",
+      "name": "synthetic-large-import-performance",
+      "value": {
+        "synthetic": true,
+        "liveAcquisition": false,
+        "followers": 50000,
+        "following": 50000,
+        "importRoundTripMs": 1175.061917000001,
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "One local automation round trip including file generation transfer and DOM assertions; not a benchmark or live acquisition evidence."
+      }
+    }
+  ]
+}

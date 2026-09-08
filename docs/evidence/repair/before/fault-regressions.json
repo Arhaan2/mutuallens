@@ -1,0 +1,843 @@
+{
+  "config": {
+    "argv": [
+      "/Users/arhaan/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/mutuallens-repair-integration/playwright.config.ts"
+    ],
+    "configFile": "/tmp/mutuallens-repair-integration/playwright.config.ts",
+    "rootDir": "/tmp/mutuallens-repair-integration",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/mutuallens-repair-integration/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/mutuallens-repair-integration",
+        "testIgnore": [],
+        "testMatch": [
+          "repair-faults.spec.ts"
+        ],
+        "timeout": 15000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/mutuallens-repair-integration/baseline-fault-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "repair-faults.spec.ts",
+      "file": "repair-faults.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "fault: capability non-JSON response fails closed, can retry, and sample works",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 15022,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 68,
+                        "line": 159
+                      },
+                      "message": "Error: locator.click: Test timeout of 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Retry availability' })\u001b[22m\n\n\n  157 |       page.getByRole(\"button\", { name: /Check automatically/ }),\n  158 |     ).toBeDisabled();\n> 159 |     await page.getByRole(\"button\", { name: \"Retry availability\" }).click();\n      |                                                                    ^\n  160 |     await expect(page.locator(\"#automatic-status\")).toContainText(\n  161 |       validCapability.automatic.reason,\n  162 |     );\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:159:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:47:12.063Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-capabi-ffd4e--can-retry-and-sample-works/error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-2dca34e771867da0c963",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 138,
+          "column": 7
+        },
+        {
+          "title": "fault: capability null JSON fails closed, can retry, and sample works",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 15026,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 68,
+                        "line": 159
+                      },
+                      "message": "Error: locator.click: Test timeout of 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Retry availability' })\u001b[22m\n\n\n  157 |       page.getByRole(\"button\", { name: /Check automatically/ }),\n  158 |     ).toBeDisabled();\n> 159 |     await page.getByRole(\"button\", { name: \"Retry availability\" }).click();\n      |                                                                    ^\n  160 |     await expect(page.locator(\"#automatic-status\")).toContainText(\n  161 |       validCapability.automatic.reason,\n  162 |     );\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:159:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:47:27.365Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-capabi-beb1d--can-retry-and-sample-works/error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-9a9ef9dc25edc8b8e78e",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 138,
+          "column": 7
+        },
+        {
+          "title": "fault: capability malformed capability fails closed, can retry, and sample works",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 15012,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 15000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 68,
+                        "line": 159
+                      },
+                      "message": "Error: locator.click: Test timeout of 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Retry availability' })\u001b[22m\n\n\n  157 |       page.getByRole(\"button\", { name: /Check automatically/ }),\n  158 |     ).toBeDisabled();\n> 159 |     await page.getByRole(\"button\", { name: \"Retry availability\" }).click();\n      |                                                                    ^\n  160 |     await expect(page.locator(\"#automatic-status\")).toContainText(\n  161 |       validCapability.automatic.reason,\n  162 |     );\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:159:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:47:42.675Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-capabi-bf921--can-retry-and-sample-works/error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-d89271e45dd355eb8db5",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 138,
+          "column": 7
+        },
+        {
+          "title": "fault: capability network failure keeps local sample functional",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 202,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:47:57.958Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-1780de5d80edae8cad13",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 169,
+          "column": 5
+        },
+        {
+          "title": "fault: hung capability times out at 8s without blocking local mode",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2086,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#automatic-status')\nExpected pattern: \u001b[32m/Checking availability/\u001b[39m\nReceived string:  \u001b[31m\"Preview only. Checking service availability. Automatic checking is unavailable in this preview.\"\u001b[39m\nTimeout: 2000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#automatic-status') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('#automatic-status')\u001b[22m\n\u001b[2m    21 × locator resolved to <p id=\"automatic-status\" class=\"availability-copy\">…</p>\u001b[22m\n\u001b[2m       - unexpected value \"Preview only. Checking service availability. Automatic checking is unavailable in this preview.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#automatic-status')\nExpected pattern: \u001b[32m/Checking availability/\u001b[39m\nReceived string:  \u001b[31m\"Preview only. Checking service availability. Automatic checking is unavailable in this preview.\"\u001b[39m\nTimeout: 2000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#automatic-status') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('#automatic-status')\u001b[22m\n\u001b[2m    21 × locator resolved to <p id=\"automatic-status\" class=\"availability-copy\">…</p>\u001b[22m\n\u001b[2m       - unexpected value \"Preview only. Checking service availability. Automatic checking is unavailable in this preview.\"\u001b[22m\n\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:201:51",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                      "column": 51,
+                      "line": 201
+                    },
+                    "snippet": "  199 |   await page.goto(\"/\");\n  200 |   await requestStarted;\n> 201 |   await expect(page.locator(\"#automatic-status\")).toContainText(\n      |                                                   ^\n  202 |     /Checking availability/,\n  203 |   );\n  204 |   await page.clock.fastForward(8001);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 51,
+                        "line": 201
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#automatic-status')\nExpected pattern: \u001b[32m/Checking availability/\u001b[39m\nReceived string:  \u001b[31m\"Preview only. Checking service availability. Automatic checking is unavailable in this preview.\"\u001b[39m\nTimeout: 2000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#automatic-status') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('#automatic-status')\u001b[22m\n\u001b[2m    21 × locator resolved to <p id=\"automatic-status\" class=\"availability-copy\">…</p>\u001b[22m\n\u001b[2m       - unexpected value \"Preview only. Checking service availability. Automatic checking is unavailable in this preview.\"\u001b[22m\n\n\n  199 |   await page.goto(\"/\");\n  200 |   await requestStarted;\n> 201 |   await expect(page.locator(\"#automatic-status\")).toContainText(\n      |                                                   ^\n  202 |     /Checking availability/,\n  203 |   );\n  204 |   await page.clock.fastForward(8001);\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:201:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:47:58.244Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-hung-c-d786a-without-blocking-local-mode/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                    "column": 51,
+                    "line": 201
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-78cda95383480ef1f04c",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 186,
+          "column": 5
+        },
+        {
+          "title": "fault: worker constructor failure gives an alert and retry works",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 235,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:00.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-13750822733ae3ef6653",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 215,
+          "column": 5
+        },
+        {
+          "title": "fault: worker error failure exits processing and retry works",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 258,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:00.839Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-845019e23a15f7eb8d42",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 247,
+          "column": 7
+        },
+        {
+          "title": "fault: worker messageerror failure exits processing and retry works",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2120,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/processing|worker|read|message/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('[role=\"alert\"]:visible')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/processing|worker|read|message/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('[role=\"alert\"]:visible')\u001b[22m\n\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:289:38",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                      "column": 38,
+                      "line": 289
+                    },
+                    "snippet": "  287 |     await page.goto(\"/\");\n  288 |     await sampleButton(page).click();\n> 289 |     await expect(visibleAlert(page)).toContainText(\n      |                                      ^\n  290 |       /processing|worker|read|message/i,\n  291 |     );\n  292 |     await expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 38,
+                        "line": 289
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/processing|worker|read|message/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('[role=\"alert\"]:visible')\u001b[22m\n\n\n  287 |     await page.goto(\"/\");\n  288 |     await sampleButton(page).click();\n> 289 |     await expect(visibleAlert(page)).toContainText(\n      |                                      ^\n  290 |       /processing|worker|read|message/i,\n  291 |     );\n  292 |     await expect(\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:289:38"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:01.102Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-worker-aa16b--processing-and-retry-works/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                    "column": 38,
+                    "line": 289
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-d01b7c4e0e9f59cf7d30",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 247,
+          "column": 7
+        },
+        {
+          "title": "fault: worker postMessage failure exits processing and retry works",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 236,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:03.413Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-e4a8cb19b427b5beca72",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 247,
+          "column": 7
+        },
+        {
+          "title": "fault: cancel, retry and clear invalidate delayed completed worker replies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 345,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:03.740Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-300dbec42f78ef2ae92b",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 305,
+          "column": 5
+        },
+        {
+          "title": "fault: changing snapshot selection invalidates delayed comparison results",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6301,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.history-result')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.history-result') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.history-result')\u001b[22m\n\u001b[2m    21 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.history-result')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.history-result') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.history-result')\u001b[22m\n\u001b[2m    21 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:340:49",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                      "column": 49,
+                      "line": 340
+                    },
+                    "snippet": "  338 |   await page.getByLabel(\"Earlier snapshot\").selectOption({ index: 1 });\n  339 |   await releaseHeld(page, 0);\n> 340 |   await expect(page.locator(\".history-result\")).toHaveCount(0);\n      |                                                 ^\n  341 |   await expect(\n  342 |     page.getByRole(\"button\", { name: \"Cancel\", exact: true }),\n  343 |   ).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 49,
+                        "line": 340
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.history-result')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.history-result') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.history-result')\u001b[22m\n\u001b[2m    21 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  338 |   await page.getByLabel(\"Earlier snapshot\").selectOption({ index: 1 });\n  339 |   await releaseHeld(page, 0);\n> 340 |   await expect(page.locator(\".history-result\")).toHaveCount(0);\n      |                                                 ^\n  341 |   await expect(\n  342 |     page.getByRole(\"button\", { name: \"Cancel\", exact: true }),\n  343 |   ).toHaveCount(0);\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:340:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:04.090Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-changi-6de0f--delayed-comparison-results/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                    "column": 49,
+                    "line": 340
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-2c62ee14661ea360544f",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 324,
+          "column": 5
+        },
+        {
+          "title": "fault: deleting saved snapshots invalidates delayed comparison results",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6426,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.history-result')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.history-result') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.history-result')\u001b[22m\n\u001b[2m    21 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.history-result')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.history-result') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.history-result')\u001b[22m\n\u001b[2m    21 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:368:49",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                      "column": 49,
+                      "line": 368
+                    },
+                    "snippet": "  366 |   await expect(page.locator(\".snapshot-row\")).toHaveCount(0);\n  367 |   await releaseHeld(page, 0);\n> 368 |   await expect(page.locator(\".history-result\")).toHaveCount(0);\n      |                                                 ^\n  369 |   await expect(\n  370 |     page.getByRole(\"button\", { name: \"Cancel\", exact: true }),\n  371 |   ).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 49,
+                        "line": 368
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.history-result')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.history-result') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.history-result')\u001b[22m\n\u001b[2m    21 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  366 |   await expect(page.locator(\".snapshot-row\")).toHaveCount(0);\n  367 |   await releaseHeld(page, 0);\n> 368 |   await expect(page.locator(\".history-result\")).toHaveCount(0);\n      |                                                 ^\n  369 |   await expect(\n  370 |     page.getByRole(\"button\", { name: \"Cancel\", exact: true }),\n  371 |   ).toHaveCount(0);\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:368:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:10.576Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-deleti-db76b--delayed-comparison-results/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                    "column": 49,
+                    "line": 368
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-8c8b5416a61276709795",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 346,
+          "column": 5
+        },
+        {
+          "title": "fault: export URL allocation failure is visible near report actions without an uncaught error",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2229,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.results [role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/export|download/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.results [role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.results [role=\"alert\"]:visible')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.results [role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/export|download/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.results [role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.results [role=\"alert\"]:visible')\u001b[22m\n\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:388:23",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                      "column": 23,
+                      "line": 388
+                    },
+                    "snippet": "  386 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  387 |   const alert = page.locator('.results [role=\"alert\"]:visible');\n> 388 |   await expect(alert).toContainText(/export|download/i);\n      |                       ^\n  389 |   const box = await alert.boundingBox();\n  390 |   expect(box).not.toBeNull();\n  391 |   expect(box!.y).toBeGreaterThanOrEqual(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 23,
+                        "line": 388
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.results [role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/export|download/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.results [role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('.results [role=\"alert\"]:visible')\u001b[22m\n\n\n  386 |   await page.getByRole(\"button\", { name: \"Export JSON\", exact: true }).click();\n  387 |   const alert = page.locator('.results [role=\"alert\"]:visible');\n> 388 |   await expect(alert).toContainText(/export|download/i);\n      |                       ^\n  389 |   const box = await alert.boundingBox();\n  390 |   expect(box).not.toBeNull();\n  391 |   expect(box!.y).toBeGreaterThanOrEqual(0);\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:388:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:17.267Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-export-cce08-s-without-an-uncaught-error/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                    "column": 23,
+                    "line": 388
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-f9f79307a4df9718c375",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 374,
+          "column": 5
+        },
+        {
+          "title": "fault: IndexedDB denied keeps report usable and reports saving failure locally",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 238,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:19.764Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-07d4c297598d41ebc250",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 398,
+          "column": 5
+        },
+        {
+          "title": "fault: corrupt synthetic stored record cannot blank the checker",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2124,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/snapshot|storage|saved|invalid|read/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('[role=\"alert\"]:visible')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/snapshot|storage|saved|invalid|read/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('[role=\"alert\"]:visible')\u001b[22m\n\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:450:36",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                      "column": 36,
+                      "line": 450
+                    },
+                    "snippet": "  448 |   await page.getByRole(\"button\", { name: \"View saved snapshots\" }).click();\n  449 |   await expect(page.locator(\"main\")).toBeVisible();\n> 450 |   await expect(visibleAlert(page)).toContainText(\n      |                                    ^\n  451 |     /snapshot|storage|saved|invalid|read/i,\n  452 |   );\n  453 |   await assertSampleWorks(page);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                        "column": 36,
+                        "line": 450
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[role=\"alert\"]:visible')\nExpected pattern: \u001b[32m/snapshot|storage|saved|invalid|read/i\u001b[39m\nTimeout: 2000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('[role=\"alert\"]:visible') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for locator('[role=\"alert\"]:visible')\u001b[22m\n\n\n  448 |   await page.getByRole(\"button\", { name: \"View saved snapshots\" }).click();\n  449 |   await expect(page.locator(\"main\")).toBeVisible();\n> 450 |   await expect(visibleAlert(page)).toContainText(\n      |                                    ^\n  451 |     /snapshot|storage|saved|invalid|read/i,\n  452 |   );\n  453 |   await assertSampleWorks(page);\n    at /private/tmp/mutuallens-repair-integration/repair-faults.spec.ts:450:36"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:48:20.082Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-integration/test-results/repair-faults-fault-corrup-62af5-rd-cannot-blank-the-checker/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+                    "column": 36,
+                    "line": 450
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "604540ee52d6055caa8e-2aba7746c7a4da43d3d9",
+          "file": "../../private/tmp/mutuallens-repair-integration/repair-faults.spec.ts",
+          "line": 418,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-08T00:47:11.873Z",
+    "duration": 70363.284,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  }
+}

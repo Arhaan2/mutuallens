@@ -1,0 +1,91 @@
+{
+  "sourceHash": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+  "note": "Curated synthetic final screenshots from the independent 63-capture review. Matrix measurements and review memos retained beside these files.",
+  "screenshots": [
+    {
+      "file": "checker-focus-390.png",
+      "bytes": 81572,
+      "sha256": "89b29d1df09674fedc781a8083ac40d5bd4e3c918541a13cbf37b6b7c3944ea8"
+    },
+    {
+      "file": "entry-1440.png",
+      "bytes": 99900,
+      "sha256": "a24569ca221f9e1eeb3375dcd91715da78667e8b2e00a178466f0d4960c47403"
+    },
+    {
+      "file": "entry-390.png",
+      "bytes": 68486,
+      "sha256": "1b9a6325e6f004273e4e7b47508a12a256fdbb7541d7d22e68b4dae08f8d44c8"
+    },
+    {
+      "file": "error-at-submit-390.png",
+      "bytes": 69115,
+      "sha256": "89e7b24160246e1f351af0c67233b09a6add5a5c6f8508eebea69c5b4a88ae4e"
+    },
+    {
+      "file": "history-last-page-360.png",
+      "bytes": 49138,
+      "sha256": "bc61d2a8747de1ffad52c9901965aa5b1f391f9794b1cdd86011d7ed2124aedc"
+    },
+    {
+      "file": "history-populated-1440.png",
+      "bytes": 79164,
+      "sha256": "a158472be395dc7e7e400ed9805931997b34165800162e29133aa22e264a3ac5"
+    },
+    {
+      "file": "home-1440.png",
+      "bytes": 121865,
+      "sha256": "dae2d683ebd5bfd2e9475f3df6c496671cf70d9c5e2ca478d027f4a09b3a3da1"
+    },
+    {
+      "file": "home-390.png",
+      "bytes": 68200,
+      "sha256": "2f644406e62f5982ae7e26984442d745e04f5a0b46a58a3cb31363fde4c8553f"
+    },
+    {
+      "file": "import-390.png",
+      "bytes": 74499,
+      "sha256": "a4a7753c9e314dfd25d27dabae78599a3b83a3f4160230509a51bef26329e9f5"
+    },
+    {
+      "file": "pagination-next-natural-390.png",
+      "bytes": 65504,
+      "sha256": "4f7592ad5f9395890f92bcfe8d6ebbdb574f04276c370dd3383b8f1f56b2a03b"
+    },
+    {
+      "file": "reflow-results-320.png",
+      "bytes": 61986,
+      "sha256": "1e0fbccb34aa7223c8729af4605b299a7dada2bb308687ad14e4a6ac507dd879"
+    },
+    {
+      "file": "results-1024.png",
+      "bytes": 98488,
+      "sha256": "551c8d251cb667818619d38abbcd923c22a04e4350dec0f580cbde6e0dea08ba"
+    },
+    {
+      "file": "results-1440.png",
+      "bytes": 103814,
+      "sha256": "ad547131817752a99e0cad2267b3312dcd7c4ac150ca94fdd75b14a86d0ab6a6"
+    },
+    {
+      "file": "results-1920.png",
+      "bytes": 106321,
+      "sha256": "fe8eeeb228b5c44aecb6ea2f37673f7358fd80881ad0de33e62afc157ee4c25e"
+    },
+    {
+      "file": "results-360.png",
+      "bytes": 69039,
+      "sha256": "48f1140065e44d38c520239bce707e724c57018dd69a38f74ea59a0486fbc79a"
+    },
+    {
+      "file": "results-390.png",
+      "bytes": 71233,
+      "sha256": "f521f9051fa7eb134ebcb09077b08622e990e4a1e07a372585bb3d7c6ef9a698"
+    },
+    {
+      "file": "results-768.png",
+      "bytes": 88679,
+      "sha256": "66dc534feacd81ae5e7f5995e251c1dc4a16e2552398379208b6d2da99f11bd3"
+    }
+  ]
+}

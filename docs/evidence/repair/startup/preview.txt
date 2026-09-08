@@ -1,0 +1,95 @@
+
+> mutuallens@0.1.0 preview
+> node scripts/serve.mjs preview
+
+[MutualLens] preview from 8d3754365a770baecb9e954408e4f2e3a8d87587 (working tree has changes). Building current files before serving.
+[MutualLens] preview PID 64815: npm run build
+
+> mutuallens@0.1.0 build
+> npm run build -w @mutuallens/checker && npm run build -w @mutuallens/site && node scripts/build-security.mjs
+
+
+> @mutuallens/checker@0.1.0 build
+> vite build
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 26 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.77 kB │ gzip:  0.43 kB
+dist/assets/processing.worker-D3jCi-6S.js   21.90 kB
+dist/assets/index-MWWSmzwe.css              18.71 kB │ gzip:  4.48 kB
+dist/assets/index-CFV-2PCV.js              225.57 kB │ gzip: 70.05 kB
+
+✓ built in 68ms
+
+> @mutuallens/site@0.1.0 build
+> ASTRO_TELEMETRY_DISABLED=1 astro build
+
+18:45:15 [vite] Re-optimizing dependencies because vite config has changed
+18:45:15 [types] Generated 39ms
+18:45:15 [build] output: "static"
+18:45:15 [build] mode: "static"
+18:45:15 [build] directory: /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site/dist/
+18:45:15 [build] Collecting build info...
+18:45:15 [build] ✓ Completed in 51ms.
+18:45:15 [build] Building static entrypoints...
+18:45:15 [vite] ✓ built in 54ms
+18:45:15 [vite] ✓ built in 9ms
+18:45:15 [build] Rearranging server assets...
+
+ generating static routes 
+18:45:15   ├─ /404.html (+5ms) 
+18:45:15   ├─ /about/index.html (+1ms) 
+18:45:15   ├─ /contact/index.html (+1ms) 
+18:45:15   ├─ /guides/download-instagram-followers/index.html (+1ms) 
+18:45:15   ├─ /guides/followers-vs-following/index.html (+1ms) 
+18:45:15   ├─ /guides/instagram-export-troubleshooting/index.html (+1ms) 
+18:45:15   ├─ /guides/not-following-back-vs-unfollowed/index.html (+1ms) 
+18:45:15   ├─ /instagram-follow-back-checker/index.html (+1ms) 
+18:45:15   ├─ /privacy/index.html (+1ms) 
+18:45:15   ├─ /robots.txt (+1ms) 
+18:45:15   ├─ /sitemap.xml (+0ms) 
+18:45:15   ├─ /terms/index.html (+1ms) 
+18:45:15   ├─ /index.html (+1ms) 
+18:45:15 ✓ Completed in 18ms.
+
+18:45:15 [build] ✓ Completed in 94ms.
+18:45:15 [build] 11 page(s) built in 148ms
+18:45:15 [build] Complete!
+[MutualLens] preview PID 64949: /Users/arhaan/.nvm/versions/node/v24.18.0/bin/node /Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/wrangler/bin/wrangler.js pages dev dist --port 5173 --ip 127.0.0.1 --inspector-port 0
+[MutualLens] preview PID 64950: /Users/arhaan/.nvm/versions/node/v24.18.0/bin/node /Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/wrangler/bin/wrangler.js pages dev dist --port 4321 --ip 127.0.0.1 --inspector-port 0
+
+ ⛅️ wrangler 4.129.1
+────────────────────
+
+ ⛅️ wrangler 4.129.1
+────────────────────
+No Functions. Shimming...
+✨ Compiled Worker successfully
+✨ Parsed 1 valid header rule.
+Your Worker has access to the following bindings:
+Binding                                                                   Resource                  Mode
+env.CF_PAGES ("1")                                                        Environment Variable      local
+env.CF_PAGES_BRANCH ("codex/ui-functional-repair")                        Environment Variable      local
+env.CF_PAGES_COMMIT_SHA ("8d3754365a770baecb9e954408e4f2e3a8d87...")      Environment Variable      local
+env.CF_PAGES_URL ("https://8d37543.mutuallens.pages.dev")                 Environment Variable      local
+
+✨ Parsed 1 valid header rule.
+Your Worker has access to the following bindings:
+Binding                                                                   Resource                  Mode
+env.CF_PAGES ("1")                                                        Environment Variable      local
+env.CF_PAGES_BRANCH ("codex/ui-functional-repair")                        Environment Variable      local
+env.CF_PAGES_COMMIT_SHA ("8d3754365a770baecb9e954408e4f2e3a8d87...")      Environment Variable      local
+env.CF_PAGES_URL ("https://8d37543.mutuallens-app.pages....")             Environment Variable      local
+
+⎔ Starting local server...
+⎔ Starting local server...
+[wrangler:info] Ready on http://127.0.0.1:4321
+[wrangler:info] Ready on http://127.0.0.1:5173
+[wrangler:info] GET /api/capabilities 200 OK (6ms)
+[wrangler:info] GET / 200 OK (15ms)
+[wrangler:info] GET / 200 OK (12ms)
+[MutualLens] READY preview; source 947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157. Public http://localhost:4321 · checker + API http://localhost:5173. Ctrl+C stops this session.
+[wrangler:info] GET /api/capabilities 200 OK (1ms)

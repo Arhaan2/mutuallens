@@ -1,0 +1,303 @@
+{
+  "config": {
+    "argv": [
+      "/Users/arhaan/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "/tmp/mutuallens-repair-functional/playwright.config.ts",
+      "--grep",
+      "homepage sample entry|missing import input|all snapshot differences"
+    ],
+    "configFile": "/tmp/mutuallens-repair-functional/playwright.config.ts",
+    "rootDir": "/tmp/mutuallens-repair-functional",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/mutuallens-repair-functional/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/tmp/mutuallens-repair-functional",
+        "testIgnore": [],
+        "testMatch": [
+          "repair-workflows.spec.ts"
+        ],
+        "timeout": 12000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/mutuallens-repair-functional/baseline-regressions.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "repair-workflows.spec.ts",
+      "file": "repair-workflows.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "repair: homepage sample entry is direct and survives reload and browser history",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5291,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://localhost:5173/\u001b[7m#sample\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://localhost:5173/\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://localhost:5173/\u001b[7m#sample\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://localhost:5173/\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/\"\u001b[22m\n\n    at /private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts:151:22",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                      "column": 22,
+                      "line": 151
+                    },
+                    "snippet": "  149 |   await page.goto(SITE);\n  150 |   await page.locator(\".sample-link\").click();\n> 151 |   await expect(page).toHaveURL(`${CHECKER}/#sample`);\n      |                      ^\n  152 |   await expect(page.locator(\"#results-title\")).toBeVisible();\n  153 |   await expect(page.locator(\".results\")).toContainText(\"SYNTHETIC SAMPLE\");\n  154 |   await page.reload();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                        "column": 22,
+                        "line": 151
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://localhost:5173/\u001b[7m#sample\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://localhost:5173/\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"en\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://localhost:5173/\"\u001b[22m\n\n\n  149 |   await page.goto(SITE);\n  150 |   await page.locator(\".sample-link\").click();\n> 151 |   await expect(page).toHaveURL(`${CHECKER}/#sample`);\n      |                      ^\n  152 |   await expect(page.locator(\"#results-title\")).toBeVisible();\n  153 |   await expect(page.locator(\".results\")).toContainText(\"SYNTHETIC SAMPLE\");\n  154 |   await page.reload();\n    at /private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts:151:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:56:40.649Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-ho-b54b4--reload-and-browser-history-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-ho-b54b4--reload-and-browser-history-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-ho-b54b4--reload-and-browser-history-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                    "column": 22,
+                    "line": 151
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-fa235479d3e83e922396",
+          "file": "../../private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+          "line": 146,
+          "column": 5
+        },
+        {
+          "title": "repair: missing import input has visible nearby feedback",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 209,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-680.140625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-680.140625\u001b[39m\n    at /private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts:180:18",
+                    "location": {
+                      "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                      "column": 18,
+                      "line": 180
+                    },
+                    "snippet": "  178 |   const box = await alert.boundingBox();\n  179 |   expect(box).not.toBeNull();\n> 180 |   expect(box!.y).toBeGreaterThanOrEqual(0);\n      |                  ^\n  181 |   expect(box!.y + box!.height).toBeLessThanOrEqual(844);\n  182 | });\n  183 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                        "column": 18,
+                        "line": 180
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m0\u001b[39m\nReceived:    \u001b[31m-680.140625\u001b[39m\n\n  178 |   const box = await alert.boundingBox();\n  179 |   expect(box).not.toBeNull();\n> 180 |   expect(box!.y).toBeGreaterThanOrEqual(0);\n      |                  ^\n  181 |   expect(box!.y + box!.height).toBeLessThanOrEqual(844);\n  182 | });\n  183 |\n    at /private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts:180:18"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:56:46.336Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-mi-5b0c4-has-visible-nearby-feedback-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-mi-5b0c4-has-visible-nearby-feedback-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-mi-5b0c4-has-visible-nearby-feedback-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                    "column": 18,
+                    "line": 180
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-6af1f9f09afd9f39401a",
+          "file": "../../private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+          "line": 168,
+          "column": 5
+        },
+        {
+          "title": "repair: all snapshot differences are browsable and full exports contain every record",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 12186,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+                        "column": 68,
+                        "line": 216
+                      },
+                      "message": "Error: locator.click: Test timeout of 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.history-result details').first().getByRole('button', { name: 'Next', exact: true })\u001b[22m\n\n\n  214 |     await expect(group).toContainText(`@${prefix}000`);\n  215 |     await expect(group).not.toContainText(`@${prefix}064`);\n> 216 |     await group.getByRole(\"button\", { name: \"Next\", exact: true }).click();\n      |                                                                    ^\n  217 |     await expect(group).toContainText(`@${prefix}064`);\n  218 |     await expect(\n  219 |       group.getByRole(\"button\", { name: \"Next\", exact: true }),\n    at /private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts:216:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T00:56:46.824Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-al-c32a1-xports-contain-every-record-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-al-c32a1-xports-contain-every-record-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/mutuallens-repair-functional/test-results/repair-workflows-repair-al-c32a1-xports-contain-every-record-chromium/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-49b9b2be1899b1eed240",
+          "file": "../../private/tmp/mutuallens-repair-functional/repair-workflows.spec.ts",
+          "line": 184,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-08T00:56:40.469Z",
+    "duration": 18782.216999999997,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

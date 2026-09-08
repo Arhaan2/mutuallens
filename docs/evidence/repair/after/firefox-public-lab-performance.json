@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-09-08T01:42:59.185Z",
+  "environment": "darwin/arm64 local preview; firefox 155.0; no network/CPU throttling",
+  "lcpMs": 21,
+  "cls": null,
+  "fcpMs": 21,
+  "domContentLoadedMs": 8,
+  "transferBytes": 2719,
+  "fieldCoreWebVitals": "NOT MEASURED",
+  "caveat": "Single local initial-load lab observation; not field percentiles, production latency, or automatic acquisition timing."
+}

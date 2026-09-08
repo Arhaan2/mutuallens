@@ -1,0 +1,69 @@
+[
+  {
+    "engine": "chromium",
+    "version": "153.0.8010.12",
+    "result": {
+      "initial": {
+        "inWorker": false,
+        "inPrototype": false,
+        "initialType": "undefined"
+      },
+      "seen": [
+        "listener:messageerror",
+        "property:error",
+        "listener:error",
+        "property:message",
+        "listener:message"
+      ],
+      "echo": "Not needed for event-dispatch compatibility probe"
+    }
+  },
+  {
+    "engine": "webkit",
+    "version": "26.6",
+    "result": {
+      "initial": {
+        "inWorker": true,
+        "inPrototype": true,
+        "initialType": "object",
+        "descriptor": {
+          "enumerable": true,
+          "configurable": true
+        }
+      },
+      "seen": [
+        "property:messageerror",
+        "listener:messageerror",
+        "property:error",
+        "listener:error",
+        "property:message",
+        "listener:message"
+      ],
+      "echo": "Not needed for event-dispatch compatibility probe"
+    }
+  },
+  {
+    "engine": "firefox",
+    "version": "155.0",
+    "result": {
+      "initial": {
+        "inWorker": true,
+        "inPrototype": true,
+        "initialType": "object",
+        "descriptor": {
+          "enumerable": true,
+          "configurable": true
+        }
+      },
+      "seen": [
+        "property:messageerror",
+        "listener:messageerror",
+        "property:error",
+        "listener:error",
+        "property:message",
+        "listener:message"
+      ],
+      "echo": "Not needed for event-dispatch compatibility probe"
+    }
+  }
+]

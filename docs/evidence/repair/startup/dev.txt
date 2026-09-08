@@ -1,0 +1,121 @@
+
+> mutuallens@0.1.0 dev
+> node scripts/serve.mjs dev
+
+[MutualLens] dev from 8d3754365a770baecb9e954408e4f2e3a8d87587 (working tree has changes). Building current files before serving.
+[MutualLens] dev PID 64399: npm run build
+
+> mutuallens@0.1.0 build
+> npm run build -w @mutuallens/checker && npm run build -w @mutuallens/site && node scripts/build-security.mjs
+
+
+> @mutuallens/checker@0.1.0 build
+> vite build
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 26 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.77 kB │ gzip:  0.43 kB
+dist/assets/processing.worker-D3jCi-6S.js   21.90 kB
+dist/assets/index-MWWSmzwe.css              18.71 kB │ gzip:  4.48 kB
+dist/assets/index-CFV-2PCV.js              225.57 kB │ gzip: 70.05 kB
+
+✓ built in 86ms
+
+> @mutuallens/site@0.1.0 build
+> ASTRO_TELEMETRY_DISABLED=1 astro build
+
+18:45:13 [vite] Re-optimizing dependencies because vite config has changed
+18:45:13 [types] Generated 52ms
+18:45:13 [build] output: "static"
+18:45:13 [build] mode: "static"
+18:45:13 [build] directory: /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site/dist/
+18:45:13 [build] Collecting build info...
+18:45:13 [build] ✓ Completed in 64ms.
+18:45:13 [build] Building static entrypoints...
+18:45:13 [vite] ✓ built in 64ms
+18:45:13 [vite] ✓ built in 9ms
+18:45:13 [build] Rearranging server assets...
+
+ generating static routes 
+18:45:13   ├─ /404.html (+6ms) 
+18:45:13   ├─ /about/index.html (+1ms) 
+18:45:13   ├─ /contact/index.html (+1ms) 
+18:45:13   ├─ /guides/download-instagram-followers/index.html (+1ms) 
+18:45:13   ├─ /guides/followers-vs-following/index.html (+1ms) 
+18:45:13   ├─ /guides/instagram-export-troubleshooting/index.html (+1ms) 
+18:45:13   ├─ /guides/not-following-back-vs-unfollowed/index.html (+1ms) 
+18:45:13   ├─ /instagram-follow-back-checker/index.html (+1ms) 
+18:45:13   ├─ /privacy/index.html (+1ms) 
+18:45:13   ├─ /robots.txt (+1ms) 
+18:45:13   ├─ /sitemap.xml (+1ms) 
+18:45:13   ├─ /terms/index.html (+1ms) 
+18:45:13   ├─ /index.html (+1ms) 
+18:45:13 ✓ Completed in 21ms.
+
+18:45:13 [build] ✓ Completed in 107ms.
+18:45:13 [build] 11 page(s) built in 173ms
+18:45:13 [build] Complete!
+[MutualLens] dev PID 64547: /Users/arhaan/.nvm/versions/node/v24.18.0/bin/node /Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/wrangler/bin/wrangler.js pages dev dist --port 8788 --ip 127.0.0.1 --inspector-port 0
+[MutualLens] dev PID 64563: npm run dev:checker
+[MutualLens] dev PID 64579: npm run dev:site
+
+> mutuallens@0.1.0 dev:site
+> npm run dev -w @mutuallens/site
+
+
+> mutuallens@0.1.0 dev:checker
+> npm run dev -w @mutuallens/checker
+
+
+> @mutuallens/checker@0.1.0 dev
+> vite --host 127.0.0.1
+
+
+> @mutuallens/site@0.1.0 dev
+> node ../../scripts/site-dev.mjs
+
+
+  VITE v8.2.2  ready in 73 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+
+ ⛅️ wrangler 4.129.1
+────────────────────
+✨ Compiled Worker successfully
+6:45:14 PM [vite] http proxy error: /api/capabilities
+Error: connect ECONNREFUSED 127.0.0.1:8788
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1706:16)
+✨ Parsed 1 valid header rule.
+Your Worker has access to the following bindings:
+Binding                                                                   Resource                  Mode
+env.CF_PAGES ("1")                                                        Environment Variable      local
+env.CF_PAGES_BRANCH ("codex/ui-functional-repair")                        Environment Variable      local
+env.CF_PAGES_COMMIT_SHA ("8d3754365a770baecb9e954408e4f2e3a8d87...")      Environment Variable      local
+env.CF_PAGES_URL ("https://8d37543.mutuallens-app.pages....")             Environment Variable      local
+
+⎔ Starting local server...
+18:45:14 [vite] connected.
+[wrangler:info] Ready on http://127.0.0.1:8788
+[wrangler:info] GET /api/capabilities 200 OK (5ms)
+[wrangler:info] GET /api/capabilities 200 OK (2ms)
+18:45:14 [types] Generated 0ms
+18:45:14 [vite] connected.
+18:45:14 [vite] Re-optimizing dependencies because vite config has changed
+ astro  v7.3.1 ready in 490 ms
+┃ Local    http://127.0.0.1:4321/
+18:45:14 watching for file changes...
+[MutualLens] Public development server PID 64716 at http://127.0.0.1:4321
+[wrangler:info] GET /api/capabilities 200 OK (2ms)
+18:45:14 [200] / 11ms
+[MutualLens] READY dev; source 947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157. Public http://localhost:4321 · checker + API http://localhost:5173. Ctrl+C stops this session.
+[wrangler:info] GET /api/capabilities 200 OK (1ms)
+npm error Lifecycle script `dev` failed with error:
+npm error code 143
+npm error path /Users/arhaan/Documents/ChatGPT/mutuallens/apps/checker
+npm error workspace @mutuallens/checker@0.1.0
+npm error location /Users/arhaan/Documents/ChatGPT/mutuallens/apps/checker
+npm error command failed
+npm error command sh -c vite --host 127.0.0.1
