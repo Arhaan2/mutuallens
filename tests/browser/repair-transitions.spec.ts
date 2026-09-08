@@ -83,7 +83,7 @@ test('repair: repeated sample activation and pending saves leave one coherent re
   const observed = observe(page);
   await page.goto('/');
   await expect(page.locator('#automatic-status')).toContainText(
-    'not available',
+    'awaiting provider account setup',
   );
   await page
     .getByRole('button', { name: 'Explore synthetic sample' })
@@ -134,7 +134,7 @@ test('repair: real large import cancels, retries with exact data, and repeated h
   const observed = observe(page);
   await page.goto('/');
   await expect(page.locator('#automatic-status')).toContainText(
-    'not available',
+    'awaiting provider account setup',
   );
   // 49,000,030 bytes: inside the documented 64 MiB input safeguard. Padding is
   // ignored JSON metadata, and the 100,000 records per direction are synthetic.

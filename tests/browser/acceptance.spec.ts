@@ -146,7 +146,7 @@ test('local loose imports show supplied-list absences without mandatory identity
 }) => {
   await page.goto('/#import');
   await expect(page.locator('#automatic-status')).toContainText(
-    'not available',
+    'awaiting provider account setup',
   );
   const requests: string[] = [];
   page.on('request', (r) => requests.push(`${r.method()} ${r.url()}`));

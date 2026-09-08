@@ -57,7 +57,7 @@ test('navigation: public destinations, mobile navigation and 404 recovery work a
     page.getByRole('button', { name: 'Check automatically', exact: true }),
   ).toBeDisabled();
   await expect(page.locator('#automatic-status')).toContainText(
-    'not available',
+    'awaiting provider account setup',
   );
   await page.goto(publicOrigin);
   await page
