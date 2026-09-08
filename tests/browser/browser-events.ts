@@ -12,11 +12,9 @@ export function expectedDevelopmentAbort(request: Request): boolean {
       request.failure()?.errorText || '',
     );
   if (expected)
-    test
-      .info()
-      .annotations.push({
-        type: 'expected-development-cleanup',
-        description: `${request.method()} ${request.url()} ${request.failure()?.errorText}`,
-      });
+    test.info().annotations.push({
+      type: 'expected-development-cleanup',
+      description: `${request.method()} ${request.url()} ${request.failure()?.errorText}`,
+    });
   return expected;
 }
