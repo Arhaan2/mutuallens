@@ -29,7 +29,7 @@ a {
 }
 a:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #98b581;
+  outline: 3px solid #3f602d;
   outline-offset: 5px;
 }
 a:hover {
@@ -45,7 +45,7 @@ h1,
 h2,
 h3 {
   line-height: 1.12;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   font-weight: 570;
 }
 h1 {
@@ -705,7 +705,7 @@ tbody th {
     gap: 18px;
   }
   .site-header nav > a:not(.nav-cta) {
-    display: none;
+    display: inline-flex;
   }
   .site-header nav .nav-cta {
     font-size: 0.75rem;
@@ -867,5 +867,31 @@ tbody th {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Keep every navigation destination reachable at small widths. */
+@media (max-width: 760px) {
+  .site-header {
+    flex-wrap: wrap;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    gap: 12px;
+  }
+  .site-header nav {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    font-size: 0.875rem;
+  }
+  .site-header nav .nav-cta {
+    font-size: 0.8125rem;
+  }
+  .hero h1 {
+    letter-spacing: -0.025em;
+  }
+  .sample-link,
+  .secondary-link,
+  .availability {
+    font-size: 0.875rem;
   }
 }
