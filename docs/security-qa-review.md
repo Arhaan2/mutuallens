@@ -1,135 +1,122 @@
 # Independent security and QA review
 
-Review date: September 7, 2026. Reviewer ownership is limited to this document and `tests/review/`; no product, dependency, git, hosting, or provider changes were performed by the reviewer.
+Review date: September 12, 2026 (America/Los_Angeles)
 
-**Release decision: PREVIEW-ONLY; mandatory production automatic acquisition is BLOCKED.** The reviewer inspected the actual source and acquisition evidence, not only implementation-agent summaries. Eighteen independent adversarial tests passed against the current core and API implementation. Integrated checks, build, 134 unit/review tests and ten local-runtime browser tests have been independently inspected below. Hosted deployment remains NOT RUN.
+Candidate: `9e190ac1b02c7642886f48df581427d8093de9cf..aca05c15b5bd5afa92f34208e46f0c553a307df4`
 
-## Scope and method
+Reviewer permissions were limited to this report and `tests/review/**`. No implementation, configuration, dependency, credential, provider, hosting, deployment, or git mutation was performed as part of the review. The reviewer's earlier public-site SEO/content implementation is excluded from independent approval. Browser/Playwright testing was assigned to a separate reviewer and was deliberately not run here.
 
-Reviewed `packages/core/src/`, checker application/worker/IndexedDB code, public Astro layouts and advertising boundary, `packages/acquisition/src/`, the checker API, shared contracts, security-build and origin configuration, CI, planned browser tests, `docs/automatic-feasibility.md`, and the stored acquisition preflight/live-gate JSON. Source was read from the lead workspace and the assigned core/UI worktrees while integration was underway. All test records are synthetic.
+## Findings first
 
-The independent suite adds ZIP relationship-part omission checks, strict collection timestamps, mismatched actual/expected count handling, historical completeness checks, identity collision permutations, CSV payloads across all export fields, and disabled API body/reflection/Fetch Metadata checks. It does not fabricate provider/session behavior.
+### Open findings
 
-Executed in the reviewer worktree:
+None. No unresolved P0, P1, P2, or P3 correctness/security finding was found in the exact candidate.
+
+### Resolved during this review
+
+**P3 / Low — a terminal-dot preview hostname could evade the generic indexability guard.**
+
+- Original path: `scripts/origins.ts:65-81` compared the unnormalized lowercase hostname against literal preview suffixes. On `b7cad6038641c5068b1b7bb60112e7c813cb59d1`, a trusted build with `PUBLIC_INDEXABLE=true` treated `https://mutuallens.pages.dev.` as indexable.
+- Resolution in the candidate: `scripts/origins.ts:74` removes one terminal DNS dot before the localhost, `pages.dev`, and `github.io` checks. `tests/unit/origins.test.ts` now covers dotted `pages.dev.` and `github.io.` hosts.
+- Verification on exact root HEAD `aca05c15b5bd5afa92f34208e46f0c553a307df4`: the direct reproduction returned `false` for both dotted hosts, and the focused origins plus cancellation suite passed 5/5.
+
+**P1 / High — cancellation queued under a held lease was discarded by the retryable-provider-error checkpoint.**
+
+- Original path: retry handling in `packages/acquisition/src/jobs.ts:667-694` saved and released the lease without honoring a cancellation that DELETE had queued while the lease was held.
+- Reproduction: the first case at `tests/review/cancellation-race.test.ts:82-165` starts an existing provider run, holds its refresh, requests cancellation, returns a retryable provider error, and requires the final state to be `cancelled` with one provider abort.
+- Resolution in the candidate: the lease owner checks the persisted cancellation flag before retry checkpointing (`packages/acquisition/src/jobs.ts:672-681`).
+
+**P1 / High — the first correction retained a check-then-save cancellation window.**
+
+- Original path: cancellation could arrive after the pre-save flag read but before the checkpoint SQL executed. DELETE could not claim the still-held lease, while the checkpoint then released the lease and returned `running`; the cancellation-mode client polls rather than advancing (`apps/checker/src/AutomaticCheck.tsx:413-415`).
+- Reproduction: the pausing SQL driver and second case at `tests/review/cancellation-race.test.ts:30-64,167-251` inject DELETE exactly between the flag read and checkpoint write. It failed against `f20bf9937dd39e341c882c87a58554a9f292e68d` with final status `running`.
+- Resolution in the candidate: immediately after the retry checkpoint releases the lease, the service re-reads the cancellation flag and executes normal cancellation (`packages/acquisition/src/jobs.ts:691-694`). A cancellation after that re-read can claim the already released lease itself. Both deterministic interleavings pass on `aca05c15b5bd5afa92f34208e46f0c553a307df4`.
+
+## Decision
+
+**The non-SEO candidate is mergeable for a noindexed preview.** The two P1 cancellation races and P3 hostname-normalization edge found during review are repaired and permanently covered. No open correctness/security finding remains in the reviewed scope.
+
+This is not approval to enable automatic checking publicly or commercially. Automatic collection remains disabled in source, and the required credentialed small test, target-scale retrieval, measured recurring-zero-cash capacity, live completeness behavior, provider-side erasure, hosted scheduler behavior, and commercial-use gates are not established by this static/synthetic review. Ads must remain disabled. The current GitHub Pages project was reported unconfigured outside this run; deployment and hosted response behavior were not authorized or verified here.
+
+## Coverage and conclusions
+
+- **Comparison semantics and identities:** core import/comparison paths treat supplied files as the working dataset without requiring account identity, collection time, or a completeness checkbox. Missing directions still error. Supplied-file differences remain qualified; incomplete automatic directions withhold confirmed negatives. Stable IDs, username-only uncertainty, collision handling, cross-page result retrieval, and history invariants are exercised by the passing unit suite. No arbitrary record-count cap was found.
+- **Provider completeness:** a provider dataset ending is not itself treated as proof that the upstream list is complete. Explicit reviewed terminal behavior and direction terminal state are required before complete results; retry exhaustion, cancellation, ambiguous start acknowledgment, charge limits, and source errors remain partial/uncertain and withhold absence classifications. Automatic setup remains fail closed while `APIFY_STARTS_REVIEWED` is false.
+- **Session and API isolation:** enabled routes require a single well-formed HttpOnly, Secure, SameSite=Strict host cookie on HTTPS; job access is scoped through a session digest; UUID-shaped job IDs avoid alternate routing forms; mutating requests require exact same Origin and reject explicit cross-site Fetch Metadata. API responses are private/no-store and noindex with no graph CORS grant. Bodies are bounded to 2 KiB before parsing.
+- **Leases, cancellation, reset, and React lifetime:** D1 checkpoint and terminal writes require the current unexpired lease. Unknown provider-start outcomes stop without blind retries. Both retry/cancel interleavings now converge. React cleanup terminates the worker and clears both `worker.current` and `activeTask.current` (`apps/checker/src/App.tsx:310-315`), closing the StrictMode remount/direct-hash stale-guard failure. Generation checks and abort controllers discard stale automatic UI work.
+- **Free-credit accounting:** capacity creation, reservation, and terminal accounting are batched. Known spend cannot exceed the reservation; uncertain/unfinished provider work conservatively consumes the full reservation rather than assuming zero. Pricing freshness, billing-event headroom, and one-active-job constraints are covered by synthetic tests. This does not prove actual provider pricing or a recurring free allowance.
+- **Expiry and erasure:** expired local job/graph data is removed independently of provider availability, with only redacted provider cleanup identifiers queued. Capacity is conservatively settled and idempotency receipts survive briefly. Remote deletion retries are bounded; retry exhaustion remains an operator privacy obligation and does not prove provider-side erasure.
+- **Data handling:** imports are parsed in a local module worker; graph data is rendered through React text nodes. Optional snapshots require explicit saving and stay in browser storage. Automatic provider credentials and transport remain server-side. This review used synthetic records only and performed no provider/network request.
+- **GitHub Pages boundary:** actions are commit-pinned, checkout credentials are not persisted, verification has read-only contents permission, and deployment alone receives `pages: write` / OIDC. Deployment waits for the full verify job. The Pages build requires a non-root base path, removes Cloudflare control files, adds `.nojekyll`, checks every HTML document for `noindex, follow`, rejects root-relative references that escape `/mutuallens`, requires a base-aware canonical/robots sitemap URL, and requires an empty sitemap. Local artifact verification passed.
+
+## Commands actually run
+
+The comprehensive commands below ran from `/private/tmp/mutuallens-review-20260912` at exact predecessor `b7cad6038641c5068b1b7bb60112e7c813cb59d1`. The final candidate changes only `scripts/origins.ts` and `tests/unit/origins.test.ts`; that delta and its focused final-candidate verification follow this block.
 
 ```text
-node /Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/vitest/vitest.mjs run --root /tmp/mutuallens-review --config /Users/arhaan/Documents/ChatGPT/mutuallens/vitest.config.ts tests/review
-2026-09-07 16:51:27 America/Los_Angeles
-2 test files passed; 18 tests passed; exit 0
+npm ci --ignore-scripts
+PASS — 429 packages installed from the lockfile; no package or lockfile edits.
+
+npx --no-install vitest run tests/review/cancellation-race.test.ts tests/review/acquisition-erasure.test.ts tests/unit/automatic-api.test.ts tests/unit/origins.test.ts
+PASS — 4 files, 17 tests.
+
+npm run check
+PASS — ESLint and TypeScript passed; Astro checked 20 files with 0 errors, 0 warnings, 0 hints.
+
+npm test
+PASS — 16 files, 319 tests.
+
+npm run build
+PASS — checker Vite build, 13-page Astro build, and security artifact generation.
+
+npm run format:check
+PASS — all matched files use Prettier formatting (rerun after this report update).
+
+PUBLIC_SITE_ORIGIN=https://arhaan2.github.io PUBLIC_SITE_BASE_PATH=/mutuallens PUBLIC_CHECKER_ORIGIN=https://mutuallens-app.pages.dev VITE_SITE_ORIGIN=https://arhaan2.github.io ASTRO_TELEMETRY_DISABLED=1 npm run build -w @mutuallens/site
+PASS — 13 static pages generated under the configured Astro base.
+
+PUBLIC_SITE_ORIGIN=https://arhaan2.github.io PUBLIC_SITE_BASE_PATH=/mutuallens PUBLIC_CHECKER_ORIGIN=https://mutuallens-app.pages.dev VITE_SITE_ORIGIN=https://arhaan2.github.io ASTRO_TELEMETRY_DISABLED=1 node scripts/build-pages.mjs
+PASS — noindex, base-path, canonical, robots, empty-sitemap, and artifact-boundary checks passed.
+
+# In /Users/arhaan/Documents/ChatGPT/mutuallens at exact HEAD aca05c15b5bd5afa92f34208e46f0c553a307df4:
+git diff --check b7cad6038641c5068b1b7bb60112e7c813cb59d1..aca05c15b5bd5afa92f34208e46f0c553a307df4
+PASS — no whitespace errors; delta is 3 insertions and 1 deletion across the origin helper and its unit test.
+
+node --experimental-strip-types --input-type=module -e "import { isPublicReleaseIndexable } from './scripts/origins.ts'; console.log(isPublicReleaseIndexable({ PUBLIC_INDEXABLE: 'true', PUBLIC_SITE_ORIGIN: 'https://mutuallens.pages.dev.' })); console.log(isPublicReleaseIndexable({ PUBLIC_INDEXABLE: 'true', PUBLIC_SITE_ORIGIN: 'https://arhaan2.github.io.' }));"
+PASS — output was `false` then `false`.
+
+npx --no-install vitest run tests/unit/origins.test.ts tests/review/cancellation-race.test.ts
+PASS — 2 files, 5 tests.
 ```
 
-This command initially imports the agent worktree's source explicitly. Integration must rewrite those imports to repository-relative source and ordinary `vitest`/`fflate` package names, then rerun the suite. The final integrated evidence takes precedence over this intermediate execution.
+Historical defect reproduction retained for audit clarity:
 
-## Findings and resolutions
+```text
+# On superseded candidate f20bf9937dd39e341c882c87a58554a9f292e68d:
+npx --no-install vitest run tests/review/cancellation-race.test.ts
+FAIL as intended — 1 passed, 1 failed; the injected check/save race ended `running` rather than `cancelled` at line 249.
+```
 
-| Finding                                                                                    | Consequence                                                                                             | Disposition                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Worker read all selected `File` contents before core's 64 MiB budget check                 | A very large selection could allocate far beyond the documented budget before rejection                 | UI engineer added size/count preflight before sequential reads. Two oversized-selection tests verify no file read occurs; a safe-input control also passes. Integrated worker and 134-test output inspected.                                                   |
-| ZIP parser ignored malformed relationship-like names such as `followers_0.json`            | User confirmation could label accepted parts complete after silently ignoring another relationship part | Core now rejects unsupported relationship-like filenames. Three independent adversarial cases PASS.                                                                                                                                                            |
-| `Date.parse` accepted calendar rollover, missing timezone and future collection timestamps | Snapshot provenance could appear more certain than the supplied dates justify                           | Core now requires canonical valid UTC timestamps, including valid calendar fields and no future date. Four independent cases PASS.                                                                                                                             |
-| Complete/terminal labels were trusted despite contradictory expected/unique counts         | Truncated or stale metadata could produce definitive negative relationships and historical differences  | Core now reconciles distinct records and count/page metadata. Three independent direct/history cases PASS.                                                                                                                                                     |
-| Origin variables initially lacked a build-time separation guard                            | A later configuration could collapse public/checker origin privacy isolation                            | Lead added strict origin tuple validation and integration tests. Shared tuple must be normalized HTTPS (localhost HTTP allowed), public/checker origins must differ, and checker public-site links must match. Local browser DOM and IndexedDB isolation PASS. |
+Playwright/browser suites, live-provider tests, deployment, hosted probing, `npm audit` network access, and credential/history scans were **NOT RUN** by this reviewer.
 
-The first browser run also exposed a mobile select without an accessible name, inadequate public proof-strip number contrast, and a preview notice outside a landmark. The integrated source adds an explicit select name, darker text and a named preview region. The rerun passes all seven browser tests. These preview fixes do not resolve the unavailable mandatory automatic workflow.
+## Artifacts and residual risks
 
-## Verified source properties and limits
+Static rendered evidence produced locally:
 
-- Partial/unverified lists and nonterminal or inconsistent metadata withhold negative relationship categories. Stable IDs distinguish conflicting same-name records. Username-only matching carries rename/reuse uncertainty. Source completeness describes supplied data rather than live atomic truth.
-- Import parser rejects unknown schemas/rows without skipping records, unsafe ZIP paths, unsupported encryption/ZIP64/multidisk/symlinks, inconsistent headers/bounds, dangerous declared expansion, streaming expansion overflow, checksum errors and invalid UTF-8. Resource limits are bytes/entries/ratio safeguards, not follower-count cutoffs. This is code inspection plus the independent cases above; the core owner's larger suite requires final integrated execution evidence.
-- The UI renders record text through React text nodes. Profile links are constructed from normalized usernames, carry `noopener noreferrer` and no referrer, and are absent from synthetic account rows. No reviewed `innerHTML`/HTML injection path accepts graph data.
-- The only application `fetch` found in checker source requests same-origin `/api/capabilities` with omitted credentials. File contents go to a same-origin module worker and remain local. This source observation does not replace browser network capture.
-- Snapshot writes require explicit user action. The application opens IndexedDB only for snapshot actions, discloses shared-profile access, and clears the snapshot object store on confirmed delete-all. Clearing a report does not claim to delete separately saved or downloaded files.
-- Public ad component is inert; no ad SDK, publisher identifier or `ads.txt` is activated. Static preview noindex metadata and the generated security headers are present in source. Actual response behavior must be confirmed after build/hosting.
-- Disabled API does not read the supplied body, perform upstream requests, create a session/job, or set cookies. It returns noncacheable `AUTOMATIC_UNAVAILABLE` and null results. State-changing requests reject missing/different Origin and explicit cross-site Fetch Metadata. This is a safe disabled boundary, **not proof of live job authorization, CSRF, reservation concurrency or idempotent billed operations**.
-- CI uses read-only contents permission, pinned action commits, `persist-credentials: false`, no configured deployment steps or exposed provider secrets, and regular `pull_request` rather than privileged pull-request execution. A narrow credential-pattern scan of working source found no private-key/GitHub/AWS/Slack-token matches; it is not comprehensive secret scanning or git-history proof.
+- `apps/site/dist/index.html`
+- `apps/site/dist/404.html`
+- `apps/site/dist/robots.txt`
+- `apps/site/dist/sitemap.xml`
+- `apps/site/dist/build-info.json`
+- `apps/checker/dist/index.html`
+- `apps/checker/dist/404.html`
+- `apps/checker/dist/_headers`
+- `apps/checker/dist/_routes.json`
 
-## Acquisition and production blockers
+Residual/out-of-scope items requiring lead or separate-review evidence:
 
-Stored live-gate evidence has no selected provider, no consented live target execution, and null list/page/completeness/reconciliation/runtime/credit measurements. The four actual list authentication preflights returned 401; a documentation/schema 200 and authentication rejection are not complete-list tests. The reviewer did not rerun external calls or receive credentials.
-
-The documented candidate allowance/cost findings establish no eligible recurring zero-cash target-scale source. This review therefore cannot pass website-only username-to-complete-results functionality, target-scale source completeness, terminal pagination, permitted public-commercial use, source retention, runtime behavior, live-session isolation, durable budget races, cancellation/resume/retries, or deployed acquisition. All remain BLOCKED/NOT RUN as recorded in the acquisition ledger. Working imports and synthetic scale results cannot satisfy these conditions.
-
-Publisher approval, actual IDs, consent/CMP and verified operator/contact details are absent. Advertising must remain disabled. All preview documents must remain noindexed, even if a preview is hosted successfully.
-
-## Final integrated evidence review
-
-The reviewer directly inspected these integrated artifacts and corresponding source, rather than accepting the lead’s summary alone:
-
-| Check                                      | Observed evidence                                                                                                                                                                                         | Review result                                                                                       |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Lint, TypeScript and Astro diagnostics     | `docs/evidence/checks.txt`: lint succeeds, Astro reports 17 files with zero errors/warnings/hints                                                                                                         | PASS for recorded run                                                                               |
-| Unit/core/API/origin/independent tests     | `docs/evidence/unit-tests-verbose.txt`: 5 files, 134 tests passed at 16:52:53 local time; includes all 18 independent tests with repository-relative imports                                              | PASS                                                                                                |
-| Static production-mode build               | `docs/evidence/build.txt`: Vite checker and 11 Astro documents built; worker bundle and security artifacts generated                                                                                      | PASS for local build; not a deployment                                                              |
-| Local Workers browser suite                | `docs/evidence/browser-tests.txt`: ten tests passed in 25.6 s. Underlying `test-results/browser-results.json`: start `2026-09-07T23:57:56.189Z`, expected 10, skipped 0, unexpected 0, flaky 0, no errors | PASS for Chromium/local Workers runtime                                                             |
-| Preview/API headers and unavailable routes | Browser assertions exercise actual local Workers responses, noindex/security headers, API 503 and cross-origin 403, real unknown-route 404                                                                | PASS locally                                                                                        |
-| Local processing/network/privacy           | Browser assertions cover sample categories, search, pagination, downloaded filename, loose/ZIP imports, no upload/external requests, negatives withheld and export disabled on unverified inputs          | PASS for exercised cases                                                                            |
-| Explicit saving and separate origins       | Browser asserts no IndexedDB database before saving, persistence only after Save, public-origin storage empty, cross-origin checker DOM raises SecurityError, and delete-all empties store                | PASS locally                                                                                        |
-| Public pages/ads/SEO plumbing              | Noindex canonical on homepage, expected public route 200s, local-only page requests, missing `ads.txt` 404                                                                                                | PASS locally; configured production host/canonical evidence absent                                  |
-| Accessibility and viewport checks          | Axe passes checker desktop/mobile, 640 px reflow, public home and nine additional public content/policy pages; 390 px/640 px layout has no horizontal overflow, reduced-motion mode exercised             | PASS for these automated checks; not a complete manual accessibility audit                          |
-| 200% layout                                | Browser suite applies CSS `zoom: 2` and verifies no horizontal overflow/search visibility; screenshot reviewed                                                                                            | PASS for CSS layout zoom only. Native browser 200% zoom NOT RUN in the inspected suite              |
-| Screenshot inspection                      | Actual `checker-desktop.png`, `checker-mobile.png`, `checker-zoom200.png`, `site-desktop.png`, `site-mobile.png` viewed                                                                                   | No clipped controls/overlap observed in captured states; rendered image previews may be downscaled  |
-| Performance evidence                       | `browser-performance.json` records synthetic search automation round trip 10.618 ms and Chromium estimated used heap 10,000,000 bytes                                                                     | Measurements observed; not live acquisition latency, a device memory limit or field Core Web Vitals |
-
-The first browser run had five passes and two failures; the inspected successful rerun followed actual accessible-name/contrast/landmark corrections, not disabled tests. The planned browser suite source was reviewed to confirm assertions were retained. Additional browser scenarios or paint metrics added after this review require their own execution evidence; this table does not pre-approve them.
-
-No discovered unresolved preview security/correctness blocker remains in the inspected implementation and exercised cases. Residual scope limitations include no hosted-origin test, no real provider/job data, no active-job session or spending-race audit, no actual source retention test, no independent full git-history secret audit, and no private support/legal/publisher approval verification. The acquisition source and no-cash live-target gate remain BLOCKED.
-
-Production deployment and rollback are NOT RUN on the evidence inspected. The hosting document records expired authorization; no successful deployment URL or actual account free-plan verification has been inferred. This review approves only the tested local preview behavior. It does not approve production completion, indexability, advertising activation or a claim that automatic checking works.
-
-## Final supplement: keyboard focus, visible history and public content
-
-The reviewer inspected the final `docs/evidence/browser-tests.txt` and underlying Playwright JSON directly after the suite grew to ten cases. The run began `2026-09-07T23:57:56.189Z`, completed in 25,574.05 ms, and reports ten expected results, zero skipped/unexpected/flaky tests and no runner errors. This supersedes the earlier seven-case browser total. These tests still use Chromium on local Workers runtime, not a deployed host.
-
-The keyboard-only test deliberately returns HTTP 503 for capability discovery, confirms the truthful unavailable status, tabs to the synthetic-sample button, activates with Enter, verifies focus moves to the result heading, and then tabs to Export JSON. A focus timing problem was fixed in the actual checker source: the result-heading focus now runs in a `useEffect` keyed to the committed `report`, when the heading ref exists, rather than racing a pre-commit animation-frame callback. The result heading remains programmatically focusable with `tabIndex={-1}`. The same test verifies a 640×450 viewport has no horizontal overflow and no Axe violations. Native browser zoom remains NOT RUN; this reflow check and the CSS 200% check must not be described as a native browser zoom test.
-
-The new visible-history test imports and explicitly saves two synthetic, complete-for-source snapshots with known ordered dates. It verifies qualified difference wording and username-only identity uncertainty in the rendered results. It then saves a different owner's snapshot, attempts an incompatible comparison, and asserts a same-account error with no stale historical result left on screen. This complements the core historical-date/source/completeness tests; it does not verify automatic-history acquisition or exact unfollow times.
-
-The new public-content test performs Axe scans on the checker explainer, four guides, privacy, terms, contact and about pages; each scan passes. Its initial-load lab artifact, `docs/evidence/public-lab-performance.json`, is an observed single local unthrottled Chromium 153.0.8010.12 run recorded `2026-09-07T23:58:20.039Z`: observed LCP 32 ms, FCP 32 ms, CLS 0, DOMContentLoaded 7.5 ms, navigation transfer size 2,715 bytes. The source measures an initial local paint window; transfer size is the navigation entry, not total site transfer. These measurements are neither field Core Web Vitals nor production/user latency and give no evidence about automatic scan performance.
-
-The final check log also reports zero Astro errors/warnings/hints at 16:57:01 local time. Repository commit/remote CI, hosted deployment, actual host-plan verification and rollback have not been approved or inferred from these local artifacts. No deployment URL exists in the evidence supplied for this review. The final review decision remains **PREVIEW-ONLY, with production automatic acquisition BLOCKED and ads disabled**.
-
-## Core-product amendment: independent acquisition integration review
-
-September 7, 2026 Pacific / September 8 UTC. The earlier sections are historical evidence under the earlier upload policy; they do not reinstate the removed completeness-checkbox or collection-date requirements. This addendum reviews the lead's new durable acquisition engine and the current import/automatic browser source. The reviewer also authored the provider adapter; its 89 synthetic tests are implementation verification, while the engine fault probes below are independent review of lead-owned code.
-
-**Decision: repaired preview work can continue; automatic live acceptance remains NOT RUN.** No provider credential, owner account data, Instagram target, paid call, deployment or actual provider erasure was used in this review. The [candidate investigation](acquisition-seemuapps.md) separates public metadata reads, synthetic adapter tests, small live testing, target scale, measured free capacity and commercial launch. Documentation is not execution evidence.
-
-Three P1 defects were independently reproduced against the first engine implementation using real in-memory SQLite and synthetic provider responses. [Before evidence](evidence/acquisition-seemu-engine-baseline.json) and [fixed probe evidence](evidence/acquisition-seemu-engine-probe.json) include source hashes; the [probe script](evidence/acquisition-seemu-engine-probe.mjs) starts no server or Actor.
-
-| Case                                        | Reproduced defect                                                                                              | Fixed probe outcome                                                              |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Successful charge-limited page, null cursor | A $0.04506 run under a $0.05 ceiling, unable to pay the next $0.009 billing event, became a complete direction | Partial result; terminal flags false                                             |
-| Provider deletion fails after local TTL     | Expired graph remained in D1 until remote deletion succeeded                                                   | Local job/graph erased; minimal remote-cleanup tombstone remains pending         |
-| Existing run cannot be read or aborted      | The full reservation was released with zero known spend while the run could still consume credits              | Full 3,000,000 microdollar reservation remains conservatively accounted as spend |
-
-The fixes require an explicit reviewed live terminal-behavior evidence ID, fresh reviewed pricing before each start and remaining headroom for another billing event. Headroom is a safeguard, not proof of the hidden Actor's complete-list semantics. The live procedure must still test truncation, continuation, charge-stop behavior and any upstream-page prechecks. The adapter's dataset-exhausted flag never establishes upstream completeness.
-
-Local expiry now queues only run/status/storage IDs while atomically removing graph rows and the target-bearing job. Source review confirmed subsequent bounded exponential cleanup retry scheduling, avoiding permanent starvation by the oldest failing records. Maintenance can continue with creation disabled. Remote cleanup success, actual scheduled invocation and downstream HikerAPI/seemuapps erasure remain unverified; a lost start without a run ID still requires private operator reconciliation and cannot be represented as a successfully deleted provider resource.
-
-Six permanent independent regressions are supplied in `tests/review/acquisition-security.test.ts`: low-charge completion, missing live behavior evidence, fresh pricing per start, local expiry independent of provider outage, uncertain-running reservation, and repeated DELETE 404 cleanup. The final integrated test result must be recorded by the lead after copying that test into the integrated checkout; the separately executed fault probe already covers the three reproduced defects. No source-completion claim is derived from these fixtures.
-
-The API source uses random same-origin HttpOnly session cookies, session-hashed job ownership, exact-origin mutation checks, private/no-store/noindex responses, and no CORS grant for graph access. D1 batches implement atomic reservation and a unique active job; lease tokens guard persisted checkpoints. STARTING is saved before an Actor start, and an unknown acknowledgement cannot trigger a blind repeat. Account setup remains fail closed on unknown Free-plan/credit facts. These are source and SQLite checks, not a hosted concurrency/authorization test.
-
-The current import worker imports only core parsing/comparison code. HTML parsing uses htmlparser2 events with no DOM insertion, script execution, navigation or resource loader. The automatic browser component calls only same-origin `/api` paths, stores only a job ID in sessionStorage, uses generation checks to discard stale responses, and keeps provider transport/server credentials outside its imports. Optional graph snapshots remain explicit. Browser execution is still required to demonstrate no import network traffic under this amendment; the UI agent owns that run.
-
-The inspected built artifact still identified the previous `75a340…` runtime and source hash `947c21…`; a clean provider-string scan of that old bundle is **not** accepted as evidence for the amended build. Recheck the newly built browser bundle and actual network trace before reporting amendment privacy acceptance. Before automatic activation, update the nearby workflow/privacy disclosure for MutualLens server, Apify/source processing and actual retention. A local worker failure in the automatic comparison path must not claim the data was never sent to a server. Ads and noindex remain separate preview gates.
-
-### Fresh WIP build and maintenance follow-up
-
-The new artifact changed from `3a237eff…` to source hash `726c51bd227169444661e1ef6255bbbf01f9f034f29af7c786f1786864aeae2d` before the worker probe began. The completed [browser-boundary evidence](evidence/acquisition-seemu-browser-boundary-726c51bd2271.json) records the actual `2026-09-08T05:22:03.593Z` build stamp and both JavaScript asset hashes. Both browser assets contain none of the checked provider endpoint, credential-variable, Actor/build ID or billing-event signatures. Source imports also keep the provider client outside the browser/worker graph. The stamped commit field is `abcbcb299…`; this was a WIP source-hash artifact, not an assertion that those uncommitted changes existed in that commit.
-
-The exact compiled worker bytes were then executed in isolated Chromium with synthetic HTML and JSON files. HTML contained script, stylesheet, image and Instagram-profile URLs. It returned one supplied follower, two supplied following records, one mutual and the expected one non-follower, without an account/completeness prompt. No unexpected request or page error was observed. The test's HTML harness and worker were fulfilled in memory by Playwright routing; every other request would be blocked and counted. No server was started, and no actual provider or Instagram endpoint was contacted. This verifies the compiled import worker's network boundary for the fixture; it does not replace the UI agent's three-engine application journeys. An earlier opaque-origin Blob harness failed without producing acceptance evidence; the corrected same-origin routed harness passed. The [reproducible script](evidence/acquisition-seemu-browser-boundary.mjs) rejects a build changing during inspection.
-
-The lead reported all six integrated independent acquisition-security regressions passing. The separate `tests/review/acquisition-erasure.test.ts` adds one focused regression for the new local-only erasure helper: construct expired D1/SQLite data, instantiate no provider client/service and supply no token/config, make any fetch throw, then require graph/job erasure, a minimal cleanup tombstone, conservative capacity accounting, idempotent replay and no network call. Its integrated execution remains for the lead to record. Source inspection confirmed the scheduled maintenance handler invokes local erasure before trying provider configuration, so missing or invalid provider setup cannot prevent that first local purge.
-
-The [distinct maintenance probe result](evidence/acquisition-seemu-engine-maintenance-probe.json) rechecks the original three critical engine cases against the latest source hashes; all three pass. Prior baseline/fixed evidence files were preserved. These additions remain synthetic/WIP evidence, with live source access, actual provider deletion, scheduled hosted execution and automatic acquisition acceptance unverified.
-
-### Deployed core-product preview: independent hosted supplement
-
-At `2026-09-08T05:45:11.513Z`–`05:45:14.546Z`, the [independent hosted probe](evidence/core-product/hosted-security.md) passed **79/79 assertions** against deployed commit `f0165de28d71180f9018eed8c1bd30633bfd6415`, source hash `ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1`. Both public/checker branch responses and immutable `10037ccf`/`80455a41` build stamps matched. This supersedes the earlier local-only/WIP hosting limitation solely for this deployed preview and the checks recorded here; historical results remain unchanged.
-
-Actual HTTPS documents carry HTML/header noindex and the examined CSP, nosniff and referrer restrictions. Capability discovery confirms automatic and advertising disabled. Four synthetic disabled-route checks return 503 with null results and no session cookie; three invalid-origin/context mutations return 403. All examined API responses remain private/no-store, noindex and without a CORS grant. Main/worker delivered JavaScript has none of the checked provider-client or token signatures. Isolated Chromium confirms public/checker DOM and local/session storage separation, no initial snapshot database or session cookie, and six first-party requests with no third-party attempt or runtime error.
-
-Static Pages resources do return `Access-Control-Allow-Origin: *`; the private API does not. This is not a blanket no-CORS claim. The initial probe incorrectly required robots Disallow, although the intentional Allow policy lets crawlers read noindex; its failed harness evidence was preserved and the final test retains HTML/header noindex checks. The [sanitized evidence](evidence/core-product/hosted-security.json) and [probe](evidence/core-product/hosted-security.mjs) retain exact hashes and attribution without credentials or graph data.
-
-No unresolved P0/P1 was found in this exercised hosted preview boundary. This run created no enabled session/job and made no Instagram/provider call. Enabled ownership checks, live complete-list acquisition, provider erasure, hosted scheduled retention, real credit usage and advertising approval remain unverified. The verdict remains **PREVIEW-ONLY**; this hosted success does not satisfy automatic-production acceptance or pre-approve a later deployment.
+- Keep GitHub Pages noindexed/noncommercial and configure/verify the actual Pages environment before expecting deployment to succeed.
+- Obtain separate browser evidence for the exact SHA, including the 390×844/WebKit repair paths, direct-hash StrictMode case, accessibility, network isolation, and rendered layout.
+- Do not enable automatic acquisition until the amendment's live credentialed, target-scale, recurring-free, completeness, retention/erasure, and security gates pass with current evidence.
+- Provider cleanup retry exhaustion still requires operational reconciliation; local erasure does not prove downstream deletion.
+- This report does not independently approve the reviewer's earlier SEO/content implementation.

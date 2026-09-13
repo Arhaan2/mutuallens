@@ -4,29 +4,58 @@
 
 ## September 12, 2026 release execution ledger
 
-| Work                            | Owner                                        | Dependency                                              | Current disposition                                                          |
-| ------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Checker UI and worker lifecycle | UI/UX implementer; lead integration          | Existing core worker                                    | Integrated; same-tick activation race fixed; full final browser gate pending |
-| Public guides and SEO output    | SEO/content implementer; lead host config    | Accepted origin/index gate                              | Integrated; GitHub subpath build verified locally; live host pending         |
-| Automatic acquisition hardening | Automatic implementer; lead contracts/config | Current provider, private token/target, D1/Worker scope | Integrated fail-closed; live gates blocked/not run                           |
-| Correctness/security review     | Independent reviewer                         | Final candidate SHA                                     | Pending                                                                      |
-| Browser/release verification    | Independent verifier                         | Reviewer-approved build and deployed URLs               | Pending                                                                      |
-| Merge and deployments           | Lead                                         | Exact-SHA CI and reviews                                | Pending                                                                      |
+| Work                            | Owner                                        | Dependency                                              | Current disposition                                                     |
+| ------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Checker UI and worker lifecycle | UI/UX implementer; lead integration          | Existing core worker                                    | Integrated; lifecycle races fixed; three-engine local acceptance passed |
+| Public guides and SEO output    | SEO/content implementer; lead host config    | Accepted origin/index gate                              | Integrated; GitHub subpath/noindex artifact verified locally            |
+| Automatic acquisition hardening | Automatic implementer; lead contracts/config | Current provider, private token/target, D1/Worker scope | Integrated fail-closed; live gates blocked/not run                      |
+| Correctness/security review     | Independent reviewer                         | Application candidate `aca05c15`                        | PASS for noindexed preview; no open P0-P3 in reviewed scope             |
+| Browser/release verification    | Independent verifier                         | Local application candidate and deployed URLs           | Local PASS; hosted verification pending                                 |
+| Merge and deployments           | Lead                                         | Exact-head CI, dependency gate, hosted readback         | BLOCKED before push by the dependency gate below                        |
 
 Confirmed defects and dispositions: the WebKit Vite worker cancellation was a
 real same-tick lifecycle race, not an ignorable network error; the UI now uses a
-synchronous active-task guard. Existing session cookies are renewed with five
-minutes of headroom beyond the one-hour job lifetime. Provider-era jobs,
-stale/late writes, cross-page identity conflicts, mismatched charge/dataset
-accounting, abandoned reservations and exhausted cleanup retries now fail
-closed. The configured provider's September 12 Free/cursor change makes the
-6,000 × 6,000 automatic target infeasible on its current advertised Free
-limits, so chargeable starts remain disabled.
+synchronous active-task guard. Independent review also reproduced two
+provider-error/cancellation interleavings that could leave the sole job slot
+occupied until expiry; both now converge to terminal cancellation and have
+deterministic regressions. A terminal-dot preview-hostname indexing edge was
+also closed. Existing session cookies are renewed with five minutes of headroom
+beyond the one-hour job lifetime. Provider-era jobs, stale/late writes,
+cross-page identity conflicts, mismatched charge/dataset accounting, abandoned
+reservations and exhausted cleanup retries now fail closed.
 
-This ledger is the current release record; final source/CI/merge/deployment
-provenance and hosted verification will replace the pending entries before
-release handoff. Older evidence below remains attributed to its recorded SHA
-and must not be used as proof for this candidate.
+Local evidence for the shipping preview: formatting and check gates pass;
+TypeScript/Astro reports zero diagnostics; 16 unit/review files with 319 tests
+pass; checker and 13-page site builds pass; startup/port safety passes 3/3. The
+lead's built-preview suite passed 153/153 and development suite passed 42/42
+across Chromium, Playwright WebKit and Firefox. The separate browser verifier
+repeated those 153 and 42 scenarios at `f20bf993`, inspected 15 responsive
+checker states at 320/390/768/1440/1920 pixels with zero Axe violations or
+overflow, parsed a complete 1,500-row CSV and 6,000-per-direction JSON export,
+and verified the noindexed `/mutuallens` Pages artifact. Later application
+deltas only repaired reviewed server-side cancellation and preview-host
+normalization; exact-head CI still must repeat the full matrix before merge.
+
+The dependency audit is the remaining code-release blocker: the locked
+development toolchain uses Wrangler 4.129.1 and reports three high-severity
+entries through Miniflare/Sharp. npm identifies non-major Wrangler 4.131.1 as
+the fix. The lead requested explicit owner permission for that development-only
+upgrade; CI intentionally retains `npm audit --audit-level=high` and has not
+been weakened. No branch push, merge, Pages setup, or release deployment will
+be represented as complete until this gate passes on the exact head.
+
+The configured provider's September 12 Free/cursor change advertises only 25
+results per list/run, three runs per day, and a 30-minute cooldown. At least 480
+one-direction runs would be required for 12,000 identities, so the 6,000 ×
+6,000 automatic target is not feasible on that current advertised Free scope.
+Chargeable starts remain disabled.
+
+This ledger is the current release record. Application candidate
+`aca05c15b5bd5afa92f34208e46f0c553a307df4` is independently approved for a
+noindexed preview, not for live automatic acquisition or commercial launch.
+Final source/CI/merge/deployment provenance and hosted verification remain
+pending. Older evidence below remains attributed to its recorded SHA and must
+not be used as proof for this candidate.
 
 > **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition remains BLOCKED. Hosted preview was subsequently deployed and verified; see the current hosting addendum below. No production completion is claimed.
 
