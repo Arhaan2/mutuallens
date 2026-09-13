@@ -2,6 +2,11 @@
 
 # Verified Cloudflare preview — September 7, 2026 PDT
 
+> **Historical branch-preview record.** The stable production-branch preview
+> aliases, GitHub Pages demo, accepted source, current deployment IDs and hosted
+> verification are recorded in [the September 12 release ledger](release-evidence.md).
+> Statements below remain evidence for the September 7 branch deployment only.
+
 **Hosting PASS for this preview. UI repair PASS within recorded coverage. Mandatory automatic Instagram acquisition BLOCKED.** This is not production product completion. All preview pages remain noindexed and ad-free.
 
 | Surface        | Verified branch preview                                     | Deployment ID                          |

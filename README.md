@@ -6,7 +6,7 @@ Username-only automatic checking has a real server adapter and resumable job imp
 
 Source: https://github.com/Arhaan2/mutuallens
 
-Verified hosted previews: [public website](https://codex-ui-functional-repair.mutuallens-ddm.pages.dev) · [checker](https://codex-ui-functional-repair.mutuallens-app.pages.dev). Both are noindexed and ad-free. [Deployment and browser evidence](docs/cloudflare-preview.md).
+Verified hosted previews: [public website](https://mutuallens-ddm.pages.dev) · [checker](https://mutuallens-app.pages.dev). Both are noindexed and ad-free. The [GitHub Pages project demo](https://arhaan2.github.io/mutuallens/) is also noindexed and links to the checker. [Current release, deployment and browser evidence](docs/release-evidence.md).
 
 ## Run locally
 
@@ -60,6 +60,6 @@ Public pages and checker require **different origins**. Build origins use `PUBLI
 
 ## Deploy
 
-Cloudflare Pages hosts the two separate previews through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. The source and deployment IDs are recorded in [the current delivery ledger](docs/core-product-delivery.md). No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. GitHub Pages is not enabled. CI tests source with read-only permissions and contains no deployment/provider credentials. Direct deployment is owned by the integrator; no untrusted PR can trigger a privileged deployment.
+Cloudflare Pages hosts the separate public and checker previews through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. GitHub Pages hosts the requested noncommercial project demo from the verified `main` workflow. Exact source, CI and deployment IDs are recorded in [the release ledger](docs/release-evidence.md). No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. Pull-request CI has read-only permissions and no deployment/provider credentials; only an accepted `main` push can trigger the GitHub Pages deployment. Direct Cloudflare deployment remains integrator-owned.
 
 See `AGENTS.md` for ownership and release rules. Use only synthetic data in tests, issues, screenshots and public evidence. Never attach your Instagram export to a public issue.
