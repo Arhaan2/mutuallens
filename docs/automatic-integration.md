@@ -1,12 +1,20 @@
 # Automatic integration: implementation and live gates
 
+> **Current source gate (2026-09-12): BLOCKED and hard-disabled.** The configured
+> Actor's Free terms and cursor source changed after the pinned build review.
+> Code now records the adapter/build epoch on jobs and sets
+> `APIFY_STARTS_REVIEWED=false`, so stale environment variables cannot enable or
+> start the Actor. See [the current candidate addendum](acquisition-seemuapps.md).
+> A new source decision must model any daily/cooldown limits and repeat the
+> credentialed identity, pagination, completion, accounting and cleanup gates.
+
 This is an implemented **unconfigured preview path**, not a successful live scan. See [the concrete candidate investigation](acquisition-seemuapps.md). The default deployed checker keeps automatic capability disabled; local import does not depend on this setup.
 
 ## Exact owner prerequisites
 
 1. An **existing** Apify Free account, with the owner authorizing its use and confirming no payment/upgrade/auto-recharge. A token was not found in the task environment or private setup files. Store it privately as `APIFY_TOKEN=...` in `/Users/arhaan/Documents/ChatGPT/mutuallens/private/apify.env` (directory mode700, file mode600), or use the existing secret-management setup. This directory is gitignored. Never send the token in chat or public evidence. No account creation or terms acceptance is authorized.
 2. Explicit authorization identifying a public Instagram account for the first small/multipage test, then the approximately6,000×6,000 target. No target is inferred from GitHub identity. None was provided in this pass.
-3. For hosted automatic validation: extend existing Cloudflare authorization to D1 and Worker deployment, bind a new **MutualLens-only** D1 database, and deploy its maintenance Worker. Current saved OAuth scopes authorize Pages, not these additional resources. Never change Million Beers or other resources. These resources have not been created in this pass.
+3. For hosted automatic validation: extend existing Cloudflare authorization to D1 and Worker deployment, bind a new **MutualLens-only** D1 database, and deploy its maintenance Worker. Current saved OAuth scopes authorize Pages, not these additional resources. Never change Million Beers or other resources. These resources have not been created in this pass. Reauthorizing Cloudflare does not by itself reopen the now-failed source gate.
 
 ## Four independent outcomes
 

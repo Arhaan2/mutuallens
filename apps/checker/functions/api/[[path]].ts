@@ -59,6 +59,14 @@ function sessionToken(request: Request): string | null {
   const value = candidates[0]!.slice(name.length + 1);
   return /^[0-9a-f]{64}$/.test(value) ? value : null;
 }
+function sessionCookie(url: URL, token: string): string {
+  const secure = url.protocol === 'https:';
+  const name = secure
+    ? '__Host-mutuallens-session'
+    : 'mutuallens-local-session';
+  // Five minutes of headroom keeps a one-hour job reachable through cleanup.
+  return `${name}=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=3900${secure ? '; Secure' : ''}`;
+}
 export async function handleApi(
   request: Request,
   env: RuntimeEnv = {},
@@ -102,21 +110,16 @@ export async function handleApi(
         return headers(
           Response.json({ code: 'METHOD_NOT_ALLOWED' }, { status: 405 }),
         );
-      if (sessionToken(request))
-        return headers(new Response(null, { status: 204 }));
-      const token = [...crypto.getRandomValues(new Uint8Array(32))]
-        .map((b) => b.toString(16).padStart(2, '0'))
-        .join('');
-      const secure = url.protocol === 'https:',
-        name = secure
-          ? '__Host-mutuallens-session'
-          : 'mutuallens-local-session';
+      const existing = sessionToken(request);
+      const token =
+        existing ||
+        [...crypto.getRandomValues(new Uint8Array(32))]
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
       return headers(
         new Response(null, {
           status: 204,
-          headers: {
-            'Set-Cookie': `${name}=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=3600${secure ? '; Secure' : ''}`,
-          },
+          headers: { 'Set-Cookie': sessionCookie(url, token) },
         }),
       );
     }

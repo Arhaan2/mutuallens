@@ -2,10 +2,11 @@ import type { APIRoute } from 'astro';
 import { publicReleaseIndexable, siteUrl } from '../lib/urls';
 
 export const GET: APIRoute = () => {
-  const sitemap = publicReleaseIndexable
-    ? `Sitemap: ${siteUrl('/sitemap.xml')}\n`
+  const release = publicReleaseIndexable
+    ? '# Accepted public release.\n'
     : '# Preview/demo: pages remain crawlable so robots can read noindex.\n';
-  return new Response(`User-agent: *\nAllow: /\n${sitemap}`, {
-    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-  });
+  return new Response(
+    `User-agent: *\nAllow: /\n${release}Sitemap: ${siteUrl('/sitemap.xml')}\n`,
+    { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+  );
 };

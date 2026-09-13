@@ -39,14 +39,16 @@ describe('configured session API boundary; mocked service, no provider calls', (
     );
     expect(r.status).toBe(204);
     expect(r.headers.get('set-cookie')).toMatch(
-      /^__Host-mutuallens-session=[0-9a-f]{64}; HttpOnly; SameSite=Strict; Path=\/; Max-Age=3600; Secure$/,
+      /^__Host-mutuallens-session=[0-9a-f]{64}; HttpOnly; SameSite=Strict; Path=\/; Max-Age=3900; Secure$/,
     );
     expect(await r.text()).toBe('');
   });
-  it('keeps an existing same-session cookie without resetting its lifetime', async () => {
+  it('renews an existing same-session cookie for the full job lifetime', async () => {
     const r = await handleApi(request('/api/session', 'POST'));
     expect(r.status).toBe(204);
-    expect(r.headers.has('set-cookie')).toBe(false);
+    expect(r.headers.get('set-cookie')).toBe(
+      `__Host-mutuallens-session=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=3900; Secure`,
+    );
   });
   it.each([
     '',

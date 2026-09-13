@@ -1,6 +1,27 @@
 # Seemuapps candidate: pinned adapter and acquisition gate
 
-Assessed September 7, 2026 (Pacific; saved probe timestamps are September 8 UTC). This is **public documentation and metadata evidence plus synthetic adapter verification**, not successful Instagram acquisition. The candidate remains eligible for a controlled test; it has not passed automatic acceptance. No authenticated account read, Actor start, Instagram target request, credit consumption, or deletion of a real provider resource was performed by this workstream.
+> **2026-09-12 revalidation addendum:** The candidate changed after the
+> evidence below was captured. Its current public page now says Free accounts
+> receive at most **25 results per list/run**, may make **3 runs/day**, and must
+> wait **30 minutes between runs**; `maxItems` is ignored on Free. It also says
+> cursors created before September 12 are invalid because the list source
+> changed. The public default is now build `1.0.43` (`V9dqlltTFabqKWVMi`), while
+> this adapter pins the earlier reviewed `1.0.35` (`qZHBzZiV6QmFCKDym`). The
+> pinned build's authenticated availability was not tested because no token was
+> present, and no Actor was started. `APIFY_STARTS_REVIEWED=false` therefore
+> prevents every chargeable start even if stale deployment variables are set.
+>
+> At the advertised Free limit, 6,000 followers plus 6,000 following would need
+> at least 480 one-direction runs, before retries, and cannot fit the existing
+> 20-minute job model or three-run daily allowance. Two public alternatives were
+> bounded for later investigation only: CoderX's no-cookie Actor advertises
+> roughly 50 Free results/run without Free cursor/resume, while Scraping
+> Solutions advertises up to 1,000 Free API results/run and continuation tokens.
+> Neither was authenticated, run, priced against the owner's account, accepted,
+> or integrated. Provider selection remains open rather than silently replacing
+> the configured source.
+
+Assessed September 7, 2026 (Pacific; saved probe timestamps are September 8 UTC). This is **public documentation and metadata evidence plus synthetic adapter verification**, not successful Instagram acquisition. The historical assessment below was superseded by the September 12 change above. No authenticated account read, Actor start, Instagram target request, credit consumption, or deletion of a real provider resource was performed by this workstream.
 
 The current prerequisite is an existing authorized Apify account/token, verified Free allowance and an explicitly authorized Instagram test target. The lead configures the token privately in the server environment; visitors never supply it. Do not put credentials or real graph data in this document, chat, tests, source, or logs. Missing setup is not evidence that acquisition is technically impossible.
 

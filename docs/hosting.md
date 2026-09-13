@@ -1,4 +1,22 @@
-# Hosting feasibility — checked 2026-09-07
+# Hosting feasibility — checked 2026-09-12
+
+## Current release split
+
+GitHub Pages is reserved for the requested **noncommercial, noindexed static
+project demo** at the repository subpath `/mutuallens/`. The workflow builds
+only `apps/site/dist`, verifies base-aware assets/routes/canonicals and HTML
+noindex, removes inert Cloudflare control files, and deploys the artifact only
+from a verified `main` push with the supported Pages actions and minimum deploy
+permissions. It does not publish repository docs, fixtures, backend source,
+Functions or D1 configuration. The Pages site must not be described as the
+future ad-funded production business host.
+
+The actual interactive checker remains on the separate Cloudflare Pages origin
+so its same-origin `/api` boundary does not depend on cross-site cookies.
+Cloudflare Pages authorization is present. The current token lacks D1/Worker
+write scope, so automatic database/maintenance provisioning remains not run.
+The existing public and checker preview deployments are preserved until the
+accepted main artifacts pass hosted verification.
 
 Cloudflare Pages now hosts two independent noindexed, ad-free branch previews. [Verified URLs, IDs and tests](cloudflare-preview.md). Assigned public subdomain: `mutuallens-ddm.pages.dev`; checker: `mutuallens-app.pages.dev`. The verified entry points use the `codex-ui-functional-repair` branch alias. GitHub Pages is not enabled. No domains were purchased.
 

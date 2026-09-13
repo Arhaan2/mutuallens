@@ -81,15 +81,21 @@ it('erases expired graph using only D1, without provider token, configuration or
     });
     const lease = await store.claim(id, 'synthetic-session', now);
     expect(lease).not.toBeNull();
-    await store.addRecords(id, lease!, 'followers', [
-      {
-        username: 'synthetic_private_record',
-        originalUsername: 'synthetic_private_record',
-        id: '1',
-        source: 'Synthetic privacy fixture',
-      },
-    ]);
-    await store.save(id, lease!, payload);
+    await store.addRecords(
+      id,
+      lease!,
+      'followers',
+      [
+        {
+          username: 'synthetic_private_record',
+          originalUsername: 'synthetic_private_record',
+          id: '1',
+          source: 'Synthetic privacy fixture',
+        },
+      ],
+      now,
+    );
+    await store.save(id, lease!, payload, now);
 
     // Deliberately no ScanService, ApifyClient, token, Free-account read, or config.
     expect(await eraseExpiredJobs(store, now + 2000)).toBe(1);

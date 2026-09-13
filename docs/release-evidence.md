@@ -2,6 +2,32 @@
 
 # MutualLens release evidence
 
+## September 12, 2026 release execution ledger
+
+| Work                            | Owner                                        | Dependency                                              | Current disposition                                                          |
+| ------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Checker UI and worker lifecycle | UI/UX implementer; lead integration          | Existing core worker                                    | Integrated; same-tick activation race fixed; full final browser gate pending |
+| Public guides and SEO output    | SEO/content implementer; lead host config    | Accepted origin/index gate                              | Integrated; GitHub subpath build verified locally; live host pending         |
+| Automatic acquisition hardening | Automatic implementer; lead contracts/config | Current provider, private token/target, D1/Worker scope | Integrated fail-closed; live gates blocked/not run                           |
+| Correctness/security review     | Independent reviewer                         | Final candidate SHA                                     | Pending                                                                      |
+| Browser/release verification    | Independent verifier                         | Reviewer-approved build and deployed URLs               | Pending                                                                      |
+| Merge and deployments           | Lead                                         | Exact-SHA CI and reviews                                | Pending                                                                      |
+
+Confirmed defects and dispositions: the WebKit Vite worker cancellation was a
+real same-tick lifecycle race, not an ignorable network error; the UI now uses a
+synchronous active-task guard. Existing session cookies are renewed with five
+minutes of headroom beyond the one-hour job lifetime. Provider-era jobs,
+stale/late writes, cross-page identity conflicts, mismatched charge/dataset
+accounting, abandoned reservations and exhausted cleanup retries now fail
+closed. The configured provider's September 12 Free/cursor change makes the
+6,000 × 6,000 automatic target infeasible on its current advertised Free
+limits, so chargeable starts remain disabled.
+
+This ledger is the current release record; final source/CI/merge/deployment
+provenance and hosted verification will replace the pending entries before
+release handoff. Older evidence below remains attributed to its recorded SHA
+and must not be used as proof for this candidate.
+
 > **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition remains BLOCKED. Hosted preview was subsequently deployed and verified; see the current hosting addendum below. No production completion is claimed.
 
 **Overall: PREVIEW-ONLY. Automatic gate: BLOCKED. Hosted preview: PASS.**
