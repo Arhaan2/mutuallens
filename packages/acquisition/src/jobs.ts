@@ -689,6 +689,8 @@ export class ScanService {
         job.message =
           'The provider is temporarily unavailable. Retrying the existing page after a bounded delay.';
         await this.store.save(id, lease, job, this.now());
+        if ((await this.owned(session, id)).cancelRequested)
+          return this.cancel(session, id);
         return this.status(session, id);
       }
       return this.stop(
