@@ -12,7 +12,6 @@ import { handleApi } from '../../apps/checker/functions/api/[[path]]';
 
 const opts = {
   account: { username: 'synthetic_review_owner' },
-  confirmedComplete: true,
   collectedAt: '2026-01-01T00:00:00Z',
 };
 const encode = (value: unknown) => strToU8(JSON.stringify(value));
@@ -27,18 +26,34 @@ const inputs = () => [
 
 describe('independent adversarial correctness review; synthetic data only', () => {
   it.each(['followers_0.json', 'followers_01.json', 'following_0.json'])(
-    'does not silently drop malformed relationship part %s from an otherwise complete ZIP',
+    'includes flexibly named relationship part %s without silently dropping identities',
     async (name) => {
       const files = Object.fromEntries(
         inputs().map((file) => [file.name, file.bytes]),
       );
       files[name] = encode([row('synthetic_omitted')]);
-      await expect(
-        importInstagram(
-          [{ name: 'synthetic.zip', bytes: zipSync(files) }],
-          opts,
-        ),
-      ).rejects.toThrow();
+      const dataset = await importInstagram(
+        [{ name: 'synthetic.zip', bytes: zipSync(files) }],
+        opts,
+      );
+      const direction = name.startsWith('followers')
+        ? 'followers'
+        : 'following';
+      expect(dataset[direction].records.map((item) => item.username)).toContain(
+        'synthetic_omitted',
+      );
+      expect(dataset[direction].records).toHaveLength(2);
+      expect(dataset[direction].metadata.terminal).toBe(false);
+      expect(dataset.comparisonBasis).toBe('supplied_files');
+      expect(dataset.importSummary?.relevantFiles).toBe(3);
+      const comparison = compareDataset(dataset);
+      const difference =
+        direction === 'following'
+          ? comparison.notFollowingBack
+          : comparison.notFollowedBackByYou;
+      expect(difference.map((item) => item.username)).toContain(
+        'synthetic_omitted',
+      );
     },
   );
 
@@ -58,6 +73,7 @@ describe('independent adversarial correctness review; synthetic data only', () =
 
   it('retains an explicit incomplete state when expected total contradicts actual records', () => {
     const dataset = createSampleDataset(2, 1);
+    dataset.comparisonBasis = 'source_evidence';
     dataset.followers.metadata.expectedCount = 3;
     const result = compareDataset(dataset);
     expect(result.negativesWithheld).toBe(true);
@@ -67,6 +83,7 @@ describe('independent adversarial correctness review; synthetic data only', () =
 
   it('does not trust a stale unique-count metadata label', () => {
     const dataset = createSampleDataset(2, 1);
+    dataset.comparisonBasis = 'source_evidence';
     dataset.followers.records.pop();
     const result = compareDataset(dataset);
     expect(result.negativesWithheld).toBe(true);
@@ -75,6 +92,7 @@ describe('independent adversarial correctness review; synthetic data only', () =
 
   it('keeps ID collisions distinct under record and list permutations', () => {
     const seed = createSampleDataset(0);
+    seed.comparisonBasis = 'source_evidence';
     const a = {
       username: 'same_name',
       originalUsername: 'same_name',
@@ -106,6 +124,8 @@ describe('independent adversarial correctness review; synthetic data only', () =
   it('rejects historical comparison when known totals contradict terminal metadata', () => {
     const before = createSnapshot(createSampleDataset(2, 1));
     const after = createSnapshot(createSampleDataset(2, 2));
+    before.dataset.comparisonBasis = after.dataset.comparisonBasis =
+      'source_evidence';
     for (const direction of ['followers', 'following'] as const) {
       before.dataset[direction].metadata.startedAt = before.dataset[
         direction
@@ -127,9 +147,9 @@ describe('independent adversarial correctness review; synthetic data only', () =
       displayName: payload,
       source: payload,
     };
-    const csv = exportCsv([record]);
+    const csv = exportCsv([record], { scope: payload, limitations: [payload] });
     const escaped = `"'${payload.replaceAll('"', '""')}"`;
-    expect(csv.split('\r\n')[1]).toBe(Array(5).fill(escaped).join(','));
+    expect(csv.split('\r\n')[1]).toBe(Array(7).fill(escaped).join(','));
   });
 });
 

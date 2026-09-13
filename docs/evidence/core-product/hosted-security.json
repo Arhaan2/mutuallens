@@ -1,0 +1,732 @@
+{
+  "kind": "ACTUAL_HOSTED_PREVIEW_SECURITY",
+  "startedAt": "2026-09-08T05:45:11.513Z",
+  "expected": {
+    "commit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+    "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1"
+  },
+  "origins": {
+    "public": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+    "checker": "https://codex-ui-functional-repair.mutuallens-app.pages.dev"
+  },
+  "observations": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 791,
+      "sha256": "410ff5f9c40ae065c5ed280e2dff50ec5f334741331ed634cc04f00d801bbc3d"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 7926,
+      "sha256": "7b2f4b18769070572aeb15d6538aa88482b370147b63370fce89d86d2bee486b"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://10037ccf.mutuallens-ddm.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://80455a41.mutuallens-app.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/robots.txt",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 96,
+      "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/robots.txt",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 96,
+      "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 213,
+      "sha256": "4366b5362f3be48947a4cb5d6598d419f747b03104ba5e7084a54ed8f3653d14"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/scans",
+      "method": "GET",
+      "status": 503,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 196,
+      "sha256": "392b56cd5ea1b4584e73f65462b5424bf2992f6d4c620a9c6f91ac71b7a030a4"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/scans/00000000-0000-4000-8000-000000000001/result?direction=followers&offset=0",
+      "method": "GET",
+      "status": 503,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 196,
+      "sha256": "392b56cd5ea1b4584e73f65462b5424bf2992f6d4c620a9c6f91ac71b7a030a4"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/session",
+      "method": "POST",
+      "status": 503,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 196,
+      "sha256": "392b56cd5ea1b4584e73f65462b5424bf2992f6d4c620a9c6f91ac71b7a030a4"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/scans",
+      "method": "POST",
+      "status": 503,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 196,
+      "sha256": "392b56cd5ea1b4584e73f65462b5424bf2992f6d4c620a9c6f91ac71b7a030a4"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/session",
+      "method": "POST",
+      "status": 403,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 26,
+      "sha256": "cc8d48ccea8b69a6c4a1b40d3b75eb3d83c2721d4d41d13336d756eec968be80"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/session",
+      "method": "POST",
+      "status": 403,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 26,
+      "sha256": "cc8d48ccea8b69a6c4a1b40d3b75eb3d83c2721d4d41d13336d756eec968be80"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/session",
+      "method": "POST",
+      "status": 403,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": null,
+        "referrer-policy": "no-referrer",
+        "cache-control": "private, no-store",
+        "access-control-allow-origin": null,
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 26,
+      "sha256": "cc8d48ccea8b69a6c4a1b40d3b75eb3d83c2721d4d41d13336d756eec968be80"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-C2ydvX6I.js",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/javascript",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 243638,
+      "sha256": "16da2f253e05c882eafa620bd040db71240f8cfc5d9a8e326035b9fbff1b5732"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-BoAbIY2g.js",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/javascript",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 89307,
+      "sha256": "2510d70452043345a00f407af4b27c5415ce8731c65702d243e16b068bc33094"
+    }
+  ],
+  "assets": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-C2ydvX6I.js",
+      "bytes": 243638,
+      "sha256": "16da2f253e05c882eafa620bd040db71240f8cfc5d9a8e326035b9fbff1b5732",
+      "forbiddenMatches": []
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-BoAbIY2g.js",
+      "bytes": 89307,
+      "sha256": "2510d70452043345a00f407af4b27c5415ce8731c65702d243e16b068bc33094",
+      "forbiddenMatches": []
+    }
+  ],
+  "assertions": [
+    {
+      "name": "public: HTTPS document200",
+      "passed": true
+    },
+    {
+      "name": "public: noindex header and HTML",
+      "passed": true
+    },
+    {
+      "name": "public: self script/connect, no frames/objects",
+      "passed": true
+    },
+    {
+      "name": "public: nosniff and no-referrer",
+      "passed": true
+    },
+    {
+      "name": "checker: HTTPS document200",
+      "passed": true
+    },
+    {
+      "name": "checker: noindex header and HTML",
+      "passed": true
+    },
+    {
+      "name": "checker: self script/connect, no frames/objects",
+      "passed": true
+    },
+    {
+      "name": "checker: nosniff and no-referrer",
+      "passed": true
+    },
+    {
+      "name": "public and checker use separate origins",
+      "passed": true
+    },
+    {
+      "name": "build1: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "build2: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "build3: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "build4: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "codex-ui-functional-repair.mutuallens-ddm.pages.dev: explicit robots policy",
+      "passed": true
+    },
+    {
+      "name": "codex-ui-functional-repair.mutuallens-app.pages.dev: explicit robots policy",
+      "passed": true
+    },
+    {
+      "name": "automatic and advertising disabled before any synthetic mutation",
+      "passed": true
+    },
+    {
+      "name": "capabilities: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "capabilities: noindex",
+      "passed": true
+    },
+    {
+      "name": "capabilities: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "capabilities: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "capabilities: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan:503/null/incomplete",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan: no private/provider fields",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan: noindex",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "disabled GET scan: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "disabled result:503/null/incomplete",
+      "passed": true
+    },
+    {
+      "name": "disabled result: no private/provider fields",
+      "passed": true
+    },
+    {
+      "name": "disabled result: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "disabled result: noindex",
+      "passed": true
+    },
+    {
+      "name": "disabled result: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "disabled result: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "disabled result: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session:503/null/incomplete",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session: no private/provider fields",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session: noindex",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "disabled same-origin session: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start:503/null/incomplete",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start: no private/provider fields",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start: noindex",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "disabled synthetic start: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "public origin: mutation403",
+      "passed": true
+    },
+    {
+      "name": "public origin: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "public origin: noindex",
+      "passed": true
+    },
+    {
+      "name": "public origin: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "public origin: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "public origin: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "absent origin: mutation403",
+      "passed": true
+    },
+    {
+      "name": "absent origin: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "absent origin: noindex",
+      "passed": true
+    },
+    {
+      "name": "absent origin: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "absent origin: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "absent origin: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "cross-site context: mutation403",
+      "passed": true
+    },
+    {
+      "name": "cross-site context: private/no-store",
+      "passed": true
+    },
+    {
+      "name": "cross-site context: noindex",
+      "passed": true
+    },
+    {
+      "name": "cross-site context: inert CSP",
+      "passed": true
+    },
+    {
+      "name": "cross-site context: no CORS grant",
+      "passed": true
+    },
+    {
+      "name": "cross-site context: no session cookie",
+      "passed": true
+    },
+    {
+      "name": "script is first-party",
+      "passed": true
+    },
+    {
+      "name": "delivered asset exclusion:/assets/index-C2ydvX6I.js",
+      "passed": true
+    },
+    {
+      "name": "script is first-party",
+      "passed": true
+    },
+    {
+      "name": "delivered asset exclusion:/assets/processing.worker-BoAbIY2g.js",
+      "passed": true
+    },
+    {
+      "name": "checker main and compiled worker both inspected",
+      "passed": true
+    },
+    {
+      "name": "checker cannot read public local/session storage",
+      "passed": true
+    },
+    {
+      "name": "checker writes do not modify public storage",
+      "passed": true
+    },
+    {
+      "name": "public cannot access checker DOM",
+      "passed": true
+    },
+    {
+      "name": "no checker snapshots created during initial visit",
+      "passed": true
+    },
+    {
+      "name": "disabled workflow creates no session cookies",
+      "passed": true
+    },
+    {
+      "name": "no third-party asset/tracker/provider requests attempted",
+      "passed": true
+    },
+    {
+      "name": "no browser runtime errors",
+      "passed": true
+    }
+  ],
+  "liveProviderRuns": 0,
+  "realInstagramTargets": 0,
+  "browser": {
+    "engine": "Chromium",
+    "requests": [
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-C2ydvX6I.js",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-DngKauON.css",
+        "method": "GET"
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+        "method": "GET"
+      }
+    ],
+    "thirdPartyRequests": [],
+    "runtimeErrors": [],
+    "isolatedStorageBefore": {
+      "local": null,
+      "session": null
+    },
+    "domError": "SecurityError",
+    "indexedDbNames": [],
+    "sessionCookieNames": [],
+    "caveat": "Fresh isolated context with synthetic storage sentinels only; no actual automatic session or graph was created. Enabled-session job authorization is not tested by this disabled-gate probe."
+  },
+  "result": "PASS",
+  "finishedAt": "2026-09-08T05:45:14.546Z",
+  "assertionsPassed": 79
+}

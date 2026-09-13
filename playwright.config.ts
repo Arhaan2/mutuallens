@@ -14,23 +14,19 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
-  webServer: [
-    {
-      command: 'npx wrangler pages dev dist --port 5173 --ip 127.0.0.1',
-      cwd: 'apps/checker',
-      url: 'http://localhost:5173/api/capabilities',
-      reuseExistingServer: !process.env.CI,
-      timeout: 60000,
-      env: { WRANGLER_SEND_METRICS: 'false' },
-    },
-    {
-      command: 'npx wrangler pages dev dist --port 4321 --ip 127.0.0.1',
-      cwd: 'apps/site',
-      url: 'http://localhost:4321',
-      reuseExistingServer: !process.env.CI,
-      timeout: 60000,
-      env: { WRANGLER_SEND_METRICS: 'false' },
-    },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
   ],
+  webServer: {
+    command:
+      process.env.MUTUALLENS_TEST_MODE === 'dev'
+        ? 'npm run dev'
+        : 'npm run preview',
+    wait: { stdout: /\[MutualLens\] READY/ },
+    reuseExistingServer: false,
+    timeout: 60000,
+    gracefulShutdown: { signal: 'SIGTERM', timeout: 5000 },
+  },
 });

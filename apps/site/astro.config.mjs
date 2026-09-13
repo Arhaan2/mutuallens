@@ -1,8 +1,13 @@
 import { defineConfig } from 'astro/config';
-import { resolveOrigins } from '../../scripts/origins.ts';
+import {
+  resolveOrigins,
+  resolvePublicBasePath,
+} from '../../scripts/origins.ts';
 const origins = resolveOrigins(process.env);
+const base = resolvePublicBasePath(process.env);
 export default defineConfig({
   site: origins.publicSite,
+  base,
   output: 'static',
   vite: {
     envDir: false,

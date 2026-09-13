@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">MutualLens</title>
+  <desc id="description">A clear, restrained social card for MutualLens with two overlapping relationship circles.</desc>
+  <rect width="1200" height="630" fill="#f7f8f5"/>
+  <rect x="48" y="48" width="1104" height="534" rx="30" fill="#ffffff" stroke="#dce2d6" stroke-width="3"/>
+  <g transform="translate(765 315)">
+    <circle cx="-105" cy="0" r="145" fill="#e9eedf" stroke="#3c5b29" stroke-width="5"/>
+    <circle cx="105" cy="0" r="145" fill="#f2f4ef" stroke="#68785a" stroke-width="5"/>
+    <path d="M0-100c45 26 74 74 74 129S45 132 0 158c-45-26-74-74-74-129S-45-74 0-100Z" fill="#d7e4cd"/>
+    <path d="M-35 20 0 55l70-78" fill="none" stroke="#263020" stroke-linecap="round" stroke-linejoin="round" stroke-width="13"/>
+  </g>
+  <text x="120" y="245" fill="#263020" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="78" font-weight="650" letter-spacing="-4">Mutual<tspan font-weight="400">Lens</tspan></text>
+  <circle cx="520" cy="187" r="9" fill="#3c5b29"/>
+  <text x="123" y="325" fill="#536149" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="31">Clarity over assumptions.</text>
+  <text x="123" y="402" fill="#3c5b29" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="650" letter-spacing="3">FOLLOWERS · FOLLOWING · MUTUALS</text>
+</svg>

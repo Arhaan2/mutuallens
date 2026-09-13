@@ -41,7 +41,7 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #a2bf87;
+  outline: 3px solid #3f602d;
   outline-offset: 4px;
 }
 button:disabled {
@@ -57,7 +57,7 @@ h1,
 h2,
 h3 {
   line-height: 1.16;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
 }
 h1 {
   font-size: clamp(2.25rem, 4.6vw, 3.9rem);
@@ -888,7 +888,7 @@ input[type='file']::file-selector-button {
     gap: 13px;
   }
   .app-header nav > a:first-child {
-    display: none;
+    display: inline;
   }
   .app-main {
     padding-top: 35px;
@@ -1078,5 +1078,518 @@ input[type='file']::file-selector-button {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* A loaded report is the workspace; onboarding remains available on demand. */
+html {
+  scroll-behavior: auto;
+}
+input:disabled {
+  background: #f1f3ee;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.workspace-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.workspace-bar h1 {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.workspace-bar nav {
+  display: flex;
+  gap: 10px 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+}
+.has-report {
+  padding-top: 28px;
+}
+.results {
+  scroll-margin-top: 24px;
+}
+#results-title:focus,
+#entry-title:focus,
+#import-title:focus {
+  outline: none;
+}
+.workflow-feedback:empty {
+  display: none;
+}
+.workflow-feedback [role='alert']:focus {
+  outline: 3px solid #773e2e;
+  outline-offset: 3px;
+}
+.notice summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.notice summary + ul {
+  margin-top: 12px;
+}
+.inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+.import-disclosure {
+  margin-top: 40px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  padding: 22px 24px;
+  scroll-margin-top: 24px;
+}
+.import-disclosure > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.import-disclosure > summary span {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 12px;
+  font-size: 0.875rem;
+}
+.import-disclosure .import-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  gap: 48px;
+}
+.import-form .field-help,
+.availability-copy,
+.entry-secondary a,
+.sample-note,
+.provenance,
+.checkbox-label,
+.history-section > p,
+.snapshot-row span,
+.history-form select,
+.history-result details,
+.history-result p,
+.delete-area {
+  font-size: 0.875rem;
+}
+.button.small,
+.result-actions .text-button,
+.sort-label,
+.sort-label select,
+.list-caption,
+.list-caption h3,
+.pagination,
+.profile-link,
+.synthetic-row {
+  font-size: 0.875rem;
+}
+.category {
+  font-size: 0.875rem;
+  padding: 14px 12px;
+}
+.category-count {
+  font-size: 0.8125rem;
+}
+.report-overview > div {
+  padding: 18px 20px;
+}
+.report-overview span,
+.report-overview .status-tag {
+  font-size: 0.8125rem;
+}
+.report-overview {
+  margin-top: 20px;
+}
+.provenance {
+  margin-bottom: 16px;
+}
+.sample-note {
+  margin: 14px 0;
+}
+.pagination > div {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.difference-list ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px 18px;
+}
+.difference-list li {
+  overflow-wrap: anywhere;
+}
+.difference-list > .button {
+  margin-top: 18px;
+}
+.snapshot-row > div {
+  min-width: 0;
+}
+@media (max-width: 1000px) {
+  .workspace-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .category-controls {
+    gap: 0;
+  }
+}
+@media (max-width: 720px) {
+  .app-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .app-header nav {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .app-header nav > a:first-child {
+    display: inline;
+  }
+  .workspace-bar nav {
+    gap: 6px 20px;
+  }
+  .app-main.has-report {
+    padding-top: 22px;
+  }
+  .category,
+  .category:first-child {
+    font-size: 0.8125rem;
+    padding: 10px 8px;
+  }
+  .list-toolbar > .button {
+    font-size: 0.8125rem;
+  }
+  .list-toolbar .sort-label {
+    min-width: 140px;
+  }
+  .pagination > div {
+    justify-content: center;
+  }
+  .pagination > div > span {
+    flex-basis: 100%;
+    order: -1;
+    text-align: center;
+  }
+  .import-disclosure {
+    padding: 20px 16px;
+  }
+  .import-disclosure > summary span {
+    display: block;
+    margin: 8px 0 0;
+  }
+  .import-disclosure .import-section {
+    gap: 20px;
+  }
+  .import-form {
+    padding: 18px 14px;
+  }
+  .difference-list ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .processing {
+    flex-wrap: wrap;
+  }
+  .report-overview > div {
+    padding: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+.report-overview {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 12px;
+}
+.report-source {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 0 0 6px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.report-source strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+@media (max-width: 720px) {
+  .report-overview > div {
+    padding: 14px 12px;
+    border-bottom: 0;
+  }
+  .report-overview > div:nth-child(2) {
+    border-right: 1px solid var(--line);
+  }
+  .report-overview strong {
+    font-size: 1.4rem;
+  }
+  .report-overview span {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Upload comparison is the primary local workflow; metadata stays optional. */
+.automatic-disclosure > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.automatic-disclosure[open] > summary {
+  margin-bottom: 20px;
+}
+.optional-import-details {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.optional-import-details > summary,
+.snapshot-options > summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.optional-import-details p {
+  margin: 14px 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.optional-import-details input {
+  margin-bottom: 16px;
+}
+.selected-files {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+.file-assignments {
+  border: 1px solid var(--line);
+  padding: 18px;
+  margin: 18px 0;
+  min-width: 0;
+  border-radius: 7px;
+}
+.file-assignments legend {
+  font-weight: 600;
+  padding: 0 6px;
+}
+.file-assignments label {
+  overflow-wrap: anywhere;
+  margin-bottom: 16px;
+}
+.file-assignments .field-help {
+  display: block;
+  margin: 8px 0;
+}
+.import-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 14px 0;
+}
+.snapshot-options {
+  position: relative;
+  max-width: 280px;
+}
+.snapshot-options p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 12px 0;
+}
+.upload-limitation p {
+  margin: 8px 0;
+}
+.result-scope {
+  max-width: 900px;
+}
+.upload-entry {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.upload-entry .intro {
+  padding-top: 0;
+}
+.upload-entry h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 14px;
+}
+.upload-entry .intro p {
+  max-width: 760px;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.import-disclosure .import-section {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+.import-section > div > p {
+  max-width: 780px;
+  margin-bottom: 8px;
+}
+.import-section h2 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+.import-disclosure {
+  margin-top: 22px;
+}
+.automatic-disclosure {
+  margin-top: 32px;
+}
+.automatic-disclosure .username-field {
+  max-width: 480px;
+}
+.automatic-disclosure .full-width {
+  max-width: 480px;
+}
+.automatic-job {
+  max-width: 780px;
+}
+.automatic-job > input {
+  max-width: 480px;
+}
+.automatic-job [role='status'] {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 16px;
+}
+.automatic-counts {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 16px;
+  background: var(--bg);
+}
+.automatic-counts p {
+  margin: 0 0 8px;
+}
+.automatic-counts p:last-child {
+  margin-bottom: 0;
+}
+
+/* Make both entry paths visible before either workflow asks for input. */
+.status-tag.status-muted {
+  color: #5d6458;
+  background: #f2f3f0;
+  border-color: #d6dad2;
+}
+.mode-choice {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.58fr) minmax(0, 1.42fr);
+  gap: 32px;
+  align-items: start;
+  margin: 24px 0 8px;
+}
+.mode-heading h2 {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+.mode-heading p {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+.mode-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mode-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 3px 12px;
+  min-height: 132px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+}
+.mode-option:hover {
+  border-color: #aeb9a6;
+  background: #fbfcfa;
+}
+.mode-option strong,
+.mode-option .mode-kicker,
+.mode-option .mode-description {
+  grid-column: 1;
+}
+.mode-option strong {
+  font-size: 1rem;
+}
+.mode-option .mode-description {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+.mode-option .mode-kicker {
+  color: var(--muted);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.mode-option .status-tag {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  white-space: nowrap;
+}
+.automatic-job[aria-busy='true'] {
+  cursor: progress;
+}
+.automatic-job [role='alert']:focus {
+  outline: 3px solid #773e2e;
+  outline-offset: 3px;
+}
+.automatic-privacy {
+  max-width: 780px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.automatic-privacy summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+.automatic-privacy p {
+  margin: 12px 0 0;
+}
+@media (max-width: 900px) {
+  .mode-choice {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+}
+@media (max-width: 720px) {
+  .mode-choice {
+    margin-top: 20px;
+  }
+  .mode-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mode-option {
+    min-height: 112px;
+    padding: 16px;
   }
 }

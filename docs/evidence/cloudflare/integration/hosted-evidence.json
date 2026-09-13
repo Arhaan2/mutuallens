@@ -1,0 +1,387 @@
+{
+  "observedAt": "2026-09-08T02:48:57.136Z",
+  "expectedCommit": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+  "origins": {
+    "site": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+    "checker": "https://codex-ui-functional-repair.mutuallens-app.pages.dev"
+  },
+  "syntheticOnly": true,
+  "checks": [
+    {
+      "name": "HTTPS home responds https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "document noindex header https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "document restricted CSP https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "served home matches deployment manifest https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "served build commit matches https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "HTTPS home responds https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "document noindex header https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "document restricted CSP https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "served home matches deployment manifest https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "served build commit matches https://codex-ui-functional-repair.mutuallens-app.pages.dev",
+      "pass": true
+    },
+    {
+      "name": "capabilities HTTP status",
+      "pass": true
+    },
+    {
+      "name": "capabilities private no-store",
+      "pass": true
+    },
+    {
+      "name": "capabilities noindex and no CORS grant",
+      "pass": true
+    },
+    {
+      "name": "automatic and ads fail closed",
+      "pass": true
+    },
+    {
+      "name": "blocked GET scan HTTP status",
+      "pass": true
+    },
+    {
+      "name": "blocked GET scan private no-store",
+      "pass": true
+    },
+    {
+      "name": "blocked GET scan noindex and no CORS grant",
+      "pass": true
+    },
+    {
+      "name": "blocked GET scan null incomplete results",
+      "pass": true
+    },
+    {
+      "name": "foreign origin mutation rejected HTTP status",
+      "pass": true
+    },
+    {
+      "name": "foreign origin mutation rejected private no-store",
+      "pass": true
+    },
+    {
+      "name": "foreign origin mutation rejected noindex and no CORS grant",
+      "pass": true
+    },
+    {
+      "name": "foreign origin mutation rejected rejection payload",
+      "pass": true
+    },
+    {
+      "name": "own origin mutation remains unavailable HTTP status",
+      "pass": true
+    },
+    {
+      "name": "own origin mutation remains unavailable private no-store",
+      "pass": true
+    },
+    {
+      "name": "own origin mutation remains unavailable noindex and no CORS grant",
+      "pass": true
+    },
+    {
+      "name": "own origin mutation remains unavailable null incomplete results",
+      "pass": true
+    },
+    {
+      "name": "synthetic result has no real Instagram profile links",
+      "pass": true
+    },
+    {
+      "name": "sample processing does not automatically create a snapshot database",
+      "pass": true
+    },
+    {
+      "name": "actual hosted checker snapshot database is unavailable on public origin",
+      "pass": true
+    },
+    {
+      "name": "public origin cannot read hosted checker document through window reference",
+      "pass": true
+    },
+    {
+      "name": "normal hosted pages/sample/snapshot flow makes no external tracker/avatar/ad requests",
+      "pass": true
+    },
+    {
+      "name": "no browser exceptions console errors failed requests or failed assets in normal hosted flow",
+      "pass": true
+    },
+    {
+      "name": "loaded JavaScript CSS and worker assets match deployment manifest",
+      "pass": true
+    }
+  ],
+  "http": [
+    {
+      "method": "GET",
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "access-control-allow-origin": "*"
+      },
+      "sha256": "8a8e36bacfb0bbf4b0944657fb18652e7be19ebe334d7c0db65c0f59893f63bf"
+    },
+    {
+      "method": "GET",
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "status": 200,
+      "stamp": {
+        "commit": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+        "sourceHash": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+        "builtAt": "2026-09-08T02:41:33.672Z"
+      }
+    },
+    {
+      "method": "GET",
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "access-control-allow-origin": "*"
+      },
+      "sha256": "b239ac5dcc02afea08a7eb5064790f7cda9ac382c712b4d206c7c4280648ce13"
+    },
+    {
+      "method": "GET",
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "status": 200,
+      "stamp": {
+        "commit": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+        "sourceHash": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+        "builtAt": "2026-09-08T02:41:33.672Z"
+      }
+    },
+    {
+      "scenario": "capabilities",
+      "method": "GET",
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "cache-control": "private, no-store",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      },
+      "payload": {
+        "release": "preview",
+        "automatic": {
+          "enabled": false,
+          "status": "blocked",
+          "reason": "Automatic checks are not available: complete-list access at the live target scale and a recurring zero-cash allowance have not been verified."
+        },
+        "ads": false
+      }
+    },
+    {
+      "scenario": "blocked GET scan",
+      "method": "GET",
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/scans",
+      "status": 503,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "cache-control": "private, no-store",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      },
+      "payload": {
+        "code": "AUTOMATIC_UNAVAILABLE",
+        "message": "Automatic checks are not available: complete-list access at the live target scale and a recurring zero-cash allowance have not been verified.",
+        "complete": false,
+        "results": null
+      }
+    },
+    {
+      "scenario": "foreign origin mutation rejected",
+      "method": "POST",
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/scans",
+      "status": 403,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "cache-control": "private, no-store",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      },
+      "payload": {
+        "code": "ORIGIN_REJECTED"
+      }
+    },
+    {
+      "scenario": "own origin mutation remains unavailable",
+      "method": "POST",
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/scans",
+      "status": 503,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "cache-control": "private, no-store",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      },
+      "payload": {
+        "code": "AUTOMATIC_UNAVAILABLE",
+        "message": "Automatic checks are not available: complete-list access at the live target scale and a recurring zero-cash allowance have not been verified.",
+        "complete": false,
+        "results": null
+      }
+    }
+  ],
+  "browser": {
+    "engine": "Chromium",
+    "version": "153.0.8010.12",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-D3jCi-6S.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+        "type": "fetch"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+        "type": "document"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+        "type": "script"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+        "type": "stylesheet"
+      },
+      {
+        "method": "GET",
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/api/capabilities",
+        "type": "fetch"
+      }
+    ],
+    "errors": [],
+    "failedRequests": [],
+    "badResponses": [],
+    "externalRequests": [],
+    "assetChecks": [
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/_astro/Page.DWSNgpg8.css",
+        "sha256": "e8430b8333daf2190cbbcf74f9097de45f37c1e2c1eccb7ef9574c5bf623f7ee",
+        "matchesManifest": true
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+        "sha256": "899c40430274ebe5ac4e71408400fb6dcaa5de9d1e5bdaba2c75025bcd805936",
+        "matchesManifest": true
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+        "sha256": "f0d82fb92aebb3dd0ebdbef30505a6723bc7f8b25cc3abb09396429ba26a26a1",
+        "matchesManifest": true
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-D3jCi-6S.js",
+        "sha256": "cc7059a611ae3f52f23a316e06914bc41a9740b560cd06a149bac7b3d7ab87ca",
+        "matchesManifest": true
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+        "sha256": "899c40430274ebe5ac4e71408400fb6dcaa5de9d1e5bdaba2c75025bcd805936",
+        "matchesManifest": true
+      },
+      {
+        "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+        "sha256": "f0d82fb92aebb3dd0ebdbef30505a6723bc7f8b25cc3abb09396429ba26a26a1",
+        "matchesManifest": true
+      }
+    ],
+    "publicInitialDatabases": [],
+    "checkerDatabases": [
+      "mutuallens-local-snapshots"
+    ],
+    "publicAfterDatabases": [],
+    "domIsolation": {
+      "blocked": true,
+      "exception": "SecurityError"
+    }
+  },
+  "limitation": "No quota exhaustion, billing access, Cloudflare configuration mutation, or live Instagram acquisition.",
+  "status": "PASS"
+}

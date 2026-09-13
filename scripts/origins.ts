@@ -35,3 +35,48 @@ export function resolveOrigins(env: Record<string, string | undefined>) {
     throw new Error('VITE_SITE_ORIGIN must match PUBLIC_SITE_ORIGIN.');
   return { publicSite, checker };
 }
+
+/** Astro's base is a path, not an origin. Keep it separate so project-site
+ * builds cannot accidentally weaken the public/checker origin boundary. */
+export function resolvePublicBasePath(
+  env: Record<string, string | undefined>,
+): string {
+  const value = env.PUBLIC_SITE_BASE_PATH || '/';
+  if (
+    !value.startsWith('/') ||
+    value.startsWith('//') ||
+    value.includes('?') ||
+    value.includes('#') ||
+    value.includes('\\') ||
+    value.split('/').some((part) => part === '.' || part === '..')
+  )
+    throw new Error(
+      'PUBLIC_SITE_BASE_PATH must be a plain absolute path without a query, fragment, backslash or traversal segment.',
+    );
+  const normalized = value === '/' ? '/' : value.replace(/\/+$/, '');
+  if (
+    !normalized ||
+    !/^\/(?:[A-Za-z0-9._~-]+(?:\/[A-Za-z0-9._~-]+)*)?$/.test(normalized)
+  )
+    throw new Error('PUBLIC_SITE_BASE_PATH contains unsupported characters.');
+  return normalized;
+}
+
+/** Indexing is released only by an explicit flag on a non-preview hostname. */
+export function isPublicReleaseIndexable(
+  env: Record<string, string | undefined>,
+): boolean {
+  if (env.PUBLIC_INDEXABLE !== 'true') return false;
+  const origin = env.PUBLIC_SITE_ORIGIN || 'http://localhost:4321';
+  const url = new URL(origin);
+  if (url.origin !== origin)
+    throw new Error('PUBLIC_SITE_ORIGIN must be a plain origin.');
+  const hostname = url.hostname.toLowerCase().replace(/\.$/, '');
+  return !(
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '[::1]' ||
+    hostname.endsWith('.pages.dev') ||
+    hostname.endsWith('.github.io')
+  );
+}

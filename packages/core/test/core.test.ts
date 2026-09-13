@@ -11,11 +11,11 @@ import {
   normalizeUsername,
 } from '../src';
 import { IMPORT_LIMITS } from '../src/import';
+import { inspectZip, newBudget, readZipEntry } from '../src/import-archive';
 import type { AccountRecord, Dataset, ImportFile } from '../src';
 
 const options = {
   account: { username: 'synthetic_owner' },
-  confirmedComplete: true,
   collectedAt: '2026-01-01T12:00:00Z',
 };
 const json = (name: string, data: unknown): ImportFile => ({
@@ -173,9 +173,10 @@ describe('deterministic identity and comparison', () => {
     });
   });
   it.each(['partial', 'unverified'] as const)(
-    'withholds all negatives when followers are %s',
+    'withholds all source-evidence negatives when followers are %s',
     (completeness) => {
       const dataset = createSampleDataset();
+      dataset.comparisonBasis = 'source_evidence';
       dataset.followers.metadata.completeness = completeness;
       const result = compareDataset(dataset);
       expect(result.negativesWithheld).toBe(true);
@@ -186,6 +187,7 @@ describe('deterministic identity and comparison', () => {
   );
   it('requires terminal source evidence even with a complete label', () => {
     const dataset = createSampleDataset();
+    dataset.comparisonBasis = 'source_evidence';
     dataset.following.metadata.terminal = false;
     expect(compareDataset(dataset).negativesWithheld).toBe(true);
   });
@@ -193,6 +195,7 @@ describe('deterministic identity and comparison', () => {
     'withholds negatives for inconsistent %s provenance',
     (field) => {
       const dataset = createSampleDataset(3, 1);
+      dataset.comparisonBasis = 'source_evidence';
       if (field === 'expected count')
         dataset.followers.metadata.expectedCount = 4;
       if (field === 'unique count') dataset.followers.metadata.uniqueCount = 1;
@@ -239,6 +242,7 @@ describe('deterministic identity and comparison', () => {
       [record('alice', '123')],
       [record('alice', '456'), record('bob', '789')],
     );
+    dataset.comparisonBasis = 'source_evidence';
     const result = compareDataset(dataset);
     expect(result.mutuals).toEqual([]);
     expect(result.unionCount).toBe(3);
@@ -299,14 +303,43 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
       ],
       options,
     );
-    expect(zipped.followers).toEqual(loose.followers);
-    expect(zipped.following).toEqual(loose.following);
+    for (const direction of ['followers', 'following'] as const) {
+      expect(zipped[direction].records).toEqual(loose[direction].records);
+      const { files: loosePaths, ...looseMetadata } = loose[direction].metadata;
+      const { files: archivePaths, ...archiveMetadata } =
+        zipped[direction].metadata;
+      expect(archiveMetadata).toEqual(looseMetadata);
+      expect(archivePaths).toEqual(
+        loosePaths?.map(
+          (name) =>
+            `synthetic_export.zip/connections/followers_and_following/${name}`,
+        ),
+      );
+    }
     expect(loose.followers.metadata).toMatchObject({
       rawCount: 4,
       uniqueCount: 3,
       pages: 2,
-      completeness: 'complete_for_source',
+      completeness: 'unverified',
+      terminal: false,
+      duplicateCount: 1,
     });
+    expect(zipped.importSummary?.relevantFiles).toBe(3);
+    expect(compareDataset(zipped)).toMatchObject({
+      negativesWithheld: false,
+      negativeBasis: 'supplied_files',
+    });
+  });
+  it('reports invalid JSON when a user explicitly selects an unnamed loose document', async () => {
+    await expect(
+      importInstagram([
+        ...fixture(1),
+        {
+          name: 'irrelevant.json',
+          bytes: strToU8('not JSON, deliberately invalid'),
+        },
+      ]),
+    ).rejects.toThrow('not valid JSON');
   });
   it.each([2499, 2500, 2501, 6000, 6001, 50000])(
     'parses and compares all %i synthetic records per direction',
@@ -348,7 +381,7 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
       }),
     );
   });
-  it('defaults to unverified and does not invent collection dates from import/relationship times', async () => {
+  it('compares unverified supplied files without inventing collection dates', async () => {
     const dataset = await importInstagram(fixture(2, 1), {
       account: { username: '@Owner' },
     });
@@ -359,7 +392,13 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
       startedAt: null,
       endedAt: null,
     });
-    expect(compareDataset(dataset).negativesWithheld).toBe(true);
+    expect(dataset.comparisonBasis).toBe('supplied_files');
+    const result = compareDataset(dataset);
+    expect(result.negativesWithheld).toBe(false);
+    expect(result.negativeBasis).toBe('supplied_files');
+    expect(result.mutuals).toHaveLength(1);
+    expect(result.notFollowingBack).toHaveLength(1);
+    expect(result.notFollowedBackByYou).toHaveLength(1);
   });
   it('preserves valid empty inputs separately from missing inputs', async () => {
     const files = [
@@ -382,19 +421,38 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
       json('followers_3.json', [row('beta')]),
       json('following.json', { relationships_following: [row('gamma')] }),
     ];
-    const dataset = await importInstagram(files, options);
+    const dataset = await importInstagram(files, {
+      ...options,
+      confirmedComplete: true,
+    });
     expect(dataset.followers.metadata.completeness).toBe('partial');
-    expect(compareDataset(dataset).notFollowingBack).toEqual([]);
+    expect(dataset.followers.metadata.terminal).toBe(false);
+    const result = compareDataset(dataset);
+    expect(result.negativesWithheld).toBe(false);
+    expect(result.negativeBasis).toBe('provisional_files');
+    expect(result.notFollowingBack.map((item) => item.username)).toEqual([
+      'gamma',
+    ]);
+    expect(result.notFollowedBackByYou.map((item) => item.username)).toEqual([
+      'alpha',
+      'beta',
+    ]);
+    expect(result.warnings.join(' ')).toContain(
+      'Numbered export parts are missing',
+    );
+    expect(
+      JSON.parse(exportDataset(dataset)).exportLimitations.join(' '),
+    ).toContain('Numbered export parts are missing');
   });
   it.each([
     [json('followers.json', { unknown: [] }), 'schema'],
-    [json('followers.json', [{ string_list_data: [] }]), 'row'],
-    [json('followers.json', [{ string_list_data: [1] }]), 'fields'],
     [
-      json('followers.json', [
-        { string_list_data: [{ value: 'alpha', unexpected: true }] },
-      ]),
-      'fields',
+      json('followers.json', [{ string_list_data: [] }]),
+      'No usable followers identities',
+    ],
+    [
+      json('followers.json', [{ string_list_data: [1] }]),
+      'No usable followers identities',
     ],
     [
       json('followers.json', [
@@ -404,13 +462,7 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
           ],
         },
       ]),
-      'conflicting',
-    ],
-    [
-      json('followers.json', [
-        { string_list_data: [{ value: 'alpha', timestamp: 'unknown' }] },
-      ]),
-      'fields',
+      'No usable followers identities',
     ],
     [{ name: 'followers.json', bytes: strToU8('{bad') }, 'valid JSON'],
     [{ name: 'followers.json', bytes: new Uint8Array([0xff]) }, 'UTF-8'],
@@ -425,37 +477,106 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
       ).rejects.toThrow(error);
     },
   );
-  it('rejects ambiguous repeated basenames across folders/files', async () => {
+  it.each([
+    { value: 'alpha', unexpected: true },
+    { value: 'alpha', timestamp: 'unknown' },
+  ])(
+    'accepts harmless optional fields without fabricating identity %#',
+    async (value) => {
+      const dataset = await importInstagram([
+        json('followers.json', [{ string_list_data: [value] }]),
+        json('following.json', { relationships_following: [row('alpha')] }),
+      ]);
+      expect(dataset.followers.records.map((item) => item.username)).toEqual([
+        'alpha',
+      ]);
+      expect(dataset.followers.metadata).toMatchObject({
+        skippedCount: 0,
+        quarantinedCount: 0,
+        completeness: 'unverified',
+        terminal: false,
+      });
+      expect(compareDataset(dataset).mutuals).toHaveLength(1);
+    },
+  );
+  it('combines repeated basenames across folders without dropping distinct records', async () => {
+    const dataset = await importInstagram([
+      json('one/followers_1.json', [row('alpha'), row('beta')]),
+      json('two/followers_1.json', [row('ALPHA'), row('gamma')]),
+      json('following.json', { relationships_following: [] }),
+    ]);
+    expect(
+      dataset.followers.records.map((item) => item.username).sort(),
+    ).toEqual(['alpha', 'beta', 'gamma']);
+    expect(dataset.followers.metadata).toMatchObject({
+      rawCount: 4,
+      uniqueCount: 3,
+      duplicateCount: 1,
+      files: ['one/followers_1.json', 'two/followers_1.json'],
+    });
+    expect(dataset.importSummary).toMatchObject({
+      relevantFiles: 3,
+      duplicatesCombined: 1,
+    });
+  });
+  it('combines numbered and unnumbered copies with a visible qualification', async () => {
+    const dataset = await importInstagram([
+      json('followers.json', [row('alpha')]),
+      json('followers_1.json', [row('ALPHA'), row('beta')]),
+      json('following.json', { relationships_following: [] }),
+    ]);
+    expect(
+      dataset.followers.records.map((item) => item.username).sort(),
+    ).toEqual(['alpha', 'beta']);
+    expect(dataset.followers.metadata).toMatchObject({
+      rawCount: 3,
+      uniqueCount: 2,
+      duplicateCount: 1,
+      terminal: false,
+    });
+    expect(dataset.importSummary?.warnings.join(' ')).toContain(
+      'Numbered and unnumbered files were combined',
+    );
+    expect(compareDataset(dataset).notFollowedBackByYou).toHaveLength(2);
+  });
+  it('reads recognized HTML lists without requiring JSON', async () => {
+    const dataset = await importInstagram([
+      {
+        name: 'followers.html',
+        bytes: strToU8(
+          '<h1>Followers</h1><div><a href="https://www.instagram.com/alpha/">alpha</a></div>',
+        ),
+      },
+      {
+        name: 'following.html',
+        bytes: strToU8(
+          '<h1>Following</h1><div><a href="https://www.instagram.com/beta/">beta</a></div>',
+        ),
+      },
+    ]);
+    expect(dataset.followers.records.map((item) => item.username)).toEqual([
+      'alpha',
+    ]);
+    expect(
+      compareDataset(dataset).notFollowingBack.map((item) => item.username),
+    ).toEqual(['beta']);
+    expect(dataset.followers.metadata.terminal).toBe(false);
+  });
+  it('rejects unrecognized HTML rather than treating it as an empty list', async () => {
     await expect(
       importInstagram(
         [
-          json('one/followers_1.json', []),
-          json('two/followers_1.json', []),
-          json('following.json', { relationships_following: [] }),
+          { name: 'followers.html', bytes: strToU8('<html>') },
+          json('following.json', []),
         ],
         options,
       ),
-    ).rejects.toThrow('Duplicate');
+    ).rejects.toThrow('No usable followers identities');
   });
-  it('rejects mixing numbered and unnumbered copies', async () => {
+  it('rejects unsupported loose file types', async () => {
     await expect(
-      importInstagram(
-        [
-          json('followers.json', []),
-          json('followers_1.json', []),
-          json('following.json', { relationships_following: [] }),
-        ],
-        options,
-      ),
-    ).rejects.toThrow('Numbered');
-  });
-  it('rejects HTML and unsupported loose filenames', async () => {
-    await expect(
-      importInstagram(
-        [{ name: 'followers.html', bytes: strToU8('<html>') }],
-        options,
-      ),
-    ).rejects.toThrow('Unsupported input filename');
+      importInstagram([{ name: 'followers.txt', bytes: strToU8('alpha') }]),
+    ).rejects.toThrow('Unsupported file type');
   });
   it.each([
     'yesterday',
@@ -474,11 +595,21 @@ describe('Instagram JSON import (synthetic format fixtures)', () => {
 
 describe('archive resource and integrity safeguards', () => {
   it.each(['followers_0.json', 'followers_01.json', 'following_invalid.json'])(
-    'rejects unsupported relationship part %s instead of silently dropping it',
+    'includes flexibly named relationship part %s instead of silently dropping it',
     async (name) => {
-      await expect(
-        importInstagram([archive([...fixture(1), json(name, [])])], options),
-      ).rejects.toThrow('Unsupported relationship filename');
+      const dataset = await importInstagram(
+        [archive([...fixture(1), json(name, [row('extra_account')])])],
+        options,
+      );
+      const direction = name.startsWith('followers')
+        ? 'followers'
+        : 'following';
+      expect(dataset[direction].records.map((item) => item.username)).toContain(
+        'extra_account',
+      );
+      expect(dataset[direction].records).toHaveLength(2);
+      expect(dataset[direction].metadata.terminal).toBe(false);
+      expect(dataset.importSummary?.relevantFiles).toBe(3);
     },
   );
   it.each([
@@ -516,20 +647,52 @@ describe('archive resource and integrity safeguards', () => {
   it('rejects excessive directory entries before parsing them', async () => {
     const file = archive(fixture(1));
     const { view, end } = zipHeaders(file.bytes);
-    view.setUint16(end + 8, IMPORT_LIMITS.entries + 1, true);
-    view.setUint16(end + 10, IMPORT_LIMITS.entries + 1, true);
+    view.setUint16(end + 8, IMPORT_LIMITS.archiveEntries + 1, true);
+    view.setUint16(end + 10, IMPORT_LIMITS.archiveEntries + 1, true);
     await expect(importInstagram([file], options)).rejects.toThrow(
-      'too many entries',
+      'too many entries for bounded metadata inspection',
     );
   });
-  it('rejects expanded total-byte overflow before allocating output', async () => {
+  it('rejects a selected-entry expansion budget overflow before allocating output', async () => {
     const file = archive(fixture(1));
-    const { view, central } = zipHeaders(file.bytes);
-    view.setUint32(central + 24, IMPORT_LIMITS.expandedBytes + 1, true);
+    const { view, central, local } = zipHeaders(file.bytes);
+    view.setUint32(central + 24, IMPORT_LIMITS.jsonBytes + 1, true);
+    view.setUint32(local + 22, IMPORT_LIMITS.jsonBytes + 1, true);
     await expect(importInstagram([file], options)).rejects.toThrow(
-      'memory safety limit',
+      'parsing budget',
     );
   });
+  it.each(['compressedBytes', 'expandedBytes'] as const)(
+    'rejects cumulative %s overflow before reading the next valid ZIP entry',
+    async (field) => {
+      const file = archive(fixture(1));
+      let reads = 0;
+      const source = {
+        name: file.name,
+        size: file.bytes.length,
+        read: async (start: number, end: number) => {
+          reads++;
+          return file.bytes.subarray(start, end);
+        },
+      };
+      const budget = newBudget();
+      const [entry] = await inspectZip(source, budget);
+      if (!entry) throw new Error('Synthetic archive must contain an entry');
+      // Precharge prior entries without allocating a large synthetic payload.
+      const limit =
+        field === 'compressedBytes'
+          ? IMPORT_LIMITS.inputBytes
+          : IMPORT_LIMITS.expandedBytes;
+      const nextCost =
+        field === 'compressedBytes' ? entry.compressedSize : entry.size;
+      budget[field] = limit - nextCost + 1;
+      const metadataReads = reads;
+      await expect(readZipEntry(source, entry, budget)).rejects.toThrow(
+        'memory safety budget',
+      );
+      expect(reads).toBe(metadataReads);
+    },
+  );
   it('rejects forged small size metadata during streaming expansion', async () => {
     const file = archive(fixture(6000));
     const { view, central, local } = zipHeaders(file.bytes);
@@ -595,6 +758,8 @@ describe('snapshots and export safety', () => {
   ] {
     const before = createSnapshot(createSampleDataset(3, 1));
     const after = createSnapshot(createSampleDataset(3, 2));
+    before.dataset.comparisonBasis = after.dataset.comparisonBasis =
+      'source_evidence';
     for (const direction of ['followers', 'following'] as const) {
       before.dataset[direction].metadata.startedAt = before.dataset[
         direction
@@ -689,6 +854,13 @@ describe('snapshots and export safety', () => {
     expect(
       exportCsv([{ ...record('synthetic'), displayName: 'A, "B"\nC' }]),
     ).toContain('"A, ""B""\nC"');
-    expect(JSON.parse(exportDataset(dataset))).toEqual(dataset);
+    const { exportScope, exportLimitations, ...reopened } = JSON.parse(
+      exportDataset(dataset),
+    );
+    expect(reopened).toEqual(dataset);
+    expect(exportScope).toBe(
+      'Synthetic example only. No Instagram account was checked.',
+    );
+    expect(exportLimitations).toEqual(compareDataset(dataset).warnings);
   });
 });

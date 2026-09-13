@@ -1,9 +1,15 @@
+import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { zipSync, strToU8 } from 'fflate';
 import { mkdir, writeFile } from 'node:fs/promises';
 
-const evidence = 'docs/evidence';
+const keyboardTab = (browserName: string) =>
+  browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab';
+const evidence = () => `test-results/acceptance-${test.info().project.name}`;
+test.beforeEach(async () => {
+  await mkdir(evidence(), { recursive: true });
+});
 const row = (username: string) => ({
   title: '',
   media_list_data: [],
@@ -61,16 +67,15 @@ test('capability, scan boundary, headers and unknown paths on local Workers runt
 
 test('synthetic target, search, pagination, keyboard, exports, no external requests', async ({
   page,
+  browserName,
 }) => {
   const requests: string[] = [];
   const errors: string[] = [];
   page.on('request', (r) => requests.push(r.url()));
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
-  await expect(
-    page.getByRole('button', { name: 'Check automatically' }),
-  ).toBeDisabled();
-  await page.keyboard.press('Tab');
+  await expect(page.locator('#automatic .button.primary')).toBeDisabled();
+  await page.keyboard.press(keyboardTab(browserName));
   await expect(
     page.getByRole('link', { name: 'Skip to checker' }),
   ).toBeFocused();
@@ -102,9 +107,13 @@ test('synthetic target, search, pagination, keyboard, exports, no external reque
   expect((await download).suggestedFilename()).toContain('synthetic');
   expect(errors).toEqual([]);
   expect(
-    requests.filter((url) => !url.startsWith('http://localhost:5173/')),
+    requests.filter(
+      (url) =>
+        !url.startsWith('http://localhost:5173/') &&
+        !url.startsWith('blob:http://localhost:5173/'),
+    ),
   ).toEqual([]);
-  await mkdir(evidence, { recursive: true });
+  await mkdir(evidence(), { recursive: true });
   const memory = await page.evaluate(() => {
     const p = performance as Performance & {
       memory?: { usedJSHeapSize: number };
@@ -112,11 +121,11 @@ test('synthetic target, search, pagination, keyboard, exports, no external reque
     return p.memory?.usedJSHeapSize ?? null;
   });
   await writeFile(
-    `${evidence}/browser-performance.json`,
+    `${evidence()}/browser-performance.json`,
     JSON.stringify(
       {
         synthetic: true,
-        browser: 'Playwright Chromium',
+        browser: `Playwright ${browserName}`,
         searchRoundTripMs: searchMs,
         usedJSHeapBytes: memory,
         caveat:
@@ -127,21 +136,20 @@ test('synthetic target, search, pagination, keyboard, exports, no external reque
     ),
   );
   await page.screenshot({
-    path: `${evidence}/checker-desktop.png`,
+    path: `${evidence()}/checker-desktop.png`,
     fullPage: true,
   });
 });
 
-test('local loose imports withhold absences by default and do not transmit files', async ({
+test('local loose imports show supplied-list absences without mandatory identity and do not transmit files', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/#import');
   await expect(page.locator('#automatic-status')).toContainText(
-    'not available',
+    'awaiting provider account setup',
   );
   const requests: string[] = [];
   page.on('request', (r) => requests.push(`${r.method()} ${r.url()}`));
-  await page.locator('#import-account').fill('synthetic_owner');
   await page
     .locator('input[type=file]')
     .setInputFiles([
@@ -149,26 +157,33 @@ test('local loose imports withhold absences by default and do not transmit files
       file('following.json', followingFile(['beta', 'mutual'])),
     ]);
   await page.getByRole('button', { name: /Compare local files/ }).click();
-  await expect(page.locator('#results-title')).toContainText('synthetic_owner');
-  await expect(
-    page.getByRole('button', { name: /Not following you back Withheld/ }),
-  ).toBeVisible();
-  await page
-    .getByRole('button', { name: /Not following you back Withheld/ })
-    .click();
-  await expect(
-    page.getByRole('heading', { name: 'Missing doesn’t mean not following.' }),
-  ).toBeVisible();
+  await expect(page.locator('#results-title')).toContainText(
+    'Your uploaded files',
+  );
+  await expect(page.locator('.category.active')).toHaveAccessibleName(
+    'Not following you back 1',
+  );
+  await expect(page.locator('.account-list')).toContainText('@beta');
+  await expect(page.locator('.result-scope')).toContainText(
+    'Based on your uploaded files',
+  );
   await expect(
     page.getByRole('button', { name: 'Export filtered CSV' }),
-  ).toBeDisabled();
-  expect(requests.filter((r) => !r.includes('/assets/'))).toEqual([]);
+  ).toBeEnabled();
+  expect(
+    requests.filter(
+      (r) =>
+        !r.startsWith('GET http://localhost:5173/assets/') &&
+        !r.startsWith('GET blob:http://localhost:5173/'),
+    ),
+  ).toEqual([]);
 });
 
 test('ZIP split import complete supplied sets, empty input distinct from missing and malformed', async ({
   page,
 }) => {
   await page.goto('/');
+  await openImportDetails(page);
   await page.locator('#import-account').fill('synthetic_owner');
   const zip = zipSync({
     'connections/followers_1.json': strToU8(followerFile(['alpha'])),
@@ -180,28 +195,29 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
     mimeType: 'application/zip',
     buffer: Buffer.from(zip),
   });
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(
     page.getByRole('button', { name: /Not following you back 1$/ }),
   ).toBeVisible();
   await expect(page.locator('.account-list')).toContainText('@beta');
+  await openImportDetails(page);
   await page
     .locator('input[type=file]')
     .setInputFiles([
       file('followers.json', '[]'),
       file('following.json', '{"relationships_following":[]}'),
     ]);
-  await page.getByLabel('I confirm these files').check();
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(
     page.getByRole('heading', { name: 'No accounts in this category' }),
   ).toBeVisible();
+  await openImportDetails(page);
   await page
     .locator('input[type=file]')
     .setInputFiles(file('following.json', followingFile(['beta'])));
   await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.getByRole('alert')).toContainText('Missing followers');
+  await openImportDetails(page);
   await page
     .locator('input[type=file]')
     .setInputFiles([
@@ -222,6 +238,7 @@ test('explicit snapshots, reload persistence, delete-all and public origin stora
   expect(
     await page.evaluate(async () => (await indexedDB.databases()).length),
   ).toBe(0);
+  await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.getByRole('status')).toContainText('Snapshot saved');
   const publicPage = await context.newPage();
@@ -251,6 +268,8 @@ test('explicit snapshots, reload persistence, delete-all and public origin stora
   });
   expect(access.blocked).toBe(true);
   await popup.close();
+  // Generic entry restores no report; #sample intentionally regenerates on reload.
+  await page.goto('/');
   await page.reload();
   await expect(page.locator('#results-title')).toHaveCount(0);
   await page.getByRole('button', { name: /View saved snapshots/ }).click();
@@ -297,7 +316,7 @@ test('desktop and mobile accessibility, 200% layout zoom and reduced motion', as
   ).toBe(true);
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.screenshot({
-    path: `${evidence}/checker-mobile.png`,
+    path: `${evidence()}/checker-mobile.png`,
     fullPage: true,
   });
   await page.setViewportSize({ width: 1280, height: 900 });
@@ -311,7 +330,7 @@ test('desktop and mobile accessibility, 200% layout zoom and reduced motion', as
   ).toBe(true);
   await expect(page.getByRole('searchbox')).toBeVisible();
   await page.screenshot({
-    path: `${evidence}/checker-zoom200.png`,
+    path: `${evidence()}/checker-zoom200.png`,
     fullPage: true,
   });
 });
@@ -334,7 +353,7 @@ test('public pages, noindex canonicals, honest copy, ad-free network and useful 
   );
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.screenshot({
-    path: `${evidence}/site-desktop.png`,
+    path: `${evidence()}/site-desktop.png`,
     fullPage: true,
   });
   const links = await page
@@ -378,13 +397,14 @@ test('public pages, noindex canonicals, honest copy, ad-free network and useful 
     ),
   ).toBe(true);
   await page.screenshot({
-    path: `${evidence}/site-mobile.png`,
+    path: `${evidence()}/site-mobile.png`,
     fullPage: true,
   });
 });
 
 test('keyboard-only sample flow and capability failure remain usable', async ({
   page,
+  browserName,
 }) => {
   await page.route('**/api/capabilities', (route) =>
     route.fulfill({ status: 503, body: 'unavailable' }),
@@ -395,7 +415,7 @@ test('keyboard-only sample flow and capability failure remain usable', async ({
   );
   let sampleFocused = false;
   for (let i = 0; i < 16; i++) {
-    await page.keyboard.press('Tab');
+    await page.keyboard.press(keyboardTab(browserName));
     sampleFocused = await page
       .getByRole('button', { name: 'Explore synthetic sample' })
       .evaluate((element) => element === document.activeElement);
@@ -404,7 +424,7 @@ test('keyboard-only sample flow and capability failure remain usable', async ({
   expect(sampleFocused).toBe(true);
   await page.keyboard.press('Enter');
   await expect(page.locator('#results-title')).toBeFocused();
-  await page.keyboard.press('Tab');
+  await page.keyboard.press(keyboardTab(browserName));
   await expect(page.getByRole('button', { name: 'Export JSON' })).toBeFocused();
   await page.setViewportSize({ width: 640, height: 450 });
   expect(
@@ -424,6 +444,7 @@ test('snapshot comparison visible semantics and incompatible identity rejection'
     followers: string[],
     date: string,
   ) {
+    await openImportDetails(page);
     await page.locator('#import-account').fill(owner);
     await page
       .locator('input[type=file]')
@@ -432,12 +453,12 @@ test('snapshot comparison visible semantics and incompatible identity rejection'
         file('following.json', followingFile(['mutual'])),
       ]);
     await page.locator('#collected-at').fill(date);
-    await page.getByLabel('I confirm these files').check();
     await page.getByRole('button', { name: /Compare local files/ }).click();
     await expect(page.locator('#results-title')).toContainText(owner);
     await expect(page.getByRole('status')).toContainText(
-      'selected files were processed',
+      'selected files were compared locally',
     );
+    await openSnapshotOptions(page);
     await page.getByRole('button', { name: 'Save snapshot locally' }).click();
     await expect(page.getByRole('status')).toContainText('Snapshot saved');
   }
@@ -478,27 +499,49 @@ test('snapshot comparison visible semantics and incompatible identity rejection'
 test('public content accessibility and recorded local paint measurements', async ({
   page,
   browser,
+  browserName,
 }) => {
   await page.addInitScript(() => {
-    const metrics = { lcpMs: 0, cls: 0 };
+    const metrics: { lcpMs: number | null; cls: number | null } = {
+      lcpMs: PerformanceObserver.supportedEntryTypes.includes(
+        'largest-contentful-paint',
+      )
+        ? 0
+        : null,
+      cls: PerformanceObserver.supportedEntryTypes.includes('layout-shift')
+        ? 0
+        : null,
+    };
     Object.assign(window, { __mutuallensLab: metrics });
-    new PerformanceObserver((list) => {
-      for (const entry of list.getEntries()) metrics.lcpMs = entry.startTime;
-    }).observe({ type: 'largest-contentful-paint', buffered: true });
-    new PerformanceObserver((list) => {
-      for (const entry of list.getEntries()) {
-        const shift = entry as PerformanceEntry & {
-          hadRecentInput: boolean;
-          value: number;
-        };
-        if (!shift.hadRecentInput) metrics.cls += shift.value;
-      }
-    }).observe({ type: 'layout-shift', buffered: true });
+    if (
+      PerformanceObserver.supportedEntryTypes.includes(
+        'largest-contentful-paint',
+      )
+    )
+      new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) metrics.lcpMs = entry.startTime;
+      }).observe({ type: 'largest-contentful-paint', buffered: true });
+    if (PerformanceObserver.supportedEntryTypes.includes('layout-shift'))
+      new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          const shift = entry as PerformanceEntry & {
+            hadRecentInput: boolean;
+            value: number;
+          };
+          if (!shift.hadRecentInput)
+            metrics.cls = (metrics.cls ?? 0) + shift.value;
+        }
+      }).observe({ type: 'layout-shift', buffered: true });
   });
   await page.goto('http://localhost:4321/');
-  await page.waitForFunction(
-    () => performance.getEntriesByName('first-contentful-paint').length > 0,
-  );
+  if (
+    await page.evaluate(() =>
+      PerformanceObserver.supportedEntryTypes.includes('paint'),
+    )
+  )
+    await page.waitForFunction(
+      () => performance.getEntriesByName('first-contentful-paint').length > 0,
+    );
   const lab = await page.evaluate(async () => {
     await new Promise<void>((resolve) =>
       requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
@@ -518,11 +561,11 @@ test('public content accessibility and recorded local paint measurements', async
     };
   });
   await writeFile(
-    `${evidence}/public-lab-performance.json`,
+    `${evidence()}/public-lab-performance.json`,
     JSON.stringify(
       {
         recordedAt: new Date().toISOString(),
-        environment: `${process.platform}/${process.arch} local Workers runtime; Chromium ${browser.version()}; no network/CPU throttling`,
+        environment: `${process.platform}/${process.arch} local preview; ${browserName} ${browser.version()}; no network/CPU throttling`,
         ...lab,
         fieldCoreWebVitals: 'NOT MEASURED',
         caveat:

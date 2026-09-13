@@ -47,6 +47,10 @@ export function compareSnapshots(
         'Choose snapshots for the same account. Stable account IDs differ.',
       );
   } else {
+    if (!previous.account.username.trim() || !next.account.username.trim())
+      throw new Error(
+        'Account identity is unknown. Add the same optional account label before saving snapshots to compare them.',
+      );
     if (
       normalizeUsername(previous.account.username) !==
       normalizeUsername(next.account.username)
@@ -58,7 +62,17 @@ export function compareSnapshots(
       'Account identity is username-only in at least one snapshot. Rename, reactivation, and username-reuse uncertainty remains.',
     );
   }
-  if (!listComplete(previous) || !listComplete(next))
+  const suppliedFiles =
+    previous.comparisonBasis === 'supplied_files' &&
+    next.comparisonBasis === 'supplied_files';
+  if (
+    (previous.comparisonBasis === 'supplied_files') !==
+    (next.comparisonBasis === 'supplied_files')
+  )
+    throw new Error(
+      'Uploaded-file and automatic-source snapshots use different comparison scopes.',
+    );
+  if (!suppliedFiles && (!listComplete(previous) || !listComplete(next)))
     throw new Error(
       'Snapshot differences require complete, terminal lists in both snapshots. Partial or unverified snapshots cannot establish absence.',
     );
@@ -93,9 +107,17 @@ export function compareSnapshots(
     previous.following.records,
     next.following.records,
   ]);
-  if (indexed.collision)
+  if (indexed.collision && !suppliedFiles)
     throw new Error(
       'Conflicting stable IDs make snapshot identity ambiguous. Historical differences are withheld.',
+    );
+  if (suppliedFiles)
+    warnings.push(
+      'These differences compare the supplied uploaded files; they are not verified current Instagram relationship changes.',
+      ...previous.followers.metadata.warnings,
+      ...previous.following.metadata.warnings,
+      ...next.followers.metadata.warnings,
+      ...next.following.metadata.warnings,
     );
   warnings.push(
     ...indexed.warnings,
@@ -105,7 +127,9 @@ export function compareSnapshots(
     left: Map<string, AccountRecord>,
     right: Map<string, AccountRecord>,
   ): AccountRecord[] =>
-    [...left].filter(([key]) => !right.has(key)).map(([, record]) => record);
+    [...left]
+      .filter(([key]) => !right.has(key) && !indexed.ambiguousKeys.has(key))
+      .map(([, record]) => record);
   return {
     followersAdded: difference(indexed.lists[1]!, indexed.lists[0]!),
     followersAbsent: difference(indexed.lists[0]!, indexed.lists[1]!),

@@ -2,7 +2,7 @@ import {
   compareDataset,
   compareSnapshots,
   createSampleDataset,
-  importInstagram,
+  importInstagramFiles,
 } from '@mutuallens/core';
 import type { Dataset, ImportOptions, Snapshot } from '@mutuallens/core';
 
@@ -15,16 +15,6 @@ type Request =
 self.onmessage = async ({ data }: MessageEvent<Request>) => {
   try {
     const started = performance.now();
-    if (
-      data.kind === 'import' &&
-      (data.files.length > 2000 ||
-        data.files.reduce((total, file) => total + file.size, 0) >
-          64 * 1024 * 1024)
-    ) {
-      throw new Error(
-        'These files exceed the local memory safety budget (64 MiB total input or 2,000 files). Select only the relevant followers and following JSON files. No record-count limit is applied.',
-      );
-    }
     if (data.kind === 'history') {
       self.postMessage({
         id: data.id,
@@ -32,20 +22,12 @@ self.onmessage = async ({ data }: MessageEvent<Request>) => {
       });
       return;
     }
-    const files = [];
-    if (data.kind === 'import') {
-      for (const file of data.files)
-        files.push({
-          name: file.name,
-          bytes: new Uint8Array(await file.arrayBuffer()),
-        });
-    }
     const dataset =
       data.kind === 'sample'
         ? createSampleDataset()
         : data.kind === 'compare'
           ? data.dataset
-          : await importInstagram(files, data.options);
+          : await importInstagramFiles(data.files, data.options);
     self.postMessage({
       id: data.id,
       result: {
@@ -55,7 +37,14 @@ self.onmessage = async ({ data }: MessageEvent<Request>) => {
       },
     });
   } catch (error) {
+    const assignments =
+      error instanceof Error &&
+      'assignments' in error &&
+      Array.isArray(error.assignments)
+        ? error.assignments
+        : undefined;
     self.postMessage({
+      ...(assignments ? { assignments } : {}),
       id: data.id,
       error:
         error instanceof Error

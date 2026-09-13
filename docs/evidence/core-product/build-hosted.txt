@@ -1,0 +1,53 @@
+
+> mutuallens@0.1.0 build
+> npm run build -w @mutuallens/checker && npm run build -w @mutuallens/site && node scripts/build-security.mjs
+
+
+> @mutuallens/checker@0.1.0 build
+> vite build
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 57 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.79 kB │ gzip:  0.44 kB
+dist/assets/processing.worker-BoAbIY2g.js   89.30 kB
+dist/assets/index-DngKauON.css              20.79 kB │ gzip:  4.86 kB
+dist/assets/index-C2ydvX6I.js              243.63 kB │ gzip: 75.19 kB
+
+✓ built in 74ms
+
+> @mutuallens/site@0.1.0 build
+> ASTRO_TELEMETRY_DISABLED=1 astro build
+
+22:37:32 [types] Generated 15ms
+22:37:32 [build] output: "static"
+22:37:32 [build] mode: "static"
+22:37:32 [build] directory: /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site/dist/
+22:37:32 [build] Collecting build info...
+22:37:32 [build] ✓ Completed in 27ms.
+22:37:32 [build] Building static entrypoints...
+22:37:32 [vite] ✓ built in 57ms
+22:37:32 [vite] ✓ built in 9ms
+22:37:32 [build] Rearranging server assets...
+
+ generating static routes 
+22:37:32   ├─ /404.html (+6ms) 
+22:37:32   ├─ /about/index.html (+1ms) 
+22:37:32   ├─ /contact/index.html (+1ms) 
+22:37:32   ├─ /guides/download-instagram-followers/index.html (+1ms) 
+22:37:32   ├─ /guides/followers-vs-following/index.html (+1ms) 
+22:37:32   ├─ /guides/instagram-export-troubleshooting/index.html (+1ms) 
+22:37:32   ├─ /guides/not-following-back-vs-unfollowed/index.html (+1ms) 
+22:37:32   ├─ /instagram-follow-back-checker/index.html (+1ms) 
+22:37:32   ├─ /privacy/index.html (+1ms) 
+22:37:32   ├─ /robots.txt (+1ms) 
+22:37:32   ├─ /sitemap.xml (+1ms) 
+22:37:32   ├─ /terms/index.html (+1ms) 
+22:37:32   ├─ /index.html (+1ms) 
+22:37:32 ✓ Completed in 21ms.
+
+22:37:32 [build] ✓ Completed in 100ms.
+22:37:32 [build] 11 page(s) built in 130ms
+22:37:32 [build] Complete!

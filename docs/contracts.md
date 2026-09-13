@@ -1,20 +1,20 @@
 # Shared interfaces
 
-`packages/core/src/types.ts` is owned by the lead. The core package exports:
+The controlling upload requirements are [Core_Product_Amendment.md](specification/Core_Product_Amendment.md). Earlier completeness-checkbox rules are historical and do not gate uploaded comparisons.
 
-```
-normalizeUsername(value: string): string // throws on invalid username/profile URL; preserve dot/underscore
-compareDataset(dataset: Dataset): Comparison
-importInstagram(files: ImportFile[], options: ImportOptions): Promise<Dataset>
-createSampleDataset(size?: number, offset?: number): Dataset // default 6000 and 1500; synthetic only
-exportCsv(records: AccountRecord[]): string
-exportDataset(dataset: Dataset): string
-createSnapshot(dataset: Dataset): Snapshot
-compareSnapshots(before: Snapshot, after: Snapshot): SnapshotComparison
-```
+`packages/core/src/types.ts` is lead-owned. The core exports normalization, `compareDataset`, `importInstagram` (byte inputs), `importInstagramFiles` (sliced File/Blob inputs), sample creation, CSV/dataset exports and snapshot comparison. See [core-formats.md](core-formats.md) for exact compatibility and resource budgets.
 
-React imports these from `@mutuallens/core`. `importInstagram` supports ZIP and loose/split JSON through `fflate`, enforces byte/entry/ratio/path/text safety. It must not invent archive collection dates or assume missing directions empty. Import completeness defaults unverified until user confirms all parts. Unknown account identity/date prevents historical comparison. Identity collisions withhold negatives. Snapshots stored explicitly in checker IndexedDB by UI, off by default. Lists remain in memory otherwise. Worker processing preferred for import/compare.
+Uploaded datasets use `comparisonBasis: 'supplied_files'`. They do not gain live verification or artificial terminal markers. Ordinary supplied lists yield both set differences immediately. Known omitted rows/parts produce provisional labels, counts and export limitations. Conflicting identities are quarantined locally; usable identities still compare. An entirely missing direction is an actionable error; a recognized empty list is valid. Unknown account identity is `{username:''}` and only prevents account-linked history. Optional collection date and account labels never block basic comparison.
 
-The checker fetches `GET /api/capabilities` returning `{ release: 'preview', automatic: { enabled: false, status: 'blocked', reason: string }, ads: false }`. All scan routes fail closed with HTTP 503 and code `AUTOMATIC_UNAVAILABLE`; no provider or synthetic data is called. A verified provider, real live gate, durable budget/session safeguards are prerequisites for replacing this boundary. Do not simulate live progress.
+Automatic datasets use `comparisonBasis: 'source_evidence'`. Negative relationships remain withheld unless both source lists have adequate completion evidence and safe identity resolution. Synthetic examples stay labeled synthetic. The worker returns import assignments when loose-file direction cannot be established; it never chooses based on list size.
 
-Public site configured with `PUBLIC_SITE_ORIGIN` and `PUBLIC_CHECKER_ORIGIN`, checker with `VITE_SITE_ORIGIN`. Local defaults `http://localhost:4321` and `http://localhost:5173`. All preview pages noindex, all ads disabled, no ads.txt fabricated. Deployment origins will be filled only after actual reservation. Public titles/canonicals/social metadata/sitemap derive from configured origin. Public content accurately labels preview limitations.
+The checker API always sends private/no-store/noindex responses, has no CORS access, and rejects cross-origin state changes. In the deployed unconfigured preview, capabilities report `enabled:false`, scan routes return503/null results, and no provider calls occur. The implemented configured routes are:
+
+- `POST /api/session`: same-origin HttpOnly, Secure, SameSite Strict session cookie.
+- `POST /api/scans`: username + UUID idempotency key, reserving capacity atomically.
+- `GET /api/scans/:id/status`, `POST .../advance`, `DELETE /api/scans/:id`: session-owned bounded job steps and cancellation.
+- `GET .../result?direction=followers|following&offset=N`: terminal-job record pages, with stable source metadata. Dataset offsets are separate from upstream continuation cursors.
+
+The client retains only an opaque job ID in sessionStorage for explicit resume. The server stores hashed session ownership, per-direction records/checkpoints and credit reservations. See [automatic-integration.md](automatic-integration.md) for activation, retention and unmeasured live gates. No fake progress percentages or synthetic fallback exist.
+
+Public and checker origins differ; no account data is passed between them. Preview metadata and HTTP headers enforce noindex. Ads are disabled and no publisher identifiers or ads.txt are fabricated.

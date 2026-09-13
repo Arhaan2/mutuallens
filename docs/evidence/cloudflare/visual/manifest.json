@@ -1,0 +1,54 @@
+{
+  "testedAt": "2026-09-08T02:44:16.179Z",
+  "browser": "153.0.8010.12",
+  "origins": [
+    "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+    "https://codex-ui-functional-repair.mutuallens-app.pages.dev"
+  ],
+  "buildInfo": {
+    "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev": {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "status": 200,
+      "body": "{\"commit\":\"75a340ec010b62cc90db3f6275313173e9b0ac77\",\"sourceHash\":\"947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157\",\"builtAt\":\"2026-09-08T02:41:33.672Z\"}"
+    },
+    "https://codex-ui-functional-repair.mutuallens-app.pages.dev": {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "status": 200,
+      "body": "{\"commit\":\"75a340ec010b62cc90db3f6275313173e9b0ac77\",\"sourceHash\":\"947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157\",\"builtAt\":\"2026-09-08T02:41:33.672Z\"}"
+    }
+  },
+  "screenshots": [
+    {
+      "name": "entry-1440.png",
+      "sha256": "a24569ca221f9e1eeb3375dcd91715da78667e8b2e00a178466f0d4960c47403"
+    },
+    {
+      "name": "entry-390.png",
+      "sha256": "1b9a6325e6f004273e4e7b47508a12a256fdbb7541d7d22e68b4dae08f8d44c8"
+    },
+    {
+      "name": "home-1440.png",
+      "sha256": "dae2d683ebd5bfd2e9475f3df6c496671cf70d9c5e2ca478d027f4a09b3a3da1"
+    },
+    {
+      "name": "home-390.png",
+      "sha256": "2f644406e62f5982ae7e26984442d745e04f5a0b46a58a3cb31363fde4c8553f"
+    },
+    {
+      "name": "sample-1440.png",
+      "sha256": "4b330988fca308a795136d8576ec4922e1aa65683a4ec8a72e4a78ee6e12276f"
+    },
+    {
+      "name": "sample-390.png",
+      "sha256": "696fbe76ddaf1a8e3a595199b1e928ac87462a35625cf9c8593deb45f1a154bf"
+    },
+    {
+      "name": "sample-natural-1440.png",
+      "sha256": "c4d97ff28028501f586096ab81e3c9a7d35850d6232217931dc186e4500792aa"
+    },
+    {
+      "name": "sample-natural-390.png",
+      "sha256": "c63eaf84c0acce6b1fe3f43b791c6cedd2bd88f3259d8af45ca5b2dce61a9466"
+    }
+  ]
+}

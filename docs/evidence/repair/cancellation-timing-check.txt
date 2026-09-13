@@ -1,0 +1,27 @@
+
+> mutuallens@0.1.0 test:browser
+> playwright test repair-transitions --project=webkit --repeat-each=3
+
+[WebServer] (node:59277) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:59337) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:59159) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:59431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [webkit] › tests/browser/repair-transitions.spec.ts:81:1 › repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot (647ms)
+  ✓  2 [webkit] › tests/browser/repair-transitions.spec.ts:129:1 › repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work (2.9s)
+(node:59501) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [webkit] › tests/browser/repair-transitions.spec.ts:81:1 › repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot (598ms)
+  ✓  4 [webkit] › tests/browser/repair-transitions.spec.ts:129:1 › repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work (2.9s)
+(node:59530) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [webkit] › tests/browser/repair-transitions.spec.ts:81:1 › repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot (569ms)
+  ✓  6 [webkit] › tests/browser/repair-transitions.spec.ts:129:1 › repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work (2.8s)
+
+  6 passed (13.6s)

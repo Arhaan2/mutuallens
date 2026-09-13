@@ -1,0 +1,25 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "mutuallens-app",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-09-07",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "JOBS",
+      "database_name": "mutuallens-jobs",
+      "migrations_dir": "../../packages/acquisition/migrations",
+    },
+  ],
+  "vars": {
+    "AUTOMATIC_ENABLED": "false",
+    "AUTOMATIC_VALIDATION_ID": "",
+    "AUTOMATIC_WINDOW_USD": "4.5",
+    "AUTOMATIC_JOB_USD": "3",
+    "AUTOMATIC_RUN_USD": "0.1",
+    "AUTOMATIC_RESERVE_USD": "0.5",
+  },
+  "secrets": {
+    "required": ["APIFY_TOKEN"],
+  },
+}

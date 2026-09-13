@@ -1,0 +1,108 @@
+---
+import Page from '../../layouts/Page.astro';
+import { checkerUrl, sitePath } from '../../lib/urls';
+---
+
+<Page
+  article
+  title="How to read MutualLens snapshot history"
+  description="Compare compatible saved relationship reports without confusing save time, source collection time, observed absence, or a verified unfollow."
+>
+  <p class="eyebrow">GUIDE · SAVED SNAPSHOTS</p><h1>
+    A snapshot preserves a report, not a motive.
+  </h1><p class="lede">
+    Saving two reports can show how their supplied records differ. The result is
+    only as comparable as the account identity, collection dates and source
+    scope recorded with both snapshots.
+  </p>
+  <h2>Save time and source time are different</h2><p>
+    MutualLens records when you save a snapshot in the browser. That timestamp
+    does not say when Instagram collected the relationship files. Historical
+    comparison needs known, ordered source collection dates; the date you
+    downloaded, opened or imported a file cannot substitute for a missing source
+    date.
+  </p>
+  <h2>Label the account before saving</h2><p>
+    Basic upload comparison does not require a username. Snapshot comparison
+    does need evidence that both reports describe the same account. Add the same
+    optional account label before saving when a stable account ID is not
+    available. Username-only matching still carries rename, reactivation and
+    username-reuse uncertainty.
+  </p>
+  <h2>Compare compatible sources</h2><ul>
+    <li>
+      Choose the genuinely earlier collection as the first snapshot and the
+      later, non-overlapping collection as the second.
+    </li><li>
+      Keep source formats and adapter versions compatible. Uploaded-file and
+      automatic-source reports describe different evidence scopes.
+    </li><li>
+      Uploaded-file comparisons preserve any skipped-row, missing-part or
+      ambiguous-identity warnings from both reports.
+    </li><li>
+      Automatic-source history needs complete, terminal lists in both
+      directions. A partial automatic scan cannot establish a confirmed
+      negative.
+    </li>
+  </ul>
+  <h2>Read the four change groups literally</h2>
+  <div class="comparison-table">
+    <table>
+      <caption
+        >What a comparison between two compatible snapshots reports</caption
+      >
+      <thead
+        ><tr><th scope="col">Group</th><th scope="col">Meaning</th></tr></thead
+      >
+      <tbody>
+        <tr
+          ><th scope="row">Followers present later</th><td
+            >Absent from the earlier supplied followers list; present in the
+            later one.</td
+          ></tr
+        >
+        <tr
+          ><th scope="row">Followers absent later</th><td
+            >Present in the earlier supplied followers list; absent from the
+            later one.</td
+          ></tr
+        >
+        <tr
+          ><th scope="row">Following present later</th><td
+            >Absent from the earlier supplied following list; present in the
+            later one.</td
+          ></tr
+        >
+        <tr
+          ><th scope="row">Following absent later</th><td
+            >Present in the earlier supplied following list; absent from the
+            later one.</td
+          ></tr
+        >
+      </tbody>
+    </table>
+  </div>
+  <p>
+    “Absent later” is not an exact unfollow timestamp. A platform-side change,
+    username change, account state, incomplete source or collection-window
+    difference may also explain the observation. The checker does not assign a
+    reason or intent.
+  </p>
+  <h2>Know where local copies live</h2><p>
+    Nothing is saved automatically. When you choose to save, the snapshot is
+    stored in IndexedDB on the checker’s browser origin. Other people using the
+    same browser profile may be able to view it. Browser cleanup, private
+    browsing or a different checker address can make it unavailable.
+  </p><p>
+    Export a snapshot if you need your own backup. “Delete all local snapshots”
+    removes the app-controlled copies on that checker origin, but it cannot
+    remove files you already downloaded or browser-managed backups.
+  </p>
+  <div class="article-actions">
+    <a class="button primary" href={checkerUrl('history')}
+      >Open saved snapshots <span aria-hidden="true">↗</span></a
+    ><a href={sitePath('/guides/not-following-back-vs-unfollowed/')}
+      >Why a difference is not proof of an unfollow</a
+    >
+  </div>
+</Page>

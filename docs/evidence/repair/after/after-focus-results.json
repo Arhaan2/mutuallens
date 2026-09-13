@@ -1,0 +1,42 @@
+[
+  {
+    "width": 390,
+    "url": "http://localhost:5173/",
+    "outline": "rgb(63, 96, 45) solid 3px",
+    "outlineOffset": "4px",
+    "background": "rgb(255, 255, 255)",
+    "focused": true,
+    "reducedMotion": true,
+    "scrollBehavior": "auto"
+  },
+  {
+    "width": 390,
+    "url": "http://localhost:4321/",
+    "outline": "rgb(63, 96, 45) solid 3px",
+    "outlineOffset": "5px",
+    "background": "rgb(247, 248, 245)",
+    "focused": true,
+    "reducedMotion": true,
+    "scrollBehavior": "auto"
+  },
+  {
+    "width": 1440,
+    "url": "http://localhost:5173/",
+    "outline": "rgb(63, 96, 45) solid 3px",
+    "outlineOffset": "4px",
+    "background": "rgb(255, 255, 255)",
+    "focused": true,
+    "reducedMotion": true,
+    "scrollBehavior": "auto"
+  },
+  {
+    "width": 1440,
+    "url": "http://localhost:4321/",
+    "outline": "rgb(63, 96, 45) solid 3px",
+    "outlineOffset": "5px",
+    "background": "rgb(247, 248, 245)",
+    "focused": true,
+    "reducedMotion": true,
+    "scrollBehavior": "auto"
+  }
+]

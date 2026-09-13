@@ -1,0 +1,212 @@
+{
+  "kind": "ACTUAL_HOSTED_PREVIEW_SECURITY",
+  "startedAt": "2026-09-08T05:43:51.816Z",
+  "expected": {
+    "commit": "f0165de28d71180f9018eed8c1bd30633bfd6415",
+    "sourceHash": "ffbc199edb1b72999beae53778e41f8b9f29b50d2652d6d82bd14df18643b1e1"
+  },
+  "origins": {
+    "public": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev",
+    "checker": "https://codex-ui-functional-repair.mutuallens-app.pages.dev"
+  },
+  "observations": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 791,
+      "sha256": "410ff5f9c40ae065c5ed280e2dff50ec5f334741331ed634cc04f00d801bbc3d"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 7926,
+      "sha256": "7b2f4b18769070572aeb15d6538aa88482b370147b63370fce89d86d2bee486b"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://10037ccf.mutuallens-ddm.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://80455a41.mutuallens-app.pages.dev/build-info.json",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 170,
+      "sha256": "3d8c78ae7b8ca6ef2b76c76a55fb33d986178edea81e4b270adef2f1fdd2b85f"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/robots.txt",
+      "method": "GET",
+      "status": 200,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "referrer-policy": "no-referrer",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": null
+      },
+      "setsCookie": false,
+      "bytes": 96,
+      "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d"
+    }
+  ],
+  "assets": [],
+  "assertions": [
+    {
+      "name": "public: HTTPS document200",
+      "passed": true
+    },
+    {
+      "name": "public: noindex header and HTML",
+      "passed": true
+    },
+    {
+      "name": "public: self script/connect, no frames/objects",
+      "passed": true
+    },
+    {
+      "name": "public: nosniff and no-referrer",
+      "passed": true
+    },
+    {
+      "name": "checker: HTTPS document200",
+      "passed": true
+    },
+    {
+      "name": "checker: noindex header and HTML",
+      "passed": true
+    },
+    {
+      "name": "checker: self script/connect, no frames/objects",
+      "passed": true
+    },
+    {
+      "name": "checker: nosniff and no-referrer",
+      "passed": true
+    },
+    {
+      "name": "public and checker use separate origins",
+      "passed": true
+    },
+    {
+      "name": "build1: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "build2: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "build3: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "build4: exact commit/source",
+      "passed": true
+    },
+    {
+      "name": "codex-ui-functional-repair.mutuallens-ddm.pages.dev: robots disallow",
+      "passed": false
+    }
+  ],
+  "liveProviderRuns": 0,
+  "realInstagramTargets": 0,
+  "result": "FAIL",
+  "failure": "Security assertion failed: codex-ui-functional-repair.mutuallens-ddm.pages.dev: robots disallow",
+  "finishedAt": "2026-09-08T05:43:52.691Z",
+  "assertionsPassed": 13
+}

@@ -1,0 +1,26 @@
+{
+  "observedAt": "2026-09-08T02:45:23.796Z",
+  "project": "mutuallens-app",
+  "request": {
+    "deployment_configs": {
+      "preview": {
+        "fail_open": false
+      },
+      "production": {
+        "fail_open": false
+      }
+    }
+  },
+  "httpStatus": 200,
+  "verified": {
+    "previewFailOpen": false,
+    "productionFailOpen": false,
+    "latestDeploymentFailOpen": null
+  },
+  "earlierAttempt": {
+    "httpStatus": 400,
+    "code": 8000066,
+    "reason": "Cloudflare requires equal fail_open values in preview and production; no change applied by rejected preview-only request."
+  },
+  "quotaExhaustionTest": "NOT RUN: do not intentionally exhaust the shared account quota"
+}

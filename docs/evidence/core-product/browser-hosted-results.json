@@ -1,0 +1,599 @@
+{
+  "config": {
+    "argv": [
+      "/Users/arhaan/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/hosted/playwright.config.ts"
+    ],
+    "configFile": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/hosted/playwright.config.ts",
+    "rootDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/hosted",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/test-results/hosted/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/hosted",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/test-results/hosted/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/hosted",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/test-results/hosted/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/hosted",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../../test-results/hosted/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "hosted.spec.ts",
+      "file": "hosted.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2761,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:13.397Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjE2LjIxN1oiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jc2FtcGxlIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvX2FzdHJvL1BhZ2UuRFdTTmdwZzguY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-d52f1ee85af2fababbfd",
+          "file": "hosted.spec.ts",
+          "line": 142,
+          "column": 1
+        },
+        {
+          "title": "hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 984,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:16.262Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjE3LjIyMFoiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jaW1wb3J0IiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-be1c3f2bacf13de2af3e",
+          "file": "hosted.spec.ts",
+          "line": 211,
+          "column": 1
+        },
+        {
+          "title": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2124,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:17.252Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjE5LjM1NVoiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICJzeW50aGV0aWMiOiB0cnVlLAogICJlcnJvcnMiOiBbXSwKICAicmVxdWVzdHMiOiBbCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9CiAgXSwKICAiaHR0cEZhaWx1cmVzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-2883958810ebebd4eda2",
+          "file": "hosted.spec.ts",
+          "line": 284,
+          "column": 1
+        },
+        {
+          "title": "hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:19.381Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjIxLjc0N1oiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICJzeW50aGV0aWMiOiB0cnVlLAogICJlcnJvcnMiOiBbXSwKICAicmVxdWVzdHMiOiBbCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-8494190242ed3e0256db",
+          "file": "hosted.spec.ts",
+          "line": 351,
+          "column": 1
+        },
+        {
+          "title": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1892,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:21.961Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjIzLjk4M1oiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvI3NhbXBsZSIsCiAgInN5bnRoZXRpYyI6IHRydWUsCiAgImVycm9ycyI6IFtdLAogICJyZXF1ZXN0cyI6IFsKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1kZG0ucGFnZXMuZGV2LyIsCiAgICAgICJ0eXBlIjogImRvY3VtZW50IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1kZG0ucGFnZXMuZGV2L19hc3Ryby9QYWdlLkRXU05ncGc4LmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9CiAgXSwKICAiaHR0cEZhaWx1cmVzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-66e7e824a2305823b2a3",
+          "file": "hosted.spec.ts",
+          "line": 142,
+          "column": 1
+        },
+        {
+          "title": "hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1747,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:24.007Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjI1LjczNloiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvI2ltcG9ydCIsCiAgInN5bnRoZXRpYyI6IHRydWUsCiAgImVycm9ycyI6IFtdLAogICJyZXF1ZXN0cyI6IFsKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LyIsCiAgICAgICJ0eXBlIjogImRvY3VtZW50IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1DMnlkdlg2SS5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtRG5nS2F1T04uY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hcGkvY2FwYWJpbGl0aWVzIiwKICAgICAgInR5cGUiOiAiZmV0Y2giCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvNTc1MmJlZjQtOWM3ZS00YWQwLWFiMWUtYTZkNDZhOGNhMGE5IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvNjY0NzI3MDItYmY3Ni00NWFiLWFkNWYtOGIwMTJkODNlM2RmIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvNjYxYWRjZjktZWU4Mi00ODUzLWFlNWUtMjA3MGViNzRlZGViIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvODA2YTQ5NzktMDBjNS00MTI1LWFlMDYtODhkMzBhNzllNWU5IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvZjg4NmMyNjItMzQzOC00NDMxLWE1NDItNDNmMmMxNTBhZDZmIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvNWE3NzJkZWQtODhlMi00ZmRkLTgzN2UtNmYyNGU0MTQzYjMyIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvMWFhMWIzZDktNjI1OS00MTVlLThlYjMtNWNiZWIwNDFhZDY4IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYzg0MmVlNTMtZDdhZC00N2MyLWJjNDgtYWRlMjk5NzQwNjJiIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYzE0NGM2YzMtZTFhZi00ZTgzLTg3NzEtMWQyYTkzZGQyZDE0IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvZWNmMjExMGItNGY4Yi00NDY1LTlkNjMtNDFmYjcyM2UyZmJhIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYTgwNjlhMzgtMzU5MS00NTlkLWIzYTMtMzMyODc2NmIwNjlkIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2QwODBkZWRmLWJlNWQtNDYxMi1hZGUyLWE5MjdmZWZmY2YwZCIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Q5MmVjMDNlLWU1MmYtNGI0NC05MmRmLTZlMTExZDllYWMwMyIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LzQ1MTNlZTY5LThkYzYtNGRkMy1iMWY5LWRjMzZiMmFiZTBjMiIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-05ee3eac184e0198eddb",
+          "file": "hosted.spec.ts",
+          "line": 211,
+          "column": 1
+        },
+        {
+          "title": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5994,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:25.759Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjMxLjczNloiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiYmxvYjpodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi82M2YzMGQ0Yi05NjM3LTRjMjMtYmNiMi05YWFhYjczNGRhMWUiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiYmxvYjpodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9iMDI5MjYxNC1mM2FhLTRkZjktOGY5MC0zOTYzZDY1NDFlNTQiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvMGE0NDM5YTctNWJkMy00YmIzLTgzOTYtNmYwNjk0MzNhMWUzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvMWY3MzlhNWMtOGQwYy00ODZlLWJiYjQtZWViZTkyZGJjMmY2IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LyIsCiAgICAgICJ0eXBlIjogImRvY3VtZW50IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1DMnlkdlg2SS5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtRG5nS2F1T04uY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hcGkvY2FwYWJpbGl0aWVzIiwKICAgICAgInR5cGUiOiAiZmV0Y2giCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-fedb03cc5b48370ce5c7",
+          "file": "hosted.spec.ts",
+          "line": 284,
+          "column": 1
+        },
+        {
+          "title": "hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2102,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:31.757Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjMzLjg0MFoiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiYmxvYjpodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9jMmM0MGM2NS05Mjc5LTRkNDItYTA2Yy1hNTFjNTQxZTlmYTgiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiYmxvYjpodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8xYmM1YjI1NS0xYzA3LTRhNzktODJkZi1iNTI5N2UwZDI4N2MiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvOThlMjhjMjQtYmFiMC00NzI1LWEzYjgtMWRmNjk4NjQ1MTkxIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LzcwZmFhMDZjLTI0M2UtNDNmZi1iM2U4LTZiMmUxMTVmYWJmYyIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2I4M2E4YjhhLWNiOTUtNGUxNC1iZWU4LTZiYzFhZDMzZThkYiIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-3c469e044e8e1c73e726",
+          "file": "hosted.spec.ts",
+          "line": 351,
+          "column": 1
+        },
+        {
+          "title": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3469,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:34.078Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjM3LjkxN1oiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jc2FtcGxlIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvX2FzdHJvL1BhZ2UuRFdTTmdwZzguY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-d7ed7f9cc66a60dd9d83",
+          "file": "hosted.spec.ts",
+          "line": 142,
+          "column": 1
+        },
+        {
+          "title": "hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 858,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:37.963Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjM4Ljc5NFoiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jaW1wb3J0IiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-796c72eb85cf7043282f",
+          "file": "hosted.spec.ts",
+          "line": 211,
+          "column": 1
+        },
+        {
+          "title": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:38.825Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjQxLjgxMFoiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICJzeW50aGV0aWMiOiB0cnVlLAogICJlcnJvcnMiOiBbXSwKICAicmVxdWVzdHMiOiBbCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUMyeWR2WDZJLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1EbmdLYXVPTi5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9CiAgXSwKICAiaHR0cEZhaWx1cmVzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-3b2f6ad408d5b9a7928a",
+          "file": "hosted.spec.ts",
+          "line": 284,
+          "column": 1
+        },
+        {
+          "title": "hosted: direct 6k by 6k upload needs no metadata and fully browses, exports, reopens and matches HTML",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:40:41.843Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDA1OjQwOjQ0LjIyNFoiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICJzeW50aGV0aWMiOiB0cnVlLAogICJlcnJvcnMiOiBbXSwKICAicmVxdWVzdHMiOiBbCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQzJ5ZHZYNkkuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LURuZ0thdU9OLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1Cb0FiSVkyZy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItQm9BYklZMmcuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUJvQWJJWTJnLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-1968accd042d84fe5bf2",
+          "file": "hosted.spec.ts",
+          "line": 351,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-08T05:40:13.189Z",
+    "duration": 31225.033,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

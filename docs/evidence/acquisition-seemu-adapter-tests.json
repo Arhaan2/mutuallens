@@ -1,0 +1,15 @@
+{
+  "type": "SYNTHETIC_UNIT_TESTS_ONLY",
+  "recordedAt": "2026-09-08T05:11:07.112Z",
+  "files": {
+    "packages/acquisition/src/apify.ts": "564229a6fb9233c254b8dc8bd7447a666bb83186a4710e8f1820dc119abce839",
+    "packages/acquisition/test/apify.test.ts": "93ce0a6a4b939d5610c3077aee031e1bb9e6c963efa6bf2c2365fbd12a706ef2"
+  },
+  "command": "npm test -- packages/acquisition/test/apify.test.ts",
+  "testFilesPassed": 1,
+  "testsPassed": 89,
+  "liveProviderRuns": 0,
+  "ownedEslint": "PASS",
+  "ownedFormatting": "PASS",
+  "wholeWorktreeTypecheck": "FAIL: unrelated in-progress packages/core/src/import.ts393-394 options.account possibly undefined; no adapter/test errors"
+}

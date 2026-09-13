@@ -1,0 +1,684 @@
+{
+  "testedAt": "2026-09-08T01:37:02.193Z",
+  "engine": "153.0.8010.12",
+  "viewports": [
+    {
+      "width": 360,
+      "states": {
+        "home": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 3729,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 9
+        },
+        "entry": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 2832,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 4
+        },
+        "resultNatural": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 5288,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "result": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 281,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 5288,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "import": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4643,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 6426,
+          "focused": "<h2 id=\"import-title\" tabindex=\"-1\">Bring your own export.</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "error": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5391,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 6590,
+          "focused": "<div tabindex=\"-1\" role=\"alert\" class=\"notice error\"><strong>We couldn’t complete that action.</strong><p>Select a ZIP archive or all relevant JSON files first.</p><button type=\"button\" class=\"text-button\">Dismiss</button></div>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "history": {
+          "width": 360,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5884,
+          "docWidth": 360,
+          "bodyWidth": 360,
+          "docHeight": 6784,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 4
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173/#sample",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(63, 96, 45) solid 3px"
+      },
+      "resultsTop": 305.3125,
+      "firstRowTop": 1147.671875,
+      "entryCount": 0,
+      "errorFocused": true,
+      "errorRect": {
+        "x": 52,
+        "y": 426.90625,
+        "width": 256,
+        "height": 145.59375
+      },
+      "submitRect": {
+        "x": 52,
+        "y": 590.5,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 390,
+      "states": {
+        "home": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 3551,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 9
+        },
+        "entry": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 2768,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 4
+        },
+        "resultNatural": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 5245,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "result": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 281,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 5245,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "import": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4623,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 6383,
+          "focused": "<h2 id=\"import-title\" tabindex=\"-1\">Bring your own export.</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "error": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5370,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 6547,
+          "focused": "<div tabindex=\"-1\" role=\"alert\" class=\"notice error\"><strong>We couldn’t complete that action.</strong><p>Select a ZIP archive or all relevant JSON files first.</p><button type=\"button\" class=\"text-button\">Dismiss</button></div>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "history": {
+          "width": 390,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5819,
+          "docWidth": 390,
+          "bodyWidth": 390,
+          "docHeight": 6719,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 4
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173/#sample",
+      "homeAxe": [],
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(63, 96, 45) solid 3px"
+      },
+      "resultsTop": 305.3125,
+      "firstRowTop": 1126.875,
+      "entryCount": 0,
+      "resultsAxe": [],
+      "errorFocused": true,
+      "errorRect": {
+        "x": 52,
+        "y": 427.109375,
+        "width": 286,
+        "height": 145.59375
+      },
+      "submitRect": {
+        "x": 52,
+        "y": 590.703125,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 768,
+      "states": {
+        "home": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 2462,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 2101,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 4
+        },
+        "resultNatural": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 4792,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "result": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 232,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 4792,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "import": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4302,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 5572,
+          "focused": "<h2 id=\"import-title\" tabindex=\"-1\">Bring your own export.</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "error": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4355,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 5762,
+          "focused": "<div tabindex=\"-1\" role=\"alert\" class=\"notice error\"><strong>We couldn’t complete that action.</strong><p>Select a ZIP archive or all relevant JSON files first.</p><button type=\"button\" class=\"text-button\">Dismiss</button></div>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "history": {
+          "width": 768,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 5034,
+          "docWidth": 768,
+          "bodyWidth": 768,
+          "docHeight": 5934,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 4
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173/#sample",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(63, 96, 45) solid 3px"
+      },
+      "resultsTop": 256.1875,
+      "firstRowTop": 877,
+      "entryCount": 0,
+      "errorFocused": true,
+      "errorRect": {
+        "x": 432,
+        "y": 728.484375,
+        "width": 249,
+        "height": 171.625
+      },
+      "submitRect": {
+        "x": 432,
+        "y": 918.109375,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 1024,
+      "states": {
+        "home": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 2328,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 1992,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 4
+        },
+        "resultNatural": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 4628,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "result": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 193,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 4628,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "import": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4134,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 5341,
+          "focused": "<h2 id=\"import-title\" tabindex=\"-1\">Bring your own export.</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "error": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4134,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 5508,
+          "focused": "<div tabindex=\"-1\" role=\"alert\" class=\"notice error\"><strong>We couldn’t complete that action.</strong><p>Select a ZIP archive or all relevant JSON files first.</p><button type=\"button\" class=\"text-button\">Dismiss</button></div>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "history": {
+          "width": 1024,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4779,
+          "docWidth": 1024,
+          "bodyWidth": 1024,
+          "docHeight": 5679,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 4
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173/#sample",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(63, 96, 45) solid 3px"
+      },
+      "resultsTop": 217,
+      "firstRowTop": 708.625,
+      "entryCount": 0,
+      "errorFocused": true,
+      "errorRect": {
+        "x": 562,
+        "y": 712.53125,
+        "width": 375,
+        "height": 149.109375
+      },
+      "submitRect": {
+        "x": 562,
+        "y": 879.640625,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 1440,
+      "states": {
+        "home": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 2305,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 1927,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 4
+        },
+        "resultNatural": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 4635,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "result": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 193,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 4635,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "import": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4137,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 5279,
+          "focused": "<h2 id=\"import-title\" tabindex=\"-1\">Bring your own export.</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "error": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4137,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 5422,
+          "focused": "<div tabindex=\"-1\" role=\"alert\" class=\"notice error\"><strong>We couldn’t complete that action.</strong><p>Select a ZIP archive or all relevant JSON files first.</p><button type=\"button\" class=\"text-button\">Dismiss</button></div>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "history": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4694,
+          "docWidth": 1440,
+          "bodyWidth": 1440,
+          "docHeight": 5594,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 4
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173/#sample",
+      "homeAxe": [],
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(63, 96, 45) solid 3px"
+      },
+      "resultsTop": 217,
+      "firstRowTop": 711.96875,
+      "entryCount": 0,
+      "resultsAxe": [],
+      "errorFocused": true,
+      "errorRect": {
+        "x": 770,
+        "y": 644.296875,
+        "width": 483,
+        "height": 125.3125
+      },
+      "submitRect": {
+        "x": 770,
+        "y": 787.609375,
+        "width": 191.859375,
+        "height": 46
+      }
+    },
+    {
+      "width": 1920,
+      "states": {
+        "home": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 2305,
+          "focused": "<body><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"preview-bar\" role=\"region\" aria-label=\"Preview availability\">PRODUCT PREVIEW <span>Automatic checking is unavailable. Sample and local-import tools are available.</span></div><header class=\"site-header wrap\"><a class=\"wordmark\" h",
+          "overflow": [],
+          "smallText": 12
+        },
+        "entry": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 1927,
+          "focused": "<body>\n    <div id=\"root\"><a class=\"skip-link\" href=\"#main\">Skip to checker</a><header class=\"app-header\"><a class=\"wordmark\" href=\"http://localhost:4321\">Mutual<span>Lens</span><span class=\"wordmark-dot\" aria-hidden=\"true\"></span></a><nav aria-label=\"Main navigation\"><a href=\"http://localhost:4321/",
+          "overflow": [],
+          "smallText": 4
+        },
+        "resultNatural": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 4635,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "result": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 193,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 4635,
+          "focused": "<h2 id=\"results-title\" tabindex=\"-1\">@synthetic_example</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "import": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4137,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 5279,
+          "focused": "<h2 id=\"import-title\" tabindex=\"-1\">Bring your own export.</h2>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "error": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4137,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 5422,
+          "focused": "<div tabindex=\"-1\" role=\"alert\" class=\"notice error\"><strong>We couldn’t complete that action.</strong><p>Select a ZIP archive or all relevant JSON files first.</p><button type=\"button\" class=\"text-button\">Dismiss</button></div>",
+          "overflow": [],
+          "smallText": 4
+        },
+        "history": {
+          "width": 1920,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 4694,
+          "docWidth": 1920,
+          "bodyWidth": 1920,
+          "docHeight": 5594,
+          "focused": "<button class=\"button small\">Hide snapshots</button>",
+          "overflow": [],
+          "smallText": 4
+        }
+      },
+      "siteNav": "The checker\nGuides\nAbout\nOpen preview ↗",
+      "sampleHref": "http://localhost:5173/#sample",
+      "focus": {
+        "tag": "A",
+        "text": "Skip to checker",
+        "outline": "rgb(63, 96, 45) solid 3px"
+      },
+      "resultsTop": 217,
+      "firstRowTop": 711.96875,
+      "entryCount": 0,
+      "errorFocused": true,
+      "errorRect": {
+        "x": 1010,
+        "y": 644.296875,
+        "width": 483,
+        "height": 125.3125
+      },
+      "submitRect": {
+        "x": 1010,
+        "y": 787.609375,
+        "width": 191.859375,
+        "height": 46
+      }
+    }
+  ],
+  "defects": [],
+  "errors": []
+}

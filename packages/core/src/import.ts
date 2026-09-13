@@ -1,527 +1,628 @@
-/* eslint-disable no-control-regex -- Security validation explicitly rejects control characters. */
-import { Inflate } from 'fflate';
 import type {
   AccountList,
   AccountRecord,
   Dataset,
   Direction,
+  ImportAssignment,
   ImportFile,
   ImportOptions,
 } from './types';
 import { indexIdentities, normalizeUsername, validId } from './identity';
 import { knownCollectionDate } from './dates';
+import {
+  IMPORT_LIMITS,
+  basename,
+  decodeText,
+  directionHint,
+  excludedPath,
+  object,
+  partNumber,
+  safePath,
+} from './import-safety';
+import {
+  inspectZip,
+  newBudget,
+  readZipEntry,
+  readZipPrefix,
+} from './import-archive';
+import type { ByteSource, ReadBudget } from './import-archive';
+import { parseRelationshipHtml } from './import-html';
+import { parseNativeDataset } from './import-native';
+export { IMPORT_LIMITS } from './import-safety';
 
-// Byte/format safeguards, never follower/following-count restrictions.
-export const IMPORT_LIMITS = Object.freeze({
-  inputBytes: 64 * 1024 * 1024,
-  expandedBytes: 128 * 1024 * 1024,
-  jsonBytes: 64 * 1024 * 1024,
-  entries: 2000,
-  compressionRatio: 200,
-});
-const utf8 = new TextDecoder('utf-8', { fatal: true });
-const relevant = /^(followers|following)(?:_([1-9][0-9]*))?\.json$/i;
-const relationshipLike = /^(?:followers|following)(?:[_. -].*)?\.json$/i;
 interface Part {
   direction: Direction;
+  name: string;
   number: number | null;
-  name: string;
-  bytes: Uint8Array;
+  format: 'JSON' | 'HTML';
+  rows: unknown[];
+  unreadable?: string;
 }
-interface ZipEntry {
-  name: string;
-  size: number;
-  compressedSize: number;
-  crc: number;
-  method: number;
-  dataStart: number;
-  dataEnd: number;
-  relevant: boolean;
+interface Collection {
+  direction?: Direction;
+  rows: unknown[];
 }
-
-function decode(bytes: Uint8Array): string {
-  try {
-    return utf8.decode(bytes);
-  } catch {
-    throw new Error(
-      'The import contains invalid UTF-8 text. Export your information as JSON and try again.',
-    );
+interface Parsed {
+  parts: Part[];
+  assignments: ImportAssignment[];
+  native?: Dataset;
+}
+interface RowResult {
+  record?: AccountRecord;
+  skipped?: boolean;
+  quarantined?: boolean;
+}
+const nativeKeys = ['schemaVersion', 'account', 'followers', 'following'];
+const directions = ['followers', 'following'] as const;
+function normalizeId(value: unknown): string | undefined {
+  if (value === undefined || value === null || value === '') return undefined;
+  if (typeof value === 'number' && Number.isSafeInteger(value) && value >= 0)
+    return validId(String(value));
+  return validId(value);
+}
+function account(options: ImportOptions): Dataset['account'] {
+  if (!options.account) return { username: '' };
+  const username = options.account.username?.trim()
+    ? normalizeUsername(options.account.username)
+    : '';
+  const id = normalizeId(options.account.id);
+  return { username, ...(id ? { id } : {}) };
+}
+function collectionRows(value: unknown): unknown[] | undefined {
+  if (Array.isArray(value)) return value;
+  if (object(value)) {
+    for (const key of ['data', 'items', 'records', 'edges'])
+      if (Array.isArray(value[key])) return value[key];
   }
+  return undefined;
 }
-
-function safePath(name: string): string {
-  const parts = name.endsWith('/')
-    ? name.slice(0, -1).split('/')
-    : name.split('/');
-  if (
-    !name ||
-    name.length > 1024 ||
-    name.startsWith('/') ||
-    name.includes('\\') ||
-    /[:\u0000-\u001f\u007f]/.test(name) ||
-    parts.some((part) => part === '..' || part === '.' || part === '')
-  ) {
-    throw new Error('The archive contains an unsafe file path.');
-  }
-  return name;
-}
-
-function basename(name: string): string {
-  return name.split('/').at(-1) ?? '';
-}
-const crcTable = Uint32Array.from({ length: 256 }, (_, number) => {
-  let crc = number;
-  for (let bit = 0; bit < 8; bit++)
-    crc = crc & 1 ? 0xedb88320 ^ (crc >>> 1) : crc >>> 1;
-  return crc >>> 0;
-});
-function crc32(bytes: Uint8Array): number {
-  let crc = 0xffffffff;
-  for (const byte of bytes) crc = crcTable[(crc ^ byte) & 255]! ^ (crc >>> 8);
-  return (crc ^ 0xffffffff) >>> 0;
-}
-
-/** Inspect every central/local header before inflating anything. ZIP64/multidisk/encryption are not supported. */
-function inspectZip(bytes: Uint8Array): ZipEntry[] {
-  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-  if (bytes.length < 22) throw new Error('The ZIP archive is truncated.');
-  let end = -1;
-  for (
-    let index = bytes.length - 22;
-    index >= Math.max(0, bytes.length - 65557);
-    index--
-  ) {
-    if (
-      view.getUint32(index, true) === 0x06054b50 &&
-      index + 22 + view.getUint16(index + 20, true) === bytes.length
-    ) {
-      end = index;
-      break;
+function jsonCollections(value: unknown, hint?: Direction): Collection[] {
+  const found: Collection[] = [];
+  function walk(node: unknown, depth: number): void {
+    if (depth > 8 || !object(node)) return;
+    for (const direction of directions)
+      for (const key of [`relationships_${direction}`, direction])
+        if (Object.hasOwn(node, key)) {
+          const rows = collectionRows(node[key]);
+          if (!rows)
+            throw new Error(
+              `The ${direction} JSON container is not a supported list.`,
+            );
+          found.push({ direction, rows });
+        }
+    if (found.length) return;
+    // These are structural wrappers, not an unrestricted traversal through profile links.
+    for (const key of [
+      'data',
+      'connections',
+      'relationships',
+      'export',
+      'instagram',
+      'user',
+    ])
+      if (object(node[key])) walk(node[key], depth + 1);
+    if (object(node.edge_followed_by)) {
+      const rows = collectionRows(node.edge_followed_by);
+      if (rows) found.push({ direction: 'followers', rows });
+    }
+    if (object(node.edge_follow)) {
+      const rows = collectionRows(node.edge_follow);
+      if (rows) found.push({ direction: 'following', rows });
     }
   }
-  if (end < 0) throw new Error('The ZIP archive has no valid directory.');
-  const count = view.getUint16(end + 10, true);
-  const directorySize = view.getUint32(end + 12, true);
-  const directoryStart = view.getUint32(end + 16, true);
+  walk(value, 0);
+  if (found.length) return found;
+  const rows = collectionRows(value);
+  if (rows) return [{ ...(hint ? { direction: hint } : {}), rows }];
+  throw new Error(
+    'Unsupported Instagram JSON schema. Select a relationship array or a recognized followers/following container.',
+  );
+}
+function rowRecord(
+  value: unknown,
+  direction: Direction,
+  source: string,
+): RowResult {
+  try {
+    if (object(value) && object(value.node)) value = value.node;
+    if (typeof value === 'string') {
+      const username = normalizeUsername(value);
+      return { record: { username, originalUsername: value, source } };
+    }
+    if (!object(value)) return { skipped: true };
+    const candidates: string[] = [];
+    let invalidIdentity = false;
+    const add = (item: unknown, profile = false) => {
+      if (item === undefined || item === null || item === '') return;
+      if (typeof item !== 'string') {
+        invalidIdentity = true;
+        return;
+      }
+      try {
+        if (profile && !/^https:\/\//i.test(item.trim())) {
+          invalidIdentity = true;
+          return;
+        }
+        candidates.push(item);
+      } catch {
+        invalidIdentity = true;
+      }
+    };
+    for (const key of ['username', 'user_name', 'userName', 'handle'])
+      add(value[key]);
+    for (const key of ['href', 'url', 'profile_url', 'profileUrl'])
+      add(value[key], true);
+    if (Array.isArray(value.string_list_data)) {
+      for (const item of value.string_list_data) {
+        if (!object(item)) {
+          invalidIdentity = true;
+          continue;
+        }
+        add(item.value);
+        add(item.username);
+        add(item.href, true);
+      }
+      if (!candidates.length && direction === 'following') add(value.title);
+      else if (
+        direction === 'following' &&
+        typeof value.title === 'string' &&
+        value.title.trim() &&
+        value.string_list_data.every((item) => object(item) && !item.value)
+      )
+        add(value.title);
+    } else if (value.string_list_data !== undefined) invalidIdentity = true;
+    else add(value.value);
+    if (!candidates.length) return { skipped: true };
+    const names = new Set<string>();
+    for (const candidate of candidates) {
+      try {
+        names.add(normalizeUsername(candidate));
+      } catch {
+        invalidIdentity = true;
+      }
+    }
+    if (names.size > 1 || invalidIdentity) return { quarantined: true };
+    if (!names.size) return { skipped: true };
+    const username = names.values().next().value;
+    if (!username) return { skipped: true };
+    const id = normalizeId(value.id ?? value.pk ?? value.user_id);
+    const displayName =
+      typeof value.display_name === 'string'
+        ? value.display_name
+        : typeof value.full_name === 'string'
+          ? value.full_name
+          : undefined;
+    return {
+      record: {
+        username,
+        originalUsername: candidates[0]!,
+        source,
+        ...(id ? { id } : {}),
+        ...(displayName && displayName.length <= 1000 ? { displayName } : {}),
+      },
+    };
+  } catch {
+    return { quarantined: true };
+  }
+}
+function parseFile(
+  name: string,
+  bytes: Uint8Array,
+  options: ImportOptions,
+  loose: boolean,
+): Parsed {
+  const hint = directionHint(name),
+    assigned = options.directions?.[name];
+  if (assigned !== undefined && !directions.includes(assigned))
+    throw new Error('Choose followers or following for each assigned file.');
+  if (excludedPath(name)) {
+    if (loose)
+      throw new Error(
+        `${basename(name)} is not a follower/following list. Blocked accounts, requests, messages, and other lists are unsupported here.`,
+      );
+    return { parts: [], assignments: [] };
+  }
+  const format = /\.html?$/i.test(name) ? 'HTML' : 'JSON';
+  let text: string;
+  try {
+    text = decodeText(bytes);
+  } catch (cause) {
+    if (hint)
+      return {
+        parts: [
+          {
+            direction: hint,
+            name,
+            number: partNumber(name, hint),
+            format,
+            rows: [],
+            unreadable: (cause as Error).message,
+          },
+        ],
+        assignments: [],
+      };
+    throw cause;
+  }
+  let collections: Collection[];
+  try {
+    if (format === 'HTML')
+      collections = parseRelationshipHtml(text, assigned ?? hint);
+    else {
+      let value: unknown;
+      try {
+        value = JSON.parse(text);
+      } catch (cause) {
+        throw new Error(
+          'A relationship file is not valid JSON. Select an original JSON or HTML export.',
+          { cause },
+        );
+      }
+      if (
+        object(value) &&
+        (Object.hasOwn(value, 'schemaVersion') ||
+          nativeKeys.every((key) => Object.hasOwn(value, key)))
+      )
+        return {
+          parts: [],
+          assignments: [],
+          native: parseNativeDataset(value, options),
+        };
+      collections = jsonCollections(value, assigned ?? hint);
+    }
+  } catch (cause) {
+    if (hint)
+      return {
+        parts: [
+          {
+            direction: hint,
+            name,
+            number: partNumber(name, hint),
+            format,
+            rows: [],
+            unreadable:
+              cause instanceof Error
+                ? cause.message
+                : 'The file could not be read.',
+          },
+        ],
+        assignments: [],
+      };
+    throw cause;
+  }
+  const parts: Part[] = [];
+  const assignments: ImportAssignment[] = [];
+  for (const collection of collections) {
+    const direction = collection.direction ?? assigned ?? hint;
+    if (!direction) {
+      if (loose) {
+        assignments.push({
+          name,
+          reason:
+            'This file contains a list but its followers/following direction is not identified. Choose the direction from your export.',
+        });
+      }
+      continue;
+    }
+    if (assigned && collection.direction && assigned !== collection.direction)
+      throw new Error(
+        `The assigned direction for ${basename(name)} conflicts with its recognized ${collection.direction} container.`,
+      );
+    // A recognized content container wins over a renamed basename; never use list length.
+    parts.push({
+      direction,
+      name,
+      number: partNumber(name, direction),
+      format,
+      rows: collection.rows,
+    });
+  }
+  return { parts, assignments };
+}
+function sourceFromBytes(file: ImportFile): ByteSource {
+  return {
+    name: file.name,
+    size: file.bytes.length,
+    read: async (start, end) => file.bytes.subarray(start, end),
+  };
+}
+function sourceFromFile(file: File): ByteSource {
+  return {
+    name: file.name,
+    size: file.size,
+    read: async (start, end) =>
+      new Uint8Array(await file.slice(start, end).arrayBuffer()),
+  };
+}
+function chargeLoose(size: number, budget: ReadBudget): void {
+  if (size > IMPORT_LIMITS.jsonBytes)
+    throw new Error(
+      'A relationship file exceeds the 64 MiB local parsing budget. Select a smaller original export part.',
+    );
+  budget.compressedBytes += size;
+  budget.expandedBytes += size;
   if (
-    view.getUint16(end + 4, true) !== 0 ||
-    view.getUint16(end + 6, true) !== 0 ||
-    view.getUint16(end + 8, true) !== count ||
-    count === 0xffff ||
-    directoryStart === 0xffffffff ||
-    directorySize === 0xffffffff
+    budget.compressedBytes > IMPORT_LIMITS.inputBytes ||
+    budget.expandedBytes > IMPORT_LIMITS.expandedBytes
   )
     throw new Error(
-      'Encrypted, multipart, or ZIP64 archives are unsupported. Choose loose JSON files instead.',
+      'Selected relationship files exceed the 64 MiB input safety budget. Select only the relevant follower/following files.',
     );
-  if (count > IMPORT_LIMITS.entries)
-    throw new Error(
-      'The ZIP contains too many entries for safe local processing. Select only the follower/following JSON files.',
-    );
-  if (directoryStart + directorySize !== end)
-    throw new Error('The ZIP directory bounds are invalid.');
-  let cursor = directoryStart;
-  let totalExpanded = 0;
-  const names = new Set<string>();
-  const entries: ZipEntry[] = [];
-  const spans: { start: number; end: number }[] = [];
-  for (let index = 0; index < count; index++) {
-    if (cursor + 46 > end || view.getUint32(cursor, true) !== 0x02014b50)
-      throw new Error('The ZIP directory is malformed.');
-    const flags = view.getUint16(cursor + 8, true);
-    const method = view.getUint16(cursor + 10, true);
-    const crc = view.getUint32(cursor + 16, true);
-    const compressedSize = view.getUint32(cursor + 20, true);
-    const size = view.getUint32(cursor + 24, true);
-    const nameLength = view.getUint16(cursor + 28, true);
-    const extraLength = view.getUint16(cursor + 30, true);
-    const commentLength = view.getUint16(cursor + 32, true);
-    const disk = view.getUint16(cursor + 34, true);
-    const attributes = view.getUint32(cursor + 38, true);
-    const localStart = view.getUint32(cursor + 42, true);
-    const next = cursor + 46 + nameLength + extraLength + commentLength;
-    if (next > end) throw new Error('The ZIP entry is truncated.');
-    if (
-      flags & 1 ||
-      flags & 64 ||
-      disk ||
-      size === 0xffffffff ||
-      compressedSize === 0xffffffff ||
-      localStart === 0xffffffff
-    )
-      throw new Error(
-        'Encrypted, multipart, or ZIP64 entries are unsupported.',
-      );
-    if (method !== 0 && method !== 8)
-      throw new Error(
-        'Unsupported ZIP compression. Use a standard ZIP or loose JSON files.',
-      );
-    if (((attributes >>> 16) & 0xf000) === 0xa000)
-      throw new Error('Archive symbolic links are unsupported.');
-    const name = safePath(
-      decode(bytes.subarray(cursor + 46, cursor + 46 + nameLength)),
-    );
-    if (names.has(name.toLowerCase()))
-      throw new Error('The ZIP contains duplicate file names.');
-    names.add(name.toLowerCase());
-    totalExpanded += size;
-    if (totalExpanded > IMPORT_LIMITS.expandedBytes)
-      throw new Error(
-        'The archive expands beyond the local memory safety limit. Select only the relevant JSON files.',
-      );
-    if (size > Math.max(1, compressedSize) * IMPORT_LIMITS.compressionRatio)
-      throw new Error(
-        'The archive has an unsafe compression ratio. Choose loose JSON files.',
-      );
-    const isRelevant = relevant.test(basename(name));
-    if (!isRelevant && relationshipLike.test(basename(name)))
-      throw new Error(
-        'Unsupported relationship filename in ZIP. Export parts were not silently ignored.',
-      );
-    if (isRelevant && size > IMPORT_LIMITS.jsonBytes)
-      throw new Error('A JSON file exceeds the local memory safety limit.');
-    if (
-      localStart + 30 > directoryStart ||
-      view.getUint32(localStart, true) !== 0x04034b50
-    )
-      throw new Error('The ZIP local header is invalid.');
-    const localNameLength = view.getUint16(localStart + 26, true);
-    const localExtraLength = view.getUint16(localStart + 28, true);
-    const dataStart = localStart + 30 + localNameLength + localExtraLength;
-    const dataEnd = dataStart + compressedSize;
-    if (
-      dataStart > directoryStart ||
-      dataEnd > directoryStart ||
-      view.getUint16(localStart + 6, true) !== flags ||
-      view.getUint16(localStart + 8, true) !== method ||
-      decode(
-        bytes.subarray(localStart + 30, localStart + 30 + localNameLength),
-      ) !== name
-    )
-      throw new Error('The ZIP local and central headers disagree.');
-    if (
-      !(flags & 8) &&
-      (view.getUint32(localStart + 14, true) !== crc ||
-        view.getUint32(localStart + 18, true) !== compressedSize ||
-        view.getUint32(localStart + 22, true) !== size)
-    )
-      throw new Error('The ZIP entry sizes or checksums disagree.');
-    if (method === 0 && compressedSize !== size)
-      throw new Error('The ZIP stored entry has invalid sizes.');
-    spans.push({ start: localStart, end: dataEnd });
-    entries.push({
-      name,
-      size,
-      compressedSize,
-      crc,
-      method,
-      dataStart,
-      dataEnd,
-      relevant: isRelevant,
-    });
-    cursor = next;
-  }
-  if (cursor !== end)
-    throw new Error('The ZIP directory size is inconsistent.');
-  spans.sort((a, b) => a.start - b.start);
-  if (spans.some((span, i) => i > 0 && span.start < spans[i - 1]!.end))
-    throw new Error('The ZIP entries overlap.');
-  return entries;
 }
-
-function inflateEntry(archive: Uint8Array, entry: ZipEntry): Uint8Array {
-  let bytes: Uint8Array;
-  if (entry.method === 0) bytes = archive.slice(entry.dataStart, entry.dataEnd);
-  else {
-    const chunks: Uint8Array[] = [];
-    let actualSize = 0;
-    const inflater = new Inflate((chunk) => {
-      actualSize += chunk.length;
-      if (
-        actualSize > entry.size ||
-        actualSize > IMPORT_LIMITS.jsonBytes ||
-        actualSize >
-          Math.max(1, entry.compressedSize) * IMPORT_LIMITS.compressionRatio
-      )
+async function readSources(
+  sources: ByteSource[],
+  options: ImportOptions,
+): Promise<Parsed> {
+  if (!sources.length)
+    throw new Error(
+      'Choose follower and following JSON or HTML files, or their ZIP archives.',
+    );
+  if (sources.length > IMPORT_LIMITS.entries)
+    throw new Error(
+      'Too many selected files for safe local processing. Select only the relevant export parts.',
+    );
+  const looseBytes = sources
+    .filter((source) => !/\.zip$/i.test(source.name))
+    .reduce((sum, source) => sum + source.size, 0);
+  if (looseBytes > IMPORT_LIMITS.inputBytes)
+    throw new Error(
+      'Selected relationship files exceed the 64 MiB input safety budget. Select only the relevant JSON/HTML parts.',
+    );
+  const budget = newBudget(),
+    result: Parsed = { parts: [], assignments: [] };
+  const merge = (parsed: Parsed) => {
+    result.parts.push(...parsed.parts);
+    result.assignments.push(...parsed.assignments);
+    if (parsed.native) {
+      if (result.native)
+        throw new Error('Select one MutualLens dataset at a time.');
+      result.native = parsed.native;
+    }
+  };
+  async function visit(
+    source: ByteSource,
+    depth: number,
+    displayPrefix = '',
+  ): Promise<void> {
+    safePath(source.name);
+    if (/\.zip$/i.test(source.name)) {
+      if (depth > IMPORT_LIMITS.nestedArchives)
         throw new Error(
-          'The ZIP expands beyond its declared size or safe resource limits.',
+          'ZIP nesting exceeds the safe inspection depth. Select the innermost relationship archive directly.',
         );
-      chunks.push(chunk);
-    });
-    try {
-      // Small compressed chunks bound transient output even when declared sizes lie.
-      for (let start = entry.dataStart; start < entry.dataEnd; start += 4096)
-        inflater.push(
-          archive.subarray(start, Math.min(start + 4096, entry.dataEnd)),
-          start + 4096 >= entry.dataEnd,
+      const entries = await inspectZip(source, budget);
+      for (const entry of entries) {
+        if (entry.name.endsWith('/') || excludedPath(entry.name)) continue;
+        if (/\.zip$/i.test(entry.name)) {
+          const nested = await readZipEntry(source, entry, budget);
+          await visit(
+            sourceFromBytes({ name: entry.name, bytes: nested }),
+            depth + 1,
+            `${displayPrefix}${source.name}/`,
+          );
+          continue;
+        }
+        if (!/\.(?:json|html?)$/i.test(entry.name)) continue;
+        // A shared export folder alone does not identify a relationship document.
+        // Inspect a bounded content prefix for unnamed entries, including files
+        // beside the relationship lists, before spending the full parsing budget.
+        const recognized = !!directionHint(entry.name);
+        // Bounded prefix discovery recognizes large renamed wrappers without loading
+        // unrelated documents in full. Full selected content still receives CRC checks.
+        let discovered = recognized;
+        if (!recognized) {
+          const prefix = await readZipPrefix(source, entry, budget);
+          const text = new TextDecoder().decode(prefix).replace(/^\uFEFF/, '');
+          if (/\.json$/i.test(entry.name))
+            discovered =
+              /"(?:relationships_followers|relationships_following|followers|following|edge_followed_by|edge_follow|schemaVersion)"\s*:/.test(
+                text,
+              );
+          else {
+            try {
+              discovered = parseRelationshipHtml(text).some(
+                (part) => !!part.direction,
+              );
+            } catch {
+              discovered = false;
+            }
+          }
+        }
+        if (!discovered) continue;
+        const bytes = await readZipEntry(source, entry, budget);
+        const name = `${displayPrefix}${source.name}/${entry.name}`;
+        try {
+          const parsed = parseFile(name, bytes, options, false);
+          if (parsed.parts.length || parsed.native) {
+            if (++budget.relevantFiles > IMPORT_LIMITS.entries)
+              throw new Error(
+                'Too many relationship documents for bounded parsing. Select only the required parts.',
+              );
+            merge(parsed);
+          }
+        } catch (cause) {
+          if (discovered) throw cause;
+        }
+      }
+    } else {
+      if (!/\.(?:json|html?)$/i.test(source.name))
+        throw new Error(
+          'Unsupported file type. Select Instagram JSON, HTML, ZIP, or a MutualLens dataset JSON file.',
         );
-      if (entry.compressedSize === 0) inflater.push(new Uint8Array(), true);
-    } catch (cause) {
-      throw new Error(
-        'The ZIP entry is corrupt or exceeds safe decompression limits.',
-        { cause },
-      );
-    }
-    if (actualSize !== entry.size)
-      throw new Error('The ZIP expanded size does not match its directory.');
-    bytes = new Uint8Array(actualSize);
-    let offset = 0;
-    for (const chunk of chunks) {
-      bytes.set(chunk, offset);
-      offset += chunk.length;
+      if (excludedPath(source.name))
+        throw new Error(
+          `${basename(source.name)} is not a follower/following list. Select the relationship files.`,
+        );
+      chargeLoose(source.size, budget);
+      const bytes = await source.read(0, source.size);
+      if (bytes.length !== source.size)
+        throw new Error(
+          'The selected file could not be read completely. Please select it again.',
+        );
+      merge(parseFile(source.name, bytes, options, true));
     }
   }
-  if (crc32(bytes) !== entry.crc)
-    throw new Error('The ZIP entry checksum is invalid.');
-  return bytes;
-}
-
-function object(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-function keysAllowed(
-  value: Record<string, unknown>,
-  allowed: string[],
-): boolean {
-  return Object.keys(value).every((key) => allowed.includes(key));
-}
-
-function parseRecords(part: Part): AccountRecord[] {
-  if (part.bytes.length > IMPORT_LIMITS.jsonBytes)
-    throw new Error('A JSON file exceeds the local memory safety limit.');
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(decode(part.bytes));
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('UTF-8')) throw error;
+  for (const source of sources) await visit(source, 0);
+  if (result.native && (result.parts.length || sources.length > 1))
     throw new Error(
-      'A follower/following file is not valid JSON. Request a JSON export, not HTML.',
-      { cause: error },
+      'Select a MutualLens dataset by itself, or select Instagram relationship files together. Do not mix the formats.',
     );
-  }
-  let rows: unknown;
-  if (part.direction === 'followers' && Array.isArray(parsed)) rows = parsed;
-  else if (object(parsed)) {
-    const key =
-      part.direction === 'following'
-        ? 'relationships_following'
-        : 'relationships_followers';
-    if (!keysAllowed(parsed, [key]) || !Array.isArray(parsed[key]))
-      throw new Error(
-        'Unsupported Instagram JSON schema. Expected a follower array or a relationships_following object.',
-      );
-    rows = parsed[key];
-  }
-  if (!Array.isArray(rows))
-    throw new Error(
-      'Unsupported Instagram JSON schema. Missing input is not an empty list.',
-    );
-  return rows.map((row) => {
-    if (
-      !object(row) ||
-      !keysAllowed(row, [
-        'title',
-        'media_list_data',
-        'string_list_data',
-        'id',
-      ]) ||
-      !Array.isArray(row.string_list_data) ||
-      row.string_list_data.length !== 1 ||
-      (row.title !== undefined && typeof row.title !== 'string') ||
-      (row.media_list_data !== undefined &&
-        (!Array.isArray(row.media_list_data) ||
-          row.media_list_data.length !== 0))
-    )
-      throw new Error(
-        'Unsupported relationship row. No records were silently discarded.',
-      );
-    const item: unknown = row.string_list_data[0];
-    if (
-      !object(item) ||
-      !keysAllowed(item, ['value', 'href', 'timestamp']) ||
-      (item.value !== undefined && typeof item.value !== 'string') ||
-      (item.href !== undefined && typeof item.href !== 'string') ||
-      (item.timestamp !== undefined &&
-        (typeof item.timestamp !== 'number' ||
-          !Number.isSafeInteger(item.timestamp) ||
-          item.timestamp < 0))
-    )
-      throw new Error('A relationship row has invalid fields.');
-    const original =
-      typeof item.value === 'string' && item.value.trim()
-        ? item.value
-        : part.direction === 'following' && typeof row.title === 'string'
-          ? row.title
-          : undefined;
-    if (!original)
-      throw new Error('A relationship row has no supported username value.');
-    const username = normalizeUsername(original);
-    if (
-      typeof item.href === 'string' &&
-      normalizeUsername(item.href) !== username
-    )
-      throw new Error(
-        'A relationship row has conflicting username and profile URL identities.',
-      );
-    if (
-      typeof row.title === 'string' &&
-      row.title.trim() &&
-      part.direction === 'following' &&
-      normalizeUsername(row.title) !== username
-    )
-      throw new Error(
-        'A following row has conflicting title and username identities.',
-      );
-    const id = validId(row.id);
-    return {
-      username,
-      originalUsername: original,
-      ...(id ? { id } : {}),
-      source: `Instagram JSON: ${basename(part.name)}`,
-    };
-  });
+  return result;
 }
-
-export async function importInstagram(
-  files: ImportFile[],
+async function importSources(
+  sources: ByteSource[],
   options: ImportOptions,
 ): Promise<Dataset> {
-  if (!files.length)
-    throw new Error(
-      'Choose follower and following JSON files, or their ZIP archive.',
-    );
-  const username = normalizeUsername(options.account.username);
-  const id = validId(options.account.id);
-  const collectedAt = options.collectedAt ?? null;
+  const owner = account(options),
+    collectedAt = options.collectedAt || null;
   if (collectedAt !== null && !knownCollectionDate(collectedAt))
     throw new Error(
       'Collection date must be a valid known UTC ISO timestamp and cannot be in the future; leave it blank if unknown.',
     );
-  const inputBytes = files.reduce(
-    (total, file) => total + file.bytes.length,
-    0,
-  );
-  if (inputBytes > IMPORT_LIMITS.inputBytes)
-    throw new Error(
-      'Selected files exceed the 64 MiB input safety budget. Select only the follower/following JSON files.',
+  const parsed = await readSources(sources, options);
+  if (parsed.assignments.length)
+    throw Object.assign(
+      new Error(
+        'Choose whether each unrecognized list contains followers or following, then compare again.',
+      ),
+      { assignments: parsed.assignments },
     );
-  if (files.length > IMPORT_LIMITS.entries)
-    throw new Error('Too many input files for safe local processing.');
-  const parts: Part[] = [];
-  let entryCount = 0;
-  let expandedBytes = 0;
-  const add = (name: string, bytes: Uint8Array): void => {
-    const match = relevant.exec(basename(name));
-    if (match)
-      parts.push({
-        direction: match[1]!.toLowerCase() as Direction,
-        number: match[2] ? Number(match[2]) : null,
-        name,
-        bytes,
-      });
-  };
-  for (const file of files) {
-    safePath(file.name);
-    if (/\.zip$/i.test(file.name)) {
-      const entries = inspectZip(file.bytes);
-      entryCount += entries.length;
-      expandedBytes += entries.reduce((sum, entry) => sum + entry.size, 0);
-      if (
-        entryCount > IMPORT_LIMITS.entries ||
-        expandedBytes > IMPORT_LIMITS.expandedBytes
-      )
-        throw new Error(
-          'The selected archives exceed the combined safe entry or expanded-byte budget.',
-        );
-      for (const entry of entries)
-        if (entry.relevant) add(entry.name, inflateEntry(file.bytes, entry));
-    } else if (relevant.test(basename(file.name))) {
-      entryCount++;
-      expandedBytes += file.bytes.length;
-      if (
-        entryCount > IMPORT_LIMITS.entries ||
-        expandedBytes > IMPORT_LIMITS.expandedBytes
-      )
-        throw new Error('The selected files exceed safe resource limits.');
-      add(file.name, file.bytes);
-    } else
+  if (parsed.native) return parsed.native;
+  const lists: Partial<Record<Direction, AccountList>> = {};
+  for (const direction of directions) {
+    const parts = parsed.parts.filter((part) => part.direction === direction);
+    if (!parts.length)
       throw new Error(
-        'Unsupported input filename. Choose followers.json, followers_1.json (and every part), following.json, or an Instagram ZIP.',
+        `Missing ${direction} input. Select that JSON or HTML list; a missing direction is not an empty list. If an archive uses unfamiliar names, select its relationship files directly.`,
       );
-  }
-  const names = new Set<string>();
-  for (const part of parts) {
-    const key = basename(part.name).toLowerCase();
-    if (names.has(key))
-      throw new Error(
-        'Duplicate relationship filenames may mix different exports. Import one account and collection at a time.',
-      );
-    names.add(key);
-  }
-  const result = {} as Record<Direction, AccountList>;
-  for (const direction of ['followers', 'following'] as const) {
-    const selected = parts.filter((part) => part.direction === direction);
-    if (!selected.length)
-      throw new Error(
-        `Missing ${direction} JSON input. A missing direction cannot be treated as an empty list.`,
-      );
-    const numbered = selected
+    const numbered = parts
       .filter((part) => part.number !== null)
-      .sort((a, b) => a.number! - b.number!);
-    if (numbered.length && numbered.length !== selected.length)
-      throw new Error(
-        'Numbered and unnumbered files for one direction cannot be mixed. Import one complete export.',
-      );
-    const hasGap = numbered.some((part, index) => part.number !== index + 1);
-    const records = selected.flatMap(parseRecords);
-    const indexed = indexIdentities([records]);
-    const unique = [...indexed.lists[0]!.values()];
-    const warnings = [...indexed.warnings];
-    if (unique.length !== records.length)
-      warnings.push(
-        `${records.length - unique.length} duplicate records were combined by identity.`,
-      );
+      .map((part) => part.number!)
+      .sort((a, b) => a - b);
+    const uniqueNumbers = [...new Set(numbered)];
+    const hasGap = uniqueNumbers.some((n, i) => n !== i + 1);
+    const warnings: string[] = [];
     if (hasGap)
       warnings.push(
-        'Numbered export parts are missing. This list is partial even if completeness was confirmed.',
+        'Numbered export parts are missing. Differences describe only the supplied records.',
       );
-    if (!options.confirmedComplete)
+    if (numbered.length && numbered.length !== parts.length)
       warnings.push(
-        'All export parts have not been confirmed. Completeness is unverified.',
+        'Numbered and unnumbered files were combined. Confirm they belong to the same export; duplicate identities were combined.',
       );
-    if (collectedAt === null)
+    const records: AccountRecord[] = [];
+    let rawCount = 0,
+      skippedCount = 0,
+      quarantinedCount = 0,
+      unreadable = 0;
+    for (const part of parts) {
+      if (part.unreadable) {
+        unreadable++;
+        warnings.push(
+          `${basename(part.name)} could not be read: ${part.unreadable} Its record count is unknown.`,
+        );
+        continue;
+      }
+      for (const value of part.rows) {
+        rawCount++;
+        const result = rowRecord(
+          value,
+          direction,
+          `Instagram ${part.format}: ${basename(part.name)}`,
+        );
+        if (result.record) records.push(result.record);
+        else if (result.quarantined) quarantinedCount++;
+        else skippedCount++;
+      }
+    }
+    if (!records.length && rawCount + unreadable > 0)
+      throw new Error(
+        `No usable ${direction} identities could be read. Select a readable ${direction} file. ${warnings[0] ?? 'The supplied rows were invalid or ambiguous.'}`,
+      );
+    const indexed = indexIdentities([records]),
+      unique = [...indexed.lists[0]!.values()],
+      duplicateCount = records.length - unique.length;
+    if (duplicateCount)
       warnings.push(
-        'Instagram collection date is unknown. Import time is not collection time; relationship timestamps are not used as collection dates.',
+        `${duplicateCount} duplicate records were combined by identity.`,
       );
-    warnings.push(
-      'Completeness describes the supplied export only. It does not verify current live Instagram relationships.',
-    );
-    result[direction] = {
+    if (skippedCount)
+      warnings.push(
+        `${skippedCount} unreadable relationship rows were skipped; omitted identities may affect the differences.`,
+      );
+    if (quarantinedCount)
+      warnings.push(
+        `${quarantinedCount} relationship rows with conflicting or invalid identities were quarantined; omitted identities may affect the differences.`,
+      );
+    if (indexed.collision)
+      warnings.push(
+        'Some usernames have conflicting stable IDs. Those identities require separate review.',
+      );
+    const knownLimitations =
+      hasGap || unreadable > 0 || skippedCount > 0 || quarantinedCount > 0;
+    lists[direction] = {
       records: unique,
       metadata: {
-        source: 'Instagram JSON export',
-        version: 'instagram-relationships-v1',
+        source: 'Instagram relationship export',
+        version: 'instagram-relationships-v2',
         startedAt: collectedAt,
         endedAt: collectedAt,
-        rawCount: records.length,
+        rawCount,
         uniqueCount: unique.length,
-        completeness: hasGap
-          ? 'partial'
-          : options.confirmedComplete && !indexed.collision
-            ? 'complete_for_source'
-            : 'unverified',
-        terminal:
-          !hasGap && options.confirmedComplete === true && !indexed.collision,
-        pages: selected.length,
+        completeness: knownLimitations ? 'partial' : 'unverified',
+        terminal: false,
+        pages: parts.length,
         warnings,
+        skippedCount,
+        quarantinedCount,
+        duplicateCount,
+        files: parts.map((part) => part.name),
       },
     };
   }
+  const followers = lists.followers,
+    following = lists.following;
+  if (!followers || !following)
+    throw new Error('Select both followers and following lists.');
+  const warnings = [
+    ...new Set([
+      ...followers.metadata.warnings,
+      ...following.metadata.warnings,
+    ]),
+  ];
   return {
     schemaVersion: 1,
-    account: { username, ...(id ? { id } : {}) },
-    ...result,
+    account: owner,
+    followers,
+    following,
     importedAt: new Date().toISOString(),
     sample: false,
+    comparisonBasis: 'supplied_files',
+    importSummary: {
+      relevantFiles: new Set(parsed.parts.map((part) => part.name)).size,
+      duplicatesCombined:
+        (followers.metadata.duplicateCount ?? 0) +
+        (following.metadata.duplicateCount ?? 0),
+      skippedRecords:
+        (followers.metadata.skippedCount ?? 0) +
+        (following.metadata.skippedCount ?? 0),
+      quarantinedRecords:
+        (followers.metadata.quarantinedCount ?? 0) +
+        (following.metadata.quarantinedCount ?? 0),
+      warnings,
+    },
   };
+}
+/** Compatibility API for byte fixtures and callers that already hold small files. */
+export async function importInstagram(
+  files: ImportFile[],
+  options: ImportOptions = {},
+): Promise<Dataset> {
+  return importSources(files.map(sourceFromBytes), options);
+}
+/** Browser API: ZIP metadata and selected entries use Blob.slice; media is not loaded. */
+export async function importInstagramFiles(
+  files: File[],
+  options: ImportOptions = {},
+): Promise<Dataset> {
+  return importSources(files.map(sourceFromFile), options);
 }

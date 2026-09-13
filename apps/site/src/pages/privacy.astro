@@ -1,5 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
+import { sitePath } from '../lib/urls';
 ---
 
 <Page
@@ -71,7 +72,7 @@ import Page from '../layouts/Page.astro';
   <h2>Contact and open items</h2><p>
     The project owner is Arhaan Aggarwal. A dedicated private support or
     privacy-request channel has not yet been supplied and is a public-launch
-    dependency. <a href="/contact/">The contact page</a> links to public project feedback;
-    do not put personal data or account exports there.
+    dependency. <a href={sitePath('/contact/')}>The contact page</a> links to public
+    project feedback; do not put personal data or account exports there.
   </p>
 </Page>

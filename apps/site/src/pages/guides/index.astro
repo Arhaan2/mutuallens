@@ -1,0 +1,71 @@
+---
+import Page from '../../layouts/Page.astro';
+import { checkerUrl, sitePath } from '../../lib/urls';
+---
+
+<Page
+  article
+  title="Instagram relationship guides: prepare, compare & interpret"
+  description="Practical MutualLens guides for preparing an Instagram export, fixing file problems, understanding relationship terms, and reading saved snapshots."
+>
+  <p class="eyebrow">MUTUALLENS GUIDES</p><h1>
+    Prepare the files.<br />Read the result carefully.
+  </h1><p class="lede">
+    Start with the task in front of you. These guides explain what the local
+    checker accepts, how its relationship groups are calculated, and where the
+    evidence stops.
+  </p>
+  <div class="guide-index" aria-label="MutualLens guides">
+    <a
+      class="guide-card"
+      href={sitePath('/guides/download-instagram-followers/')}
+    >
+      <span>EXPORT PREPARATION</span><h2>Prepare your relationship files</h2><p>
+        Use official export controls, keep both directions and include every
+        available split part.
+      </p><span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a
+      class="guide-card"
+      href={sitePath('/guides/instagram-export-troubleshooting/')}
+    >
+      <span>TROUBLESHOOTING</span><h2>Resolve missing or unclear files</h2><p>
+        Work through missing directions, ambiguous loose files, nested ZIPs,
+        unsupported archives and qualified results.
+      </p><span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-card" href={sitePath('/guides/followers-vs-following/')}>
+      <span>TERMINOLOGY</span><h2>Followers, following and mutuals</h2><p>
+        See how two fictional lists become three relationship groups, without
+        turning a difference into a judgment.
+      </p><span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a class="guide-card" href={sitePath('/guides/reading-snapshot-history/')}>
+      <span>SNAPSHOTS</span><h2>Read changes between saved reports</h2><p>
+        Learn which dates and account labels make snapshots compatible, and what
+        an observed change can and cannot prove.
+      </p><span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+    <a
+      class="guide-card"
+      href={sitePath('/guides/not-following-back-vs-unfollowed/')}
+    >
+      <span>INTERPRETATION</span><h2>Separate a result from an unfollow</h2><p>
+        “Not following back” describes one comparison. “Unfollowed” requires
+        compatible observations over time.
+      </p><span class="guide-arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <aside class="article-note">
+    <strong>Automatic checking remains unavailable.</strong><p>
+      These guides describe the working local-import preview. They do not claim
+      that a website-only live scan has passed its completeness, scale or
+      recurring free-capacity gates.
+    </p>
+  </aside>
+  <div class="article-actions">
+    <a class="button primary" href={checkerUrl('import')}
+      >Open upload mode <span aria-hidden="true">↗</span></a
+    ><a href={sitePath('/')}>Return to the checker overview</a>
+  </div>
+</Page>

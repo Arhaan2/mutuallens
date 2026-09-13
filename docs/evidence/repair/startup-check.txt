@@ -1,0 +1,32 @@
+
+> mutuallens@0.1.0 test:startup
+> node scripts/test-startup.mjs
+
+[
+  {
+    "scenario": "occupied port refused without changing existing listener",
+    "result": "PASS",
+    "exit": {
+      "code": 1,
+      "signal": null
+    }
+  },
+  {
+    "scenario": "dev: readiness, real API, foreground SIGINT cleanup",
+    "result": "PASS",
+    "portsReleased": [
+      4321,
+      5173,
+      8788
+    ]
+  },
+  {
+    "scenario": "preview: readiness, real API, foreground SIGINT cleanup",
+    "result": "PASS",
+    "portsReleased": [
+      4321,
+      5173,
+      8788
+    ]
+  }
+]

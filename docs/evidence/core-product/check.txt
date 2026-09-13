@@ -1,0 +1,23 @@
+
+> mutuallens@0.1.0 check
+> npm run lint && npm run typecheck
+
+
+> mutuallens@0.1.0 lint
+> eslint .
+
+
+> mutuallens@0.1.0 typecheck
+> tsc --noEmit && npm run check -w @mutuallens/site
+
+
+> @mutuallens/site@0.1.0 check
+> ASTRO_TELEMETRY_DISABLED=1 astro check
+
+22:28:28 [types] Generated 20ms
+22:28:28 [check] Getting diagnostics for Astro files in /Users/arhaan/Documents/ChatGPT/mutuallens/apps/site...
+Result (17 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+

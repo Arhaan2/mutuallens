@@ -1,0 +1,1755 @@
+{
+  "sourceHash": "947c21a67c37785ddb58a553055bcf531f8820180152d4cb61918566973de157",
+  "stats": {
+    "startTime": "2026-09-08T01:41:48.594Z",
+    "duration": 95822.622,
+    "expected": 126,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "capability, scan boundary, headers and unknown paths on local Workers runtime",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 39,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "synthetic target, search, pagination, keyboard, exports, no external requests",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 670,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "local loose imports withhold absences by default and do not transmit files",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 271,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "ZIP split import complete supplied sets, empty input distinct from missing and malformed",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 518,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "explicit snapshots, reload persistence, delete-all and public origin storage/DOM isolation",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 593,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "desktop and mobile accessibility, 200% layout zoom and reduced motion",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1284,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "public pages, noindex canonicals, honest copy, ad-free network and useful navigation",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 531,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "keyboard-only sample flow and capability failure remain usable",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 613,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "snapshot comparison visible semantics and incompatible identity rejection",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 849,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "public content accessibility and recorded local paint measurements",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1791,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "capability, scan boundary, headers and unknown paths on local Workers runtime",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 37,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "synthetic target, search, pagination, keyboard, exports, no external requests",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 877,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "local loose imports withhold absences by default and do not transmit files",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 359,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "ZIP split import complete supplied sets, empty input distinct from missing and malformed",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 657,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "explicit snapshots, reload persistence, delete-all and public origin storage/DOM isolation",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 844,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "desktop and mobile accessibility, 200% layout zoom and reduced motion",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1678,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "public pages, noindex canonicals, honest copy, ad-free network and useful navigation",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 763,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "keyboard-only sample flow and capability failure remain usable",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 782,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "snapshot comparison visible semantics and incompatible identity rejection",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 981,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "public content accessibility and recorded local paint measurements",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2689,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "capability, scan boundary, headers and unknown paths on local Workers runtime",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 37,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "synthetic target, search, pagination, keyboard, exports, no external requests",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 873,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "local loose imports withhold absences by default and do not transmit files",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 335,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "ZIP split import complete supplied sets, empty input distinct from missing and malformed",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 628,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "explicit snapshots, reload persistence, delete-all and public origin storage/DOM isolation",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 844,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "desktop and mobile accessibility, 200% layout zoom and reduced motion",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1557,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "public pages, noindex canonicals, honest copy, ad-free network and useful navigation",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 687,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "keyboard-only sample flow and capability failure remain usable",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 908,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "snapshot comparison visible semantics and incompatible identity rejection",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 865,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "public content accessibility and recorded local paint measurements",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2956,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "navigation: public destinations, mobile navigation and 404 recovery work across origins",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1082,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "navigation: public destinations, mobile navigation and 404 recovery work across origins",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1406,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "navigation: public destinations, mobile navigation and 404 recovery work across origins",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2010,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability non-JSON response fails closed, can retry, and sample works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 282,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability null JSON fails closed, can retry, and sample works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 286,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability malformed capability fails closed, can retry, and sample works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 280,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability network failure keeps local sample functional",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 231,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: hung capability times out at 8s without blocking local mode",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 234,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker constructor failure gives an alert and retry works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 298,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker error failure exits processing and retry works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 303,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker messageerror failure exits processing and retry works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 299,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker postMessage failure exits processing and retry works",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 300,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: cancel, retry and clear invalidate delayed completed worker replies",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 365,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: changing snapshot selection invalidates delayed comparison results",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 634,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: deleting saved snapshots invalidates delayed comparison results",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 733,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: export URL allocation failure is visible near report actions without an uncaught error",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 266,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: IndexedDB denied keeps report usable and reports saving failure locally",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 248,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: corrupt synthetic stored record cannot blank the checker",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 329,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: import failure stays beside import after exporting the previous report",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 516,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: repeated current history entry discards a delayed completed import",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 518,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability non-JSON response fails closed, can retry, and sample works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 402,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability null JSON fails closed, can retry, and sample works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 347,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability malformed capability fails closed, can retry, and sample works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 322,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability network failure keeps local sample functional",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 361,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: hung capability times out at 8s without blocking local mode",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 370,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker constructor failure gives an alert and retry works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 349,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker error failure exits processing and retry works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 348,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker messageerror failure exits processing and retry works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 427,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker postMessage failure exits processing and retry works",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 354,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: cancel, retry and clear invalidate delayed completed worker replies",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 456,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: changing snapshot selection invalidates delayed comparison results",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 714,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: deleting saved snapshots invalidates delayed comparison results",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 821,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: export URL allocation failure is visible near report actions without an uncaught error",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 367,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: IndexedDB denied keeps report usable and reports saving failure locally",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 343,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: corrupt synthetic stored record cannot blank the checker",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 355,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: import failure stays beside import after exporting the previous report",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 571,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: repeated current history entry discards a delayed completed import",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 623,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability non-JSON response fails closed, can retry, and sample works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 376,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability null JSON fails closed, can retry, and sample works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 365,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability malformed capability fails closed, can retry, and sample works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 369,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: capability network failure keeps local sample functional",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 327,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: hung capability times out at 8s without blocking local mode",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 359,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker constructor failure gives an alert and retry works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 373,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker error failure exits processing and retry works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 362,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker messageerror failure exits processing and retry works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 355,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: worker postMessage failure exits processing and retry works",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 356,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: cancel, retry and clear invalidate delayed completed worker replies",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 840,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: changing snapshot selection invalidates delayed comparison results",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 665,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: deleting saved snapshots invalidates delayed comparison results",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 713,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: export URL allocation failure is visible near report actions without an uncaught error",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 376,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: IndexedDB denied keeps report usable and reports saving failure locally",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 358,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: corrupt synthetic stored record cannot blank the checker",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 380,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: import failure stays beside import after exporting the previous report",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 511,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "fault: repeated current history entry discards a delayed completed import",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 558,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 268,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 5033,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 443,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2845,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 477,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 2065,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: homepage sample entry is direct and survives reload and browser history",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 410,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: missing import input has visible nearby feedback",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 189,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: all snapshot differences are browsable and full exports contain every record",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1871,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 818,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 586,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 415,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: partial input withholds negatives; missing malformed and unsupported files fail clearly",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 699,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for all mutual",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 237,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for no mutual",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 230,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for asymmetric empty following",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 231,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1474,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "chromium",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1435,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: homepage sample entry is direct and survives reload and browser history",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 567,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: missing import input has visible nearby feedback",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 244,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: all snapshot differences are browsable and full exports contain every record",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1635,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1118,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 726,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 558,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: partial input withholds negatives; missing malformed and unsupported files fail clearly",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 951,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for all mutual",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 356,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for no mutual",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 357,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for asymmetric empty following",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 324,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1621,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "webkit",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1139,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: homepage sample entry is direct and survives reload and browser history",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 948,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: missing import input has visible nearby feedback",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 262,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: all snapshot differences are browsable and full exports contain every record",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1285,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 957,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 665,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 570,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: partial input withholds negatives; missing malformed and unsupported files fail clearly",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 836,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for all mutual",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 332,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for no mutual",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 333,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: exact category counts for asymmetric empty following",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 338,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1807,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "firefox",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "durationMs": 1549,
+          "errors": []
+        }
+      ],
+      "annotations": []
+    }
+  ],
+  "measurements": [
+    {
+      "test": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "chromium",
+      "name": "real-worker-cancellation-environment",
+      "value": {
+        "synthetic": true,
+        "mocked": false,
+        "inputBytes": 49000030,
+        "followers": 100000,
+        "following": 100000,
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "Resource-safe inputs exercise cancellation; this is not completed 100,000-record result or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "webkit",
+      "name": "real-worker-cancellation-environment",
+      "value": {
+        "synthetic": true,
+        "mocked": false,
+        "inputBytes": 49000030,
+        "followers": 100000,
+        "following": 100000,
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "Resource-safe inputs exercise cancellation; this is not completed 100,000-record result or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+      "browser": "firefox",
+      "name": "real-worker-cancellation-environment",
+      "value": {
+        "synthetic": true,
+        "mocked": false,
+        "inputBytes": 49000030,
+        "followers": 100000,
+        "following": 100000,
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "Resource-safe inputs exercise cancellation; this is not completed 100,000-record result or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "chromium",
+      "name": "synthetic-large-import-performance",
+      "value": {
+        "synthetic": true,
+        "liveAcquisition": false,
+        "followers": 50000,
+        "following": 50000,
+        "importRoundTripMs": 1144.2942079999993,
+        "browser": "chromium",
+        "version": "153.0.8010.12",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "One local automation round trip including file generation transfer and DOM assertions; not a benchmark or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "webkit",
+      "name": "synthetic-large-import-performance",
+      "value": {
+        "synthetic": true,
+        "liveAcquisition": false,
+        "followers": 50000,
+        "following": 50000,
+        "importRoundTripMs": 797.8331249999974,
+        "browser": "webkit",
+        "version": "26.6",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "One local automation round trip including file generation transfer and DOM assertions; not a benchmark or live acquisition evidence."
+      }
+    },
+    {
+      "test": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+      "browser": "firefox",
+      "name": "synthetic-large-import-performance",
+      "value": {
+        "synthetic": true,
+        "liveAcquisition": false,
+        "followers": 50000,
+        "following": 50000,
+        "importRoundTripMs": 1156.4140420000003,
+        "browser": "firefox",
+        "version": "155.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "caveat": "One local automation round trip including file generation transfer and DOM assertions; not a benchmark or live acquisition evidence."
+      }
+    }
+  ]
+}

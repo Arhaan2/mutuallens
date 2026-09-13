@@ -1,0 +1,238 @@
+{
+  "observedAt": "2026-09-08T02:46:47.589Z",
+  "status": "PASS",
+  "sourceCommit": "75a340ec010b62cc90db3f6275313173e9b0ac77",
+  "checks": 25,
+  "rows": [
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/404.html",
+      "status": 200,
+      "bytes": 2828,
+      "sha256": "95291bd57229a5d528507caa3b8260d268724fad3c61d610ac507d7ea88fab5c",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/404/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/about/",
+      "status": 200,
+      "bytes": 4131,
+      "sha256": "a78e67f6c8073ac5a10d69d8b55053ff45579c99ec98748293ac147b88c77fd7",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/about/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/build-info.json",
+      "status": 200,
+      "bytes": 170,
+      "sha256": "3fbb1123c98fcb7a43ee2ffdb50b2606366845722a86a8745d4a972cafdb90b9",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/contact/",
+      "status": 200,
+      "bytes": 3884,
+      "sha256": "f15a1faff09503f80954d26c294ab9140a6f83f1ba0d7203424d9d45071df7e2",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/contact/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/download-instagram-followers/",
+      "status": 200,
+      "bytes": 6267,
+      "sha256": "f16e2c843d878c0df951953989298f732735fd5d2975bf487a345dd9a1e75fed",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/download-instagram-followers/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/followers-vs-following/",
+      "status": 200,
+      "bytes": 5109,
+      "sha256": "83cb86175ef253044da2d90e282c06de468d404a78a40b15fb8ac13231305b62",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/followers-vs-following/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/instagram-export-troubleshooting/",
+      "status": 200,
+      "bytes": 6073,
+      "sha256": "6581f63fa99e636fbee86883860d8639a6ce1eb265d7c02f767eeb9d2105fbe4",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/instagram-export-troubleshooting/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/not-following-back-vs-unfollowed/",
+      "status": 200,
+      "bytes": 4903,
+      "sha256": "9c9c090f1cf38c7b5f452779a493e58dbcae6152f337075f0f42ff1322ad6d05",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/guides/not-following-back-vs-unfollowed/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/",
+      "status": 200,
+      "bytes": 7879,
+      "sha256": "8a8e36bacfb0bbf4b0944657fb18652e7be19ebe334d7c0db65c0f59893f63bf",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/instagram-follow-back-checker/",
+      "status": 200,
+      "bytes": 6073,
+      "sha256": "32d4026e8098c4ae036dad6449b49c87bccb869cecb68b1ac8d0c47b4cc8836c",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/instagram-follow-back-checker/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/privacy/",
+      "status": 200,
+      "bytes": 6250,
+      "sha256": "d83170da43e1cccbb3fb064213bf5b1d2d32d2f776c39bca50fd33aced6dc19f",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/privacy/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/robots.txt",
+      "status": 200,
+      "bytes": 96,
+      "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/sitemap.xml",
+      "status": 200,
+      "bytes": 1131,
+      "sha256": "524e282361206662b15bc5d3991b713faf6f0ca021703befd4b98aecd67e39e8",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/terms/",
+      "status": 200,
+      "bytes": 4637,
+      "sha256": "cb304e5407c4f6c8c1b7339a3c6709f1b508783bbb2837755e3db7825dfdc787",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/terms/"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/404.html",
+      "status": 200,
+      "bytes": 354,
+      "sha256": "399ff468a87d9736f71c1d0b40f2c9a5022b89492fba6a9bd7932e11f4aa3c59",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-Cxy_rvRa.js",
+      "status": 200,
+      "bytes": 225608,
+      "sha256": "f0d82fb92aebb3dd0ebdbef30505a6723bc7f8b25cc3abb09396429ba26a26a1",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/index-MWWSmzwe.css",
+      "status": 200,
+      "bytes": 18717,
+      "sha256": "899c40430274ebe5ac4e71408400fb6dcaa5de9d1e5bdaba2c75025bcd805936",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/assets/processing.worker-D3jCi-6S.js",
+      "status": 200,
+      "bytes": 21901,
+      "sha256": "cc7059a611ae3f52f23a316e06914bc41a9740b560cd06a149bac7b3d7ab87ca",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/build-info.json",
+      "status": 200,
+      "bytes": 170,
+      "sha256": "3fbb1123c98fcb7a43ee2ffdb50b2606366845722a86a8745d4a972cafdb90b9",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/",
+      "status": 200,
+      "bytes": 770,
+      "sha256": "b239ac5dcc02afea08a7eb5064790f7cda9ac382c712b4d206c7c4280648ce13",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/robots.txt",
+      "status": 200,
+      "bytes": 96,
+      "sha256": "0efd6090177683fa5ddf3c720a551b641a5cad812449c3c0158f13b38b7fdf3d",
+      "matchesBuild": true,
+      "noindex": "noindex, nofollow",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; frame-src 'none'",
+      "canonical": null
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/unknown-synthetic-route",
+      "status": 404,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-ddm.pages.dev/ads.txt",
+      "status": 404,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/unknown-synthetic-route",
+      "status": 404,
+      "noindex": "noindex, nofollow"
+    },
+    {
+      "url": "https://codex-ui-functional-repair.mutuallens-app.pages.dev/ads.txt",
+      "status": 404,
+      "noindex": "noindex, nofollow"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
+import { sitePath } from '../lib/urls';
 ---
 
 <Page
@@ -33,8 +34,8 @@ import Page from '../layouts/Page.astro';
     advertising launch.
   </p>
   <p>
-    <a href="/privacy/">Read the privacy draft</a> or <a href="/about/"
-      >learn about the project</a
+    <a href={sitePath('/privacy/')}>Read the privacy draft</a> or <a
+      href={sitePath('/about/')}>learn about the project</a
     >.
   </p>
 </Page>

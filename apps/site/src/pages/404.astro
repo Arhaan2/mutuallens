@@ -1,18 +1,25 @@
 ---
 import Page from '../layouts/Page.astro';
+import { checkerUrl, sitePath } from '../lib/urls';
 ---
 
 <Page
   article
+  allowIndex={false}
+  includeCanonical={false}
   title="Page not found"
   description="This MutualLens preview page could not be found. Return to the homepage or browse the checker explanation."
 >
   <p class="eyebrow">404 · PAGE NOT FOUND</p><h1>This page isn’t here.</h1><p
     class="lede"
   >
-    The link may be out of date. The MutualLens preview and guides are available
-    from the homepage.
-  </p><a class="button primary" href="/"
-    >Back to MutualLens <span aria-hidden="true">→</span></a
-  >
+    The address may be incomplete or out of date. No account, result or saved
+    report is exposed at this URL.
+  </p><div class="article-actions">
+    <a class="button primary" href={sitePath('/')}
+      >Back to MutualLens <span aria-hidden="true">→</span></a
+    ><a href={sitePath('/guides/')}>Browse the guides</a><a
+      href={checkerUrl('import')}>Open upload mode</a
+    >
+  </div>
 </Page>

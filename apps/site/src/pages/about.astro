@@ -1,5 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
+import { sitePath } from '../lib/urls';
 ---
 
 <Page
@@ -40,5 +41,10 @@ import Page from '../layouts/Page.astro';
       rel="noopener noreferrer">MutualLens GitHub repository</a
     >. MutualLens is not affiliated with, endorsed by, or operated by Instagram
     or Meta.
+  </p>
+  <p>
+    <a href={sitePath('/guides/')}>Browse the practical guides</a> or <a
+      href={sitePath('/')}>return to the checker overview</a
+    >.
   </p>
 </Page>

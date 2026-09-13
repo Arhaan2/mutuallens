@@ -82,6 +82,8 @@ export function validId(value: unknown): string | undefined {
 export interface IdentityIndex {
   lists: Map<string, AccountRecord>[];
   collision: boolean;
+  ambiguousKeys: Set<string>;
+  quarantinedCount: number;
   warnings: string[];
 }
 
@@ -105,11 +107,18 @@ export function indexIdentities(input: AccountRecord[][]): IdentityIndex {
       return { ...record, username, ...(id === undefined ? {} : { id }) };
     }),
   );
-  const collision = [...namesToIds.values()].some((ids) => ids.size > 1);
+  const ambiguousNames = new Set(
+    [...namesToIds].filter(([, ids]) => ids.size > 1).map(([name]) => name),
+  );
+  const ambiguousIds = new Set(
+    [...ambiguousNames].flatMap((name) => [...namesToIds.get(name)!]),
+  );
+  const ambiguousKeys = new Set<string>();
+  const collision = ambiguousNames.size > 0;
   const warnings: string[] = [];
   if (collision)
     warnings.push(
-      'Conflicting stable IDs share a username. Identity is ambiguous; negative relationships are withheld.',
+      'Conflicting stable IDs share a username. Those ambiguous identities are excluded from negative comparisons.',
     );
   if ([...idToNames.values()].some((names) => names.size > 1))
     warnings.push(
@@ -130,12 +139,23 @@ export function indexIdentities(input: AccountRecord[][]): IdentityIndex {
         resolved === undefined
           ? `username:${record.username}`
           : `id:${resolved}`;
+      if (
+        ambiguousNames.has(record.username) ||
+        (resolved !== undefined && ambiguousIds.has(resolved))
+      )
+        ambiguousKeys.add(key);
       const previous = map.get(key);
       if (!previous || (!previous.id && record.id)) map.set(key, record);
     }
     return map;
   });
-  return { lists, collision, warnings };
+  return {
+    lists,
+    collision,
+    ambiguousKeys,
+    quarantinedCount: ambiguousKeys.size,
+    warnings,
+  };
 }
 
 function completenessEvidence(dataset: Dataset): {
@@ -192,34 +212,69 @@ export function compareDataset(dataset: Dataset): Comparison {
   ]);
   const followers = indexed.lists[0]!;
   const following = indexed.lists[1]!;
-  const evidence = completenessEvidence(dataset);
+  const suppliedFiles = dataset.comparisonBasis === 'supplied_files';
+  const evidence = suppliedFiles
+    ? { complete: false, warnings: [] }
+    : completenessEvidence(dataset);
+  const knownLimitations =
+    [dataset.followers.metadata, dataset.following.metadata].some(
+      (meta) =>
+        meta.completeness === 'partial' ||
+        (meta.skippedCount ?? 0) > 0 ||
+        (meta.quarantinedCount ?? 0) > 0 ||
+        (meta.expectedCount !== undefined &&
+          meta.expectedCount !== meta.uniqueCount),
+    ) ||
+    indexed.collision ||
+    (dataset.importSummary?.skippedRecords ?? 0) > 0 ||
+    (dataset.importSummary?.quarantinedRecords ?? 0) > 0;
   const warnings = [
     ...indexed.warnings,
     ...evidence.warnings,
     ...dataset.followers.metadata.warnings,
     ...dataset.following.metadata.warnings,
+    ...(dataset.importSummary?.warnings ?? []),
   ];
-  const negativesWithheld = !evidence.complete || indexed.collision;
-  if (!evidence.complete)
+  const negativesWithheld =
+    !suppliedFiles && (!evidence.complete || indexed.collision);
+  if (suppliedFiles) {
     warnings.push(
-      'One or both lists are partial or unverified. Missing accounts are not classified as negative relationships.',
+      'Based on uploaded files, not a verified current Instagram relationship snapshot.',
+    );
+    if (knownLimitations)
+      warnings.push(
+        'Known omissions or ambiguous identities affect this upload. Negative results mean not found in the usable supplied records, not confirmed current non-followers.',
+      );
+  } else if (!evidence.complete)
+    warnings.push(
+      'One or both automatic/source lists are partial or unverified. Missing accounts are not classified as negative relationships.',
     );
   const mutuals: AccountRecord[] = [];
   const notFollowingBack: AccountRecord[] = [];
   const notFollowedBackByYou: AccountRecord[] = [];
   for (const [key, record] of following) {
     if (followers.has(key)) mutuals.push(record);
-    else if (!negativesWithheld) notFollowingBack.push(record);
+    else if (!negativesWithheld && !indexed.ambiguousKeys.has(key))
+      notFollowingBack.push(record);
   }
   if (!negativesWithheld)
     for (const [key, record] of followers)
-      if (!following.has(key)) notFollowedBackByYou.push(record);
+      if (!following.has(key) && !indexed.ambiguousKeys.has(key))
+        notFollowedBackByYou.push(record);
   return {
     mutuals,
     notFollowingBack,
     notFollowedBackByYou,
     unionCount: followers.size + following.size - mutuals.length,
     negativesWithheld,
+    negativeBasis: suppliedFiles
+      ? knownLimitations
+        ? 'provisional_files'
+        : 'supplied_files'
+      : 'source_evidence',
+    quarantinedCount:
+      indexed.quarantinedCount +
+      (dataset.importSummary?.quarantinedRecords ?? 0),
     warnings: [...new Set(warnings)],
   };
 }

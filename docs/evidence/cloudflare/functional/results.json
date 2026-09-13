@@ -1,0 +1,479 @@
+{
+  "config": {
+    "argv": [
+      "/Users/arhaan/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "/tmp/mutuallens-hosted-functional/playwright.config.ts"
+    ],
+    "configFile": "/tmp/mutuallens-hosted-functional/playwright.config.ts",
+    "rootDir": "/tmp/mutuallens-hosted-functional",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/mutuallens-hosted-functional/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/tmp/mutuallens-hosted-functional",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/mutuallens-hosted-functional/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/tmp/mutuallens-hosted-functional",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/mutuallens-hosted-functional/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/tmp/mutuallens-hosted-functional",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/mutuallens-hosted-functional/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "hosted.spec.ts",
+      "file": "hosted.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 787,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:23.453Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjI0LjI4MloiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jc2FtcGxlIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvX2FzdHJvL1BhZ2UuRFdTTmdwZzguY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQ3h5X3J2UmEuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LU1XV1NtendlLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQ3h5X3J2UmEuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LU1XV1NtendlLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-d52f1ee85af2fababbfd",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 143,
+          "column": 5
+        },
+        {
+          "title": "hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:24.317Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjI0Ljc5OVoiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jaW1wb3J0IiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-e13e55510239dce39bb4",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 212,
+          "column": 5
+        },
+        {
+          "title": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1189,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:24.830Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjI1Ljk5NVoiLAogICJicm93c2VyIjogImNocm9taXVtIiwKICAidmVyc2lvbiI6ICIxNTMuMC44MDEwLjEyIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICJzeW50aGV0aWMiOiB0cnVlLAogICJlcnJvcnMiOiBbXSwKICAicmVxdWVzdHMiOiBbCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQ3h5X3J2UmEuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LU1XV1NtendlLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1EM2pDaS02Uy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9CiAgXSwKICAiaHR0cEZhaWx1cmVzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-2883958810ebebd4eda2",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 287,
+          "column": 5
+        },
+        {
+          "title": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1325,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:26.195Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjI3LjcxMloiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvI3NhbXBsZSIsCiAgInN5bnRoZXRpYyI6IHRydWUsCiAgImVycm9ycyI6IFtdLAogICJyZXF1ZXN0cyI6IFsKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1kZG0ucGFnZXMuZGV2LyIsCiAgICAgICJ0eXBlIjogImRvY3VtZW50IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1kZG0ucGFnZXMuZGV2L19hc3Ryby9QYWdlLkRXU05ncGc4LmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9CiAgXSwKICAiaHR0cEZhaWx1cmVzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-66e7e824a2305823b2a3",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 143,
+          "column": 5
+        },
+        {
+          "title": "hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 631,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:27.738Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjI4LjM1M1oiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvI2ltcG9ydCIsCiAgInN5bnRoZXRpYyI6IHRydWUsCiAgImVycm9ycyI6IFtdLAogICJyZXF1ZXN0cyI6IFsKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LyIsCiAgICAgICJ0eXBlIjogImRvY3VtZW50IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1DeHlfcnZSYS5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtTVdXU216d2UuY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hcGkvY2FwYWJpbGl0aWVzIiwKICAgICAgInR5cGUiOiAiZmV0Y2giCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvMjg4MzliNjgtNTMwOS00OGYwLWE5YzMtYzU4YjIwYTVjNDM4IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1EM2pDaS02Uy5qcyIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LzY0ZjQ3OGZhLTJjOWYtNDAwNS04NTMxLWM5YjUxOTZmNjQ0YiIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LzY1M2Q5OTc3LWIzMjAtNGJhNi1iNGE1LWRiMDY5YTNkMjIyOCIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJibG9iOmh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LzM4MzFiMWNmLTY2MWQtNGM3Mi1hODRhLTkyM2U2NDNjZGE1OCIsCiAgICAgICJ0eXBlIjogInhociIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-d8b9579026e55428e7cc",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 212,
+          "column": 5
+        },
+        {
+          "title": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1356,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:28.375Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjI5LjcxOFoiLAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInZpZXdwb3J0IjogewogICAgIndpZHRoIjogMTQ0MCwKICAgICJoZWlnaHQiOiA5MDAKICB9LAogICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiYmxvYjpodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9mOWY4MWMyMS1jMGFjLTRlOTMtOGJhOC1kODk4NjdmNDdjZTkiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiYmxvYjpodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9kMjY2NGMwNi1mZDBiLTRkNDktYmM4MS1jMTVkZjBlM2ZhM2MiLAogICAgICAidHlwZSI6ICJ4aHIiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvNzQyZTliZTAtYWM0ZS00MDlkLWJjOTgtYTAyMjlmMGUzNTQ4IiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImJsb2I6aHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvMDYyNDQ3YWMtNDI3MS00YTM2LWFjMzEtZGVmMDE2NmFhOGEzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2LyIsCiAgICAgICJ0eXBlIjogImRvY3VtZW50IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1DeHlfcnZSYS5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtTVdXU216d2UuY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hcGkvY2FwYWJpbGl0aWVzIiwKICAgICAgInR5cGUiOiAiZmV0Y2giCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAieGhyIgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-fedb03cc5b48370ce5c7",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 287,
+          "column": 5
+        },
+        {
+          "title": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:29.910Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjMxLjcwNVoiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jc2FtcGxlIiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWRkbS5wYWdlcy5kZXYvX2FzdHJvL1BhZ2UuRFdTTmdwZzguY3NzIiwKICAgICAgInR5cGUiOiAic3R5bGVzaGVldCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQ3h5X3J2UmEuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LU1XV1NtendlLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1EM2pDaS02Uy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQ3h5X3J2UmEuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LU1XV1NtendlLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1EM2pDaS02Uy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0KICBdLAogICJodHRwRmFpbHVyZXMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-d7ed7f9cc66a60dd9d83",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 143,
+          "column": 5
+        },
+        {
+          "title": "hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 648,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:31.751Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjMyLjM3NVoiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8jaW1wb3J0IiwKICAic3ludGhldGljIjogdHJ1ZSwKICAiZXJyb3JzIjogW10sCiAgInJlcXVlc3RzIjogWwogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL3Byb2Nlc3Npbmcud29ya2VyLUQzakNpLTZTLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfQogIF0sCiAgImh0dHBGYWlsdXJlcyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-7f36dd800480f7036590",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 212,
+          "column": 5
+        },
+        {
+          "title": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1300,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T02:44:32.403Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "hosted-browser-evidence",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0ZXN0ZWRBdCI6ICIyMDI2LTA5LTA4VDAyOjQ0OjMzLjY4NVoiLAogICJicm93c2VyIjogImZpcmVmb3giLAogICJ2ZXJzaW9uIjogIjE1NS4wIiwKICAidmlld3BvcnQiOiB7CiAgICAid2lkdGgiOiAxNDQwLAogICAgImhlaWdodCI6IDkwMAogIH0sCiAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICJzeW50aGV0aWMiOiB0cnVlLAogICJlcnJvcnMiOiBbXSwKICAicmVxdWVzdHMiOiBbCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi8iLAogICAgICAidHlwZSI6ICJkb2N1bWVudCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvaW5kZXgtQ3h5X3J2UmEuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LU1XV1NtendlLmNzcyIsCiAgICAgICJ0eXBlIjogInN0eWxlc2hlZXQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXBpL2NhcGFiaWxpdGllcyIsCiAgICAgICJ0eXBlIjogImZldGNoIgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9wcm9jZXNzaW5nLndvcmtlci1EM2pDaS02Uy5qcyIsCiAgICAgICJ0eXBlIjogInNjcmlwdCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvIiwKICAgICAgInR5cGUiOiAiZG9jdW1lbnQiCiAgICB9LAogICAgewogICAgICAibWV0aG9kIjogIkdFVCIsCiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9jb2RleC11aS1mdW5jdGlvbmFsLXJlcGFpci5tdXR1YWxsZW5zLWFwcC5wYWdlcy5kZXYvYXNzZXRzL2luZGV4LUN4eV9ydlJhLmpzIiwKICAgICAgInR5cGUiOiAic2NyaXB0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2Fzc2V0cy9pbmRleC1NV1dTbXp3ZS5jc3MiLAogICAgICAidHlwZSI6ICJzdHlsZXNoZWV0IgogICAgfSwKICAgIHsKICAgICAgIm1ldGhvZCI6ICJHRVQiLAogICAgICAidXJsIjogImh0dHBzOi8vY29kZXgtdWktZnVuY3Rpb25hbC1yZXBhaXIubXV0dWFsbGVucy1hcHAucGFnZXMuZGV2L2FwaS9jYXBhYmlsaXRpZXMiLAogICAgICAidHlwZSI6ICJmZXRjaCIKICAgIH0sCiAgICB7CiAgICAgICJtZXRob2QiOiAiR0VUIiwKICAgICAgInVybCI6ICJodHRwczovL2NvZGV4LXVpLWZ1bmN0aW9uYWwtcmVwYWlyLm11dHVhbGxlbnMtYXBwLnBhZ2VzLmRldi9hc3NldHMvcHJvY2Vzc2luZy53b3JrZXItRDNqQ2ktNlMuanMiLAogICAgICAidHlwZSI6ICJzY3JpcHQiCiAgICB9CiAgXSwKICAiaHR0cEZhaWx1cmVzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "66afe6f656386ac7b094-3b2f6ad408d5b9a7928a",
+          "file": "../../private/tmp/mutuallens-hosted-functional/hosted.spec.ts",
+          "line": 287,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-08T02:44:23.258Z",
+    "duration": 10625.301000000001,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

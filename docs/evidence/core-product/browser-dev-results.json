@@ -1,0 +1,2064 @@
+{
+  "config": {
+    "argv": [
+      "/Users/arhaan/.nvm/versions/node/v24.18.0/bin/node",
+      "/Users/arhaan/Documents/ChatGPT/mutuallens/node_modules/.bin/playwright",
+      "test",
+      "repair-workflows",
+      "repair-transitions"
+    ],
+    "configFile": "/Users/arhaan/Documents/ChatGPT/mutuallens/playwright.config.ts",
+    "rootDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/arhaan/Documents/ChatGPT/mutuallens/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev",
+      "wait": {
+        "stdout": {}
+      },
+      "reuseExistingServer": false,
+      "timeout": 60000,
+      "gracefulShutdown": {
+        "signal": "SIGTERM",
+        "timeout": 5000
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "repair-transitions.spec.ts",
+      "file": "repair-transitions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 699,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:03.801Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-83c666d15ded95808432",
+          "file": "repair-transitions.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5464,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:04.689Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "real-worker-cancellation-environment",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJtb2NrZWQiOiBmYWxzZSwKICAiaW5wdXRCeXRlcyI6IDQ5MDAwMDMwLAogICJmb2xsb3dlcnMiOiAxMDAwMDAsCiAgImZvbGxvd2luZyI6IDEwMDAwMCwKICAiYnJvd3NlciI6ICJjaHJvbWl1bSIsCiAgInZlcnNpb24iOiAiMTUzLjAuODAxMC4xMiIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJSZXNvdXJjZS1zYWZlIGlucHV0cyBleGVyY2lzZSBjYW5jZWxsYXRpb247IHRoaXMgaXMgbm90IGNvbXBsZXRlZCAxMDAsMDAwLXJlY29yZCByZXN1bHQgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-5d19c02b819270205219",
+          "file": "repair-transitions.spec.ts",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 823,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:22.728Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-786f7efe61f4090c9cc3",
+          "file": "repair-transitions.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2830,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:23.748Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "real-worker-cancellation-environment",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJtb2NrZWQiOiBmYWxzZSwKICAiaW5wdXRCeXRlcyI6IDQ5MDAwMDMwLAogICJmb2xsb3dlcnMiOiAxMDAwMDAsCiAgImZvbGxvd2luZyI6IDEwMDAwMCwKICAiYnJvd3NlciI6ICJ3ZWJraXQiLAogICJ2ZXJzaW9uIjogIjI2LjYiLAogICJwbGF0Zm9ybSI6ICJkYXJ3aW4iLAogICJhcmNoaXRlY3R1cmUiOiAiYXJtNjQiLAogICJjYXZlYXQiOiAiUmVzb3VyY2Utc2FmZSBpbnB1dHMgZXhlcmNpc2UgY2FuY2VsbGF0aW9uOyB0aGlzIGlzIG5vdCBjb21wbGV0ZWQgMTAwLDAwMC1yZWNvcmQgcmVzdWx0IG9yIGxpdmUgYWNxdWlzaXRpb24gZXZpZGVuY2UuIgp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-ef9540c57d2012dbaafe",
+          "file": "repair-transitions.spec.ts",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 975,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:37.806Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-ae553410298bc1fdd9d4",
+          "file": "repair-transitions.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "repair: real large import cancels, retries with exact data, and repeated history navigation cancels newer work",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2211,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:39.244Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "real-worker-cancellation-environment",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJtb2NrZWQiOiBmYWxzZSwKICAiaW5wdXRCeXRlcyI6IDQ5MDAwMDMwLAogICJmb2xsb3dlcnMiOiAxMDAwMDAsCiAgImZvbGxvd2luZyI6IDEwMDAwMCwKICAiYnJvd3NlciI6ICJmaXJlZm94IiwKICAidmVyc2lvbiI6ICIxNTUuMCIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJSZXNvdXJjZS1zYWZlIGlucHV0cyBleGVyY2lzZSBjYW5jZWxsYXRpb247IHRoaXMgaXMgbm90IGNvbXBsZXRlZCAxMDAsMDAwLXJlY29yZCByZXN1bHQgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a4874b0dca2e5a13e69-f1e09f091173d18bda1b",
+          "file": "repair-transitions.spec.ts",
+          "line": 129,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "repair-workflows.spec.ts",
+      "file": "repair-workflows.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "repair: homepage sample entry is direct and survives reload and browser history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1010,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:10.167Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-fa235479d3e83e922396",
+          "file": "repair-workflows.spec.ts",
+          "line": 131,
+          "column": 1
+        },
+        {
+          "title": "repair: missing import input has visible nearby feedback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 338,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:11.182Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-6af1f9f09afd9f39401a",
+          "file": "repair-workflows.spec.ts",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "repair: all snapshot differences are browsable and full exports contain every record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1602,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:11.523Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-49b9b2be1899b1eed240",
+          "file": "repair-workflows.spec.ts",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:13.129Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-6f3693a4697d217cb86e",
+          "file": "repair-workflows.spec.ts",
+          "line": 232,
+          "column": 1
+        },
+        {
+          "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:14.431Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-010beaf40f0ac05faeb8",
+          "file": "repair-workflows.spec.ts",
+          "line": 341,
+          "column": 1
+        },
+        {
+          "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 648,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:15.336Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-11d092544bc13cad0a52",
+          "file": "repair-workflows.spec.ts",
+          "line": 412,
+          "column": 1
+        },
+        {
+          "title": "repair: known missing parts qualify useful negatives; missing malformed and unsupported data fail clearly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 981,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:15.988Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-f35e05643f16f44a6203",
+          "file": "repair-workflows.spec.ts",
+          "line": 484,
+          "column": 1
+        },
+        {
+          "title": "repair: exact category counts for all mutual",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 412,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:16.973Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-d068d0b6a168d848e270",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: exact category counts for no mutual",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 429,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:17.388Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-7229a785bad0031b2ae7",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: exact category counts for asymmetric empty following",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:17.821Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-7d23d14353d0e6ef2a77",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2131,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:18.237Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-e9e5455dc51709a762c8",
+          "file": "repair-workflows.spec.ts",
+          "line": 604,
+          "column": 1
+        },
+        {
+          "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2140,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:20.372Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities net::ERR_ABORTED"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "synthetic-large-import-performance",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJsaXZlQWNxdWlzaXRpb24iOiBmYWxzZSwKICAiZm9sbG93ZXJzIjogNTAwMDAsCiAgImZvbGxvd2luZyI6IDUwMDAwLAogICJpbXBvcnRSb3VuZFRyaXBNcyI6IDE2ODIuNTM0MDgyOTk5OTk4NiwKICAiYnJvd3NlciI6ICJjaHJvbWl1bSIsCiAgInZlcnNpb24iOiAiMTUzLjAuODAxMC4xMiIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJPbmUgbG9jYWwgYXV0b21hdGlvbiByb3VuZCB0cmlwIGluY2x1ZGluZyBmaWxlIGdlbmVyYXRpb24gdHJhbnNmZXIgYW5kIERPTSBhc3NlcnRpb25zOyBub3QgYSBiZW5jaG1hcmsgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-514f09f123eea9fbdbe0",
+          "file": "repair-workflows.spec.ts",
+          "line": 693,
+          "column": 1
+        },
+        {
+          "title": "repair: homepage sample entry is direct and survives reload and browser history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 788,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:26.594Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-6262590d37a38857d95f",
+          "file": "repair-workflows.spec.ts",
+          "line": 131,
+          "column": 1
+        },
+        {
+          "title": "repair: missing import input has visible nearby feedback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:27.388Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-2b4bd1c63f7435dd32d6",
+          "file": "repair-workflows.spec.ts",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "repair: all snapshot differences are browsable and full exports contain every record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1802,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:27.741Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-4d417cfcf228ee011779",
+          "file": "repair-workflows.spec.ts",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:29.547Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-5815b5884da9ca5f0bf2",
+          "file": "repair-workflows.spec.ts",
+          "line": 232,
+          "column": 1
+        },
+        {
+          "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 906,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:30.822Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-8121b2b03a6314e1bc57",
+          "file": "repair-workflows.spec.ts",
+          "line": 341,
+          "column": 1
+        },
+        {
+          "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 710,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:31.732Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-4531757282babdd7c27b",
+          "file": "repair-workflows.spec.ts",
+          "line": 412,
+          "column": 1
+        },
+        {
+          "title": "repair: known missing parts qualify useful negatives; missing malformed and unsupported data fail clearly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1007,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:32.446Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-09104a08c72031178d47",
+          "file": "repair-workflows.spec.ts",
+          "line": 484,
+          "column": 1
+        },
+        {
+          "title": "repair: exact category counts for all mutual",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 423,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:33.456Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-88c7af7a9880d8867649",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: exact category counts for no mutual",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 417,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:33.883Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-d1f9f7166ecc7efdd9d7",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: exact category counts for asymmetric empty following",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 423,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:34.304Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-110aadc4b641681de4d9",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1645,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:34.731Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-1f417d4194a3f5258aa1",
+          "file": "repair-workflows.spec.ts",
+          "line": 604,
+          "column": 1
+        },
+        {
+          "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities cancelled"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1206,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:36.381Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities cancelled"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "synthetic-large-import-performance",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJsaXZlQWNxdWlzaXRpb24iOiBmYWxzZSwKICAiZm9sbG93ZXJzIjogNTAwMDAsCiAgImZvbGxvd2luZyI6IDUwMDAwLAogICJpbXBvcnRSb3VuZFRyaXBNcyI6IDc3MC45NTc3MDc5OTk5OTk5LAogICJicm93c2VyIjogIndlYmtpdCIsCiAgInZlcnNpb24iOiAiMjYuNiIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJPbmUgbG9jYWwgYXV0b21hdGlvbiByb3VuZCB0cmlwIGluY2x1ZGluZyBmaWxlIGdlbmVyYXRpb24gdHJhbnNmZXIgYW5kIERPTSBhc3NlcnRpb25zOyBub3QgYSBiZW5jaG1hcmsgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-2858aa9aa8529ec99689",
+          "file": "repair-workflows.spec.ts",
+          "line": 693,
+          "column": 1
+        },
+        {
+          "title": "repair: homepage sample entry is direct and survives reload and browser history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                },
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 925,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:41.469Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    },
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-35fa82186d8354657832",
+          "file": "repair-workflows.spec.ts",
+          "line": 131,
+          "column": 1
+        },
+        {
+          "title": "repair: missing import input has visible nearby feedback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 336,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:42.398Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-7b588045ba717849424b",
+          "file": "repair-workflows.spec.ts",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "repair: all snapshot differences are browsable and full exports contain every record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1483,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:42.738Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-4d704210a436ae5e0bd5",
+          "file": "repair-workflows.spec.ts",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "title": "repair: synthetic result categories search sorting paging and downloads contain complete data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1085,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:44.225Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-30176863f7ed6f63fd35",
+          "file": "repair-workflows.spec.ts",
+          "line": 232,
+          "column": 1
+        },
+        {
+          "title": "repair: sample replacement requires explicit choice and clearing differs from starting over",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 764,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:45.313Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-42726ec4110aab47693c",
+          "file": "repair-workflows.spec.ts",
+          "line": 341,
+          "column": 1
+        },
+        {
+          "title": "repair: ZIP split parts deduplicate correctly and selecting same files again is supported",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 702,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:46.081Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-e0c710137ef4bc0d151c",
+          "file": "repair-workflows.spec.ts",
+          "line": 412,
+          "column": 1
+        },
+        {
+          "title": "repair: known missing parts qualify useful negatives; missing malformed and unsupported data fail clearly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 891,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:46.787Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-05af789c11d72e118385",
+          "file": "repair-workflows.spec.ts",
+          "line": 484,
+          "column": 1
+        },
+        {
+          "title": "repair: exact category counts for all mutual",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:47.682Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-5ce1451566e16899d5c5",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: exact category counts for no mutual",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 385,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:48.311Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-1c18d47053cbf836d2bd",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: exact category counts for asymmetric empty following",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 384,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:48.700Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-0a2b4457f0b3d71ac2d1",
+          "file": "repair-workflows.spec.ts",
+          "line": 585,
+          "column": 3
+        },
+        {
+          "title": "repair: snapshots persist only after saving; invalid comparisons are rejected and deletion is confirmed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1585,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:49.087Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-6969be9a60f5c60e9b81",
+          "file": "repair-workflows.spec.ts",
+          "line": 604,
+          "column": 1
+        },
+        {
+          "title": "repair: 50,000 per-direction local import preserves full searchable and exported data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "expected-development-cleanup",
+                  "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1632,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-08T05:33:50.676Z",
+                  "annotations": [
+                    {
+                      "type": "expected-development-cleanup",
+                      "description": "GET http://localhost:5173/api/capabilities NS_BINDING_ABORTED"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "synthetic-large-import-performance",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWMiOiB0cnVlLAogICJsaXZlQWNxdWlzaXRpb24iOiBmYWxzZSwKICAiZm9sbG93ZXJzIjogNTAwMDAsCiAgImZvbGxvd2luZyI6IDUwMDAwLAogICJpbXBvcnRSb3VuZFRyaXBNcyI6IDExNjYuMTU1NzA4MDAwMDAwMiwKICAiYnJvd3NlciI6ICJmaXJlZm94IiwKICAidmVyc2lvbiI6ICIxNTUuMCIsCiAgInBsYXRmb3JtIjogImRhcndpbiIsCiAgImFyY2hpdGVjdHVyZSI6ICJhcm02NCIsCiAgImNhdmVhdCI6ICJPbmUgbG9jYWwgYXV0b21hdGlvbiByb3VuZCB0cmlwIGluY2x1ZGluZyBmaWxlIGdlbmVyYXRpb24gdHJhbnNmZXIgYW5kIERPTSBhc3NlcnRpb25zOyBub3QgYSBiZW5jaG1hcmsgb3IgbGl2ZSBhY3F1aXNpdGlvbiBldmlkZW5jZS4iCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fdcc91de8abf6a607c31-acda38345857f1d8b3f0",
+          "file": "repair-workflows.spec.ts",
+          "line": 693,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-08T05:33:01.049Z",
+    "duration": 51482.959,
+    "expected": 42,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "stats": {
+    "startTime": "2026-09-08T02:44:23.258Z",
+    "duration": 10625.301000000001,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "test": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+      "status": "passed",
+      "browser": "chromium",
+      "version": "153.0.8010.12",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:24.282Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 12,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives",
+      "status": "passed",
+      "browser": "chromium",
+      "version": "153.0.8010.12",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:24.799Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 6,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+      "status": "passed",
+      "browser": "chromium",
+      "version": "153.0.8010.12",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:25.995Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 11,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+      "status": "passed",
+      "browser": "webkit",
+      "version": "26.6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:27.712Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 12,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives",
+      "status": "passed",
+      "browser": "webkit",
+      "version": "26.6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:28.353Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 10,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+      "status": "passed",
+      "browser": "webkit",
+      "version": "26.6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:29.718Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 15,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports",
+      "status": "passed",
+      "browser": "firefox",
+      "version": "155.0",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:31.705Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 12,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: ZIP split parts deduplicate, export exact records, and partial import withholds negatives",
+      "status": "passed",
+      "browser": "firefox",
+      "version": "155.0",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:32.375Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 6,
+      "requestMethods": [
+        "GET"
+      ]
+    },
+    {
+      "test": "hosted: explicit snapshots persist, all65 differences browse, export is complete, deletion is confirmed",
+      "status": "passed",
+      "browser": "firefox",
+      "version": "155.0",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "testedAt": "2026-09-08T02:44:33.685Z",
+      "errors": [],
+      "httpFailures": [],
+      "requestCount": 11,
+      "requestMethods": [
+        "GET"
+      ]
+    }
+  ]
+}

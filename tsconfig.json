@@ -18,6 +18,9 @@
     "apps/checker/src/**/*.tsx",
     "apps/checker/functions/**/*.ts",
     "tests/**/*.ts",
-    "*.ts"
+    "*.ts",
+    "apps/checker/server/**/*.ts",
+    "apps/checker/automatic-env.d.ts",
+    "apps/maintenance/src/**/*.ts"
   ]
 }

@@ -1,0 +1,7 @@
+{
+  "synthetic": true,
+  "browser": "Playwright webkit",
+  "searchRoundTripMs": 20.08770800000002,
+  "usedJSHeapBytes": null,
+  "caveat": "Automation round-trip includes input and assertion overhead; memory is Chromium estimate, not device limit or live scan evidence."
+}
