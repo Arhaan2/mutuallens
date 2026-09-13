@@ -190,6 +190,8 @@ export default function App() {
     () => () => {
       ++taskId.current;
       worker.current?.terminate();
+      worker.current = null;
+      activeTask.current = null;
       ++storageGeneration.current;
     },
     [],
