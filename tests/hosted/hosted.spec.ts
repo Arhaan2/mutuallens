@@ -3,8 +3,12 @@ import { test, expect, type Page, type Download } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { zipSync, strToU8 } from 'fflate';
 
-const SITE = 'https://codex-ui-functional-repair.mutuallens-ddm.pages.dev';
-const CHECKER = 'https://codex-ui-functional-repair.mutuallens-app.pages.dev';
+const SITE =
+  process.env.MUTUALLENS_HOSTED_SITE_ORIGIN ??
+  'https://codex-ui-functional-repair.mutuallens-ddm.pages.dev';
+const CHECKER =
+  process.env.MUTUALLENS_HOSTED_CHECKER_ORIGIN ??
+  'https://codex-ui-functional-repair.mutuallens-app.pages.dev';
 const allowed = new Set([new URL(SITE).origin, new URL(CHECKER).origin]);
 const row = (value: string) => ({ string_list_data: [{ value }] });
 const following = (names: string[]) => ({
@@ -158,6 +162,7 @@ test('hosted: homepage sample entry, metadata, exact synthetic counts and parsed
     'href',
     `${CHECKER}/#sample`,
   );
+  await page.waitForLoadState('networkidle');
   await page.locator('.sample-link').click();
   await expect(page).toHaveURL(`${CHECKER}/#sample`);
   await expect(page.locator('#results-title')).toContainText(
