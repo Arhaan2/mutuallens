@@ -62,7 +62,7 @@ it('finishes a queued cancellation when the leased advance hits a retryable prov
     getReviewedPricing: vi.fn(async () => pricing),
     start: vi.fn(async () => running()),
     getRun,
-    abortRun: vi.fn(async () => ({ ...running(), status: 'ABORTED' })),
+    abortRun: vi.fn(async () => ({ ...running(), status: 'ABORTED' as const })),
     readDatasetPage: vi.fn(),
     deleteDataset: vi.fn(async () => undefined),
     deleteKeyValueStore: vi.fn(async () => undefined),
