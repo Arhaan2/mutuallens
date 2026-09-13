@@ -669,6 +669,16 @@ export class ScanService {
         job.retries < 3 &&
         job.stage !== 'starting'
       ) {
+        if ((await this.owned(session, id)).cancelRequested)
+          return this.stop(
+            id,
+            lease,
+            job,
+            'cancelled',
+            'Scan cancelled. Observed records are incomplete; confirmed absence classifications are withheld.',
+            false,
+            session,
+          );
         job.retries++;
         job.nextAt =
           this.now() +
