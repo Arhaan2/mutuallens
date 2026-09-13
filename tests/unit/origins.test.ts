@@ -66,7 +66,9 @@ it('requires both the production flag and a non-preview host for indexing', () =
   for (const origin of [
     'http://localhost:4321',
     'https://mutuallens.pages.dev',
+    'https://mutuallens.pages.dev.',
     'https://arhaan2.github.io',
+    'https://arhaan2.github.io.',
   ]) {
     expect(
       isPublicReleaseIndexable({

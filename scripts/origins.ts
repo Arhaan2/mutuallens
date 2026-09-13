@@ -71,7 +71,7 @@ export function isPublicReleaseIndexable(
   const url = new URL(origin);
   if (url.origin !== origin)
     throw new Error('PUBLIC_SITE_ORIGIN must be a plain origin.');
-  const hostname = url.hostname.toLowerCase();
+  const hostname = url.hostname.toLowerCase().replace(/\.$/, '');
   return !(
     hostname === 'localhost' ||
     hostname === '127.0.0.1' ||
