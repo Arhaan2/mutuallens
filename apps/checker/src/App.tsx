@@ -135,7 +135,10 @@ export default function App() {
   }, [report]);
 
   useEffect(() => {
-    if (error) errorBox.current?.focus();
+    if (error && errorBox.current) {
+      errorBox.current.focus({ preventScroll: true });
+      errorBox.current.scrollIntoView({ block: 'center' });
+    }
   }, [error, feedbackScope]);
 
   useEffect(() => {

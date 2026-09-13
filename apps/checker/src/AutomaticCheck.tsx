@@ -220,7 +220,10 @@ export function AutomaticCheck({
   }, [resetKey]);
 
   useEffect(() => {
-    if (error) errorBox.current?.focus();
+    if (error && errorBox.current) {
+      errorBox.current.focus({ preventScroll: true });
+      errorBox.current.scrollIntoView({ block: 'center' });
+    }
   }, [error]);
 
   const current = (epoch: number) => generation.current === epoch;
