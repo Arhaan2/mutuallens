@@ -1,5 +1,6 @@
 ---
 import Page from '../../layouts/Page.astro';
+import { sitePath } from '../../lib/urls';
 ---
 
 <Page
@@ -70,10 +71,9 @@ import Page from '../../layouts/Page.astro';
     windows; neither is a perfect atomic record of a changing platform.
   </p>
   <p>
-    Next: <a href="/guides/not-following-back-vs-unfollowed/"
+    Next: <a href={sitePath('/guides/not-following-back-vs-unfollowed/')}
       >why “not following back” and “unfollowed” mean different things</a
-    >, or <a href="/instagram-follow-back-checker/"
-      >see the current checker preview</a
-    >.
+    >, or <a href={sitePath('/')}>see the current checker preview</a>.
   </p>
+  <p><a href={sitePath('/guides/')}>Browse all MutualLens guides</a>.</p>
 </Page>

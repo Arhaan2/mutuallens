@@ -1,7 +1,6 @@
 ---
 import Page from '../../layouts/Page.astro';
-const checker =
-  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+import { checkerUrl, sitePath } from '../../lib/urls';
 ---
 
 <Page
@@ -17,7 +16,7 @@ const checker =
     without a required account label, source date or confirmation.
   </p>
   <aside class="article-note">
-    <strong>Verification note · September 7, 2026</strong><p>
+    <strong>Verification note · September 12, 2026</strong><p>
       Meta’s public announcement confirms that Instagram information-download
       tools are in Accounts Center. The detailed Help Center page redirected to
       a login screen during review, so the current exact menu sequence and
@@ -75,12 +74,13 @@ const checker =
     malformed records to force a report. A fresh supported export may be needed
     when formats change.
   </p><p>
-    <a href="/guides/instagram-export-troubleshooting/"
+    <a href={sitePath('/guides/instagram-export-troubleshooting/')}
       >Troubleshoot missing or unsupported files</a
-    >, or <a href={`${checker}/#import`}>open the local import preview</a>.
+    >, or <a href={checkerUrl('import')}>open the local import preview</a>.
   </p>
   <p class="small muted">
     This is preparation guidance for a tested local parser, not evidence of a
     successful live Instagram export or automatic account scan.
   </p>
+  <p><a href={sitePath('/guides/')}>Browse all MutualLens guides</a>.</p>
 </Page>

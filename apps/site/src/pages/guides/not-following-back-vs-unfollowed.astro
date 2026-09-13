@@ -1,5 +1,6 @@
 ---
 import Page from '../../layouts/Page.astro';
+import { sitePath } from '../../lib/urls';
 ---
 
 <Page
@@ -55,8 +56,13 @@ import Page from '../../layouts/Page.astro';
     copies when appropriate.
   </p>
   <p>
-    <a href="/privacy/">Read the storage details</a> or return to <a
-      href="/guides/followers-vs-following/">followers vs. following</a
+    <a href={sitePath('/guides/reading-snapshot-history/')}
+      >Read the snapshot-history guide</a
+    >, <a href={sitePath('/privacy/')}>review the storage details</a>, or return
+    to
+    <a href={sitePath('/guides/followers-vs-following/')}
+      >followers vs. following</a
     >.
   </p>
+  <p><a href={sitePath('/guides/')}>Browse all MutualLens guides</a>.</p>
 </Page>

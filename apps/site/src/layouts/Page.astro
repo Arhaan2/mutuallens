@@ -1,16 +1,42 @@
 ---
 import '../styles/global.css';
 import AdReadiness from '../components/AdReadiness.astro';
+import {
+  checkerRootUrl,
+  publicReleaseIndexable,
+  sitePath,
+  siteUrl,
+} from '../lib/urls';
 interface Props {
   title: string;
   description: string;
   article?: boolean;
+  allowIndex?: boolean;
+  includeCanonical?: boolean;
 }
-const { title, description, article = false } = Astro.props;
-const origin = import.meta.env.PUBLIC_SITE_ORIGIN || 'http://localhost:4321';
-const checker =
-  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
-const canonical = new URL(Astro.url.pathname, origin).href;
+const {
+  title,
+  description,
+  article = false,
+  allowIndex = true,
+  includeCanonical = true,
+} = Astro.props;
+const canonical = siteUrl(Astro.url.pathname);
+const robots =
+  publicReleaseIndexable && allowIndex ? 'index, follow' : 'noindex, follow';
+const socialCard = siteUrl('/social-card.png');
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: canonical,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'MutualLens',
+    url: siteUrl('/'),
+  },
+}).replaceAll('<', '\\u003c');
 ---
 
 <!doctype html>
@@ -18,20 +44,39 @@ const canonical = new URL(Astro.url.pathname, origin).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, follow" />
+    <meta name="robots" content={robots} />
     <meta name="referrer" content="no-referrer" />
     <meta name="theme-color" content="#f7f8f5" />
     <title>{title} · MutualLens</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {includeCanonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={sitePath('/apple-touch-icon.png')} />
     <meta property="og:title" content={`${title} · MutualLens`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={article ? 'article' : 'website'} />
-    <meta property="og:url" content={canonical} />
+    {includeCanonical && <meta property="og:url" content={canonical} />}
     <meta property="og:site_name" content="MutualLens" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={socialCard} />
+    <meta
+      property="og:image:alt"
+      content="MutualLens — clarity over assumptions"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${title} · MutualLens`} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialCard} />
+    {
+      includeCanonical && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={structuredData}
+        />
+      )
+    }
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -42,14 +87,16 @@ const canonical = new URL(Astro.url.pathname, origin).href;
       >
     </div>
     <header class="site-header wrap">
-      <a class="wordmark" href="/" aria-label="MutualLens home"
+      <a class="wordmark" href={sitePath('/')} aria-label="MutualLens home"
         >Mutual<span>Lens</span><span class="wordmark-dot" aria-hidden="true"
         ></span></a
       >
       <nav aria-label="Main navigation">
-        <a href="/instagram-follow-back-checker/">The checker</a><a
-          href="/guides/followers-vs-following/">Guides</a
-        ><a href="/about/">About</a><a class="nav-cta" href={checker}
+        <a href={sitePath('/instagram-follow-back-checker/')}>The checker</a><a
+          href={sitePath('/guides/')}>Guides</a
+        ><a href={sitePath('/about/')}>About</a><a
+          class="nav-cta"
+          href={checkerRootUrl}
           >Open preview <span aria-hidden="true">↗</span></a
         >
       </nav>
@@ -61,13 +108,16 @@ const canonical = new URL(Astro.url.pathname, origin).href;
     <footer class="site-footer wrap">
       <div class="footer-top">
         <div>
-          <a class="wordmark" href="/">Mutual<span>Lens</span></a><p>
+          <a class="wordmark" href={sitePath('/')}>Mutual<span>Lens</span></a><p
+          >
             Clarity over assumptions.
           </p>
         </div><div class="footer-links">
-          <a href="/about/">About</a><a href="/privacy/">Privacy</a><a
-            href="/terms/">Terms</a
-          ><a href="/contact/">Contact</a>
+          <a href={sitePath('/guides/')}>Guides</a><a href={sitePath('/about/')}
+            >About</a
+          ><a href={sitePath('/privacy/')}>Privacy</a><a
+            href={sitePath('/terms/')}>Terms</a
+          ><a href={sitePath('/contact/')}>Contact</a>
         </div>
       </div><div class="footer-bottom">
         <span>© {new Date().getFullYear()} MutualLens · Preview only</span><span

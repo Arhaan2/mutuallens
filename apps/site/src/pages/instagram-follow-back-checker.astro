@@ -1,13 +1,13 @@
 ---
 import Page from '../layouts/Page.astro';
-const checker =
-  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+import { checkerUrl, sitePath } from '../lib/urls';
 ---
 
 <Page
   article
-  title="Instagram follow-back checker: preview & limitations"
-  description="Upload Instagram JSON, HTML or ZIP relationship files to see non-followers immediately, with optional history and a separate automatic-integration preview."
+  allowIndex={false}
+  title="Checker availability, upload scope & privacy"
+  description="See which MutualLens checker features work in this preview, what uploaded results mean, and why website-only automatic checking remains unavailable."
 >
   <p class="eyebrow">THE MUTUALLENS CHECKER</p><h1>
     Follow-back checking,<br />with the context intact.
@@ -36,9 +36,9 @@ const checker =
     gates.
   </p>
   <div class="article-actions">
-    <a class="button primary" href={`${checker}/#import`}
+    <a class="button primary" href={checkerUrl('import')}
       >Upload your Instagram files <span aria-hidden="true">↗</span></a
-    ><a href={`${checker}/#automatic`}>Automatic checking status</a>
+    ><a href={checkerUrl('automatic')}>Automatic checking status</a>
   </div><p class="small muted">
     The automatic entry opens the checker’s honest unavailable state. No real
     request returns sample results.
@@ -67,16 +67,22 @@ const checker =
     the requested account data; it would not be entirely on-device.
   </p><p>
     The checker runs on a separate browser origin from these public pages and
-    contains no advertising or marketing scripts. Read the <a href="/privacy/"
-      >privacy draft</a
+    contains no advertising or marketing scripts. Read the <a
+      href={sitePath('/privacy/')}>privacy draft</a
     > for storage and hosting limitations.
   </p>
   <h2>One report cannot explain intent</h2><p>
     An account absent from a supplied list may never have followed you, may have
     changed its username, or may reflect a source or timing difference. A
     current report does not prove a historical unfollow. <a
-      href="/guides/not-following-back-vs-unfollowed/"
+      href={sitePath('/guides/not-following-back-vs-unfollowed/')}
       >Learn how to interpret changes.</a
     >
+  </p>
+  <p>
+    Need help preparing an export or interpreting a saved comparison? Browse the{
+      ' '
+    }
+    <a href={sitePath('/guides/')}>MutualLens guides</a>.
   </p>
 </Page>

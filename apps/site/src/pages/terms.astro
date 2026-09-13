@@ -1,5 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
+import { sitePath } from '../lib/urls';
 ---
 
 <Page
@@ -46,8 +47,8 @@ import Page from '../layouts/Page.astro';
     represent that those steps have happened.
   </p>
   <p>
-    See the <a href="/privacy/">privacy draft</a> and <a href="/contact/"
-      >project contact information</a
+    See the <a href={sitePath('/privacy/')}>privacy draft</a> and <a
+      href={sitePath('/contact/')}>project contact information</a
     >.
   </p>
 </Page>

@@ -1,7 +1,6 @@
 ---
 import Page from '../../layouts/Page.astro';
-const checker =
-  import.meta.env.PUBLIC_CHECKER_ORIGIN || 'http://localhost:5173';
+import { checkerUrl, sitePath } from '../../lib/urls';
 ---
 
 <Page
@@ -61,8 +60,10 @@ const checker =
     describe the same account.
   </p>
   <p>
-    <a href={`${checker}/#import`}>Open upload mode</a> or <a
-      href="/guides/download-instagram-followers/">prepare your export</a
+    <a href={checkerUrl('import')}>Open upload mode</a> or <a
+      href={sitePath('/guides/download-instagram-followers/')}
+      >prepare your export</a
     >.
   </p>
+  <p><a href={sitePath('/guides/')}>Browse all MutualLens guides</a>.</p>
 </Page>
