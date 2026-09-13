@@ -11,7 +11,7 @@
 | Automatic acquisition hardening | Automatic implementer; lead contracts/config | Current provider, private token/target, D1/Worker scope | Integrated fail-closed; live gates blocked/not run                      |
 | Correctness/security review     | Independent reviewer                         | Application candidate `aca05c15`                        | PASS for noindexed preview; no open P0-P3 in reviewed scope             |
 | Browser/release verification    | Independent verifier                         | Local application candidate and deployed URLs           | Local PASS; hosted verification pending                                 |
-| Merge and deployments           | Lead                                         | Exact-head CI, dependency gate, hosted readback         | BLOCKED before push by the dependency gate below                        |
+| Merge and deployments           | Lead                                         | Exact-head CI and hosted readback                       | Dependency gate repaired locally; push/CI/merge/deploy pending          |
 
 Confirmed defects and dispositions: the WebKit Vite worker cancellation was a
 real same-tick lifecycle race, not an ignorable network error; the UI now uses a
@@ -36,13 +36,13 @@ and verified the noindexed `/mutuallens` Pages artifact. Later application
 deltas only repaired reviewed server-side cancellation and preview-host
 normalization; exact-head CI still must repeat the full matrix before merge.
 
-The dependency audit is the remaining code-release blocker: the locked
-development toolchain uses Wrangler 4.129.1 and reports three high-severity
-entries through Miniflare/Sharp. npm identifies non-major Wrangler 4.131.1 as
-the fix. The lead requested explicit owner permission for that development-only
-upgrade; CI intentionally retains `npm audit --audit-level=high` and has not
-been weakened. No branch push, merge, Pages setup, or release deployment will
-be represented as complete until this gate passes on the exact head.
+The dependency gate is repaired locally with the owner's explicit approval.
+Wrangler is exactly pinned from 4.129.1 to 4.131.1 and its required Cloudflare
+types are exactly pinned from 5.20260907.1 to 5.20260911.1. A clean `npm ci`,
+Wrangler version check, and `npm audit --audit-level=high` now pass with zero
+known vulnerabilities. CI intentionally retains the same audit threshold. No
+branch push, merge, Pages setup, or release deployment will be represented as
+complete until all exact-head remote and hosted gates pass.
 
 The configured provider's September 12 Free/cursor change advertises only 25
 results per list/run, three runs per day, and a 30-minute cooldown. At least 480
