@@ -4,14 +4,14 @@
 
 ## September 12, 2026 release execution ledger
 
-| Work                            | Owner                                        | Dependency                                              | Current disposition                                                     |
-| ------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Checker UI and worker lifecycle | UI/UX implementer; lead integration          | Existing core worker                                    | Integrated; lifecycle races fixed; three-engine local acceptance passed |
-| Public guides and SEO output    | SEO/content implementer; lead host config    | Accepted origin/index gate                              | Integrated; GitHub subpath/noindex artifact verified locally            |
-| Automatic acquisition hardening | Automatic implementer; lead contracts/config | Current provider, private token/target, D1/Worker scope | Integrated fail-closed; live gates blocked/not run                      |
-| Correctness/security review     | Independent reviewer                         | Application candidate `aca05c15`                        | PASS for noindexed preview; no open P0-P3 in reviewed scope             |
-| Browser/release verification    | Independent verifier                         | Local application candidate and deployed URLs           | Local PASS; hosted verification pending                                 |
-| Merge and deployments           | Lead                                         | Exact-head CI and hosted readback                       | Dependency gate repaired locally; push/CI/merge/deploy pending          |
+| Work                            | Owner                                        | Dependency                                              | Current disposition                                                    |
+| ------------------------------- | -------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Checker UI and worker lifecycle | UI/UX implementer; lead integration          | Existing core worker                                    | Merged and hosted; local and hosted three-engine acceptance passed     |
+| Public guides and SEO output    | SEO/content implementer; lead host config    | Accepted origin/index gate                              | Merged and hosted as noindexed Cloudflare preview and GitHub demo      |
+| Automatic acquisition hardening | Automatic implementer; lead contracts/config | Current provider, private token/target, D1/Worker scope | Integrated fail-closed; live gates blocked/not run                     |
+| Correctness/security review     | Independent reviewer                         | Final candidate `efa81e43`                              | PASS for noindexed preview; no open P0-P3 in reviewed scope            |
+| Browser/release verification    | Independent verifier; lead hosted readback   | Accepted deployment URLs                                | Local and hosted PASS; no release-blocking UI/SEO/browser defect       |
+| Merge and deployments           | Lead                                         | Exact-head CI and hosted readback                       | PR #1 merged; GitHub Pages and both Cloudflare Pages projects deployed |
 
 Confirmed defects and dispositions: the WebKit Vite worker cancellation was a
 real same-tick lifecycle race, not an ignorable network error; the UI now uses a
@@ -24,25 +24,22 @@ beyond the one-hour job lifetime. Provider-era jobs, stale/late writes,
 cross-page identity conflicts, mismatched charge/dataset accounting, abandoned
 reservations and exhausted cleanup retries now fail closed.
 
-Local evidence for the shipping preview: formatting and check gates pass;
-TypeScript/Astro reports zero diagnostics; 16 unit/review files with 319 tests
-pass; checker and 13-page site builds pass; startup/port safety passes 3/3. The
-lead's built-preview suite passed 153/153 and development suite passed 42/42
+Local evidence for the shipping preview: formatting and check gates passed;
+TypeScript/Astro reported zero diagnostics; 16 unit/review files with 319 tests
+passed; checker and 13-page site builds passed; startup/port safety passed 3/3.
+The lead's built-preview suite passed 153/153 and development suite passed 42/42
 across Chromium, Playwright WebKit and Firefox. The separate browser verifier
-repeated those 153 and 42 scenarios at `f20bf993`, inspected 15 responsive
-checker states at 320/390/768/1440/1920 pixels with zero Axe violations or
-overflow, parsed a complete 1,500-row CSV and 6,000-per-direction JSON export,
-and verified the noindexed `/mutuallens` Pages artifact. Later application
-deltas only repaired reviewed server-side cancellation and preview-host
-normalization; exact-head CI still must repeat the full matrix before merge.
+repeated those 153 and 42 scenarios, inspected 15 responsive checker states at
+320/390/768/1440/1920 pixels with zero Axe violations or overflow, parsed a
+complete 1,500-row CSV and 6,000-per-direction JSON export, and verified the
+noindexed `/mutuallens` Pages artifact. The lead also exercised the exact built
+candidate with synthetic uploads and visually inspected the entry and results.
 
-The dependency gate is repaired locally with the owner's explicit approval.
+The dependency gate was repaired with the owner's explicit approval.
 Wrangler is exactly pinned from 4.129.1 to 4.131.1 and its required Cloudflare
 types are exactly pinned from 5.20260907.1 to 5.20260911.1. A clean `npm ci`,
 Wrangler version check, and `npm audit --audit-level=high` now pass with zero
-known vulnerabilities. CI intentionally retains the same audit threshold. No
-branch push, merge, Pages setup, or release deployment will be represented as
-complete until all exact-head remote and hosted gates pass.
+known vulnerabilities. CI intentionally retains the same audit threshold.
 
 The configured provider's September 12 Free/cursor change advertises only 25
 results per list/run, three runs per day, and a 30-minute cooldown. At least 480
@@ -50,12 +47,92 @@ one-direction runs would be required for 12,000 identities, so the 6,000 ×
 6,000 automatic target is not feasible on that current advertised Free scope.
 Chargeable starts remain disabled.
 
-This ledger is the current release record. Application candidate
-`aca05c15b5bd5afa92f34208e46f0c553a307df4` is independently approved for a
-noindexed preview, not for live automatic acquisition or commercial launch.
-Final source/CI/merge/deployment provenance and hosted verification remain
-pending. Older evidence below remains attributed to its recorded SHA and must
-not be used as proof for this candidate.
+### Final source, CI and merge provenance
+
+- Independently approved PR head: `efa81e4385c2d17d794012fdbe7b2268f24a9ba0`.
+- [PR #1](https://github.com/Arhaan2/mutuallens/pull/1) merged normally without
+  admin bypass, force push or branch deletion at 2026-09-12 19:25 PDT.
+- Accepted merge/source SHA:
+  `00e53a44cc07bf9f19671b56ad40f2497a72a43e`.
+- Exact-head [PR CI run 34732636866](https://github.com/Arhaan2/mutuallens/actions/runs/34732636866)
+  passed before merge. Post-merge [main run 34733033964](https://github.com/Arhaan2/mutuallens/actions/runs/34733033964)
+  passed all verification, GitHub Pages build and deployment jobs against the
+  accepted merge SHA.
+- The post-merge run repeated clean install, formatting, TypeScript/Astro,
+  319 tests, build, high-severity audit, 153 built-browser cases, 42 development
+  cases and 3 startup cases. Browser cases ran in Chromium, Playwright WebKit
+  and Firefox. WebKit automation is not a physical Safari or iPhone test.
+
+### Deployed preview provenance and hosted checks
+
+- GitHub Pages project/demo: <https://arhaan2.github.io/mutuallens/>. Workflow
+  deployment `6416905477` / successful status `18278609354` serves commit
+  `00e53a44`. The `/mutuallens/` base, CSS, guides and helpful 404 reloads return
+  the expected status; `build-info.json` matches the accepted SHA. HTML is
+  `noindex`, `robots.txt` allows retrieval of that directive, and the demo
+  sitemap is an empty URL set. GitHub does not serve the Cloudflare `_headers`
+  control file, so no `X-Robots-Tag` header is claimed on this host.
+- Cloudflare public preview: <https://mutuallens-ddm.pages.dev/>, deployment
+  `b6fdaa91-e856-479b-8b94-3175365312ea` from `main`/`00e53a4`.
+- Cloudflare checker: <https://mutuallens-app.pages.dev/>, deployment
+  `ce91374e-6cd0-438c-8b63-3580528b68f7` from `main`/`00e53a4`; the Pages
+  Functions bundle compiled and deployed.
+- Both stable Cloudflare aliases return the accepted build stamp and enforce
+  `X-Robots-Tag: noindex, nofollow`; their HTML also contains noindex. Direct
+  content and hashed checker assets return 200. Capability readback reports
+  preview, automatic blocked and ads false. An unauthenticated/cross-origin
+  scan start fails closed with 403 `ORIGIN_REJECTED`.
+- The production-alias hosted suite passed 12/12 scenarios without application
+  failures across Chromium, Playwright WebKit and Firefox. It parsed downloads,
+  reopened native data, exercised ZIP/split/partial inputs, local snapshots and
+  the exact 6,000-followers + 6,000-following + 4,500-mutual result. The first
+  attempt exposed only a Firefox harness boundary: immediate navigation canceled
+  two otherwise-200 icon fetches. Waiting for actual network idle (not ignoring
+  failures or sleeping) made the complete rerun pass. The lead also opened and
+  visually inspected the stable GitHub and Cloudflare aliases.
+- The independent hosted verifier separately returned PASS for the exact source
+  SHA and stable aliases. Six product journeys passed across Chromium,
+  Playwright WebKit and Firefox at 1440 × 900 and 390 × 844 with parsed exports,
+  sample/upload counts, search, no horizontal overflow and no product console
+  errors. It captured 18 entry/sample/upload states, manually inspected six
+  representative captures, repeated all three build stamps twice, and verified
+  the GitHub subpath/404/indexing output plus Cloudflare headers/capability.
+  Sanitized evidence is retained at
+  `/private/tmp/mutuallens-hosted-evidence-20260913/`.
+
+Reproduce the hosted matrix from a clean checkout with:
+
+```sh
+MUTUALLENS_HOSTED_SITE_ORIGIN=https://mutuallens-ddm.pages.dev \
+MUTUALLENS_HOSTED_CHECKER_ORIGIN=https://mutuallens-app.pages.dev \
+npx playwright test --config tests/hosted/playwright.config.ts
+```
+
+### Rollback and remaining gates
+
+The release artifacts are reproducible from merge SHA `00e53a44`; source hash
+`e9c0bc636dbde59ff574ac2ba6da37b8e567cabbf10dfe714e0e0717043ca9a8`
+matches all three hosted build records. Prior verified Cloudflare branch-preview
+deployments remain available as read-only comparison points. This was the first
+production-branch deployment, so no destructive production rollback was run;
+recovery is an explicit rebuild/redeploy of the accepted SHA followed by the
+same hosted suite.
+
+Automatic acquisition remains disabled and BLOCKED/NOT RUN. No credentialed
+provider retrieval, target-scale retrieval, recurring-free measurement, D1
+migration or maintenance Worker deployment was performed. The exact owner
+action is to place `APIFY_TOKEN` and an explicitly authorized public test
+username in ignored `private/apify.env`, then refresh Wrangler authorization
+with D1/Workers scope. Secrets must not be pasted into chat or committed. The
+current configured provider Free limits are insufficient for the 6,000 by 6,000
+target, so no provider start is authorized until a zero-cash path is proven.
+Physical Safari/iPhone testing, trace-level Chrome DevTools Core Web Vitals and
+the owner's previously rejected private exports were unavailable and are not
+claimed. Production indexability, advertising and commercial launch remain
+blocked; this is a noindexed, ad-free preview release.
+
+This ledger is the current release record. Older evidence below remains
+attributed to its recorded SHA and must not be used as proof for this release.
 
 > **2026-09-08 repair addendum:** Browser-verified repair of baseline `549e82a` is documented in [ui-functional-repair.md](ui-functional-repair.md): 140 unit/security tests, 126 built-preview browser tests and 42 development scenarios across Chromium/WebKit/Firefox passed locally. See the repair PR for the final pushed head and its matching CI. Historical evidence below remains attributed to its original commits. Automatic acquisition remains BLOCKED. Hosted preview was subsequently deployed and verified; see the current hosting addendum below. No production completion is claimed.
 

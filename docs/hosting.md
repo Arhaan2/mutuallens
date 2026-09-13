@@ -15,10 +15,16 @@ The actual interactive checker remains on the separate Cloudflare Pages origin
 so its same-origin `/api` boundary does not depend on cross-site cookies.
 Cloudflare Pages authorization is present. The current token lacks D1/Worker
 write scope, so automatic database/maintenance provisioning remains not run.
-The existing public and checker preview deployments are preserved until the
-accepted main artifacts pass hosted verification.
+The older branch previews remain preserved. The accepted `main` artifacts have
+now passed hosted verification and are served from the stable project aliases.
 
-Cloudflare Pages now hosts two independent noindexed, ad-free branch previews. [Verified URLs, IDs and tests](cloudflare-preview.md). Assigned public subdomain: `mutuallens-ddm.pages.dev`; checker: `mutuallens-app.pages.dev`. The verified entry points use the `codex-ui-functional-repair` branch alias. GitHub Pages is not enabled. No domains were purchased.
+Cloudflare Pages now hosts two independent noindexed, ad-free production-branch
+preview artifacts: [public](https://mutuallens-ddm.pages.dev) and
+[checker](https://mutuallens-app.pages.dev). GitHub Pages hosts the noindexed
+[noncommercial project demo](https://arhaan2.github.io/mutuallens/). Exact
+source, deployment IDs and hosted tests are in [the current release ledger](release-evidence.md).
+The older [September 7 branch-preview evidence](cloudflare-preview.md) remains
+available for historical comparison. No domains were purchased.
 
 Current [Pages pricing](https://developers.cloudflare.com/pages/functions/pricing/) says static requests are free/unlimited if they do not invoke Functions. Pages Functions consume Workers request quota; Workers Free has 100,000 requests/day, reset midnight UTC. The generated checker `_routes.json` invokes Functions for `/api/*` only. The [Pages limits](https://developers.cloudflare.com/pages/platform/limits/) list 500 builds/month, 20,000 files and 25 MiB maximum file size on Free. Assets are well below those boundaries; actual build sizes belong in release evidence.
 
@@ -32,7 +38,7 @@ The [Cloudflare self-serve agreement](https://www.cloudflare.com/terms/) permits
 
 ## Current authorization and deployment
 
-Owner reauthentication succeeded through scoped Wrangler OAuth. Before creation, the Pages project listing was empty. The owner confirmed Workers Free after viewing the account plan; subscription API reads were denied, so billing evidence is owner-confirmed. Only the new `mutuallens` and `mutuallens-app` Pages projects were created and deployed. No existing Worker, billing or subscription was changed. Both deployments are in Cloudflare's preview environment; production branch `main` has no deployment.
+Owner reauthentication succeeded through scoped Wrangler OAuth. Before initial creation, the Pages project listing was empty. The owner confirmed Workers Free after viewing the account plan; subscription API reads were denied, so billing evidence is owner-confirmed. Only the `mutuallens` and `mutuallens-app` Pages projects were created and deployed. No unrelated Worker, billing or subscription was changed. Both projects now have verified production-branch `main` preview artifacts. This refers to Cloudflare's production deployment channel, not commercial product readiness.
 
 The checker project was configured and read back with `fail_open: false` in both environments (Cloudflare requires matching values). Quota exhaustion was not intentionally tested. Static requests avoid invoking Functions outside `/api/*`.
 
@@ -49,18 +55,18 @@ Only acquisition/access/budget/target/runtime gates can unlock a future producti
 For subsequent updates or recovery, reuse only these verified MutualLens projects; do not rerun project creation. From a clean checkout of the source being deployed, build with:
 
 ```sh
-PUBLIC_SITE_ORIGIN=https://codex-ui-functional-repair.mutuallens-ddm.pages.dev \
-PUBLIC_CHECKER_ORIGIN=https://codex-ui-functional-repair.mutuallens-app.pages.dev \
-VITE_SITE_ORIGIN=https://codex-ui-functional-repair.mutuallens-ddm.pages.dev \
+PUBLIC_SITE_ORIGIN=https://mutuallens-ddm.pages.dev \
+PUBLIC_CHECKER_ORIGIN=https://mutuallens-app.pages.dev \
+VITE_SITE_ORIGIN=https://mutuallens-ddm.pages.dev \
 npm run build
 ```
 
-Run Wrangler from each application's directory: `wrangler pages deploy dist --project-name mutuallens --branch codex/ui-functional-repair --commit-hash <actual-clean-source-sha>` for `apps/site`, and the same command with project `mutuallens-app` for `apps/checker`. Use the repository's pinned Wrangler executable and `WRANGLER_SEND_METRICS=false`. The checker directory is essential for compiling its Functions. Record actual deployment results and rerun the hosted suite. Do not run `npm run preview` between this build and upload: that local command intentionally rebuilds with localhost origins.
+Run Wrangler from each application's directory: `wrangler pages deploy dist --project-name mutuallens --branch main --commit-hash <actual-clean-source-sha>` for `apps/site`, and the same command with project `mutuallens-app` for `apps/checker`. Use the repository's pinned Wrangler executable and `WRANGLER_SEND_METRICS=false`. The checker directory is essential for compiling its Functions. Record actual deployment results and rerun the hosted suite. Do not run `npm run preview` between this build and upload: that local command intentionally rebuilds with localhost origins.
 
 ## Rollback
 
-After the first verified release, keep its Git SHA and build origins. Redeploy that exact source/build to the same two newly created projects as a rollback, then repeat browser/header smoke tests. Cloudflare also documents a [Pages rollback](https://developers.cloudflare.com/pages/configuration/rollbacks/) to a prior successful production deployment; a preview deployment is not an eligible rollback target. Rollback remains NOT RUN: these are the first deployments, with no earlier hosted version to restore. Current verified source is `75a340ec010b62cc90db3f6275313173e9b0ac77`. Do not delete projects or modify unrelated hosting resources to recover.
+Keep the accepted Git SHA and build origins. Redeploy that exact source/build to the same two projects as a rollback, then repeat browser/header smoke tests. Cloudflare also documents a [Pages rollback](https://developers.cloudflare.com/pages/configuration/rollbacks/) to a prior successful production deployment; a branch preview is not an eligible production rollback target. Rollback remains NOT RUN because `00e53a44cc07bf9f19671b56ad40f2497a72a43e` is the first production-branch deployment. Older verified branch previews remain comparison points. Do not delete projects or modify unrelated hosting resources to recover.
 
 ## Source CI zero-cash scope
 
-The repository is public and the workflow uses the standard Ubuntu GitHub runner. [GitHub's current billing documentation](https://docs.github.com/en/billing/concepts/product-billing/github-actions) describes standard public-repository runner use as free. No larger runner, artifact upload, paid storage increase or deployment secret is configured. The existing per-repository cache allowance was not raised. Actual successful run and commit are in `evidence/github-ci.json`.
+The repository is public and the workflow uses the standard Ubuntu GitHub runner. [GitHub's current billing documentation](https://docs.github.com/en/billing/concepts/product-billing/github-actions) describes standard public-repository runner use as free. No larger runner, paid storage increase or deployment secret is configured. The existing per-repository cache allowance was not raised. The actual successful source, CI and Pages deployment are in [the current release ledger](release-evidence.md); the older `evidence/github-ci.json` retains its historical scope.

@@ -1,4 +1,8 @@
 import { defineConfig } from '@playwright/test';
+const checkerOrigin =
+  process.env.MUTUALLENS_HOSTED_CHECKER_ORIGIN ??
+  'https://codex-ui-functional-repair.mutuallens-app.pages.dev';
+
 export default defineConfig({
   testDir: '.',
   testMatch: 'hosted.spec.ts',
@@ -12,7 +16,7 @@ export default defineConfig({
     ['json', { outputFile: '../../test-results/hosted/results.json' }],
   ],
   use: {
-    baseURL: 'https://codex-ui-functional-repair.mutuallens-app.pages.dev',
+    baseURL: checkerOrigin,
     viewport: { width: 1440, height: 900 },
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
