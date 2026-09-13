@@ -174,6 +174,7 @@ export function AutomaticCheck({
   const completedId = useRef<string | null>(null);
   const creating = useRef<{ username: string; key: string } | null>(null);
   const working = useRef(false);
+  const errorBox = useRef<HTMLDivElement>(null);
   const initialReset = useRef(resetKey);
   const resultHandler = useRef(onResult);
   resultHandler.current = onResult;
@@ -217,6 +218,10 @@ export function AutomaticCheck({
     setCancelRequested(false);
     remember(null);
   }, [resetKey]);
+
+  useEffect(() => {
+    if (error) errorBox.current?.focus();
+  }, [error]);
 
   const current = (epoch: number) => generation.current === epoch;
   function stop(messageText: string) {
@@ -523,7 +528,14 @@ export function AutomaticCheck({
     }
   }
   return (
-    <div className="automatic-job">
+    <form
+      className="automatic-job"
+      aria-busy={running}
+      onSubmit={(event) => {
+        event.preventDefault();
+        void run();
+      }}
+    >
       <label htmlFor="automatic-username">Instagram username</label>
       <input
         id="automatic-username"
@@ -538,10 +550,9 @@ export function AutomaticCheck({
       />
       <div className="inline-actions">
         <button
-          type="button"
+          type="submit"
           className="button primary"
           disabled={!enabled || running || !!savedId}
-          onClick={() => void run()}
         >
           {pendingStart ? 'Retry same start' : 'Check automatically'}
         </button>
@@ -598,10 +609,10 @@ export function AutomaticCheck({
         {message && <p>{message}</p>}
       </div>
       {error && (
-        <div role="alert" className="notice error">
+        <div ref={errorBox} tabIndex={-1} role="alert" className="notice error">
           {error}
         </div>
       )}
-    </div>
+    </form>
   );
 }

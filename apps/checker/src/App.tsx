@@ -65,6 +65,15 @@ export default function App() {
   const [capability, setCapability] = useState<Capability | null>(null);
   const [capabilityError, setCapabilityError] = useState(false);
   const [availabilityAttempt, setAvailabilityAttempt] = useState(0);
+  const automaticAvailable =
+    !!capability?.automatic.enabled && !capabilityError;
+  const automaticLabel = capabilityError
+    ? 'Unavailable'
+    : capability
+      ? capability.automatic.enabled
+        ? 'Available'
+        : 'Unavailable'
+      : 'Checking…';
   const [feedbackScope, setFeedbackScope] = useState<Scope>('entry');
   const [importOpen, setImportOpen] = useState(true);
   const [replaceSample, setReplaceSample] = useState(false);
@@ -102,6 +111,9 @@ export default function App() {
   const [history, setHistory] = useState<SnapshotComparison | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const worker = useRef<Worker | null>(null);
+  const activeTask = useRef<'sample' | 'import' | 'compare' | 'history' | null>(
+    null,
+  );
   const taskId = useRef(0);
   const resultsHeading = useRef<HTMLHeadingElement>(null);
   const listHeading = useRef<HTMLHeadingElement>(null);
@@ -184,6 +196,8 @@ export default function App() {
     kind: 'sample' | 'import' | 'compare' | 'history',
     payload: Record<string, unknown> = {},
   ) {
+    if (activeTask.current) return;
+    activeTask.current = kind;
     if (kind === 'import') setAutomaticResetKey((value) => value + 1);
     worker.current?.terminate();
     const id = ++taskId.current;
@@ -208,6 +222,7 @@ export default function App() {
       worker.current = instance;
       instance.onmessage = ({ data }) => {
         if (id !== taskId.current) return;
+        activeTask.current = null;
         setBusy(null);
         instance.terminate();
         worker.current = null;
@@ -261,6 +276,7 @@ export default function App() {
         if (id === taskId.current) {
           ++taskId.current;
           setFeedbackScope(scope);
+          activeTask.current = null;
           setBusy(null);
           setError(
             kind === 'compare' &&
@@ -290,6 +306,7 @@ export default function App() {
     ++taskId.current;
     worker.current?.terminate();
     worker.current = null;
+    activeTask.current = null;
   }
   function invalidate() {
     instanceCleanup();
@@ -371,6 +388,7 @@ export default function App() {
     );
   }
   function requestSample() {
+    if (activeTask.current) return;
     setAutomaticResetKey((value) => value + 1);
     invalidate();
     setError('');
@@ -396,12 +414,16 @@ export default function App() {
         );
       }
       if (window.location.hash === '#automatic') {
-        document.getElementById('automatic')?.setAttribute('open', '');
-        requestAnimationFrame(() =>
-          document
-            .getElementById('automatic')
-            ?.scrollIntoView({ block: 'start' }),
-        );
+        const automatic = document.getElementById('automatic');
+        automatic?.setAttribute('open', '');
+        requestAnimationFrame(() => {
+          automatic?.scrollIntoView({ block: 'start' });
+          const input = document.getElementById(
+            'automatic-username',
+          ) as HTMLInputElement | null;
+          if (input && !input.disabled) input.focus();
+          else automatic?.querySelector<HTMLElement>('summary')?.focus();
+        });
       }
       if (window.location.hash === '#history') {
         setHistoryOpen(true);
@@ -674,10 +696,51 @@ export default function App() {
                   Find who doesn’t follow you back.
                 </h1>
                 <p>
-                  Choose your Instagram relationship files to see who appears in
-                  following but not followers. No username, date or confirmation
-                  is required.
+                  Enter a public username when automatic checking is available,
+                  or compare your Instagram relationship files privately on this
+                  device. Uploads need no account label, date or confirmation.
                 </p>
+              </div>
+            </section>
+            <section className="mode-choice" aria-labelledby="mode-title">
+              <div className="mode-heading">
+                <h2 id="mode-title">Choose how to check</h2>
+                <p>Both paths lead to the same browsable comparison.</p>
+              </div>
+              <div className="mode-options">
+                <a
+                  className="mode-option"
+                  href="#automatic"
+                  aria-label={`Open automatic checking. ${automaticLabel}`}
+                >
+                  <span className="mode-kicker">Website-only</span>
+                  <strong>Check automatically</strong>
+                  <span className="mode-description">
+                    Enter a public Instagram username.
+                  </span>
+                  <span
+                    className={
+                      automaticAvailable
+                        ? 'status-tag'
+                        : 'status-tag status-muted'
+                    }
+                  >
+                    {automaticLabel}
+                  </span>
+                </a>
+                <a
+                  className="mode-option"
+                  href="#import"
+                  onClick={openImport}
+                  aria-label="Open local file upload. Available now"
+                >
+                  <span className="mode-kicker">Private on this device</span>
+                  <strong>Upload files</strong>
+                  <span className="mode-description">
+                    Choose JSON, HTML or ZIP relationship files.
+                  </span>
+                  <span className="status-tag">Available now</span>
+                </a>
               </div>
             </section>
           </>
@@ -693,9 +756,17 @@ export default function App() {
               >
                 Explore synthetic sample
               </button>
-              <button className="text-button" onClick={() => clearReport(true)}>
-                Start over
-              </button>
+              {(files.length > 0 ||
+                account ||
+                collectedAt ||
+                assignments.length > 0) && (
+                <button
+                  className="text-button"
+                  onClick={() => clearReport(true)}
+                >
+                  Start over
+                </button>
+              )}
             </div>
           </>
         )}
@@ -1310,27 +1381,20 @@ export default function App() {
           <div className="panel-label">
             <span className="status-dot" />
             Automatic check{' '}
-            <span className="status-tag">
-              {capabilityError
-                ? 'Unverified'
-                : capability
-                  ? capability.automatic.enabled
-                    ? 'Available'
-                    : 'Unavailable'
-                  : 'Loading'}
+            <span
+              className={
+                automaticAvailable ? 'status-tag' : 'status-tag status-muted'
+              }
+            >
+              {automaticLabel}
             </span>
           </div>
           <p className="field-help">
-            When available, automatic checking sends the username to our server
-            and its Apify source provider, which processes relationship records.
-            Our stored scan data expires after one hour. Provider-side retention
-            is separate; deletion there is requested but cannot be guaranteed by
-            this browser. Local file uploads stay on your device.
+            Enter a public username. The service reads both relationship
+            directions before it shows a non-followers result.
           </p>
           <AutomaticCheck
-            enabled={
-              !!capability?.automatic.enabled && !capabilityError && !busy
-            }
+            enabled={automaticAvailable && !busy}
             resetKey={automaticResetKey}
             onResult={(dataset) => process('compare', { dataset })}
           />
@@ -1349,6 +1413,16 @@ export default function App() {
               Retry availability
             </button>
           )}
+          <details className="automatic-privacy">
+            <summary>Privacy &amp; source details</summary>
+            <p>
+              Automatic checking sends the username to our server and its Apify
+              source provider, which processes relationship records. Our stored
+              scan data expires after one hour. Provider-side retention is
+              separate; deletion there is requested but cannot be guaranteed by
+              this browser. Local file uploads stay on your device.
+            </p>
+          </details>
           <div className="entry-secondary">
             <button
               className="text-button"
