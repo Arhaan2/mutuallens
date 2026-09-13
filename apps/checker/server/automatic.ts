@@ -1,5 +1,8 @@
 /// <reference types="@cloudflare/workers-types" />
-import { ApifyClient } from '../../../packages/acquisition/src/apify';
+import {
+  APIFY_STARTS_REVIEWED,
+  ApifyClient,
+} from '../../../packages/acquisition/src/apify';
 import {
   ScanService,
   capacityReader,
@@ -14,6 +17,7 @@ export type RuntimeEnv = Partial<{
 }>;
 export function automaticConfigured(env: RuntimeEnv): boolean {
   return (
+    APIFY_STARTS_REVIEWED &&
     env.AUTOMATIC_ENABLED === 'true' &&
     !!env.AUTOMATIC_VALIDATION_ID?.trim() &&
     !!env.APIFY_TOKEN?.trim() &&
@@ -33,13 +37,22 @@ export function automaticService(
   return new ScanService(
     new JobStore<ScanJob>(new D1Driver(env.JOBS)),
     new ApifyClient({ token: env.APIFY_TOKEN }),
-    {
-      windowUsd: Number(env.AUTOMATIC_WINDOW_USD),
-      jobUsd: Number(env.AUTOMATIC_JOB_USD),
-      runUsd: Number(env.AUTOMATIC_RUN_USD),
-      reserveUsd: Number(env.AUTOMATIC_RESERVE_USD),
-      terminalEvidenceId: env.AUTOMATIC_VALIDATION_ID,
-    },
+    maintenance
+      ? {
+          // Maintenance never creates or advances a job; valid inert values let
+          // provider cleanup continue after scan configuration is disabled.
+          windowUsd: 1,
+          jobUsd: 1,
+          runUsd: 1,
+          reserveUsd: 1,
+        }
+      : {
+          windowUsd: Number(env.AUTOMATIC_WINDOW_USD),
+          jobUsd: Number(env.AUTOMATIC_JOB_USD),
+          runUsd: Number(env.AUTOMATIC_RUN_USD),
+          reserveUsd: Number(env.AUTOMATIC_RESERVE_USD),
+          terminalEvidenceId: env.AUTOMATIC_VALIDATION_ID,
+        },
     capacityReader(env.APIFY_TOKEN),
   );
 }

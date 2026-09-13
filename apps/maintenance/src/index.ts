@@ -12,7 +12,24 @@ export default {
       new JobStore<ScanJob>(new D1Driver(env.JOBS)),
       Date.now(),
     );
-    if (env.APIFY_TOKEN) await automaticService(env, true).cleanupExpired();
+    if (!env.APIFY_TOKEN) {
+      console.error(
+        JSON.stringify({
+          message: 'automatic remote cleanup paused',
+          reason: 'provider credential unavailable',
+        }),
+      );
+      return;
+    }
+    const cleanup = await automaticService(env, true).cleanupExpired();
+    if (cleanup.pending || cleanup.failed)
+      console.error(
+        JSON.stringify({
+          message: 'automatic remote cleanup requires attention',
+          pendingRetries: cleanup.pending,
+          exhaustedRetries: cleanup.failed,
+        }),
+      );
   },
   fetch(): Response {
     return new Response('Not found', { status: 404 });

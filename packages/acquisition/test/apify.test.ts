@@ -2,8 +2,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   APIFY_ACTOR_ID,
   APIFY_BUILD_ID,
-  APIFY_BUILD_NUMBER,
+  APIFY_REVIEWED_ACTOR_MODIFIED_AT,
   APIFY_REVIEWED_EVENT_PRICE_USD,
+  APIFY_STARTS_REVIEWED,
   ApifyAdapterError,
   ApifyClient,
   normalizeAcquisitionEnvelopes,
@@ -19,6 +20,7 @@ const pricingNow = Date.parse('2026-09-08T00:00:00.000Z');
 const pricingPayload = () => ({
   data: {
     id: APIFY_ACTOR_ID,
+    modifiedAt: APIFY_REVIEWED_ACTOR_MODIFIED_AT,
     actorPermissionLevel: 'LIMITED_PERMISSIONS',
     pricingInfos: [
       {
@@ -117,46 +119,14 @@ afterEach(() => {
 });
 
 describe('server-only pinned Apify HTTP transport (synthetic)', () => {
-  it('starts once asynchronously with an explicit charge ceiling and upstream cursor in input', async () => {
-    const { client, fetch } = mockClient(() =>
-      json(runPayload(), { status: 201 }),
-    );
-    const run = await client.start({
-      ...startInput,
-      upstreamCursor: 'opaque+/=cursor',
+  it('disables every chargeable start after the documented provider capability and cursor change', async () => {
+    const { client, fetch } = mockClient(() => json(runPayload()));
+    expect(APIFY_STARTS_REVIEWED).toBe(false);
+    await expect(client.start(startInput)).rejects.toMatchObject({
+      code: 'CONFIGURATION',
+      startOutcome: 'not-started',
     });
-    expect(run.id).toBe(runId);
-    expect(fetch).toHaveBeenCalledTimes(1);
-    const [address, init] = fetch.mock.calls[0];
-    const url = new URL(String(address));
-    expect(url.origin).toBe('https://api.apify.com');
-    expect(url.pathname).toBe(`/v2/acts/${APIFY_ACTOR_ID}/runs`);
-    expect(Object.fromEntries(url.searchParams)).toEqual({
-      build: APIFY_BUILD_NUMBER,
-      timeout: '120',
-      memory: '256',
-      maxTotalChargeUsd: '0.05',
-      restartOnError: 'false',
-      waitForFinish: '0',
-      forcePermissionLevel: 'LIMITED_PERMISSIONS',
-    });
-    expect(url.href).not.toContain(syntheticToken);
-    expect(init).toMatchObject({
-      method: 'POST',
-      redirect: 'error',
-      cache: 'no-store',
-      credentials: 'omit',
-    });
-    expect(new Headers(init?.headers).get('authorization')).toBe(
-      `Bearer ${syntheticToken}`,
-    );
-    expect(JSON.parse(String(init?.body))).toEqual({
-      username: 'synthetic_target',
-      mode: 'followers',
-      maxItems: 200,
-      pageId: 'opaque+/=cursor',
-    });
-    expect(JSON.stringify(client)).not.toContain(syntheticToken);
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it.each([
@@ -206,42 +176,6 @@ describe('server-only pinned Apify HTTP transport (synthetic)', () => {
     ).toThrow(ApifyAdapterError);
   });
 
-  it.each([400, 401, 403, 404, 422])(
-    'does not retry a rejected start (%i), nor expose its raw body',
-    async (status) => {
-      const { client, fetch } = mockClient(() =>
-        json(
-          { error: { message: `${syntheticToken}: private target` } },
-          { status },
-        ),
-      );
-      const error = await client.start(startInput).catch((error) => error);
-      expect(error).toMatchObject({
-        status,
-        startOutcome: 'not-started',
-        retryable: false,
-      });
-      expect(String(error)).not.toMatch(/synthetic-test-token|private target/);
-      expect(fetch).toHaveBeenCalledTimes(1);
-    },
-  );
-
-  it.each([429, 500, 503])(
-    'preserves uncertain start reservation and never retries (%i)',
-    async (status) => {
-      const { client, fetch } = mockClient(() =>
-        json({}, { status, headers: { 'retry-after': '999' } }),
-      );
-      await expect(client.start(startInput)).rejects.toMatchObject({
-        status,
-        startOutcome: 'unknown',
-        retryable: false,
-        retryAfterSeconds: 300,
-      });
-      expect(fetch).toHaveBeenCalledTimes(1);
-    },
-  );
-
   it('reports retryability for safe read failures without implementing a retry loop', async () => {
     const { client, fetch } = mockClient(() =>
       json({}, { status: 429, headers: { 'retry-after': '3' } }),
@@ -255,42 +189,15 @@ describe('server-only pinned Apify HTTP transport (synthetic)', () => {
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 
-  it.each([
-    () =>
-      new Response('<html>blocked</html>', {
-        headers: { 'content-type': 'text/html' },
-      }),
-    () =>
-      new Response('{}', {
-        headers: { 'content-type': 'text/application/json-fake' },
-      }),
-    () =>
-      new Response('{', { headers: { 'content-type': 'application/json' } }),
-    () => json(null),
-    () => json(runPayload({ buildId: 'UnreviewedBuild' })),
-    () => json(runPayload({ actId: 'UnreviewedActor' })),
-  ])(
-    'treats an unusable start acknowledgement as uncertain',
-    async (response) => {
-      const { client, fetch } = mockClient(response);
-      await expect(client.start(startInput)).rejects.toMatchObject({
-        code: 'PROVIDER_RESPONSE_INVALID',
-        startOutcome: 'unknown',
-        retryable: false,
-      });
-      expect(fetch).toHaveBeenCalledTimes(1);
-    },
-  );
-
   it('sanitizes thrown transport failures', async () => {
     const { client, fetch } = mockClient(() =>
       Promise.reject(new Error(`Connection lost ${syntheticToken}`)),
     );
-    const error = await client.start(startInput).catch((error) => error);
+    const error = await client.getRun(runId).catch((error) => error);
     expect(error).toMatchObject({
       code: 'PROVIDER_TRANSPORT',
-      startOutcome: 'unknown',
-      retryable: false,
+      startOutcome: null,
+      retryable: true,
     });
     expect(String(error)).not.toContain(syntheticToken);
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -301,10 +208,10 @@ describe('server-only pinned Apify HTTP transport (synthetic)', () => {
     const { client, fetch } = mockClient(() => new Promise(() => {}), {
       requestTimeoutMs: 100,
     });
-    const check = expect(client.start(startInput)).rejects.toMatchObject({
+    const check = expect(client.getRun(runId)).rejects.toMatchObject({
       code: 'PROVIDER_TIMEOUT',
-      startOutcome: 'unknown',
-      retryable: false,
+      startOutcome: null,
+      retryable: true,
     });
     await vi.advanceTimersByTimeAsync(100);
     await check;
@@ -351,9 +258,9 @@ describe('server-only pinned Apify HTTP transport (synthetic)', () => {
           }),
         { maxResponseBytes: 20 },
       );
-      await expect(client.start(startInput)).rejects.toMatchObject({
+      await expect(client.getRun(runId)).rejects.toMatchObject({
         code: 'PROVIDER_RESPONSE_TOO_LARGE',
-        startOutcome: 'unknown',
+        startOutcome: null,
       });
     },
   );
@@ -470,6 +377,7 @@ describe('run metadata and two independent pagination domains (synthetic)', () =
     'futurePrice',
     'multipleActive',
     'fullPermissions',
+    'changedActorMetadata',
     'changedEventSemantics',
     'unknownMinimum',
   ])('rejects unreviewed pricing condition %s', (condition) => {
@@ -487,6 +395,8 @@ describe('run metadata and two independent pagination domains (synthetic)', () =
       payload.data.pricingInfos.push(structuredClone(p));
     if (condition === 'fullPermissions')
       payload.data.actorPermissionLevel = 'FULL_PERMISSIONS';
+    if (condition === 'changedActorMetadata')
+      payload.data.modifiedAt = '2026-09-12T00:00:00.000Z';
     if (condition === 'changedEventSemantics')
       events['user-batch-50'].isOneTimeEvent = true;
     if (condition === 'unknownMinimum')
@@ -756,6 +666,30 @@ describe('nested envelope normalization and conservative upstream completion (sy
       invalidRecordCount: 0,
     });
     expect(result.records).toHaveLength(1);
+  });
+
+  it('collapses ID-less and ID-bearing variants of one normalized username', () => {
+    const result = normalizeAcquisitionEnvelopes(
+      [
+        {
+          results: [
+            { relation: 'follower', username: 'Synthetic_1' },
+            syntheticRow(1),
+          ],
+          cursor_next: null,
+        },
+      ],
+      'followers',
+    );
+    expect(result).toMatchObject({
+      duplicateCount: 1,
+      invalidRecordCount: 0,
+    });
+    expect(result.records).toHaveLength(1);
+    expect(result.records[0]).toMatchObject({
+      username: 'synthetic_1',
+      id: '1',
+    });
   });
 
   it('quarantines both sides of conflicting usernames/IDs and leaves other records usable', () => {

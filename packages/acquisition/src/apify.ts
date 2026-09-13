@@ -5,6 +5,13 @@ export const APIFY_ACTOR_NAME = 'seemuapps/instagram-followers-scraper';
 export const APIFY_BUILD_ID = 'qZHBzZiV6QmFCKDym';
 export const APIFY_BUILD_NUMBER = '1.0.35';
 export const APIFY_INPUT_SCHEMA_VERSION = 1;
+export const APIFY_REVIEWED_ACTOR_MODIFIED_AT = '2026-08-12T00:20:28.328Z';
+/**
+ * The Actor changed its Free-plan limits and cursor source on 2026-09-12.
+ * Keep chargeable starts disabled until the replacement build, account behavior,
+ * cursor epoch, cooldown, daily limit and target-scale viability are revalidated.
+ */
+export const APIFY_STARTS_REVIEWED = false;
 export const APIFY_REVIEWED_EVENT_PRICE_USD = {
   'apify-actor-start': 0.00005,
   'apify-default-dataset-item': 0.00001,
@@ -195,6 +202,7 @@ export function normalizeReviewedPricing(
   const actor = payload.data;
   if (
     actor.id !== APIFY_ACTOR_ID ||
+    actor.modifiedAt !== APIFY_REVIEWED_ACTOR_MODIFIED_AT ||
     actor.actorPermissionLevel !== 'LIMITED_PERMISSIONS' ||
     !Array.isArray(actor.pricingInfos)
   )
@@ -381,7 +389,7 @@ export function normalizeAcquisitionEnvelopes(
           continue;
         }
         id = raw.userId;
-      } else warnings.push('Some provider records have no stable identity ID.');
+      }
       const key = `${id ?? ''}:${handle}`;
       if (seen.has(key)) {
         duplicateCount++;
@@ -412,13 +420,28 @@ export function normalizeAcquisitionEnvelopes(
     handles.add(row.username);
     handlesById.set(row.id, handles);
   }
-  const usable = records.filter((row) => {
+  const unambiguous = records.filter((row) => {
     const ambiguous =
       (idsByHandle.get(row.username)?.size ?? 0) > 1 ||
       (!!row.id && (handlesById.get(row.id)?.size ?? 0) > 1);
     if (ambiguous) invalidRecordCount++;
     return !ambiguous;
   });
+  // Treat an ID-bearing and ID-less row for the same normalized username as one
+  // observation. Prefer the stable-ID variant without counting it as corruption.
+  const canonical = new Map<string, AcquiredAccount>();
+  for (const row of unambiguous) {
+    const existing = canonical.get(row.username);
+    if (!existing) {
+      canonical.set(row.username, row);
+      continue;
+    }
+    duplicateCount++;
+    if (!existing.id && row.id) canonical.set(row.username, row);
+  }
+  const usable = [...canonical.values()];
+  if (usable.some((row) => !row.id))
+    warnings.push('Some provider records have no stable identity ID.');
   const capReached =
     options.requestedMaxItems !== undefined &&
     rawRecordCount >= options.requestedMaxItems;
@@ -672,13 +695,23 @@ export class ApifyClient {
         'INVALID_INPUT',
         'Only the reviewed provider build is allowed.',
       );
+    const upstreamCursor =
+      input.upstreamCursor !== undefined && input.upstreamCursor !== null
+        ? cursor(input.upstreamCursor)
+        : null;
+    if (!APIFY_STARTS_REVIEWED)
+      throw new ApifyAdapterError(
+        'CONFIGURATION',
+        'The provider changed its build, cursor source and Free-plan limits. Automatic starts are disabled until operator revalidation.',
+        null,
+        false,
+        'not-started',
+      );
     const body = {
       username: normalized,
       mode: input.direction,
       maxItems: input.maxItems,
-      ...(input.upstreamCursor !== undefined && input.upstreamCursor !== null
-        ? { pageId: cursor(input.upstreamCursor) }
-        : {}),
+      ...(upstreamCursor ? { pageId: upstreamCursor } : {}),
     };
     const query = new URLSearchParams({
       build,

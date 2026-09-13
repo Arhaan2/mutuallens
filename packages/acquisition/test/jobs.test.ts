@@ -30,7 +30,11 @@ const run = (
   startedAt: '2026-09-08T00:00:00Z',
   finishedAt: '2026-09-08T00:00:01Z',
   usageTotalUsd: 0.01,
-  chargedEventCounts: null,
+  chargedEventCounts: {
+    'apify-actor-start': 1,
+    'apify-default-dataset-item': 1,
+    'user-batch-50': 1,
+  },
   datasetItemCount: 1,
 });
 function setup(override: Partial<ScanProvider> = {}) {
@@ -118,6 +122,10 @@ function setup(override: Partial<ScanProvider> = {}) {
     service,
     tick: () => {
       time += 3000;
+    },
+    advanceTime: (milliseconds: number) => {
+      time += milliseconds;
+      return time;
     },
     expire: () => {
       time += 3600001;
@@ -229,7 +237,12 @@ describe('resumable automatic engine using synthetic provider fixtures and real 
       Date.parse('2026-09-08T00:00:00Z'),
     ))!;
     row.payload.stage = 'starting';
-    await store.save(job.id, lease!, row.payload);
+    await store.save(
+      job.id,
+      lease!,
+      row.payload,
+      Date.parse('2026-09-08T00:00:00Z'),
+    );
     tick();
     expect((await service.advance('s', job.id)).status).toBe('uncertain');
     expect(provider.start).not.toHaveBeenCalled();
@@ -251,7 +264,10 @@ describe('resumable automatic engine using synthetic provider fixtures and real 
     await expect(service.status('owner', job.id)).rejects.toThrow(
       'SCAN_NOT_FOUND',
     );
-    expect(await service.cleanupExpired()).toEqual({ removed: 1, pending: 0 });
+    expect(await service.cleanupExpired()).toEqual({
+      removed: 1,
+      pending: 0,
+    });
   });
   it('missing free capacity refuses new scans before any provider run', async () => {
     const { service, capacity, provider } = setup();
@@ -322,5 +338,130 @@ describe('resumable automatic engine using synthetic provider fixtures and real 
     await service.advance('s', job.id);
     expect(provider.start).toHaveBeenCalledTimes(1);
     expect(provider.abortRun).toHaveBeenCalledTimes(1);
+  });
+  it('erases an abandoned unstarted job before create and preserves the expired idempotency receipt', async () => {
+    const { service, sql, expire } = setup();
+    const key = crypto.randomUUID();
+    const abandoned = await service.create('s', key, 'synthetic_owner');
+    expire();
+    await expect(service.create('s', key, 'synthetic_owner')).rejects.toThrow(
+      'expired',
+    );
+    const replacement = await service.create(
+      's',
+      crypto.randomUUID(),
+      'synthetic_owner',
+    );
+    expect(replacement.id).not.toBe(abandoned.id);
+    expect(
+      sql.db.prepare('SELECT spent,reserved FROM capacity').get(),
+    ).toMatchObject({ spent: 0, reserved: 3000000 });
+    expect(sql.db.prepare('SELECT COUNT(*) AS n FROM jobs').get()?.n).toBe(1);
+  });
+  it('rejects late checkpoint writes after a lease expires', async () => {
+    const { service, store, advanceTime } = setup();
+    const job = await service.create(
+      's',
+      crypto.randomUUID(),
+      'synthetic_owner',
+    );
+    const started = Date.parse('2026-09-08T00:00:00Z');
+    const lease = await store.claim(job.id, 's', started);
+    const row = (await store.get(job.id, 's', started))!;
+    const late = advanceTime(60001);
+    row.payload.message = 'late stale reply';
+    await expect(store.save(job.id, lease!, row.payload, late)).rejects.toThrow(
+      'lease changed',
+    );
+    expect((await store.get(job.id, 's', late))!.payload.message).not.toBe(
+      'late stale reply',
+    );
+  });
+  it('quarantines conflicting identities across provider pages without inflating unique counts', async () => {
+    const { service, store } = setup();
+    const job = await service.create(
+      's',
+      crypto.randomUUID(),
+      'synthetic_owner',
+    );
+    const now = Date.parse('2026-09-08T00:00:00Z');
+    const lease = await store.claim(job.id, 's', now);
+    const first = await store.addRecords(
+      job.id,
+      lease!,
+      'followers',
+      [
+        {
+          username: 'synthetic_same',
+          originalUsername: 'synthetic_same',
+          id: '1',
+          source: 'synthetic',
+        },
+      ],
+      now,
+    );
+    const conflict = await store.addRecords(
+      job.id,
+      lease!,
+      'followers',
+      [
+        {
+          username: 'synthetic_same',
+          originalUsername: 'synthetic_same',
+          id: '2',
+          source: 'synthetic',
+        },
+        {
+          username: 'synthetic_renamed',
+          originalUsername: 'synthetic_renamed',
+          id: '1',
+          source: 'synthetic',
+        },
+      ],
+      now,
+    );
+    expect(first).toEqual({ total: 1, conflictCount: 0 });
+    expect(conflict).toEqual({ total: 1, conflictCount: 2 });
+  });
+  it('preserves known storage IDs when later run and abort responses omit them', async () => {
+    const started = {
+      ...run('preserveRun', 'RUNNING'),
+      defaultKeyValueStoreId: 'preserveStore',
+      defaultRequestQueueId: 'preserveQueue',
+    };
+    const refreshed = {
+      ...run('preserveRun'),
+      defaultDatasetId: null,
+      defaultKeyValueStoreId: null,
+      defaultRequestQueueId: null,
+    };
+    const { service, provider, tick } = setup({
+      start: vi.fn(async () => started),
+      getRun: vi.fn(async () => refreshed),
+    });
+    const job = await service.create(
+      's',
+      crypto.randomUUID(),
+      'synthetic_owner',
+    );
+    for (let i = 0; i < 4; i++) {
+      tick();
+      await service.advance('s', job.id);
+    }
+    expect(provider.deleteDataset).toHaveBeenCalledWith('preserveRunDataset');
+    expect(provider.deleteKeyValueStore).toHaveBeenCalledWith('preserveStore');
+    expect(provider.deleteRequestQueue).toHaveBeenCalledWith('preserveQueue');
+  });
+  it('stops retrying remote deletion after twelve bounded attempts', async () => {
+    const { store, sql } = setup();
+    sql.db
+      .prepare(
+        'INSERT INTO remote_cleanup(run_id,payload,created_at) VALUES(?,?,?)',
+      )
+      .run('cleanupRun', '{}', 0);
+    for (let attempt = 0; attempt < 12; attempt++)
+      await store.retryCleanup('cleanupRun', attempt * 4000000);
+    expect(await store.pendingCleanup(Number.MAX_SAFE_INTEGER)).toEqual([]);
+    expect(await store.failedCleanupCount()).toBe(1);
   });
 });

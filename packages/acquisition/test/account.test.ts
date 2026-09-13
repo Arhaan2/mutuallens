@@ -1,8 +1,12 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { readFreeCapacity } from '../src/account';
 const now = Date.parse('2026-09-08T00:00:00Z');
 const user = {
   isPaying: false,
+  effectivePlatformFeatures: {
+    ACTORS: { isEnabled: true, isTrial: false },
+    STORAGE: { isEnabled: true, isTrial: false },
+  },
   plan: {
     tier: 'FREE',
     isEnabled: true,
@@ -12,13 +16,14 @@ const user = {
   },
 };
 const limits = {
-  limits: { maxMonthlyUsageUsd: 5 },
-  current: { monthlyUsageUsd: 1.25 },
+  limits: { maxMonthlyUsageUsd: 5, dataRetentionDays: 14 },
+  current: { monthlyUsageUsd: 1.25, activeActorJobCount: 0 },
   monthlyUsageCycle: {
     startAt: '2026-09-01T00:00:00Z',
     endAt: '2026-10-01T00:00:00Z',
   },
 };
+afterEach(() => vi.useRealTimers());
 function fixture(u: unknown = user, l: unknown = limits) {
   return vi.fn<typeof fetch>(async (input, init) => {
     expect(init?.redirect).toBe('error');
@@ -56,7 +61,10 @@ describe('Free account allowance guard; synthetic metadata, no real account call
     expect(
       await readFreeCapacity(
         'synthetic-token',
-        fixture(user, { ...limits, limits: { maxMonthlyUsageUsd: 1 } }),
+        fixture(user, {
+          ...limits,
+          limits: { ...limits.limits, maxMonthlyUsageUsd: 1 },
+        }),
         now,
       ),
     ).toMatchObject({ recurringCreditsUsd: 1, remainingUsd: 0 });
@@ -100,5 +108,47 @@ describe('Free account allowance guard; synthetic metadata, no real account call
         now,
       ),
     ).rejects.toThrow('metadata budget');
+  });
+  it('fails closed when required recurring platform features are unavailable or trial-only', async () => {
+    for (const feature of [
+      { isEnabled: false, isTrial: false },
+      { isEnabled: true, isTrial: true },
+    ])
+      await expect(
+        readFreeCapacity(
+          'synthetic-token',
+          fixture({
+            ...user,
+            effectivePlatformFeatures: {
+              ...user.effectivePlatformFeatures,
+              ACTORS: feature,
+            },
+          }),
+          now,
+        ),
+      ).rejects.toThrow('Free account');
+  });
+  it('refuses to reserve capacity while other account-wide Actor work is active', async () => {
+    await expect(
+      readFreeCapacity(
+        'synthetic-token',
+        fixture(user, {
+          ...limits,
+          current: { ...limits.current, activeActorJobCount: 1 },
+        }),
+        now,
+      ),
+    ).rejects.toThrow('other active Actor work');
+  });
+  it('bounds account metadata fetches even when an injected transport ignores cancellation', async () => {
+    vi.useFakeTimers();
+    const pending = readFreeCapacity(
+      'synthetic-token',
+      vi.fn(() => new Promise<Response>(() => {})),
+      now,
+    );
+    const check = expect(pending).rejects.toThrow('timed out');
+    await vi.advanceTimersByTimeAsync(10001);
+    await check;
   });
 });

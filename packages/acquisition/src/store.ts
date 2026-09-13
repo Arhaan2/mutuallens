@@ -37,6 +37,10 @@ export interface StoredJob<T> {
   leaseToken: string | null;
   cancelRequested: boolean;
 }
+export interface RecordInsertResult {
+  total: number;
+  conflictCount: number;
+}
 export class CapacityError extends Error {
   readonly code = 'SERVICE_CAPACITY';
   constructor() {
@@ -151,10 +155,12 @@ export class JobStore<T extends { spentMicros: number }> {
         now,
       ),
       query(
-        'UPDATE capacity SET reserved=reserved+? WHERE period=? AND EXISTS(SELECT 1 FROM jobs WHERE id=?)',
+        'UPDATE capacity SET reserved=reserved+? WHERE period=? AND EXISTS(SELECT 1 FROM jobs WHERE id=? AND session_hash=? AND request_key=? AND active=1)',
         reservation,
         period,
         id,
+        session,
+        key,
       ),
       query(
         'SELECT id FROM jobs WHERE session_hash=? AND request_key=? AND expires_at>?',
@@ -200,16 +206,21 @@ export class JobStore<T extends { spentMicros: number }> {
     id: string,
     token: string,
     payload: T,
+    now: number,
     release = true,
   ): Promise<void> {
+    if (!Number.isSafeInteger(now)) throw new Error('Invalid checkpoint time.');
     const [r] = await this.sql.batch([
       query(
-        'UPDATE jobs SET payload=?,lease_token=?,lease_until=CASE WHEN ? THEN 0 ELSE lease_until END WHERE id=? AND lease_token=?',
+        'UPDATE jobs SET payload=?,lease_token=?,lease_until=CASE WHEN ? THEN 0 ELSE ? END WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?',
         JSON.stringify(payload),
         release ? null : token,
         release ? 1 : 0,
+        now + 60000,
         id,
         token,
+        now,
+        now,
       ),
     ]);
     if (r!.changes !== 1)
@@ -222,27 +233,94 @@ export class JobStore<T extends { spentMicros: number }> {
     token: string,
     direction: Direction,
     records: AccountRecord[],
-  ): Promise<number> {
-    await this.sql.batch([
+    now: number,
+  ): Promise<RecordInsertResult> {
+    if (!Number.isSafeInteger(now)) throw new Error('Invalid checkpoint time.');
+    const payload = JSON.stringify(records);
+    const results = await this.sql.batch([
       query(
-        `INSERT INTO records(job_id,direction,identity,payload)
-      SELECT ?,?,CASE WHEN json_extract(value,'$.id') IS NULL THEN 'u:'||json_extract(value,'$.username') ELSE 'id:'||json_extract(value,'$.id') END,value
-      FROM json_each(?) WHERE EXISTS(SELECT 1 FROM jobs WHERE id=? AND lease_token=?) ON CONFLICT DO NOTHING`,
-        id,
-        direction,
-        JSON.stringify(records),
+        'SELECT id FROM jobs WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?',
         id,
         token,
+        now,
+        now,
       ),
-    ]);
-    const [total] = await this.sql.batch([
+      query(
+        `SELECT COUNT(DISTINCT incoming.key) AS n FROM json_each(?) AS incoming
+        JOIN records AS existing ON existing.job_id=? AND existing.direction=?
+        WHERE ((json_extract(existing.payload,'$.username')=json_extract(incoming.value,'$.username')
+          AND json_extract(existing.payload,'$.id') IS NOT NULL
+          AND json_extract(incoming.value,'$.id') IS NOT NULL
+          AND json_extract(existing.payload,'$.id')<>json_extract(incoming.value,'$.id'))
+        OR (json_extract(existing.payload,'$.id') IS NOT NULL
+          AND json_extract(incoming.value,'$.id') IS NOT NULL
+          AND json_extract(existing.payload,'$.id')=json_extract(incoming.value,'$.id')
+          AND json_extract(existing.payload,'$.username')<>json_extract(incoming.value,'$.username')))
+        AND EXISTS(SELECT 1 FROM jobs WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?)`,
+        payload,
+        id,
+        direction,
+        id,
+        token,
+        now,
+        now,
+      ),
+      query(
+        `UPDATE records AS existing SET payload=(
+          SELECT incoming.value FROM json_each(?) AS incoming
+          WHERE json_extract(incoming.value,'$.username')=json_extract(existing.payload,'$.username')
+          AND json_extract(incoming.value,'$.id') IS NOT NULL LIMIT 1)
+        WHERE existing.job_id=? AND existing.direction=?
+        AND json_extract(existing.payload,'$.id') IS NULL
+        AND EXISTS(SELECT 1 FROM json_each(?) AS incoming
+          WHERE json_extract(incoming.value,'$.username')=json_extract(existing.payload,'$.username')
+          AND json_extract(incoming.value,'$.id') IS NOT NULL)
+        AND EXISTS(SELECT 1 FROM jobs WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?)`,
+        payload,
+        id,
+        direction,
+        payload,
+        id,
+        token,
+        now,
+        now,
+      ),
+      query(
+        `INSERT INTO records(job_id,direction,identity,payload)
+        SELECT ?,?,CASE WHEN json_extract(incoming.value,'$.id') IS NULL THEN 'u:'||json_extract(incoming.value,'$.username') ELSE 'id:'||json_extract(incoming.value,'$.id') END,incoming.value
+        FROM json_each(?) AS incoming
+        WHERE EXISTS(SELECT 1 FROM jobs WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?)
+        AND NOT EXISTS(SELECT 1 FROM records AS existing
+          WHERE existing.job_id=? AND existing.direction=?
+          AND (json_extract(existing.payload,'$.username')=json_extract(incoming.value,'$.username')
+            OR (json_extract(existing.payload,'$.id') IS NOT NULL
+              AND json_extract(incoming.value,'$.id') IS NOT NULL
+              AND json_extract(existing.payload,'$.id')=json_extract(incoming.value,'$.id'))))
+        ON CONFLICT DO NOTHING`,
+        id,
+        direction,
+        payload,
+        id,
+        token,
+        now,
+        now,
+        id,
+        direction,
+      ),
       query(
         'SELECT COUNT(*) AS n FROM records WHERE job_id=? AND direction=?',
         id,
         direction,
       ),
     ]);
-    return Number(total!.rows[0]!.n);
+    if (!results[0]!.rows.length)
+      throw new Error(
+        'The scan checkpoint lease changed; retry status before continuing.',
+      );
+    return {
+      conflictCount: Number(results[1]!.rows[0]!.n),
+      total: Number(results[4]!.rows[0]!.n),
+    };
   }
   async records(
     id: string,
@@ -267,33 +345,64 @@ export class JobStore<T extends { spentMicros: number }> {
     id: string,
     token: string,
     payload: T,
+    now: number,
     uncertain = false,
   ): Promise<void> {
-    await this.sql.batch([
+    if (
+      !Number.isSafeInteger(now) ||
+      !Number.isSafeInteger(payload.spentMicros) ||
+      payload.spentMicros < 0
+    )
+      throw new Error('Invalid capacity checkpoint.');
+    const charged = uncertain ? null : payload.spentMicros;
+    const results = await this.sql.batch([
       query(
         `UPDATE capacity SET reserved=reserved-(SELECT reservation FROM jobs WHERE id=?),
         spent=spent+CASE WHEN ? THEN (SELECT reservation FROM jobs WHERE id=?) ELSE ? END
-        WHERE period=(SELECT period FROM jobs WHERE id=? AND lease_token=? AND active=1)`,
+        WHERE period=(SELECT period FROM jobs WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?)
+        AND reserved>=(SELECT reservation FROM jobs WHERE id=?)
+        AND (CASE WHEN ? THEN (SELECT reservation FROM jobs WHERE id=?) ELSE ? END)<=(SELECT reservation FROM jobs WHERE id=?)
+        AND spent+(CASE WHEN ? THEN (SELECT reservation FROM jobs WHERE id=?) ELSE ? END)<=ceiling`,
         id,
         uncertain ? 1 : 0,
         id,
-        payload.spentMicros,
+        charged,
         id,
         token,
+        now,
+        now,
+        id,
+        uncertain ? 1 : 0,
+        id,
+        charged,
+        id,
+        uncertain ? 1 : 0,
+        id,
+        charged,
       ),
       query(
-        'UPDATE jobs SET payload=?,active=0,lease_token=NULL,lease_until=0 WHERE id=? AND lease_token=?',
+        `UPDATE jobs SET payload=?,active=0,lease_token=NULL,lease_until=0
+        WHERE id=? AND lease_token=? AND active=1 AND expires_at>? AND lease_until>?
+        AND (CASE WHEN ? THEN reservation ELSE ? END)<=reservation`,
         JSON.stringify(payload),
         id,
         token,
+        now,
+        now,
+        uncertain ? 1 : 0,
+        charged,
       ),
     ]);
+    if (results[0]!.changes !== 1 || results[1]!.changes !== 1)
+      throw new Error(
+        'The scan checkpoint lease changed or its capacity bound was exceeded; retry status before continuing.',
+      );
   }
   /** Expiry denies reads immediately; a scheduled operator invokes cleanup even with no visitors. */
   async expired(now: number): Promise<{ id: string; payload: T }[]> {
     const [r] = await this.sql.batch([
       query(
-        'SELECT id,payload FROM jobs WHERE expires_at<=? AND lease_until<=? ORDER BY expires_at LIMIT 20',
+        'SELECT id,payload FROM jobs WHERE expires_at<=? AND lease_until<=? ORDER BY active DESC,expires_at LIMIT 20',
         now,
         now,
       ),
@@ -308,7 +417,11 @@ export class JobStore<T extends { spentMicros: number }> {
     id: string,
     now: number,
     cleanup: { id: string; payload: string }[] = [],
+    spentMicros = 0,
+    uncertain = true,
   ): Promise<void> {
+    if (!Number.isSafeInteger(spentMicros) || spentMicros < 0)
+      throw new Error('Invalid expired capacity checkpoint.');
     await this.sql.batch([
       ...cleanup.map((item) =>
         query(
@@ -327,9 +440,20 @@ export class JobStore<T extends { spentMicros: number }> {
         now,
       ),
       query(
-        'UPDATE capacity SET spent=spent+(SELECT reservation FROM jobs WHERE id=?),reserved=reserved-(SELECT reservation FROM jobs WHERE id=?) WHERE period=(SELECT period FROM jobs WHERE id=? AND active=1)',
+        `UPDATE capacity SET spent=spent+CASE WHEN ? THEN (SELECT reservation FROM jobs WHERE id=?) ELSE ? END,
+        reserved=reserved-(SELECT reservation FROM jobs WHERE id=?)
+        WHERE period=(SELECT period FROM jobs WHERE id=? AND active=1)
+        AND reserved>=(SELECT reservation FROM jobs WHERE id=?)
+        AND (CASE WHEN ? THEN (SELECT reservation FROM jobs WHERE id=?) ELSE ? END)<=(SELECT reservation FROM jobs WHERE id=?)`,
+        uncertain ? 1 : 0,
+        id,
+        uncertain ? null : spentMicros,
         id,
         id,
+        id,
+        uncertain ? 1 : 0,
+        id,
+        uncertain ? null : spentMicros,
         id,
       ),
       query(
@@ -346,7 +470,7 @@ export class JobStore<T extends { spentMicros: number }> {
   ): Promise<{ id: string; payload: string }[]> {
     const [r] = await this.sql.batch([
       query(
-        'SELECT run_id,payload FROM remote_cleanup WHERE next_attempt<=? ORDER BY next_attempt,created_at LIMIT 20',
+        'SELECT run_id,payload FROM remote_cleanup WHERE attempts<12 AND next_attempt<=? ORDER BY next_attempt,created_at LIMIT 20',
         now,
       ),
     ]);
@@ -368,6 +492,12 @@ export class JobStore<T extends { spentMicros: number }> {
         id,
       ),
     ]);
+  }
+  async failedCleanupCount(): Promise<number> {
+    const [r] = await this.sql.batch([
+      query('SELECT COUNT(*) AS n FROM remote_cleanup WHERE attempts>=12'),
+    ]);
+    return Number(r!.rows[0]!.n);
   }
   async pruneReceipts(now: number): Promise<void> {
     await this.sql.batch([

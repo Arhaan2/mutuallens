@@ -10,6 +10,7 @@ import {
   APIFY_BUILD_ID,
   APIFY_BUILD_NUMBER,
   APIFY_ACTOR_NAME,
+  APIFY_REVIEWED_ACTOR_MODIFIED_AT,
   normalizeAcquisitionEnvelopes,
 } from './apify';
 import type { ApifyClient, ApifyRun } from './apify';
@@ -37,6 +38,9 @@ interface DirectionState {
   fingerprints: string[];
 }
 export interface ScanJob {
+  adapterBuildId?: string;
+  adapterBuildNumber?: string;
+  adapterReviewedAt?: string;
   username: string;
   status: ScanStatus;
   message: string;
@@ -79,6 +83,8 @@ export interface ScanProgress {
 const terminal = (s: ScanStatus) =>
   ['complete', 'partial', 'cancelled', 'failed', 'uncertain'].includes(s);
 const micros = (usd: number) => Math.ceil(usd * 1_000_000);
+/** Aligns with both currently documented 25-row and stale 200-row source-page claims. */
+export const RUN_MAX_ITEMS = 400;
 const directionState = (): DirectionState => ({
   cursor: null,
   terminal: false,
@@ -112,6 +118,48 @@ export type ScanProvider = Pick<
   | 'deleteRequestQueue'
   | 'deleteRun'
 >;
+const compatibleAdapter = (job: ScanJob) =>
+  job.adapterBuildId === APIFY_BUILD_ID &&
+  job.adapterBuildNumber === APIFY_BUILD_NUMBER &&
+  job.adapterReviewedAt === APIFY_REVIEWED_ACTOR_MODIFIED_AT;
+const mergeRun = (previous: ApifyRun | null, next: ApifyRun): ApifyRun => {
+  if (!previous) return next;
+  if (previous.id !== next.id || previous.actorId !== next.actorId)
+    throw new Error('Provider run identity changed during refresh.');
+  return {
+    ...next,
+    buildId: next.buildId ?? previous.buildId,
+    defaultDatasetId: next.defaultDatasetId ?? previous.defaultDatasetId,
+    defaultKeyValueStoreId:
+      next.defaultKeyValueStoreId ?? previous.defaultKeyValueStoreId,
+    defaultRequestQueueId:
+      next.defaultRequestQueueId ?? previous.defaultRequestQueueId,
+    startedAt: next.startedAt ?? previous.startedAt,
+    finishedAt: next.finishedAt ?? previous.finishedAt,
+    usageTotalUsd: next.usageTotalUsd ?? previous.usageTotalUsd,
+    chargedEventCounts: next.chargedEventCounts ?? previous.chargedEventCounts,
+    datasetItemCount: next.datasetItemCount ?? previous.datasetItemCount,
+  };
+};
+const runChargesMatch = (
+  run: ApifyRun,
+  rawCount: number,
+  envelopes: number,
+) => {
+  const charges = run.chargedEventCounts;
+  if (!charges) return false;
+  const allowed = new Set([
+    'apify-actor-start',
+    'apify-default-dataset-item',
+    'user-batch-50',
+  ]);
+  return (
+    Object.keys(charges).every((key) => allowed.has(key)) &&
+    (charges['apify-actor-start'] ?? 0) === 1 &&
+    (charges['apify-default-dataset-item'] ?? 0) === envelopes &&
+    (charges['user-batch-50'] ?? 0) === Math.ceil(rawCount / 50)
+  );
+};
 /** Local erasure needs only D1, even if provider credentials/configuration fail. */
 export async function eraseExpiredJobs(
   store: JobStore<ScanJob>,
@@ -124,13 +172,25 @@ export async function eraseExpiredJobs(
       id: run.id,
       payload: JSON.stringify({
         id: run.id,
+        actorId: run.actorId,
+        buildId: run.buildId,
         status: run.status,
         defaultDatasetId: run.defaultDatasetId,
         defaultKeyValueStoreId: run.defaultKeyValueStoreId,
         defaultRequestQueueId: run.defaultRequestQueueId,
       }),
     }));
-    await store.removeExpired(row.id, now, minimal);
+    const startedOrUnreconciled =
+      row.payload.run !== null ||
+      row.payload.cleanup.length > 0 ||
+      row.payload.stage === 'starting';
+    await store.removeExpired(
+      row.id,
+      now,
+      minimal,
+      row.payload.spentMicros,
+      startedOrUnreconciled,
+    );
     removed++;
   }
   return removed;
@@ -163,6 +223,9 @@ export class ScanService {
     if (!/^[0-9a-f-]{36}$/i.test(key))
       throw new Error('A unique scan request key is required.');
     const account = normalizeUsername(username);
+    // Scheduled cleanup remains authoritative, but an abandoned expired active
+    // row must not hold the single free-capacity slot until the next cron tick.
+    await eraseExpiredJobs(this.store, this.now());
     const existing = await this.store.find(session, key, this.now());
     if (existing) {
       if (existing.payload.username !== account)
@@ -175,6 +238,9 @@ export class ScanService {
     const now = this.now(),
       id = crypto.randomUUID();
     const payload: ScanJob = {
+      adapterBuildId: APIFY_BUILD_ID,
+      adapterBuildNumber: APIFY_BUILD_NUMBER,
+      adapterReviewedAt: APIFY_REVIEWED_ACTOR_MODIFIED_AT,
       username: account,
       status: 'queued',
       message: 'Ready to retrieve public relationship lists.',
@@ -264,7 +330,17 @@ export class ScanService {
           job,
           'cancelled',
           'Scan cancelled; observed records remain incomplete.',
-          true,
+          job.stage === 'starting',
+          session,
+        );
+      if (!compatibleAdapter(job))
+        return await this.stop(
+          id,
+          lease,
+          job,
+          'partial',
+          'The provider build or cursor epoch changed. This saved scan cannot resume safely; observed records remain incomplete.',
+          job.stage === 'starting',
           session,
         );
       if (job.stage === 'starting') {
@@ -286,7 +362,7 @@ export class ScanService {
           job,
           'partial',
           'The scan time budget ended. Observed records remain available without confirmed absence classifications.',
-          true,
+          false,
           session,
         );
       if (job.stage === 'ready') {
@@ -314,12 +390,12 @@ export class ScanService {
         job.stage = 'starting';
         job.status = 'running';
         job.message = `Retrieving ${job.direction}.`;
-        await this.store.save(id, lease, job, false);
+        await this.store.save(id, lease, job, this.now(), false);
         job.run = await this.provider.start({
           username: job.username,
           direction: job.direction,
           upstreamCursor: job[job.direction].cursor,
-          maxItems: 500,
+          maxItems: RUN_MAX_ITEMS,
           maxTotalChargeUsd: this.config.runUsd,
           timeoutSecs: 120,
           build: APIFY_BUILD_NUMBER,
@@ -340,7 +416,7 @@ export class ScanService {
         job.retries = 0;
       } else if (job.stage === 'polling') {
         if (!job.run) throw new Error('Missing durable provider run.');
-        const run = await this.provider.getRun(job.run.id);
+        const run = mergeRun(job.run, await this.provider.getRun(job.run.id));
         job.run = run;
         job.cleanup = job.cleanup.map((item) =>
           item.id === run.id ? run : item,
@@ -360,7 +436,21 @@ export class ScanService {
               true,
               session,
             );
-          job.spentMicros += micros(run.usageTotalUsd);
+          const runSpent = micros(run.usageTotalUsd);
+          job.spentMicros += runSpent;
+          if (
+            runSpent > micros(this.config.runUsd) ||
+            job.spentMicros > job.budgetMicros
+          )
+            return await this.stop(
+              id,
+              lease,
+              job,
+              'partial',
+              'Provider usage exceeded the reserved bound. Collection stopped and the full job reservation remains accounted for operator review.',
+              true,
+              session,
+            );
           if (run.status !== 'SUCCEEDED' || !run.defaultDatasetId)
             return await this.stop(
               id,
@@ -387,18 +477,35 @@ export class ScanService {
           job.run.defaultDatasetId,
           { offset: job.datasetOffset, limit: 10 },
         );
+        if (
+          job.run.datasetItemCount === null ||
+          job.run.datasetItemCount !== page.total
+        )
+          return await this.stop(
+            id,
+            lease,
+            job,
+            'partial',
+            'Provider run and dataset counts disagree. Observed records remain incomplete.',
+            false,
+            session,
+          );
         const normalized = normalizeAcquisitionEnvelopes(
           page.items,
           job.direction,
-          { requestedMaxItems: 500, inputCursor: job[job.direction].cursor },
+          {
+            requestedMaxItems: RUN_MAX_ITEMS,
+            inputCursor: job[job.direction].cursor,
+          },
         );
         const state = job[job.direction];
         const fingerprint = await digest(
           JSON.stringify(
-            normalized.records.map((record) => [
-              record.id ?? '',
-              record.username,
-            ]),
+            normalized.records
+              .map((record) => [record.id ?? '', record.username])
+              .sort(([aId, aName], [bId, bName]) =>
+                `${aId}:${aName}`.localeCompare(`${bId}:${bName}`),
+              ),
           ),
         );
         if (
@@ -415,12 +522,20 @@ export class ScanService {
             session,
           );
         if (normalized.records.length) state.fingerprints.push(fingerprint);
-        state.uniqueCount = await this.store.addRecords(
+        const inserted = await this.store.addRecords(
           id,
           lease,
           job.direction,
           normalized.records,
+          this.now(),
         );
+        state.uniqueCount = inserted.total;
+        if (inserted.conflictCount) {
+          state.invalidCount += inserted.conflictCount;
+          state.warnings.push(
+            'Conflicting provider identities across source pages were quarantined; automatic absence classifications remain withheld.',
+          );
+        }
         state.rawCount += normalized.rawRecordCount;
         state.invalidCount += normalized.invalidRecordCount;
         state.warnings = [
@@ -437,6 +552,26 @@ export class ScanService {
           job.datasetOffset = page.nextOffset;
         } else {
           state.pages++;
+          if (!runChargesMatch(job.run, job.runRawCount, job.runEnvelopes))
+            return await this.stop(
+              id,
+              lease,
+              job,
+              'partial',
+              'Provider charge events did not match the reviewed accounting contract. Collection stopped safely for operator review.',
+              true,
+              session,
+            );
+          if (job.runCursor && job.runRawCount === 0)
+            return await this.stop(
+              id,
+              lease,
+              job,
+              'partial',
+              'The provider returned an empty page with another cursor. Collection stopped to avoid repeated chargeable calls.',
+              false,
+              session,
+            );
           if (job.runCursor) {
             const cursorHash = await digest(job.runCursor);
             if (
@@ -457,7 +592,7 @@ export class ScanService {
           } else if (
             job.runTerminal === true &&
             job.runEnvelopes === 1 &&
-            job.runRawCount < 500 &&
+            job.runRawCount < RUN_MAX_ITEMS &&
             state.invalidCount === 0 &&
             !!this.config.terminalEvidenceId?.trim() &&
             job.run.usageTotalUsd !== null &&
@@ -507,7 +642,7 @@ export class ScanService {
           session,
         );
       job.retries = 0;
-      await this.store.save(id, lease, job);
+      await this.store.save(id, lease, job, this.now());
       return this.status(session, id);
     } catch (error) {
       if (
@@ -543,7 +678,7 @@ export class ScanService {
           );
         job.message =
           'The provider is temporarily unavailable. Retrying the existing page after a bounded delay.';
-        await this.store.save(id, lease, job);
+        await this.store.save(id, lease, job, this.now());
         return this.status(session, id);
       }
       return this.stop(
@@ -587,14 +722,14 @@ export class ScanService {
       job.message +=
         ' Provider cleanup is pending; expired local records are erased independently.';
     }
-    await this.store.finish(id, lease, job, uncertain);
+    await this.store.finish(id, lease, job, this.now(), uncertain);
     return this.status(session, id);
   }
   private async cleanRuns(job: { cleanup: ApifyRun[] }): Promise<void> {
     for (const old of [...job.cleanup]) {
       let run = old;
       if (['READY', 'RUNNING', 'TIMING-OUT', 'ABORTING'].includes(run.status)) {
-        run = await this.provider.abortRun(run.id);
+        run = mergeRun(run, await this.provider.abortRun(run.id));
         job.cleanup = job.cleanup.map((item) =>
           item.id === run.id ? run : item,
         );
@@ -638,7 +773,7 @@ export class ScanService {
       job,
       'cancelled',
       'Scan cancelled. Observed records are incomplete; confirmed absence classifications are withheld.',
-      true,
+      job.stage === 'starting',
       session,
     );
   }
@@ -660,7 +795,7 @@ export class ScanService {
       records: [],
       metadata: {
         source: APIFY_ACTOR_NAME,
-        version: APIFY_BUILD_NUMBER,
+        version: job.adapterBuildNumber || 'unreviewed',
         startedAt: job.startedAt,
         endedAt: job.finishedAt,
         rawCount: job[d].rawCount,
@@ -689,7 +824,11 @@ export class ScanService {
       },
     };
   }
-  async cleanupExpired(): Promise<{ removed: number; pending: number }> {
+  async cleanupExpired(): Promise<{
+    removed: number;
+    pending: number;
+    failed?: number;
+  }> {
     const removed = await eraseExpiredJobs(this.store, this.now());
     let pending = 0;
     for (const item of await this.store.pendingCleanup(this.now())) {
@@ -703,7 +842,8 @@ export class ScanService {
         pending++;
       }
     }
-    return { removed, pending };
+    const failed = await this.store.failedCleanupCount();
+    return failed ? { removed, pending, failed } : { removed, pending };
   }
 }
 export const capacityReader = (token: string) => () => readFreeCapacity(token);
