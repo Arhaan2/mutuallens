@@ -1,3 +1,7 @@
+import {
+  importSyntheticDataset,
+  selectSyntheticDataset,
+} from './synthetic-import';
 import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect, type Page } from '@playwright/test';
 
@@ -11,8 +15,6 @@ const validCapability = {
   },
   ads: false,
 };
-const sampleButton = (page: Page) =>
-  page.getByRole('button', { name: /Explore synthetic sample/ }).first();
 const visibleAlert = (page: Page) => page.locator('[role="alert"]:visible');
 const file = (name: string, value: unknown) => ({
   name,
@@ -22,8 +24,8 @@ const file = (name: string, value: unknown) => ({
 const records = (names: string[]) =>
   names.map((value) => ({ string_list_data: [{ value }] }));
 
-async function assertSampleWorks(page: Page) {
-  await sampleButton(page).click();
+async function assertImportWorks(page: Page) {
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_example',
   );
@@ -40,14 +42,13 @@ async function importAndSave(
 ) {
   await openImportDetails(page);
   await page.locator('#import-account').fill('synthetic_owner');
+  await page.locator('#collected-at').fill(date);
   await page.locator('input[type=file]').setInputFiles([
     file('followers.json', records([marker, 'mutual'])),
     file('following.json', {
       relationships_following: records(['following_only', 'mutual']),
     }),
   ]);
-  await page.locator('#collected-at').fill(date);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(page.locator('#results-title')).toContainText('synthetic_owner');
   await page.getByRole('button', { name: /All followers/ }).click();
@@ -136,7 +137,7 @@ for (const [name, response] of [
     }),
   ],
 ] as const) {
-  test(`fault: capability ${name} fails closed, can retry, and sample works`, async ({
+  test(`fault: capability ${name} fails closed, can retry, and import works`, async ({
     page,
   }) => {
     const errors: string[] = [];
@@ -152,7 +153,7 @@ for (const [name, response] of [
     });
     await page.goto('/#automatic');
     await expect(page.locator('#automatic-status')).toContainText(
-      'Availability could not be verified',
+      'Automatic checking could not be reached',
     );
     await expect(page.locator('#automatic .button.primary')).toBeDisabled();
     await expect(
@@ -160,15 +161,15 @@ for (const [name, response] of [
     ).toBeVisible();
     await page.getByRole('button', { name: 'Retry availability' }).click();
     await expect(page.locator('#automatic-status')).toContainText(
-      validCapability.automatic.reason,
+      'Automatic checking is currently unavailable',
     );
     expect(calls).toBe(2);
-    await assertSampleWorks(page);
+    await assertImportWorks(page);
     expect(errors).toEqual([]);
   });
 }
 
-test('fault: capability network failure keeps local sample functional', async ({
+test('fault: capability network failure keeps local import functional', async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -176,10 +177,10 @@ test('fault: capability network failure keeps local sample functional', async ({
   await page.route('**/api/capabilities', (route) => route.abort('failed'));
   await page.goto('/');
   await expect(page.locator('#automatic-status')).toContainText(
-    'Availability could not be verified',
+    'Automatic checking could not be reached',
   );
   await expect(page.locator('#automatic .button.primary')).toBeDisabled();
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   expect(errors).toEqual([]);
 });
 
@@ -203,12 +204,12 @@ test('fault: hung capability times out at 8s without blocking local mode', async
   );
   await page.clock.fastForward(8001);
   await expect(page.locator('#automatic-status')).toContainText(
-    'Availability could not be verified',
+    'Automatic checking could not be reached',
   );
   await expect(
     page.getByRole('button', { name: 'Retry availability' }),
   ).toBeVisible();
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   expect(errors).toEqual([]);
 });
 
@@ -231,7 +232,7 @@ test('fault: worker constructor failure gives an alert and retry works', async (
     });
   });
   await page.goto('/');
-  await sampleButton(page).click();
+  await selectSyntheticDataset(page);
   await expect(visibleAlert(page)).toContainText(/processing|worker/i);
   await expect(page.locator('#results-title')).toHaveCount(0);
   await page.evaluate(() => {
@@ -239,7 +240,7 @@ test('fault: worker constructor failure gives an alert and retry works', async (
       window as unknown as { __mutuallensWorkerConstructor: { fail: boolean } }
     ).__mutuallensWorkerConstructor.fail = false;
   });
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   expect(errors).toEqual([]);
 });
 
@@ -285,7 +286,7 @@ for (const kind of ['error', 'messageerror', 'postMessage'] as const) {
       });
     }, kind);
     await page.goto('/');
-    await sampleButton(page).click();
+    await selectSyntheticDataset(page);
     await expect(visibleAlert(page)).toContainText(
       /processing|worker|read|message/i,
     );
@@ -297,7 +298,7 @@ for (const kind of ['error', 'messageerror', 'postMessage'] as const) {
         window as unknown as { __mutuallensWorkerEvent: { fail: boolean } }
       ).__mutuallensWorkerEvent.fail = false;
     });
-    await assertSampleWorks(page);
+    await assertImportWorks(page);
     expect(errors).toEqual([]);
   });
 }
@@ -307,8 +308,8 @@ test('fault: cancel, retry and clear invalidate delayed completed worker replies
 }) => {
   await installHeldWorkers(page);
   await page.goto('/');
-  await setHeldKind(page, 'sample');
-  await sampleButton(page).click();
+  await setHeldKind(page, 'import');
+  await selectSyntheticDataset(page);
   await waitHeld(page, 1);
   await page
     .getByRole('button', { name: 'Cancel processing', exact: true })
@@ -317,10 +318,61 @@ test('fault: cancel, retry and clear invalidate delayed completed worker replies
   await releaseHeld(page, 0);
   await expect(page.locator('#results-title')).toHaveCount(0);
   await setHeldKind(page, '');
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   await page.getByRole('button', { name: 'Clear report', exact: true }).click();
   await releaseHeld(page, 0);
   await expect(page.locator('#results-title')).toHaveCount(0);
+});
+
+test('fault: obsolete sample fragment does not cancel or replace a pending uploaded-file report', async ({
+  page,
+}) => {
+  await installHeldWorkers(page);
+  await page.goto('/#import');
+  await setHeldKind(page, 'import');
+  await selectSyntheticDataset(page);
+  await waitHeld(page, 1);
+  await page.evaluate(() => {
+    location.hash = 'sample';
+  });
+  await expect(page).toHaveURL(/#sample$/);
+  await expect(
+    page.getByRole('button', { name: 'Cancel processing', exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await releaseHeld(page, 0);
+  await expect(page.locator('#results-title')).toContainText(
+    'synthetic_example',
+  );
+  await expect(
+    page.getByRole('button', { name: 'Mutuals 4,500', exact: true }),
+  ).toBeVisible();
+});
+
+test('fault: back and forward mode navigation cancels pending work and permits a fresh import', async ({
+  page,
+}) => {
+  await installHeldWorkers(page);
+  await page.goto('/#automatic');
+  await page
+    .getByRole('link', { name: 'Import your Instagram export', exact: true })
+    .click();
+  await expect(page).toHaveURL(/#import$/);
+  await setHeldKind(page, 'import');
+  await selectSyntheticDataset(page);
+  await waitHeld(page, 1);
+  await page.goBack();
+  await expect(page).toHaveURL(/#automatic$/);
+  await expect(
+    page.getByRole('button', { name: 'Cancel processing', exact: true }),
+  ).toHaveCount(0);
+  await releaseHeld(page, 0);
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await page.goForward();
+  await expect(page).toHaveURL(/#import$/);
+  await expect(page.locator('#import-files')).toBeVisible();
+  await setHeldKind(page, '');
+  await assertImportWorks(page);
 });
 
 test('fault: changing snapshot selection invalidates delayed comparison results', async ({
@@ -379,7 +431,7 @@ test('fault: export URL allocation failure is visible near report actions withou
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   await page.evaluate(() => {
     URL.createObjectURL = () => {
       throw new Error('Synthetic download allocation failure');
@@ -408,7 +460,7 @@ test('fault: IndexedDB denied keeps report usable and reports saving failure loc
     };
   });
   await page.goto('/');
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   await openSnapshotOptions(page);
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(visibleAlert(page)).toContainText(/storage|sav/i);
@@ -453,7 +505,7 @@ test('fault: corrupt synthetic stored record cannot blank the checker', async ({
   await expect(visibleAlert(page)).toContainText(
     /snapshot|storage|saved|invalid|read/i,
   );
-  await assertSampleWorks(page);
+  await assertImportWorks(page);
   expect(errors).toEqual([]);
 });
 
@@ -464,13 +516,12 @@ test('fault: import failure stays beside import after exporting the previous rep
   await page.goto('/');
   await importAndSave(page, 'earlier_only', '2025-01-01T12:00', 1);
   await page.locator('details#import > summary').click();
+  await setHeldKind(page, 'import');
   await page.locator('#import-files').setInputFiles(
     file('following.json', {
       relationships_following: records(['synthetic_other']),
     }),
   );
-  await setHeldKind(page, 'import');
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await waitHeld(page, 1);
   const downloading = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export JSON', exact: true }).click();

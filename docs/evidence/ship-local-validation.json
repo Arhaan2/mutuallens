@@ -1,0 +1,75 @@
+{
+  "applicationSourceHash": "b45488234e44ef6d8995762733f83d78b8478cc4b53625308815f74c273e5ba7",
+  "node": "24.18.0",
+  "npm": "11.16.0",
+  "baselineUnitPassed": 319,
+  "baselineBrowserPassed": 153,
+  "candidateUnitPassed": 320,
+  "candidateBuiltBrowserPassed": 162,
+  "candidateDevelopmentBrowserPassed": 42,
+  "candidateStartupPassed": 3,
+  "independentBrowserPassed": 21,
+  "independentFocusedTestsPassed": 57,
+  "engines": [
+    "Chromium",
+    "Playwright WebKit",
+    "Firefox"
+  ],
+  "physicalIphoneTest": false,
+  "ownerExportsTested": false,
+  "liveAutomaticRuns": 0,
+  "logsPrivate": {
+    "baseline-install": {
+      "sha256": "7c2917841270442f8f699b778f7ed3beebaa69d1a4b5742ca55754be8e56a458",
+      "bytes": 455
+    },
+    "baseline-format": {
+      "sha256": "438471f210f968e29251b5f08ca6b4f4907731c1ba8c3e38aa4af9ac30093e16",
+      "bytes": 121
+    },
+    "baseline-check": {
+      "sha256": "889e3899040915c3a38e64fed7810c682b7cb473746ad4996b9512c01ffcee06",
+      "bytes": 456
+    },
+    "baseline-test": {
+      "sha256": "3a44c8a5c0d6e480df68c23a5969b9e71f0de5fd3231f28d8f18aab2845d2bbd",
+      "bytes": 248
+    },
+    "baseline-build": {
+      "sha256": "c64cf71dbaadc1a4bab77482c1279c59cde879c07386ad0ea51e887e80195a2f",
+      "bytes": 2109
+    },
+    "baseline-browser": {
+      "sha256": "e4363ba8ae2501a026f86b45623fea6505e7d32e55d1d9fbcd32d450741a0e99",
+      "bytes": 25501
+    },
+    "final-format": {
+      "sha256": "438471f210f968e29251b5f08ca6b4f4907731c1ba8c3e38aa4af9ac30093e16",
+      "bytes": 121
+    },
+    "final-check": {
+      "sha256": "e88c08a9d4daa2556d06175d6a34e8d5a1a9f060bef9784a2b1c861329b43c11",
+      "bytes": 456
+    },
+    "final-unit": {
+      "sha256": "b92b030d9bf124e32e55e74fcbc00976be9c4c2e411c6d2f026d098afe00ad55",
+      "bytes": 248
+    },
+    "final-browser": {
+      "sha256": "5171d037fcdb127e0e03729d595c2d441575a1ba0b5f9cf7750f002c486829d5",
+      "bytes": 27091
+    },
+    "final-browser-dev": {
+      "sha256": "0a7a754bcfaa800e601bfc92973dfa0381068e4eee44eefbe998d5f4590ac637",
+      "bytes": 9193
+    },
+    "final-startup": {
+      "sha256": "15efb550ff304d1eeb167923eba3a2df91d30ab877eada96136e830960ca8843",
+      "bytes": 570
+    },
+    "audit": {
+      "sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3",
+      "bytes": 24
+    }
+  }
+}

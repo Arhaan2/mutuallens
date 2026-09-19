@@ -1,3 +1,7 @@
+import {
+  importSyntheticDataset,
+  selectSyntheticDataset,
+} from './synthetic-import';
 import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect, type Page, type Download } from '@playwright/test';
 import { zipSync, strToU8 } from 'fflate';
@@ -43,11 +47,10 @@ async function importLists(
   await page
     .locator('#import-account')
     .fill(options.owner ?? 'synthetic_owner');
-  await page.locator('#import-files').setInputFiles(pair(followers, following));
   await page
     .locator('#collected-at')
     .fill(options.sourceDate ?? '2025-01-01T12:00');
-  await page.getByRole('button', { name: /Compare local files/ }).click();
+  await page.locator('#import-files').setInputFiles(pair(followers, following));
   await expect(page.locator('#results-title')).toContainText(
     options.owner ?? 'synthetic_owner',
   );
@@ -128,23 +131,27 @@ test.afterEach(async ({ page }, testInfo) => {
   expect(failures).toEqual([]);
 });
 
-test('repair: homepage sample entry is direct and survives reload and browser history', async ({
+test('repair: homepage upload entry survives navigation without restoring an unsaved report', async ({
   page,
 }) => {
   await page.goto(SITE);
-  await page.locator('.sample-link').click();
-  await expect(page).toHaveURL(`${CHECKER}/#sample`);
+  await expect(page.locator('a[href$="#sample"]')).toHaveCount(0);
+  await page.locator(`a[href="${CHECKER}/#import"]`).first().click();
+  await expect(page).toHaveURL(`${CHECKER}/#import`);
+  await expect(page.locator('#import-files')).toBeVisible();
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toBeVisible();
   await expect(page.locator('.results')).toContainText('SYNTHETIC SAMPLE');
   await page.reload();
-  await expect(page.locator('#results-title')).toBeVisible();
+  await expect(page.locator('#results-title')).toHaveCount(0);
   await page.goBack();
   await expect(page).toHaveURL(`${SITE}/`);
   await page.goForward();
-  await expect(page).toHaveURL(`${CHECKER}/#sample`);
-  await expect(page.locator('#results-title')).toBeVisible();
-  await page.getByRole('button', { name: 'Explore synthetic sample' }).click();
-  await expect(page.locator('#results-title')).toBeVisible();
+  await expect(page).toHaveURL(`${CHECKER}/#import`);
+  await expect(page.locator('#import-files')).toBeVisible();
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await importSyntheticDataset(page);
   await expect(
     page.getByRole('button', { name: /Not following you back 1,500/ }),
   ).toBeVisible();
@@ -232,7 +239,8 @@ test('repair: all snapshot differences are browsable and full exports contain ev
 test('repair: synthetic result categories search sorting paging and downloads contain complete data', async ({
   page,
 }) => {
-  await page.goto(`${CHECKER}/#sample`);
+  await page.goto(`${CHECKER}/#import`);
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_example',
   );
@@ -332,13 +340,14 @@ test('repair: synthetic result categories search sorting paging and downloads co
       ),
     ).size,
   ).toBe(6000);
-  expect(dataset.followers.metadata.completeness).toBe('complete_for_source');
+  expect(dataset.followers.metadata.completeness).toBe('unverified');
+  expect(dataset.comparisonBasis).toBe('supplied_files');
   expect(
     await page.locator('.account-list a[href*="instagram.com"]').count(),
   ).toBe(0);
 });
 
-test('repair: sample replacement requires explicit choice and clearing differs from starting over', async ({
+test('repair: file selection replaces report automatically and stale sample links preserve drafts; clear and start over differ', async ({
   page,
 }) => {
   await page.goto(`${CHECKER}/#import`);
@@ -348,50 +357,38 @@ test('repair: sample replacement requires explicit choice and clearing differs f
     ['synthetic_b', 'synthetic_mutual'],
   );
   await save(page);
-  await page.getByRole('button', { name: 'Explore synthetic sample' }).click();
   await expect(
-    page.getByRole('button', {
-      name: 'Replace report with sample',
-      exact: true,
-    }),
-  ).toBeVisible();
-  await expect(page.locator('#results-title')).toContainText('synthetic_owner');
-  await page
-    .getByRole('button', { name: 'Keep current report', exact: true })
-    .click();
-  await expect(page.locator('#results-title')).toContainText('synthetic_owner');
-  await expect(
-    page.getByRole('button', {
-      name: 'Replace report with sample',
-      exact: true,
-    }),
+    page.getByRole('button', { name: /Explore synthetic sample/ }),
   ).toHaveCount(0);
-  // A fragment navigation is a supported user entry, not a business-logic mock.
+  await expect(page.locator('#results-title')).toContainText('synthetic_owner');
+  await expect(
+    page.getByRole('button', { name: 'Mutuals 1', exact: true }),
+  ).toBeVisible();
+  await openImport(page);
+  await page.locator('#import-account').fill('synthetic_draft');
+  // Old bookmarks must not create or replace a report or discard metadata edits.
   await page.evaluate(() => {
     location.hash = 'sample';
   });
-  await expect(
-    page.getByRole('button', {
-      name: 'Replace report with sample',
-      exact: true,
-    }),
-  ).toBeVisible();
+  await expect(page).toHaveURL(`${CHECKER}/#sample`);
   await expect(page.locator('#results-title')).toContainText('synthetic_owner');
-  await page
-    .getByRole('button', { name: 'Replace report with sample', exact: true })
-    .click();
-  await expect(page.locator('#results-title')).toContainText(
-    'synthetic_example',
-  );
+  await expect(
+    page.getByRole('button', { name: 'Mutuals 1', exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('#import-account')).toHaveValue('synthetic_draft');
+  await selectSyntheticDataset(page);
+  await expect(
+    page.getByRole('button', { name: 'Mutuals 4,500', exact: true }),
+  ).toBeVisible();
   await page.getByRole('button', { name: 'Clear report', exact: true }).click();
   await expect(page.locator('#results-title')).toHaveCount(0);
   await openImport(page);
-  await expect(page.locator('#import-account')).toHaveValue('synthetic_owner');
+  await expect(page.locator('#import-account')).toHaveValue('synthetic_draft');
   expect(
     await page
       .locator('#import-files')
       .evaluate((element: HTMLInputElement) => element.files?.length),
-  ).toBe(2);
+  ).toBe(1);
   await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
   await page.getByRole('button', { name: 'Start over', exact: true }).click();
   await expect(page.locator('#results-title')).toHaveCount(0);
@@ -407,6 +404,10 @@ test('repair: sample replacement requires explicit choice and clearing differs f
   const show = page.getByRole('button', { name: 'View saved snapshots' });
   if (await show.count()) await show.click();
   await expect(page.locator('.snapshot-row')).toHaveCount(1);
+  await page.goto(`${CHECKER}/#sample`);
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await page.reload();
+  await expect(page.locator('#results-title')).toHaveCount(0);
 });
 
 test('repair: ZIP split parts deduplicate correctly and selecting same files again is supported', async ({
@@ -432,7 +433,6 @@ test('repair: ZIP split parts deduplicate correctly and selecting same files aga
     buffer: Buffer.from(zip),
   };
   await page.locator('#import-files').setInputFiles(input);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText('synthetic_owner');
   await expect(
     page.getByRole('button', { name: 'All followers 3', exact: true }),
@@ -463,7 +463,6 @@ test('repair: ZIP split parts deduplicate correctly and selecting same files aga
   ).toBe(0);
   await page.locator('#import-files').setInputFiles(input);
   await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(
     page.getByRole('button', { name: 'All followers 3', exact: true }),
@@ -497,7 +496,6 @@ test('repair: known missing parts qualify useful negatives; missing malformed an
         followingText(['synthetic_b', 'synthetic_mutual']),
       ),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.category.active')).toHaveAccessibleName(
     'Not found in supplied followers 1',
   );
@@ -530,16 +528,14 @@ test('repair: known missing parts qualify useful negatives; missing malformed an
   ]) {
     await openImport(page);
     await page.locator('#import-files').setInputFiles(scenario.files);
-    await page.getByRole('button', { name: /Compare local files/ }).click();
     await expect(page.getByRole('alert')).toContainText(scenario.expected);
     await expect(page.locator('#results-title')).toContainText(
       'synthetic_owner',
     );
   }
   await openImport(page);
-  await page.locator('#import-files').setInputFiles(pair([], []));
   await page.locator('#import-account').fill('invalid account !');
-  await page.getByRole('button', { name: /Compare local files/ }).click();
+  await page.locator('#import-files').setInputFiles(pair([], []));
   await expect(page.getByRole('alert')).toContainText('Usernames must contain');
   await page.locator('#import-account').fill('synthetic_owner');
   await page.locator('#collected-at').fill('2099-01-01T12:00');

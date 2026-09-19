@@ -1,11 +1,11 @@
 import { defineConfig } from '@playwright/test';
 const checkerOrigin =
   process.env.MUTUALLENS_HOSTED_CHECKER_ORIGIN ??
-  'https://codex-ui-functional-repair.mutuallens-app.pages.dev';
+  'https://mutuallens-app.pages.dev';
 
 export default defineConfig({
   testDir: '.',
-  testMatch: 'hosted.spec.ts',
+  testMatch: '*.spec.ts',
   fullyParallel: false,
   workers: 1,
   retries: 0,

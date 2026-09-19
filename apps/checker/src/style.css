@@ -164,14 +164,6 @@ input[type='file']::file-selector-button {
   color: var(--muted);
   text-decoration: none;
 }
-.preview-label {
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 3px 8px;
-  font-size: 0.75rem;
-  letter-spacing: 0.035em;
-  text-transform: uppercase;
-}
 .app-main {
   padding-top: 55px;
 }

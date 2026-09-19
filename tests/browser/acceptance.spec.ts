@@ -1,3 +1,7 @@
+import {
+  importSyntheticDataset,
+  syntheticDatasetFile,
+} from './synthetic-import';
 import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
@@ -79,7 +83,7 @@ test('synthetic target, search, pagination, keyboard, exports, no external reque
   await expect(
     page.getByRole('link', { name: 'Skip to checker' }),
   ).toBeFocused();
-  await page.getByRole('button', { name: 'Explore synthetic sample' }).click();
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toBeVisible();
   await expect(
     page.getByRole('button', { name: /Not following you back 1,500/ }),
@@ -146,7 +150,7 @@ test('local loose imports show supplied-list absences without mandatory identity
 }) => {
   await page.goto('/#import');
   await expect(page.locator('#automatic-status')).toContainText(
-    'awaiting provider account setup',
+    'Automatic checking is currently unavailable',
   );
   const requests: string[] = [];
   page.on('request', (r) => requests.push(`${r.method()} ${r.url()}`));
@@ -156,7 +160,6 @@ test('local loose imports show supplied-list absences without mandatory identity
       file('followers_1.json', followerFile(['alpha', 'mutual'])),
       file('following.json', followingFile(['beta', 'mutual'])),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText(
     'Your uploaded files',
   );
@@ -195,7 +198,6 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
     mimeType: 'application/zip',
     buffer: Buffer.from(zip),
   });
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(
     page.getByRole('button', { name: /Not following you back 1$/ }),
   ).toBeVisible();
@@ -207,7 +209,6 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
       file('followers.json', '[]'),
       file('following.json', '{"relationships_following":[]}'),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(
     page.getByRole('heading', { name: 'No accounts in this category' }),
   ).toBeVisible();
@@ -215,7 +216,6 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
   await page
     .locator('input[type=file]')
     .setInputFiles(file('following.json', followingFile(['beta'])));
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.getByRole('alert')).toContainText('Missing followers');
   await openImportDetails(page);
   await page
@@ -224,7 +224,6 @@ test('ZIP split import complete supplied sets, empty input distinct from missing
       file('followers.json', '{bad'),
       file('following.json', '{}'),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.getByRole('alert')).toContainText('not valid JSON');
 });
 
@@ -233,7 +232,7 @@ test('explicit snapshots, reload persistence, delete-all and public origin stora
   context,
 }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Explore synthetic sample' }).click();
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toBeVisible();
   expect(
     await page.evaluate(async () => (await indexedDB.databases()).length),
@@ -268,7 +267,7 @@ test('explicit snapshots, reload persistence, delete-all and public origin stora
   });
   expect(access.blocked).toBe(true);
   await popup.close();
-  // Generic entry restores no report; #sample intentionally regenerates on reload.
+  // A fresh entry never restores unsaved relationship data automatically.
   await page.goto('/');
   await page.reload();
   await expect(page.locator('#results-title')).toHaveCount(0);
@@ -304,7 +303,7 @@ test('desktop and mobile accessibility, 200% layout zoom and reduced motion', as
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Explore synthetic sample' }).click();
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toBeVisible();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.setViewportSize({ width: 390, height: 844 });
@@ -402,7 +401,7 @@ test('public pages, noindex canonicals, honest copy, ad-free network and useful 
   });
 });
 
-test('keyboard-only sample flow and capability failure remain usable', async ({
+test('keyboard import action and capability failure remain usable', async ({
   page,
   browserName,
 }) => {
@@ -411,18 +410,20 @@ test('keyboard-only sample flow and capability failure remain usable', async ({
   );
   await page.goto('/');
   await expect(page.locator('#automatic-status')).toContainText(
-    'could not be verified',
+    'could not be reached',
   );
-  let sampleFocused = false;
+  let fileInputFocused = false;
   for (let i = 0; i < 16; i++) {
     await page.keyboard.press(keyboardTab(browserName));
-    sampleFocused = await page
-      .getByRole('button', { name: 'Explore synthetic sample' })
+    fileInputFocused = await page
+      .locator('#import-files')
       .evaluate((element) => element === document.activeElement);
-    if (sampleFocused) break;
+    if (fileInputFocused) break;
   }
-  expect(sampleFocused).toBe(true);
+  expect(fileInputFocused).toBe(true);
+  const choosing = page.waitForEvent('filechooser');
   await page.keyboard.press('Enter');
+  await (await choosing).setFiles(syntheticDatasetFile());
   await expect(page.locator('#results-title')).toBeFocused();
   await page.keyboard.press(keyboardTab(browserName));
   await expect(page.getByRole('button', { name: 'Export JSON' })).toBeFocused();
@@ -446,14 +447,13 @@ test('snapshot comparison visible semantics and incompatible identity rejection'
   ) {
     await openImportDetails(page);
     await page.locator('#import-account').fill(owner);
+    await page.locator('#collected-at').fill(date);
     await page
       .locator('input[type=file]')
       .setInputFiles([
         file('followers.json', followerFile(followers)),
         file('following.json', followingFile(['mutual'])),
       ]);
-    await page.locator('#collected-at').fill(date);
-    await page.getByRole('button', { name: /Compare local files/ }).click();
     await expect(page.locator('#results-title')).toContainText(owner);
     await expect(page.getByRole('status')).toContainText(
       'selected files were compared locally',

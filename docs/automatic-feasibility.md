@@ -1,6 +1,47 @@
-> **Current amendment:** See [Core product delivery](core-product-delivery.md) and [the controlling user amendment](specification/Core_Product_Amendment.md). The evidence below retains its original dates, source commits and scope. In particular, the old upload-checkbox policy and earlier per-profile provider economics do not govern the new supplied-file comparison or the newly investigated Seemuapps batch-billed candidate.
-
 # Automatic acquisition feasibility
+
+## Shipping revalidation — September 18, 2026 Pacific
+
+**Decision: preserve the existing adapter and its disabled start gate. Neither investigated replacement meets the required target within the documented recurring Free allowance.** Presentation changes may ship independently. Use a concise feature-level unavailable message and the working upload path; do not restore sitewide demo, preview or internal verification branding. Unfinished launch surfaces remain noindexed and ads remain disabled.
+
+This section supersedes the September 7 decision and presentation instructions below. The older investigation remains historical evidence. In particular, a separately authorized controlled small test does not require target-scale or commercial-launch readiness. The [core amendment](specification/Core_Product_Amendment.md) still governs immediate supplied-file comparison; automatic-source completeness remains a separate requirement.
+
+### Current source evidence
+
+The [current Seemuapps README](https://apify.com/seemuapps/instagram-followers-scraper) still advertises 25 identities per direction/run, three Free runs per UTC day, a 30-minute cooldown, and ignored `maxItems` on Free. It invalidates cursors from before September 12. These claims were re-read on September 19 UTC; they are provider documentation, not observed runtime behavior.
+
+Two fixed unauthenticated metadata GETs returned HTTP 200. The current public default is **1.0.43 / `V9dqlltTFabqKWVMi`**, modified September 12, while the adapter pins **1.0.35 / `qZHBzZiV6QmFCKDym`**. Hidden source code prevents verifying internal list behavior. [Sanitized metadata and hashes](evidence/acquisition-ship-public-metadata.json) and its [bounded read-only probe](evidence/acquisition-ship-public-probe.mjs) retain exact facts. The initial sandbox network attempt failed locally; the same public reads succeeded with network permission. Neither attempt used a token or Instagram target.
+
+The existing engine starts one direction at a time and expires work after 20 minutes. It therefore cannot accommodate even the next run's advertised 30-minute cooldown. At 25 delivered identities per run, 12,000 identities require at least 480 one-direction runs: at least 160 daily allowances. A hypothetical combined-direction implementation would still need at least 240 runs and 80 daily allowances. These are lower bounds, not live measurements or a credible contemporary comparison. Do not resume old cursors or use the old build to evade new Free restrictions.
+
+### Bounded alternative decision
+
+Only two alternative Actors were revalidated in this pass, both on the already contemplated Apify platform. Scraping Solutions uses resumable single-direction chunks and key-value `OUTPUT` continuation metadata; the Apify-maintained Actor offers both directions and typed dataset rows. They are materially different integration contracts from Seemuapps' nested envelopes.
+
+| Candidate                                                                                                   | Current primary-source finding                                                                                                                                                                                                   | Decision for 6,000 + 6,000                                                                          |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [Scraping Solutions](https://apify.com/scraping_solutions/instagram-scraper-followers-following-no-cookies) | Free API runs remain limited to 1,000 results; continuation tokens are documented. The [Free rate](https://apify.com/scraping_solutions/instagram-scraper-followers-following-no-cookies/pricing) is $0.85/1,000 delivered rows. | At least **$10.20** in result events before retries or external operations; fails a fresh $5 cycle. |
+| [Apify-maintained](https://apify.com/apify/instagram-followers-following-scraper)                           | Both directions are documented with `FOLLOWER`/`FOLLOWING` rows. Its [Free rate](https://apify.com/apify/instagram-followers-following-scraper/pricing) is $2/1,000 profiles.                                                    | At least **$24** in result events; fails a fresh $5 cycle.                                          |
+
+[Apify pricing](https://apify.com/pricing) still lists $5/month on Free. [Subscription documentation](https://docs.apify.com/account/subscriptions) confirms Free suspends at exhaustion and unused credits do not accumulate. This establishes advertised limits only; the lead must independently inspect the existing account. No finite target-sized recurring capacity is demonstrated by these candidates. A small test remains a distinct milestone; it cannot establish full-product readiness.
+
+No new adapter is justified by these results. Adding a second integration that already exceeds the entire allowance would not satisfy the task. The next supported implementation step requires a changed qualifying source contract: pin that exact build/schema, model its real cooldown/daily limits, invalidate prior cursor epochs, then perform an authorized small test before changing the public capability gate. Preserve the existing ownership, capacity, uncertain-start, cancellation and cleanup infrastructure. Do not change `APIFY_STARTS_REVIEWED=false` based on this document.
+
+### Live outcomes and code inspection
+
+| Milestone                                        | Outcome of this workstream                                                                                                   |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Genuine small-account retrieval, both directions | **NOT RUN** — no credentials or authorized target were provided to this agent; lead checks private prerequisites separately. |
+| Genuine multipage continuation                   | **NOT RUN** — no source page was requested.                                                                                  |
+| Approximately 6,000 followers + 6,000 following  | **NOT RUN; current documented candidates fail the required operating model.**                                                |
+| Measured recurring Free capacity                 | **NOT MEASURED** — public arithmetic is not account usage or observed capacity.                                              |
+| Hosted website-only automatic journey            | **NOT RUN** — automatic capability remains disabled.                                                                         |
+
+Source inspection confirmed two independent guards: `automaticConfigured()` requires the hard review flag, and `ApifyClient.start()` rejects before its POST when that flag is false. Fresh pricing additionally rejects changed metadata. Jobs retain the reviewed build epoch and reject incompatible saved cursors. The current engine's work chunk is **400**, although older integration prose says 500; the adapter permits a maximum of 500. This is a documentation discrepancy, not an observed live defect. The cooldown/20-minute mismatch is a future enablement blocker safely contained by the guards. No runtime code was changed by this workstream.
+
+## Historical investigation — September 7, 2026 UTC
+
+> **Superseded decision and presentation policy:** The material below records the original investigation. Its requirement to label uploads as a preview and its all-gates-before-any-small-test prerequisite are no longer active. Specifications are requirements, not evidence of execution.
 
 **Gate: BLOCKED. Mandatory website-only automatic checking is not implemented or proven.**
 

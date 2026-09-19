@@ -12,3 +12,5 @@ coverage/
 *.tsbuildinfo
 private/
 
+
+apps/site/project-dist/

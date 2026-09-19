@@ -1,3 +1,5 @@
+> **Current source decision:** [September 18 revalidation](automatic-feasibility.md) confirms the source remains blocked. [Current release record](release-current.md) controls shipped presentation and live-test status.
+
 # Automatic integration: implementation and live gates
 
 > **Current source gate (2026-09-12): BLOCKED and hard-disabled.** The configured
@@ -29,7 +31,7 @@ A does not require proof of B, C at unlimited visitor scale, or commercial launc
 
 ## Implemented bounded execution
 
-The pinned build is `seemuapps/instagram-followers-scraper`1.0.35, build ID`qZHBzZiV6QmFCKDym`. The adapter starts one direction at a time and pins a500-item work chunk,120-second Actor timeout, explicit run charge ceiling and limited permissions. It validates bounded metadata/dataset bodies and uses deadlines. These are per-step limits, not an account-count cutoff. There is no advertised private-account support.
+The pinned build is `seemuapps/instagram-followers-scraper`1.0.35, build ID`qZHBzZiV6QmFCKDym`. The adapter starts one direction at a time and uses a400-item work chunk,120-second Actor timeout, explicit run charge ceiling and limited permissions. It validates bounded metadata/dataset bodies and uses deadlines. These are per-step limits, not an account-count cutoff. There is no advertised private-account support.
 
 `ScanService` stores the target, per-direction cursor/records, raw/unique counts, fingerprints, provider-run IDs and separate dataset offsets in D1. Each HTTP advance performs one bounded stage. Source pagination, dataset envelope pagination and200-record visitor result pages are independent. Counts reflect observed identities; no percentage is invented. Incomplete source lists do not create confirmed negative classifications.
 

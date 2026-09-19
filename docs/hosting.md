@@ -1,3 +1,5 @@
+> **Historical record — superseded for current status.** See [the authoritative release record](release-current.md). Original evidence below retains its recorded source, dates and scope.
+
 # Hosting feasibility — checked 2026-09-12
 
 ## Current release split

@@ -80,12 +80,6 @@ const structuredData = JSON.stringify({
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="preview-bar" role="region" aria-label="Preview availability">
-      PRODUCT PREVIEW <span
-        >Automatic checking is unavailable. Sample and local-import tools are
-        available.</span
-      >
-    </div>
     <header class="site-header wrap">
       <a class="wordmark" href={sitePath('/')} aria-label="MutualLens home"
         >Mutual<span>Lens</span><span class="wordmark-dot" aria-hidden="true"
@@ -97,7 +91,7 @@ const structuredData = JSON.stringify({
         ><a href={sitePath('/about/')}>About</a><a
           class="nav-cta"
           href={checkerRootUrl}
-          >Open preview <span aria-hidden="true">↗</span></a
+          >Open checker <span aria-hidden="true">↗</span></a
         >
       </nav>
     </header>
@@ -120,8 +114,8 @@ const structuredData = JSON.stringify({
           ><a href={sitePath('/contact/')}>Contact</a>
         </div>
       </div><div class="footer-bottom">
-        <span>© {new Date().getFullYear()} MutualLens · Preview only</span><span
-          >Not affiliated with Instagram or Meta. Ads are disabled.</span
+        <span>© {new Date().getFullYear()} MutualLens</span><span
+          >Not affiliated with Instagram or Meta.</span
         >
       </div>
     </footer>

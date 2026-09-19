@@ -5,21 +5,20 @@ import { sitePath } from '../lib/urls';
 
 <Page
   article
-  title="Privacy draft: local files, snapshots & future automatic checks"
-  description="How the MutualLens preview handles locally imported files, optional IndexedDB snapshots, origin separation, hosting traffic, and disabled advertising."
+  title="Privacy: local files, snapshots & automatic checks"
+  description="How MutualLens handles uploaded files, optional browser snapshots, automatic checks and hosting requests."
 >
-  <p class="eyebrow">PRIVACY · PREVIEW DRAFT</p><h1>
+  <p class="eyebrow">PRIVACY</p><h1>
     Your data has context.<br />So should its handling.
   </h1><p class="lede">
-    This describes the current preview. It is a product disclosure draft, not a
-    claim that legal review has been completed. Updated September 7, 2026.
+    Uploaded files stay on your device. Saving a snapshot is your choice.
+    Updated September 18, 2026.
   </p>
-  <h2>Local imports and sample data</h2><p>
+  <h2>Local imports</h2><p>
     Files selected in the checker are read and compared in your browser. The
     import interface does not upload their contents or account lists to
     MutualLens’s server. Reports remain in memory unless you explicitly choose
-    to save a local snapshot or download a file. Synthetic sample records are
-    fictional.
+    to save a local snapshot or download a file.
   </p><p>
     Closing or refreshing the page loses the current in-memory report. Clearing
     a report removes it from the interface, but is not a secure memory-erasure
@@ -38,15 +37,14 @@ import { sitePath } from '../lib/urls';
     may also clear local data without preserving a backup.
   </p>
   <h2>Automatic checks</h2><p>
-    Automatic acquisition is unavailable. The preview requests the checker’s
-    capability status; it does not start an Instagram scan or send the username
-    field to an acquisition provider.
+    Automatic checking is currently unavailable. The checker requests service
+    availability without sending an Instagram username or starting a scan.
   </p><p>
-    If a future automatic integration is approved, MutualLens’s backend and its
-    provider would process the requested account and returned relationship data.
-    That workflow would not be entirely on-device. Its provider, retention,
-    operational logging, and access controls must be disclosed and reviewed
-    before activation.
+    When enabled, automatic checking sends the requested username to our server
+    and Apify, the source provider, to collect relationship records. Our stored
+    scan data expires after one hour. Provider-side retention is separate;
+    deletion is requested, but this browser cannot guarantee when the provider
+    removes its copies. This workflow is not entirely on your device.
   </p>
   <h2>Separate origins</h2><p>
     The public pages and checker use different browser origins. The public pages
@@ -58,21 +56,18 @@ import { sitePath } from '../lib/urls';
   <h2>Website requests and hosting</h2><p>
     Opening either website sends normal network requests to its hosting
     provider. Infrastructure may process IP addresses, request metadata, and
-    security logs. The preview does not claim that there is no infrastructure
-    data processing. The application avoids graph data and target usernames in
-    URLs, and it contains no marketing analytics, session replay, or social
+    security logs. The application avoids relationship data and target usernames
+    in URLs, and it contains no marketing analytics, session replay, or social
     embeds.
   </p>
-  <h2>Advertising and consent</h2><p>
-    Ads are disabled everywhere in the preview, with no advertising-network
-    scripts loaded. A future public-content advertising launch needs actual
-    publisher approval and identifiers, appropriate consent configuration, and
-    completed operator disclosures. The checker will remain ad-free.
+  <h2>Ads and tracking</h2><p>
+    MutualLens does not load advertising scripts, marketing analytics, session
+    replay or social embeds. The checker is ad-free.
   </p>
-  <h2>Contact and open items</h2><p>
-    The project owner is Arhaan Aggarwal. A dedicated private support or
-    privacy-request channel has not yet been supplied and is a public-launch
-    dependency. <a href={sitePath('/contact/')}>The contact page</a> links to public
-    project feedback; do not put personal data or account exports there.
+  <h2>Contact</h2><p>
+    MutualLens is a project by Arhaan Aggarwal. The <a
+      href={sitePath('/contact/')}>contact page</a
+    > links to the public issue tracker. No private support channel is currently available.
+    Do not share personal data or account exports in public issues.
   </p>
 </Page>

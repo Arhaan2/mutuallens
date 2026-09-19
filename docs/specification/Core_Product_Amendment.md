@@ -1,3 +1,5 @@
+> Presentation and release execution now follow [Release Presentation Amendment](Release_Presentation_Amendment.md). Older preview-branding requirements are superseded; upload semantics and automatic safety gates remain in force. Current execution evidence is [release-current.md](../release-current.md).
+
 # MutualLens — Deliver the Core Product
 
 Continue work on:

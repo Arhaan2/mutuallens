@@ -1,3 +1,4 @@
+import { importSyntheticDataset } from '../browser/synthetic-import';
 import { openImportDetails, openSnapshotOptions } from '../browser/product-ui';
 import { test, expect, type Page, type Download } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
@@ -5,10 +6,10 @@ import { zipSync, strToU8 } from 'fflate';
 
 const SITE =
   process.env.MUTUALLENS_HOSTED_SITE_ORIGIN ??
-  'https://codex-ui-functional-repair.mutuallens-ddm.pages.dev';
+  'https://mutuallens-ddm.pages.dev';
 const CHECKER =
   process.env.MUTUALLENS_HOSTED_CHECKER_ORIGIN ??
-  'https://codex-ui-functional-repair.mutuallens-app.pages.dev';
+  'https://mutuallens-app.pages.dev';
 const allowed = new Set([new URL(SITE).origin, new URL(CHECKER).origin]);
 const row = (value: string) => ({ string_list_data: [{ value }] });
 const following = (names: string[]) => ({
@@ -34,9 +35,8 @@ async function importPair(
 ) {
   await openImport(page);
   await page.locator('#import-account').fill('synthetic_hosted');
-  await page.locator('#import-files').setInputFiles(pair(followers, followed));
   await page.locator('#collected-at').fill(date);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
+  await page.locator('#import-files').setInputFiles(pair(followers, followed));
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_hosted',
@@ -143,7 +143,7 @@ test.afterEach(async ({ page, browser, browserName }, info) => {
   ).toEqual([]);
 });
 
-test('hosted: homepage sample entry, metadata, exact synthetic counts and parsed full exports', async ({
+test('hosted: homepage upload entry, metadata, exact synthetic counts and parsed full exports', async ({
   page,
   request,
 }) => {
@@ -158,13 +158,14 @@ test('hosted: homepage sample entry, metadata, exact synthetic counts and parsed
     'href',
     `${SITE}/`,
   );
-  await expect(page.locator('.sample-link')).toHaveAttribute(
-    'href',
-    `${CHECKER}/#sample`,
-  );
+  await expect(page.locator('a[href$="#sample"]')).toHaveCount(0);
+  const uploadEntry = page.locator(`a[href="${CHECKER}/#import"]`).first();
+  await expect(uploadEntry).toBeVisible();
   await page.waitForLoadState('networkidle');
-  await page.locator('.sample-link').click();
-  await expect(page).toHaveURL(`${CHECKER}/#sample`);
+  await uploadEntry.click();
+  await expect(page).toHaveURL(`${CHECKER}/#import`);
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await importSyntheticDataset(page);
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_example',
   );
@@ -208,9 +209,8 @@ test('hosted: homepage sample entry, metadata, exact synthetic counts and parsed
     ),
   ).toHaveLength(4500);
   await page.reload();
-  await expect(page.locator('#results-title')).toContainText(
-    'synthetic_example',
-  );
+  await expect(page.locator('#results-title')).toHaveCount(0);
+  await expect(page.locator('#import-files')).toBeVisible();
 });
 
 test('hosted: ZIP split parts deduplicate, export exact records, and missing parts qualify negatives', async ({
@@ -235,7 +235,6 @@ test('hosted: ZIP split parts deduplicate, export exact records, and missing par
     mimeType: 'application/zip',
     buffer: Buffer.from(zip),
   });
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_hosted',
   );
@@ -270,7 +269,6 @@ test('hosted: ZIP split parts deduplicate, export exact records, and missing par
       ),
     ]);
   await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(page.locator('.category.active')).toHaveAccessibleName(
     'Not found in supplied followers 1',
@@ -370,7 +368,6 @@ test('hosted: direct 6k by 6k upload needs no metadata and fully browses, export
   await page
     .locator('#import-files')
     .setInputFiles(pair(followers, followingNames));
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   const assertCounts = async () => {
     await expect(page.locator('#results-title')).toHaveText(
       'Your uploaded files',
@@ -452,7 +449,6 @@ test('hosted: direct 6k by 6k upload needs no metadata and fully browses, export
     await expect(page.locator('#import-account')).toHaveValue('');
     await expect(page.locator('#collected-at')).toHaveValue('');
     await page.locator('#import-files').setInputFiles(inputs);
-    await page.getByRole('button', { name: /Compare local files/ }).click();
     await assertCounts();
     const equivalent = parseCsv(
       await textDownload(await download(page, 'Export filtered CSV')),

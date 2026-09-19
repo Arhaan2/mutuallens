@@ -1,3 +1,5 @@
+import { importSyntheticDataset } from './synthetic-import';
+import { openImportFiles } from './product-ui';
 import { openImportDetails, openSnapshotOptions } from './product-ui';
 import { test, expect, type Page, type Worker } from '@playwright/test';
 import { expectedDevelopmentAbort } from './browser-events';
@@ -77,16 +79,18 @@ async function activateDuringProcessing(
   }, action);
 }
 
-test('repair: repeated sample activation and pending saves leave one coherent report and one saved snapshot', async ({
+test('repair: repeated import submission and pending saves leave one coherent report and one saved snapshot', async ({
   page,
 }) => {
   const observed = observe(page);
   await page.goto('/');
   await expect(page.locator('#automatic-status')).toContainText(
-    'awaiting provider account setup',
+    'Automatic checking is currently unavailable',
   );
+  await importSyntheticDataset(page);
+  await openImportFiles(page);
   await page
-    .getByRole('button', { name: 'Explore synthetic sample' })
+    .getByRole('button', { name: /Compare local files/ })
     .evaluate((button: HTMLButtonElement) => {
       button.click();
       button.click();
@@ -95,9 +99,9 @@ test('repair: repeated sample activation and pending saves leave one coherent re
   await expect(page.locator('#results-title')).toContainText(
     'synthetic_example',
   );
-  await expect(
-    page.getByRole('button', { name: 'Explore synthetic sample' }),
-  ).toBeEnabled();
+  // Successful comparison closes the import disclosure; readiness is still
+  // observable on its retained submit control without reopening the form.
+  await expect(page.locator('.import-form button[type=submit]')).toBeEnabled();
   await expect(
     page.getByRole('button', { name: 'Mutuals 4,500', exact: true }),
   ).toBeVisible();
@@ -134,7 +138,7 @@ test('repair: real large import cancels, retries with exact data, and repeated h
   const observed = observe(page);
   await page.goto('/');
   await expect(page.locator('#automatic-status')).toContainText(
-    'awaiting provider account setup',
+    'Automatic checking is currently unavailable',
   );
   // 49,000,030 bytes: inside the documented 64 MiB input safeguard. Padding is
   // ignored JSON metadata, and the 100,000 records per direction are synthetic.
@@ -154,9 +158,8 @@ test('repair: real large import cancels, retries with exact data, and repeated h
   );
   expect(inputBytes).toBe(49000030);
   expect(inputBytes).toBeLessThan(64 * 1024 * 1024);
-  await form(page, large, 'synthetic_cancel');
   await activateDuringProcessing(page, 'cancel');
-  await page.getByRole('button', { name: /Compare local files/ }).click();
+  await form(page, large, 'synthetic_cancel');
   const cancel = page.getByRole('button', {
     name: 'Cancel processing',
     exact: true,
@@ -166,7 +169,6 @@ test('repair: real large import cancels, retries with exact data, and repeated h
   await expect(page.locator('#results-title')).toHaveCount(0);
 
   await form(page, small(), 'synthetic_retry');
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toContainText('synthetic_retry');
   await expect(
     page.getByRole('button', { name: 'Mutuals 1', exact: true }),
@@ -199,10 +201,9 @@ test('repair: real large import cancels, retries with exact data, and repeated h
     .getByRole('link', { name: 'Saved snapshots', exact: true })
     .click();
   await expect(page).toHaveURL(/#history$/);
+  await activateDuringProcessing(page, 'history');
   await form(page, large, 'synthetic_navigation');
   await expect(page).toHaveURL(/#history$/);
-  await activateDuringProcessing(page, 'history');
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#import [role=status]')).toContainText('canceled');
   await expect(cancel).toHaveCount(0);
   await expect.poll(() => observed.workers.size).toBe(0);
