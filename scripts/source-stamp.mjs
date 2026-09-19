@@ -11,7 +11,13 @@ export async function sourceStamp() {
       await readdir(root + path, { withFileTypes: true })
     ).sort((a, b) => a.name.localeCompare(b.name))) {
       if (
-        ['node_modules', 'dist', '.astro', '.wrangler'].includes(entry.name) ||
+        [
+          'node_modules',
+          'dist',
+          'project-dist',
+          '.astro',
+          '.wrangler',
+        ].includes(entry.name) ||
         entry.name.startsWith('.env') ||
         entry.name.startsWith('.dev.vars')
       )

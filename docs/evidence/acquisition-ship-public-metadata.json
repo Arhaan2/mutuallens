@@ -1,0 +1,72 @@
+{
+  "evidenceType": "PUBLIC_METADATA_ONLY",
+  "liveActorRuns": 0,
+  "credentialedAccountRequests": 0,
+  "instagramTargetRequests": 0,
+  "publicActor": {
+    "url": "https://api.apify.com/v2/acts/seemuapps~instagram-followers-scraper",
+    "httpStatus": 200,
+    "retrievedAt": "2026-09-19T00:19:41.472Z",
+    "sha256": "03510bdfab14d5a8e6fda57898892afe7b55d6ea0bc1484561ec4069bc49c9cc",
+    "actorId": "2nsQrloj1Sl16uh4z",
+    "modifiedAt": "2026-09-12T10:04:21.396Z",
+    "actorPermissionLevel": "LIMITED_PERMISSIONS",
+    "isSourceCodeHidden": true,
+    "pricing": [
+      {
+        "model": "PAY_PER_EVENT",
+        "startedAt": "2026-04-12T12:56:41.164Z",
+        "minimalMaxTotalChargeUsd": null,
+        "events": {
+          "apify-actor-start": {
+            "eventPriceUsd": 0.00005,
+            "isOneTimeEvent": true
+          },
+          "apify-default-dataset-item": {
+            "eventPriceUsd": 0.00001,
+            "isOneTimeEvent": false
+          },
+          "user-batch-50": {
+            "eventPriceUsd": 0.009,
+            "isOneTimeEvent": false
+          }
+        }
+      }
+    ]
+  },
+  "publicBuild": {
+    "url": "https://api.apify.com/v2/acts/seemuapps~instagram-followers-scraper/builds/default",
+    "httpStatus": 200,
+    "retrievedAt": "2026-09-19T00:19:41.484Z",
+    "sha256": "f651b94c034dd8972813b56447568f9bc22b514de775f28b8f8542f076edb71c",
+    "id": "V9dqlltTFabqKWVMi",
+    "buildNumber": "1.0.43",
+    "status": "SUCCEEDED",
+    "statusScope": "ACTOR_BUILD_ONLY_NOT_SCRAPING_RUN",
+    "finishedAt": "2026-09-12T10:04:21.396Z",
+    "inputSchemaVersion": 1,
+    "inputSchemaSha256": "f0534c2580a289cea119907d557d4bf0e1e2221a84e58105053307675f02c492",
+    "inputFields": {
+      "username": {
+        "type": "string"
+      },
+      "mode": {
+        "type": "string",
+        "default": "followers",
+        "enum": [
+          "followers",
+          "following",
+          "both"
+        ]
+      },
+      "pageId": {
+        "type": "string"
+      },
+      "maxItems": {
+        "type": "integer",
+        "default": 500,
+        "minimum": 0
+      }
+    }
+  }
+}

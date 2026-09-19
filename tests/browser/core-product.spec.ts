@@ -46,7 +46,6 @@ test('ordinary upload immediately shows non-followers without identity, date or 
   await expect(page.locator('#import input[required]')).toHaveCount(0);
   await expect(page.locator('#import input[type=checkbox]')).toHaveCount(0);
   await page.locator('#import-files').setInputFiles(standard());
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toHaveText(
     'Your uploaded files',
   );
@@ -74,9 +73,46 @@ test('ordinary upload immediately shows non-followers without identity, date or 
   await page
     .locator('#import-files')
     .setInputFiles(file('mutuallens-dataset.json', json));
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.account-list')).toContainText('@visual_beta');
   expect(errors).toEqual([]);
+});
+
+test('dropping relationship files compares immediately without metadata or a submit action', async ({
+  page,
+}) => {
+  await page.goto('/#import');
+  const requests: string[] = [];
+  page.on('request', (request) => {
+    if (
+      request.method() !== 'GET' ||
+      new URL(request.url()).origin !== 'http://localhost:5173'
+    )
+      requests.push(`${request.method()} ${request.url()}`);
+  });
+  const transfer = await page.evaluateHandle(
+    (files) => {
+      const value = new DataTransfer();
+      for (const { name, text } of files)
+        value.items.add(new File([text], name, { type: 'application/json' }));
+      return value;
+    },
+    standard().map((input) => ({
+      name: input.name,
+      text: input.buffer.toString('utf8'),
+    })),
+  );
+  await page
+    .locator('.import-form')
+    .dispatchEvent('drop', { dataTransfer: transfer });
+  await transfer.dispose();
+  await expect(page.locator('#results-title')).toHaveText(
+    'Your uploaded files',
+  );
+  await expect(page.locator('.account-list')).toContainText('@visual_beta');
+  await expect(
+    page.getByRole('button', { name: 'Mutuals 1', exact: true }),
+  ).toBeVisible();
+  expect(requests).toEqual([]);
 });
 
 test('known missing follower parts qualify usable negatives, export limitations, and preserve report on failed replacement', async ({
@@ -90,7 +126,6 @@ test('known missing follower parts qualify usable negatives, export limitations,
       file('followers_3.json', followers(['visual_mutual'])),
       file('following.json', following(['visual_beta', 'visual_mutual'])),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.category.active')).toContainText(
     'Not found in supplied followers',
   );
@@ -109,7 +144,6 @@ test('known missing follower parts qualify usable negatives, export limitations,
   await page
     .locator('#import-files')
     .setInputFiles(file('following.json', following(['different_fixture'])));
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.getByRole('alert')).toContainText(
     /Missing followers|followers.*missing/i,
   );
@@ -157,7 +191,6 @@ test('JSON, inert HTML and nested ZIP relationship data give equivalent results 
     if (!(await page.locator('#import-files').isVisible()))
       await page.locator('details#import > summary').click();
     await page.locator('#import-files').setInputFiles(input);
-    await page.getByRole('button', { name: /Compare local files/ }).click();
     // A retained report can have identical counts: wait for this replacement to finish.
     await expect(
       page.locator('.import-form button[type=submit]'),
@@ -187,7 +220,6 @@ test('ambiguous loose relationship files offer explicit direction assignment and
       file('first.json', followers(['visual_alpha', 'visual_mutual'])),
       file('second.json', followers(['visual_beta', 'visual_mutual'])),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.file-assignments select')).toHaveCount(2);
   await page
     .locator('.file-assignments select')
@@ -206,7 +238,6 @@ test('unknown account labels remain optional for saving but do not imply matchin
 }) => {
   await page.goto('/#import');
   await page.locator('#import-files').setInputFiles(standard());
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await page.locator('.snapshot-options summary').click();
   await page.getByRole('button', { name: 'Save snapshot locally' }).click();
   await expect(page.getByRole('status')).toContainText('Snapshot saved');
@@ -232,7 +263,6 @@ test('uploaded target scale exposes all non-followers through search, pagination
       file('followers_1.json', followers(names(0))),
       file('following.json', following(names(1500))),
     ]);
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('.category.active')).toContainText('1,500');
   await expect(
     page.getByRole('button', { name: /Mutuals 4,500/ }),
@@ -425,7 +455,6 @@ test('mocked automatic reset cancels its job and cannot overwrite a later local 
   await expect.poll(() => cancellations).toBeGreaterThan(0);
   release!();
   await page.locator('#import-files').setInputFiles(standard());
-  await page.getByRole('button', { name: /Compare local files/ }).click();
   await expect(page.locator('#results-title')).toHaveText(
     'Your uploaded files',
   );

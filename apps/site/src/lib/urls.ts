@@ -1,3 +1,5 @@
+import { isPublicReleaseIndexable } from '../../../../scripts/origins';
+
 const siteOrigin =
   import.meta.env.PUBLIC_SITE_ORIGIN || 'http://localhost:4321';
 const checkerOrigin =
@@ -29,25 +31,14 @@ export function siteUrl(pathname: string) {
   return new URL(sitePath(pathname), siteOrigin).href;
 }
 
-export function checkerUrl(
-  fragment: 'import' | 'automatic' | 'sample' | 'history',
-) {
+export function checkerUrl(fragment: 'import' | 'automatic' | 'history') {
   const url = new URL('/', checkerOrigin);
   url.hash = fragment;
   return url.href;
 }
 
-const siteHost = new URL(siteOrigin).hostname.toLowerCase();
-const duplicateOrPreviewHost =
-  siteHost === 'localhost' ||
-  siteHost === '127.0.0.1' ||
-  siteHost === '[::1]' ||
-  siteHost.endsWith('.pages.dev') ||
-  siteHost.endsWith('.github.io');
-
-/**
- * Indexing is a two-key release decision. Preview/project hosts remain noindex
- * even if a build accidentally receives the production flag.
- */
-export const publicReleaseIndexable =
-  import.meta.env.PUBLIC_INDEXABLE === 'true' && !duplicateOrPreviewHost;
+/** Keep browser-facing robots metadata aligned with deployment headers. */
+export const publicReleaseIndexable = isPublicReleaseIndexable({
+  PUBLIC_INDEXABLE: import.meta.env.PUBLIC_INDEXABLE,
+  PUBLIC_SITE_ORIGIN: siteOrigin,
+});

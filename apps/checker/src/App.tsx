@@ -1,5 +1,5 @@
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from 'react';
-import type { FormEvent } from 'react';
+import type { FormEvent, MouseEvent } from 'react';
 import {
   createSnapshot,
   exportCsv,
@@ -76,7 +76,6 @@ export default function App() {
       : 'Checking…';
   const [feedbackScope, setFeedbackScope] = useState<Scope>('entry');
   const [importOpen, setImportOpen] = useState(true);
-  const [replaceSample, setReplaceSample] = useState(false);
   const [storageBusy, setStorageBusy] = useState(false);
   const storagePending = useRef(false);
   const storageGeneration = useRef(0);
@@ -91,9 +90,9 @@ export default function App() {
     setNoticeText(text);
     setQuietNotice(quiet);
   }
-  const [busy, setBusy] = useState<
-    'sample' | 'import' | 'compare' | 'history' | null
-  >(null);
+  const [busy, setBusy] = useState<'import' | 'compare' | 'history' | null>(
+    null,
+  );
   const [report, setReport] = useState<Report | null>(null);
   const [category, setCategory] = useState<Category>('notFollowingBack');
   const [query, setQuery] = useState('');
@@ -111,10 +110,9 @@ export default function App() {
   const [history, setHistory] = useState<SnapshotComparison | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const worker = useRef<Worker | null>(null);
-  const activeTask = useRef<'sample' | 'import' | 'compare' | 'history' | null>(
-    null,
-  );
+  const activeTask = useRef<'import' | 'compare' | 'history' | null>(null);
   const taskId = useRef(0);
+  const navigationUrl = useRef<string | null>(null);
   const resultsHeading = useRef<HTMLHeadingElement>(null);
   const listHeading = useRef<HTMLHeadingElement>(null);
   const pageNavigation = useRef(false);
@@ -198,7 +196,7 @@ export default function App() {
   );
 
   function process(
-    kind: 'sample' | 'import' | 'compare' | 'history',
+    kind: 'import' | 'compare' | 'history',
     payload: Record<string, unknown> = {},
   ) {
     if (activeTask.current) return;
@@ -257,7 +255,6 @@ export default function App() {
         setReport(next);
         setAssignments([]);
         setImportOpen(false);
-        setReplaceSample(false);
         setFeedbackScope('results');
         setSort('ascending');
         setCategory(
@@ -322,13 +319,16 @@ export default function App() {
     setError('');
     setNotice('Local processing canceled. No new result was created.');
   }
-  function importFiles(event: FormEvent) {
-    event.preventDefault();
+  function compareFiles(
+    selectedFiles: File[],
+    selectedDirections: Record<string, Direction> = directions,
+  ) {
+    if (activeTask.current) return;
     setFeedbackScope('import');
     setNotice('');
     setError('');
     try {
-      if (!files.length)
+      if (!selectedFiles.length)
         throw new Error(
           'Select your followers and following JSON, HTML or ZIP files first.',
         );
@@ -341,10 +341,10 @@ export default function App() {
       if (timestamp && new Date(timestamp).getTime() > Date.now())
         throw new Error('The source collection date cannot be in the future.');
       process('import', {
-        files,
+        files: selectedFiles,
         options: {
           ...(normalized ? { account: { username: normalized } } : {}),
-          directions,
+          directions: selectedDirections,
           collectedAt: timestamp,
         },
       });
@@ -356,13 +356,24 @@ export default function App() {
       );
     }
   }
+  function importFiles(event: FormEvent) {
+    event.preventDefault();
+    compareFiles(files);
+  }
+  function selectFiles(selected: File[]) {
+    if (activeTask.current) return;
+    setImportOpen(true);
+    setFiles(selected);
+    setAssignments([]);
+    setDirections({});
+    if (selected.length) compareFiles(selected, {});
+  }
   function clearReport(startOver = false) {
     setAutomaticResetKey((value) => value + 1);
     invalidate();
     ++storageGeneration.current;
     setReport(null);
     setHistory(null);
-    setReplaceSample(false);
     setCategory('notFollowingBack');
     setQuery('');
     setSort('ascending');
@@ -371,6 +382,7 @@ export default function App() {
     setFeedbackScope('entry');
     setImportOpen(true);
     window.history.replaceState(null, '', window.location.pathname);
+    navigationUrl.current = window.location.href;
     if (startOver) {
       setFiles([]);
       if (fileInput.current) fileInput.current.value = '';
@@ -392,72 +404,70 @@ export default function App() {
       document.getElementById('entry-title')?.focus(),
     );
   }
-  function requestSample() {
-    if (activeTask.current) return;
-    setAutomaticResetKey((value) => value + 1);
-    invalidate();
-    setError('');
-    setNotice('');
-    if (report && !report.dataset.sample) {
-      setReplaceSample(true);
-      setFeedbackScope('results');
+  function applyMode(mode: string) {
+    if (!['#import', '#automatic', '#history'].includes(mode)) return;
+    if (activeTask.current) cancel();
+    if (mode === '#import') {
+      setAutomaticResetKey((value) => value + 1);
+      setImportOpen(true);
       requestAnimationFrame(() =>
-        document.getElementById('replace-sample')?.focus(),
+        document.getElementById('import-title')?.focus(),
       );
-    } else process('sample');
+    }
+    if (mode === '#automatic') {
+      const automatic = document.getElementById('automatic');
+      automatic?.setAttribute('open', '');
+      requestAnimationFrame(() => {
+        automatic?.scrollIntoView({ block: 'start' });
+        const input = document.getElementById(
+          'automatic-username',
+        ) as HTMLInputElement | null;
+        if (input && !input.disabled) input.focus();
+        else automatic?.querySelector<HTMLElement>('summary')?.focus();
+      });
+    }
+    if (mode === '#history') {
+      setHistoryOpen(true);
+      void refreshSnapshots();
+      requestAnimationFrame(() =>
+        document.getElementById('history')?.scrollIntoView({ block: 'start' }),
+      );
+    }
   }
   const enterMode = useEffectEvent(() => {
-    if (window.location.hash === '#sample') requestSample();
-    else {
-      if (busy) cancel();
-      setReplaceSample(false);
-      if (window.location.hash === '#import') {
-        setAutomaticResetKey((value) => value + 1);
-        setImportOpen(true);
-        requestAnimationFrame(() =>
-          document.getElementById('import-title')?.focus(),
-        );
-      }
-      if (window.location.hash === '#automatic') {
-        const automatic = document.getElementById('automatic');
-        automatic?.setAttribute('open', '');
-        requestAnimationFrame(() => {
-          automatic?.scrollIntoView({ block: 'start' });
-          const input = document.getElementById(
-            'automatic-username',
-          ) as HTMLInputElement | null;
-          if (input && !input.disabled) input.focus();
-          else automatic?.querySelector<HTMLElement>('summary')?.focus();
-        });
-      }
-      if (window.location.hash === '#history') {
-        setHistoryOpen(true);
-        void refreshSnapshots();
-      }
-    }
+    const url = window.location.href;
+    // A history traversal can emit both popstate and hashchange. Apply its
+    // transition once, so a later notification cannot cancel newly started work.
+    if (navigationUrl.current === url) return;
+    navigationUrl.current = url;
+    applyMode(window.location.hash);
   });
   useEffect(() => {
     enterMode();
     const navigate = () => enterMode();
     window.addEventListener('hashchange', navigate);
-    return () => window.removeEventListener('hashchange', navigate);
+    window.addEventListener('popstate', navigate);
+    return () => {
+      window.removeEventListener('hashchange', navigate);
+      window.removeEventListener('popstate', navigate);
+    };
   }, []);
-  function sampleEntry() {
-    if (window.location.hash === '#sample') requestSample();
-    else window.location.hash = 'sample';
-  }
-  function openHistory() {
-    if (busy) cancel();
-    setHistoryOpen(true);
-    void refreshSnapshots();
-  }
-  function openImport() {
-    setAutomaticResetKey((value) => value + 1);
-    setImportOpen(true);
-    if (busy) cancel();
-    requestAnimationFrame(() =>
-      document.getElementById('import-title')?.focus(),
-    );
+  function navigateMode(event: MouseEvent<HTMLAnchorElement>) {
+    if (
+      event.button !== 0 ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey
+    )
+      return;
+    event.preventDefault();
+    const mode = event.currentTarget.hash;
+    // pushState changes the bookmark without scheduling a second hashchange.
+    // Repeated clicks still apply the action even when the hash is unchanged.
+    if (window.location.hash !== mode) window.history.pushState(null, '', mode);
+    navigationUrl.current = window.location.href;
+    applyMode(mode);
   }
   function download(
     content: string,
@@ -508,11 +518,9 @@ export default function App() {
           {busy && taskScope === scope && (
             <div className="notice processing">
               <span>
-                {busy === 'sample'
-                  ? 'Preparing synthetic data on this device…'
-                  : busy === 'history'
-                    ? 'Comparing saved snapshots locally…'
-                    : 'Reading and comparing files on this device…'}
+                {busy === 'history'
+                  ? 'Comparing saved snapshots locally…'
+                  : 'Reading and comparing files on this device…'}
               </span>
               <button type="button" className="button small" onClick={cancel}>
                 Cancel processing
@@ -683,7 +691,6 @@ export default function App() {
         <nav aria-label="Main navigation">
           <a href={`${site}/guides/followers-vs-following/`}>How it works</a>
           <a href={`${site}/privacy/`}>Privacy</a>
-          <span className="preview-label">Preview</span>
         </nav>
       </header>
       <main id="main" className={report ? 'app-main has-report' : 'app-main'}>
@@ -701,27 +708,30 @@ export default function App() {
                   Find who doesn’t follow you back.
                 </h1>
                 <p>
-                  Enter a public username when automatic checking is available,
-                  or compare your Instagram relationship files privately on this
-                  device. Uploads need no account label, date or confirmation.
+                  Upload your Instagram files to compare followers and following
+                  privately on this device. Your results appear as soon as the
+                  files are read.
                 </p>
               </div>
             </section>
             <section className="mode-choice" aria-labelledby="mode-title">
               <div className="mode-heading">
                 <h2 id="mode-title">Choose how to check</h2>
-                <p>Both paths lead to the same browsable comparison.</p>
+                <p>Start with your Instagram followers and following files.</p>
               </div>
               <div className="mode-options">
                 <a
                   className="mode-option"
                   href="#automatic"
+                  onClick={navigateMode}
                   aria-label={`Open automatic checking. ${automaticLabel}`}
                 >
                   <span className="mode-kicker">Website-only</span>
                   <strong>Check automatically</strong>
                   <span className="mode-description">
-                    Enter a public Instagram username.
+                    {automaticAvailable
+                      ? 'Enter a public Instagram username.'
+                      : 'Currently unavailable. Upload your files below.'}
                   </span>
                   <span
                     className={
@@ -736,7 +746,7 @@ export default function App() {
                 <a
                   className="mode-option"
                   href="#import"
-                  onClick={openImport}
+                  onClick={navigateMode}
                   aria-label="Open local file upload. Available now"
                 >
                   <span className="mode-kicker">Private on this device</span>
@@ -754,13 +764,6 @@ export default function App() {
           <>
             {feedback('entry')}
             <div className="inline-actions">
-              <button
-                className="text-button"
-                onClick={sampleEntry}
-                disabled={!!busy}
-              >
-                Explore synthetic sample
-              </button>
               {(files.length > 0 ||
                 account ||
                 collectedAt ||
@@ -779,17 +782,10 @@ export default function App() {
           <div className="workspace-bar">
             <h1>Your local report</h1>
             <nav aria-label="Report workspace">
-              <button
-                className="text-button"
-                onClick={sampleEntry}
-                disabled={!!busy}
-              >
-                Explore synthetic sample
-              </button>
-              <a href="#import" onClick={openImport}>
+              <a href="#import" onClick={navigateMode}>
                 Import local files
               </a>
-              <a href="#history" onClick={openHistory}>
+              <a href="#history" onClick={navigateMode}>
                 Saved snapshots
               </a>
               <button className="text-button" onClick={() => clearReport(true)}>
@@ -845,38 +841,6 @@ export default function App() {
               </div>
             </div>
             {feedback('results')}
-            {replaceSample && (
-              <div
-                className="notice warning"
-                id="replace-sample"
-                tabIndex={-1}
-                role="region"
-                aria-label="Replace current report"
-              >
-                <p>
-                  Replace this imported report with fictional sample data? Saved
-                  snapshots remain available.
-                </p>
-                <div className="inline-actions">
-                  <button className="button" onClick={() => process('sample')}>
-                    Replace report with sample
-                  </button>
-                  <button
-                    className="button"
-                    onClick={() => {
-                      setReplaceSample(false);
-                      window.history.replaceState(
-                        null,
-                        '',
-                        window.location.pathname,
-                      );
-                    }}
-                  >
-                    Keep current report
-                  </button>
-                </div>
-              </div>
-            )}
             <p className="sample-note result-scope">{resultScope}</p>
             {provisionalFiles && (
               <div className="notice warning upload-limitation">
@@ -1018,10 +982,6 @@ export default function App() {
                     </ul>
                   </div>
                 )}
-              <p className="muted">
-                Local processing: {report.elapsedMs.toFixed(1)} ms on this
-                device. This is not automatic-scan performance.
-              </p>
             </details>
             {report.comparison.negativesWithheld &&
               report.comparison.warnings.length > 0 && (
@@ -1270,10 +1230,7 @@ export default function App() {
                 if (busy) return;
                 const chosen = Array.from(event.dataTransfer.files);
                 if (chosen.length) {
-                  setImportOpen(true);
-                  setFiles(chosen);
-                  setAssignments([]);
-                  setDirections({});
+                  selectFiles(chosen);
                   if (fileInput.current) {
                     fileInput.current.files = event.dataTransfer.files;
                   }
@@ -1287,12 +1244,10 @@ export default function App() {
                 type="file"
                 multiple
                 accept=".zip,.json,.html,.htm,application/zip,application/json,text/html"
-                onChange={(event) => {
-                  setImportOpen(true);
-                  setFiles(Array.from(event.target.files || []));
-                  setAssignments([]);
-                  setDirections({});
-                }}
+                disabled={!!busy}
+                onChange={(event) =>
+                  selectFiles(Array.from(event.target.files || []))
+                }
               />
               <p className="field-help">
                 {files.length
@@ -1395,8 +1350,9 @@ export default function App() {
             </span>
           </div>
           <p className="field-help">
-            Enter a public username. The service reads both relationship
-            directions before it shows a non-followers result.
+            {automaticAvailable
+              ? 'Enter a public username to compare followers and following.'
+              : 'You can still compare your Instagram files privately on this device.'}
           </p>
           <AutomaticCheck
             enabled={automaticAvailable && !busy}
@@ -1404,11 +1360,13 @@ export default function App() {
             onResult={(dataset) => process('compare', { dataset })}
           />
           <p id="automatic-status" className="availability-copy">
-            <strong>Preview only.</strong>{' '}
             {capabilityError
-              ? 'Availability could not be verified. Automatic checking remains unavailable.'
-              : capability?.automatic.reason ||
-                'Checking availability… Automatic checking remains unavailable.'}
+              ? 'Automatic checking could not be reached. Upload your Instagram files or try again.'
+              : !capability
+                ? 'Checking availability…'
+                : automaticAvailable
+                  ? 'Automatic checking is available for supported public accounts.'
+                  : 'Automatic checking is currently unavailable. Upload your Instagram files to compare.'}
           </p>
           {capabilityError && (
             <button
@@ -1429,14 +1387,7 @@ export default function App() {
             </p>
           </details>
           <div className="entry-secondary">
-            <button
-              className="text-button"
-              onClick={sampleEntry}
-              disabled={!!busy}
-            >
-              Explore synthetic sample <span aria-hidden="true">→</span>
-            </button>
-            <a href="#import" onClick={openImport}>
+            <a href="#import" onClick={navigateMode}>
               Import your Instagram export
             </a>
           </div>
@@ -1674,10 +1625,7 @@ export default function App() {
           <a href={`${site}/terms/`}>Terms</a>
           <a href={`${site}/contact/`}>Contact</a>
         </div>
-        <p>
-          Preview only · Automatic checking unavailable · No ads · Not
-          affiliated with Instagram or Meta.
-        </p>
+        <p>No ads or trackers · Not affiliated with Instagram or Meta.</p>
       </footer>
     </>
   );

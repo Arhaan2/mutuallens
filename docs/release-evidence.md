@@ -1,3 +1,5 @@
+> **Historical record — superseded for current status.** See [the authoritative release record](release-current.md). Original evidence below retains its recorded source, dates and scope.
+
 > **Current amendment:** See [Core product delivery](core-product-delivery.md) and [the controlling user amendment](specification/Core_Product_Amendment.md). The evidence below retains its original dates, source commits and scope. In particular, the old upload-checkbox policy and earlier per-profile provider economics do not govern the new supplied-file comparison or the newly investigated Seemuapps batch-billed candidate.
 
 # MutualLens release evidence

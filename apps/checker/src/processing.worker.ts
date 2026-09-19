@@ -1,13 +1,11 @@
 import {
   compareDataset,
   compareSnapshots,
-  createSampleDataset,
   importInstagramFiles,
 } from '@mutuallens/core';
 import type { Dataset, ImportOptions, Snapshot } from '@mutuallens/core';
 
 type Request =
-  | { id: number; kind: 'sample' }
   | { id: number; kind: 'import'; files: File[]; options: ImportOptions }
   | { id: number; kind: 'compare'; dataset: Dataset }
   | { id: number; kind: 'history'; before: Snapshot; after: Snapshot };
@@ -23,11 +21,9 @@ self.onmessage = async ({ data }: MessageEvent<Request>) => {
       return;
     }
     const dataset =
-      data.kind === 'sample'
-        ? createSampleDataset()
-        : data.kind === 'compare'
-          ? data.dataset
-          : await importInstagramFiles(data.files, data.options);
+      data.kind === 'compare'
+        ? data.dataset
+        : await importInstagramFiles(data.files, data.options);
     self.postMessage({
       id: data.id,
       result: {

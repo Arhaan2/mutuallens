@@ -15,7 +15,7 @@ test('navigation: public destinations, mobile navigation and 404 recovery work a
   await page.setViewportSize({ width: 360, height: 800 });
   await page.goto(publicOrigin);
   const navigation = page.getByRole('navigation', { name: 'Main navigation' });
-  for (const label of ['The checker', 'Guides', 'About', 'Open preview'])
+  for (const label of ['The checker', 'Guides', 'About', 'Open checker'])
     await expect(
       navigation.getByRole('link', { name: label, exact: true }),
     ).toBeVisible();
@@ -50,14 +50,14 @@ test('navigation: public destinations, mobile navigation and 404 recovery work a
   }
   await page.goto(publicOrigin);
   await page
-    .getByRole('link', { name: 'Automatic checking status', exact: true })
+    .getByRole('link', { name: 'Automatic checking', exact: true })
     .click();
   await expect(page).toHaveURL(`${checkerOrigin}/#automatic`);
   await expect(
     page.getByRole('button', { name: 'Check automatically', exact: true }),
   ).toBeDisabled();
   await expect(page.locator('#automatic-status')).toContainText(
-    'awaiting provider account setup',
+    'Automatic checking is currently unavailable',
   );
   await page.goto(publicOrigin);
   await page

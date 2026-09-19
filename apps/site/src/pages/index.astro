@@ -18,51 +18,40 @@ import { checkerUrl, sitePath } from '../lib/urls';
         <a class="button primary" href={checkerUrl('import')}
           >Upload your Instagram files <span aria-hidden="true">↗</span></a
         ><a class="secondary-link" href={checkerUrl('automatic')}
-          >Automatic checking status</a
+          >Automatic checking</a
         >
       </div><p class="availability">
-        <span aria-hidden="true">○</span> Automatic checking is unavailable in this
-        preview.
-      </p><a class="sample-link" href={checkerUrl('sample')}
-        >Explore clearly labeled synthetic sample data <span aria-hidden="true"
-          >→</span
-        ></a
-      >
+        <span aria-hidden="true">○</span> Automatic checking is currently unavailable.
+      </p>
     </div>
-    <div
-      class="report-preview"
-      aria-label="Illustrative synthetic report, not live Instagram data"
-    >
-      <div class="preview-top">
-        <span>YOUR CONNECTIONS</span><span class="mini-label"
-          >Synthetic example</span
-        >
-      </div><div class="preview-report-title">The overlap, made clear.</div><div
-        class="preview-metrics"
-      >
-        <div><strong>6,000</strong><span>Followers</span></div><div>
-          <strong>6,000</strong><span>Following</span>
-        </div><div><strong>4,500</strong><span>Mutuals</span></div>
-      </div><div class="preview-category">
-        <span>Not following you back</span><span>1,500</span>
-      </div><div class="preview-rows">
-        {
-          ['user06001', 'user06002', 'user06003', 'user06004'].map(
-            (username) => (
-              <div>
-                <>
-                  <span class="account-marker" aria-hidden="true">
-                    U
-                  </span>
-                  <strong>@{username}</strong>
-                  <span>Synthetic</span>
-                </>
-              </div>
-            ),
-          )
-        }
-      </div><p class="preview-caption">
-        An illustration using fictional records. No account was checked.
+    <div class="connection-card" aria-label="How your connections are compared">
+      <div class="connection-top">TWO LISTS. THREE USEFUL GROUPS.</div>
+      <div class="connection-title">The overlap, made clear.</div>
+      <div class="connection-groups">
+        <div class="connection-group highlighted">
+          <span class="relation-symbol" aria-hidden="true">→</span>
+          <div>
+            <strong>Not following you back</strong><p>
+              In following, absent from followers.
+            </p>
+          </div>
+        </div>
+        <div class="connection-group">
+          <span class="relation-symbol" aria-hidden="true">↔</span>
+          <div><strong>Mutual followers</strong><p>In both your lists.</p></div>
+        </div>
+        <div class="connection-group">
+          <span class="relation-symbol" aria-hidden="true">←</span>
+          <div>
+            <strong>You don’t follow back</strong><p>
+              In followers, absent from following.
+            </p>
+          </div>
+        </div>
+      </div>
+      <p class="connection-caption">
+        Based on your uploaded files. Search every list and download your
+        results.
       </p>
     </div>
   </section>
@@ -108,17 +97,14 @@ import { checkerUrl, sitePath } from '../lib/urls';
     </div>
   </section>
   <section class="integrity-panel">
-    <div class="eyebrow">A NOTE ON AVAILABILITY</div><h2>
-      Useful comparisons, with their scope intact.
+    <div class="eyebrow">YOUR FILES, YOUR DEVICE</div><h2>
+      Your connections stay in your hands.
     </h2><p>
-      MutualLens is still a preview. Website-only automatic acquisition has not
-      passed its live completeness, scale, and recurring free-allowance checks.
-      Upload comparison works directly from your supplied files without a
-      username, date or confirmation checkbox. Known omissions qualify results.
-      This does not certify Instagram’s current state or prove automatic
-      checking works.
-    </p><a class="text-link" href={sitePath('/instagram-follow-back-checker/')}
-      >See what is available today <span aria-hidden="true">→</span></a
+      Your files are read and compared in your browser. No password is needed,
+      and nothing is saved unless you choose to save a snapshot or download a
+      report. If a file is missing parts, the affected results say so.
+    </p><a class="text-link" href={sitePath('/privacy/')}
+      >How your data is handled <span aria-hidden="true">→</span></a
     >
   </section>
   <section class="section-block guides-section">

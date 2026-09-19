@@ -5,7 +5,7 @@ export const capabilities = Object.freeze({
     enabled: false as const,
     status: 'blocked' as const,
     reason:
-      'Automatic checking is awaiting provider account setup and authorized live validation. File comparison is available now.',
+      'Automatic checking is currently unavailable. Upload your Instagram files to compare them.',
   }),
   ads: false as const,
 });

@@ -1,12 +1,12 @@
 # MutualLens
 
-**Upload your Instagram relationship files and compare immediately.** The noindexed, ad-free preview calculates who appears in following but not followers without a username, date or completeness checkbox. JSON, inert HTML, ZIPs, split files and validated MutualLens dataset exports are supported. Known partial inputs show qualified results.
+**Upload your Instagram relationship files and compare immediately.** The ad-free checker calculates who appears in following but not followers without a username, date or completeness checkbox. JSON, inert HTML, ZIPs, split files and validated MutualLens dataset exports are supported. Known partial inputs show qualified results.
 
 Username-only automatic checking has a real server adapter and resumable job implementation, but credentialed live tests are **NOT RUN** pending an existing Apify Free token and an explicitly authorized Instagram target. The deployed API stays disabled until applicable source/account/runtime gates pass; no production completion is claimed.
 
 Source: https://github.com/Arhaan2/mutuallens
 
-Verified hosted previews: [public website](https://mutuallens-ddm.pages.dev) · [checker](https://mutuallens-app.pages.dev). Both are noindexed and ad-free. The [GitHub Pages project demo](https://arhaan2.github.io/mutuallens/) is also noindexed and links to the checker. [Current release, deployment and browser evidence](docs/release-evidence.md).
+Hosted product: [public website](https://mutuallens-ddm.pages.dev) · [checker](https://mutuallens-app.pages.dev). Both are noindexed and ad-free. The [GitHub Pages project entry](https://arhaan2.github.io/mutuallens/) is a distinct static project showcase with a normal link to the Cloudflare website. [Current release, deployment and browser evidence](docs/release-current.md).
 
 ## Run locally
 
@@ -39,11 +39,11 @@ Both commands build the current files, refuse occupied ports, start the required
 
 The startup log records the Git commit and a source-content hash also served at `/build-info.json` on each built origin. A dirty-tree build is explicitly labeled. `npm run test:browser` starts a fresh built runtime (never reuses a server) and tests Chromium, WebKit, and Firefox. `npm run test:browser:dev` runs the normal workflows/transitions in the complete development stack; production headers/404/fault injection are checked in the built suite. Stop an interactive local session before running tests.
 
-See [the core product ledger](docs/core-product-delivery.md) for this amendment’s tests and deployment evidence; [the repair ledger](docs/ui-functional-repair.md) preserves earlier evidence.
+See [the current release record](docs/release-current.md) for authoritative execution status. The core-product and repair ledgers preserve historical evidence.
 
 ## Structure
 
-- `apps/site`: Astro public guides and policies, prepared for SEO but noindexed while preview-only.
+- `apps/site`: Astro public guides and policies, noindexed until full product acceptance.
 - `apps/checker`: React/Vite checker, module-worker file processing, explicit checker-origin IndexedDB snapshots; same-origin Pages API.
 - `packages/core`: tested normalization, import, source-aware comparison, CSV/JSON and snapshot semantics.
 - `packages/acquisition`: pinned Apify adapter, Free-account/price guards, resumable jobs and D1 capacity accounting; disabled until live validation.
@@ -54,12 +54,12 @@ See [the core product ledger](docs/core-product-delivery.md) for this amendment�
 
 ## Privacy and limits
 
-Selected imports stay on the checker origin in browser memory unless explicitly saved locally. No ad SDK, tracking, session replay, remote avatar, or Instagram credentials. The hosting service can process ordinary network/security metadata. Configured automatic scans involve our server and the named Apify provider; the deployed preview has no provider binding. No arbitrary record cutoff; defensive byte/ZIP resource limits fail explicitly. Known partial uploads show provisional differences with export limitations. Incomplete automatic lists withhold confirmed negatives.
+Selected imports stay on the checker origin in browser memory unless explicitly saved locally. No ad SDK, tracking, session replay, remote avatar, or Instagram credentials. The hosting service can process ordinary network/security metadata. Configured automatic scans involve our server and the named Apify provider; the deployed checker has no provider binding. No arbitrary record cutoff; defensive byte/ZIP resource limits fail explicitly. Known partial uploads show provisional differences with export limitations. Incomplete automatic lists withhold confirmed negatives.
 
-Public pages and checker require **different origins**. Build origins use `PUBLIC_SITE_ORIGIN`, `PUBLIC_CHECKER_ORIGIN`, and `VITE_SITE_ORIGIN`; local defaults are `http://localhost:4321` / `http://localhost:5173`. Production origins must come from actual host reservations. No names/graphs/tokens are passed between origins. All preview documents receive noindex and all ads remain disabled. There is no production-enabling environment switch: release gates must be satisfied and reviewed code must change.
+Public pages and checker require **different origins**. Build origins use `PUBLIC_SITE_ORIGIN`, `PUBLIC_CHECKER_ORIGIN`, and `VITE_SITE_ORIGIN`; local defaults are `http://localhost:4321` / `http://localhost:5173`. Production origins must come from actual host reservations. No names/graphs/tokens are passed between origins. All unfinished launch documents receive noindex and all ads remain disabled. There is no production-enabling environment switch: release gates must be satisfied and reviewed code must change.
 
 ## Deploy
 
-Cloudflare Pages hosts the separate public and checker previews through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. GitHub Pages hosts the requested noncommercial project demo from the verified `main` workflow. Exact source, CI and deployment IDs are recorded in [the release ledger](docs/release-evidence.md). No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. Pull-request CI has read-only permissions and no deployment/provider credentials; only an accepted `main` push can trigger the GitHub Pages deployment. Direct Cloudflare deployment remains integrator-owned.
+Cloudflare Pages hosts the separate public and checker websites through the existing authorized account. The owner confirmed Workers Free; subscription API access was unavailable. GitHub Pages hosts the requested static project entry from the verified `main` workflow. Exact source, CI and deployment IDs are recorded in [the release ledger](docs/release-current.md). No account creation, payment method, upgrades, auto-overage or paid fallbacks are authorized. See `docs/hosting.md`. Pull-request CI has read-only permissions and no deployment/provider credentials; only an accepted `main` push can trigger the GitHub Pages deployment. Direct Cloudflare deployment remains integrator-owned.
 
 See `AGENTS.md` for ownership and release rules. Use only synthetic data in tests, issues, screenshots and public evidence. Never attach your Instagram export to a public issue.

@@ -1,3 +1,5 @@
+> **Current source decision:** [September 18 revalidation](automatic-feasibility.md) confirms the source remains blocked. [Current release record](release-current.md) controls shipped presentation and live-test status.
+
 # Seemuapps candidate: pinned adapter and acquisition gate
 
 > **2026-09-12 revalidation addendum:** The candidate changed after the
@@ -37,7 +39,7 @@ Unauthenticated **GETs only** to [public Actor metadata](https://api.apify.com/v
 
 The [input schema](https://apify.com/seemuapps/instagram-followers-scraper/input-schema) exposes `username`, `mode` (`followers`, `following`, `both`), `pageId`, and `maxItems` (integer, minimum 0, default 500). Its description says up to 200 identities per upstream call and 0 means unlimited. The README describes one page per run and up to 500 identities; the public build's Actor-definition description instead mentions 1,000 per run and 50 per API call. These are conflicting claims, not interchangeable limits.
 
-The adapter deliberately starts **one direction per run**, with a positive work budget of 1–500 records per run, 256 MB, an explicit run timeout (default 120 seconds, maximum 300), an explicit charge ceiling, and limited Actor permissions. These are bounded work chunks, not a total account cutoff. More records require continuation. The vendor default timeout is 3,600 seconds; that default is not used. Cloudflare only starts/polls/collects bounded requests; scraping runs on Apify. The public schema names HikerAPI as the upstream service, introducing a separate downstream retention/usage dependency whose implementation is not inspectable here.
+The adapter deliberately starts **one direction per run**, with an engine work chunk of 400 records (adapter accepts a positive budget of 1–500 per run), 256 MB, an explicit run timeout (default 120 seconds, maximum 300), an explicit charge ceiling, and limited Actor permissions. These are bounded work chunks, not a total account cutoff. More records require continuation. The vendor default timeout is 3,600 seconds; that default is not used. Cloudflare only starts/polls/collects bounded requests; scraping runs on Apify. The public schema names HikerAPI as the upstream service, introducing a separate downstream retention/usage dependency whose implementation is not inspectable here.
 
 Two pagination domains must remain separate:
 

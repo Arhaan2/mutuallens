@@ -1,3 +1,5 @@
+> **Historical record — superseded for current status.** See [the authoritative release record](release-current.md). Original evidence below retains its recorded source, dates and scope.
+
 # Core product amendment delivery
 
 This pass implements the owner's [Core Product Amendment](specification/Core_Product_Amendment.md) on `codex/ui-functional-repair`, preserving main, the original tag, prior deployments and other projects. Earlier specification/evidence about checkbox-gated local negatives is historical; it does not control the new upload behavior.

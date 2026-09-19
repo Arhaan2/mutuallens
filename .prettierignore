@@ -7,3 +7,4 @@ node_modules/
 .wrangler/
 test-results/
 playwright-report/
+apps/site/project-dist/
