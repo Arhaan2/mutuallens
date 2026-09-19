@@ -1,6 +1,9 @@
 import { expect, type Page } from '@playwright/test';
 
 export async function openImportFiles(page: Page) {
+  // A cross-origin navigation can update its URL before React mounts. Inspect
+  // disclosure state only once the rendered control exists, then toggle if needed.
+  await expect(page.locator('details#import > summary')).toBeVisible();
   if (!(await page.locator('#import-files').isVisible()))
     await page.locator('details#import > summary').click();
   await expect(page.locator('#import-files')).toBeVisible();
