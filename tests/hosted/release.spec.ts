@@ -20,11 +20,23 @@ test('release: stable source stamps, accurate capability and separate noindexed 
     expected,
     'Hosted verification requires an exact deployed source SHA',
   ).toMatch(/^[a-f0-9]{40}$/);
-  for (const origin of [SITE, CHECKER, PROJECT.replace(/\/$/, '')]) {
+  const expectedProject =
+    process.env.MUTUALLENS_EXPECTED_PROJECT_SHA ?? expected;
+  expect(expectedProject).toMatch(/^[a-f0-9]{40}$/);
+  const sourceHashes = new Set<string>();
+  for (const [origin, expectedCommit] of [
+    [SITE, expected],
+    [CHECKER, expected],
+    [PROJECT.replace(/\/$/, ''), expectedProject],
+  ]) {
     const stamp = await request.get(`${origin}/build-info.json`);
     expect(stamp.status()).toBe(200);
-    expect(await stamp.json()).toMatchObject({ commit: expected });
+    const body = await stamp.json();
+    expect(body).toMatchObject({ commit: expectedCommit });
+    expect(body.sourceHash).toMatch(/^[a-f0-9]{64}$/);
+    sourceHashes.add(body.sourceHash);
   }
+  expect(sourceHashes.size).toBe(1);
   for (const origin of [SITE, CHECKER]) {
     const response = await request.get(origin);
     expect(response.status()).toBe(200);
