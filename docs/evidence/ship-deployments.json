@@ -1,0 +1,131 @@
+{
+  "status": "Presentation cleanup deployed; automatic release still blocked",
+  "applicationCommit": "b252dc79c46d9c55ec990cd29b1604427fc83f02",
+  "applicationSourceHash": "b45488234e44ef6d8995762733f83d78b8478cc4b53625308815f74c273e5ba7",
+  "originalMain": "0f0ec2c2545195117fbfb4c2cf81b2fc6d030ae4",
+  "preservationTag": "preserve/pre-ship-20260919-0055",
+  "originalDeployedCommit": "00e53a44cc07bf9f19671b56ad40f2497a72a43e",
+  "pr": {
+    "number": 3,
+    "head": "65e475677949b049d903187dc003fcf1ebdfd4f7",
+    "runId": 35409790175,
+    "conclusion": "success"
+  },
+  "mainWorkflow": {
+    "runId": 35410222658,
+    "conclusion": "success"
+  },
+  "build": {
+    "node": "24.18.0",
+    "npm": "11.16.0",
+    "builtAt": "2026-09-19T00:42:04.027Z",
+    "PUBLIC_SITE_ORIGIN": "https://mutuallens-ddm.pages.dev",
+    "PUBLIC_CHECKER_ORIGIN": "https://mutuallens-app.pages.dev",
+    "VITE_SITE_ORIGIN": "https://mutuallens-ddm.pages.dev",
+    "indexing": false,
+    "ads": false,
+    "automatic": false
+  },
+  "deploymentsAtApplicationVerification": [
+    {
+      "url": "https://mutuallens-ddm.pages.dev/",
+      "project": "mutuallens",
+      "id": "aaf96e28-55ca-4abb-9aa6-5e75b0d0c6c7",
+      "rollbackId": "b6fdaa91-e856-479b-8b94-3175365312ea"
+    },
+    {
+      "url": "https://mutuallens-app.pages.dev/",
+      "project": "mutuallens-app",
+      "id": "40c931ad-8d13-4bac-b932-facf9c090f85",
+      "rollbackId": "ce91374e-6cd0-438c-8b63-3580528b68f7"
+    },
+    {
+      "url": "https://arhaan2.github.io/mutuallens/",
+      "role": "static project entry",
+      "id": 6535367045,
+      "workflowId": 35410222658,
+      "status": "success"
+    }
+  ],
+  "laterEvidenceOnlyWorkflow": "Normal main Actions may republish GitHub Pages with a later documentation/test commit; application hash remains unchanged. Host build-info.json is authoritative for its artifact stamp.",
+  "hosted": {
+    "engines": [
+      "Chromium",
+      "Playwright WebKit",
+      "Firefox"
+    ],
+    "product": {
+      "startTime": "2026-09-19T00:48:23.228Z",
+      "duration": 17137.121,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "release": {
+      "startTime": "2026-09-19T00:57:25.190Z",
+      "duration": 31284.278000000002,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "realStableUrls": true,
+    "certificateVerifiedTls": true,
+    "responseMocks": false,
+    "resolution": "Temporary localhost CONNECT tunnel restricted to the three stable hosts on HTTPS port 443, public DNS resolution; system resolver failed intermittently.",
+    "physicalIphone": false,
+    "ownerExports": false
+  },
+  "automatic": {
+    "smallBothDirections": "NOT RUN",
+    "multipage": "NOT RUN",
+    "target6000Plus6000": "NOT RUN",
+    "recurringFreeCapacity": "NOT MEASURED",
+    "hostedAutomatic": "NOT RUN; disabled",
+    "creditConsumingCalls": 0
+  },
+  "rollbackExercised": false,
+  "logsPrivate": {
+    "hosted-product.log": {
+      "sha256": "e98f987e4088829f45ac05217dbdd16fe6f1733df26e1a319b1a04f95864351c",
+      "bytes": 31545
+    },
+    "hosted-product-final.log": {
+      "sha256": "e46267e75901fd0a87cee6f17205bd5c0a68f53101929f06f92975e35f6ce9e4",
+      "bytes": 2545
+    },
+    "hosted-product-results.json": {
+      "sha256": "207824f48fee50c3537d2d50b5d65e996e52d06840b6edc8c680f664e0419255",
+      "bytes": 46462
+    },
+    "hosted-release.log": {
+      "sha256": "073ee403e1749757ff6f851a6c68e643fafb40c76e146831d8de3941dbdc4e01",
+      "bytes": 9988
+    },
+    "hosted-release-final.log": {
+      "sha256": "beb5c80cdfd0c41e75577df8b27a7e238c79ea1699900a23f0af6cf96b993e37",
+      "bytes": 7739
+    },
+    "hosted-release-verified.log": {
+      "sha256": "07edabf316a3e80687c2f3adf44996bfb0046f72e55c7bbfbbca57ed7de928f8",
+      "bytes": 1968
+    },
+    "hosted-release-results.json": {
+      "sha256": "451ace2da24e296cb67673175b17092981f3bfd6e38b75e2683408e00b3d45f3",
+      "bytes": 12773
+    },
+    "deploy-site.log": {
+      "sha256": "52409ec123508adef2637c8c4a75939b8e9d2c4063a4de0a4678aa2038a0d717",
+      "bytes": 470
+    },
+    "deploy-checker.log": {
+      "sha256": "f88e8b66be559a9c4bbfd37a876458b97fdf15979b619d99077716a0eaa33833",
+      "bytes": 532
+    },
+    "production-artifacts.json": {
+      "sha256": "21c098d64a4f07851e833b5b6b8e4fc7bda5ebcfc9b1ce5fedf3160c43da9108",
+      "bytes": 5660
+    }
+  }
+}

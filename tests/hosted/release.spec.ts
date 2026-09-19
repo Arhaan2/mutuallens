@@ -20,11 +20,23 @@ test('release: stable source stamps, accurate capability and separate noindexed 
     expected,
     'Hosted verification requires an exact deployed source SHA',
   ).toMatch(/^[a-f0-9]{40}$/);
-  for (const origin of [SITE, CHECKER, PROJECT.replace(/\/$/, '')]) {
+  const expectedProject =
+    process.env.MUTUALLENS_EXPECTED_PROJECT_SHA ?? expected;
+  expect(expectedProject).toMatch(/^[a-f0-9]{40}$/);
+  const sourceHashes = new Set<string>();
+  for (const [origin, expectedCommit] of [
+    [SITE, expected],
+    [CHECKER, expected],
+    [PROJECT.replace(/\/$/, ''), expectedProject],
+  ]) {
     const stamp = await request.get(`${origin}/build-info.json`);
     expect(stamp.status()).toBe(200);
-    expect(await stamp.json()).toMatchObject({ commit: expected });
+    const body = await stamp.json();
+    expect(body).toMatchObject({ commit: expectedCommit });
+    expect(body.sourceHash).toMatch(/^[a-f0-9]{64}$/);
+    sourceHashes.add(body.sourceHash);
   }
+  expect(sourceHashes.size).toBe(1);
   for (const origin of [SITE, CHECKER]) {
     const response = await request.get(origin);
     expect(response.status()).toBe(200);
@@ -48,6 +60,7 @@ test('release: stable source stamps, accurate capability and separate noindexed 
 
 test('release: public pages have product copy, working links, accessible mobile and desktop layouts', async ({
   page,
+  request,
 }, info) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
@@ -62,13 +75,26 @@ test('release: public pages have product copy, working links, accessible mobile 
     .evaluateAll((anchors) => [
       ...new Set(anchors.map((a) => (a as HTMLAnchorElement).href)),
     ]);
-  const pages = paths.filter(
-    (url) => new URL(url).origin === new URL(SITE).origin,
-  );
+  // In-page links such as #main do not issue an HTTP navigation. Check each
+  // distinct public document once, without treating a null anchor response as
+  // a failed page load.
+  const pages = [
+    ...new Set(
+      paths
+        .filter((url) => new URL(url).origin === new URL(SITE).origin)
+        .map((url) => {
+          const document = new URL(url);
+          document.hash = '';
+          return document.href;
+        }),
+    ),
+  ];
   expect(pages.length).toBeGreaterThan(5);
   for (const url of pages) {
+    expect((await request.get(url)).status(), url).toBe(200);
     const response = await page.goto(url);
-    expect(response?.status(), url).toBe(200);
+    // Firefox can report a successful cache revalidation as 304.
+    expect([200, 304], url).toContain(response?.status());
     expect(await page.locator('body').innerText(), url).not.toMatch(obsolete);
     expect(await page.title()).not.toMatch(obsolete);
     await expect(page.locator('meta[name=robots]')).toHaveAttribute(
@@ -82,12 +108,8 @@ test('release: public pages have product copy, working links, accessible mobile 
   }
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    for (const [label, url] of [
-      ['public', SITE],
-      ['checker', CHECKER],
-      ['project', PROJECT],
-    ]) {
-      await page.goto(url!);
+    for (const url of [SITE, CHECKER, PROJECT]) {
+      await page.goto(url);
       await page.waitForLoadState('networkidle');
       expect(await page.locator('body').innerText()).not.toMatch(obsolete);
       expect(
@@ -96,10 +118,6 @@ test('release: public pages have product copy, working links, accessible mobile 
         ),
       ).toBe(true);
       expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
-      await page.screenshot({
-        path: info.outputPath(`${label}-${width}.png`),
-        fullPage: true,
-      });
     }
   }
   expect(errors).toEqual([]);
@@ -111,6 +129,28 @@ test('release: public pages have product copy, working links, accessible mobile 
   expect(requests.filter((url) => !origins.has(new URL(url).origin))).toEqual(
     [],
   );
+  // Playwright WebKit injects an inline stylesheet while taking screenshots.
+  // Keep visual capture on a separate page so its CSP error cannot contaminate
+  // the application console checks above; production CSP remains unchanged.
+  const visualPage = await page.context().newPage();
+  try {
+    for (const width of [390, 1440]) {
+      await visualPage.setViewportSize({ width, height: 900 });
+      for (const [label, url] of [
+        ['public', SITE],
+        ['checker', CHECKER],
+        ['project', PROJECT],
+      ]) {
+        await visualPage.goto(url!);
+        await visualPage.screenshot({
+          path: info.outputPath(`${label}-${width}.png`),
+          fullPage: true,
+        });
+      }
+    }
+  } finally {
+    await visualPage.close();
+  }
 });
 
 test('release: GitHub project base, assets, refresh and 404 lead to the actual Cloudflare website', async ({
